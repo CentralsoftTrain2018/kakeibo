@@ -23,7 +23,7 @@ public class GameOverServlet extends HttpServlet
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        RequestDispatcher disp = request.getRequestDispatcher("/End.jsp");
+        RequestDispatcher disp = request.getRequestDispatcher("/GameOver.jsp");
         disp.forward(request, response);
     }
 
