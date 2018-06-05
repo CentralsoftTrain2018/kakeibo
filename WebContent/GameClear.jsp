@@ -7,7 +7,7 @@
 <title>ゲームクリア</title>
 </head>
 <body>
-ゲームクリア
-<img src="/image/bungee_jump.png">
+ゲームクリア<br>
+<img src="image/bungee_jump.png">
 </body>
 </html>
