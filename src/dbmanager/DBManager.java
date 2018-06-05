@@ -1,16 +1,16 @@
 package dbmanager;
 
-import java.sql.Date;
+import vo.ExpenseVo;
 
 public class DBManager {
-    public static void addExpense(int kingaku, String categoryName, String expenseName, String userId) {
+    public static void addExpense(ExpenseVo ev) {
 
     }
 
-    public static void updateExpense(int expenseId, int kingaku, String categoryName, String expenseName, Date expenseDate, String userId) {
+    public static void updateExpense(ExpenseVo ev) {
 
     }
 
-    public static void deleteExpense(int expenseId) {
+    public static void deleteExpense(ExpenseVo ev) {
     }
 }
