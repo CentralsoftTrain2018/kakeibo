@@ -10,6 +10,10 @@ public class ExpenseVo {
     private Date expenseDate;
     private String userId;
 
+    public ExpenseVo() {
+        super();
+    }
+
     public ExpenseVo(int expenseId, int expenseKingaku, String category, String expenseName, Date expenseDate,
             String userId) {
         super();
