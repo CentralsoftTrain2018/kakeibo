@@ -7,6 +7,7 @@ import vo.ExpenseVo;
 
 public class Service {
     public static void addExpense(int kingaku, String categoryName, String expenseName, String userId) {
+<<<<<<< HEAD
         try {
             Category.valueOf(categoryName);
         }
@@ -30,6 +31,20 @@ public class Service {
             e.printStackTrace();
         }
 
+=======
+
+        ExpenseVo ev = new ExpenseVo();
+        ev.setExpenseKingaku(kingaku);
+        ev.setCategoryName(categoryName);
+        ev.setExpenseName(expenseName);
+        ev.setUserId(userId);
+        Date expenseDate = new Date(new java.util.Date().getTime());
+        ev.setExpenseDate(expenseDate);
+        DBManager.addExpense(ev);
+    }
+
+    public static void updateExpense(int expenseId, int kingaku, String categoryName, String expenseName, Date expenseDate, String userId) {
+>>>>>>> refs/remotes/origin/master
         ExpenseVo ev = new ExpenseVo();
         ev.setExpenseId(expenseId);
         ev.setExpenseKingaku(kingaku);
