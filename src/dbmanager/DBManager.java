@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import vo.ExpenseVo;
+import vo.ExpenseVo;;
 
 public class DBManager {
     public static void addExpense(ExpenseVo ev) {
