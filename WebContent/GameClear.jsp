@@ -8,5 +8,6 @@
 </head>
 <body>
 ゲームクリア
+<img src="/image/bungee_jump.png">
 </body>
 </html>

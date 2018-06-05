@@ -9,5 +9,6 @@
 </head>
 <body>
 自白を表示する所<br>
+<img src="Y:\git\kakeibo\WebContent\image\犯人.png">
 </body>
 </html>

@@ -9,7 +9,7 @@
 <body>
 <h1>Bungy</h1>
 <form  method="POST" action="GameOverServlet">
-  <input type="submit" value="Bungy">
+  <input type="submit" value="GameOver">
 </form>
 </body>
 </html>
