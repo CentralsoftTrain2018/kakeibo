@@ -1,0 +1,35 @@
+@charset "UTF-8";
+/* 吹き出し本体 */
+.balloon{
+  position: relative;
+  padding: 20px;
+  background-color: #fff5cc;
+  border: 2px solid #ffdb4f;
+  display: inline-block;
+}
+
+/* アイコンを左に表示 */
+.balloon::before{
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  left: -15px;
+  top: 20px;
+  border-right: 15px solid #ffdb4f;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+}
+.balloon::after{
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  left: -12px;
+  top: 20px;
+  border-right: 15px solid #fff5cc;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+}
