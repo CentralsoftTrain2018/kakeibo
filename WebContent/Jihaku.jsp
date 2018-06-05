@@ -9,5 +9,6 @@
 </head>
 <body>
 自白を表示する所<br>
+<img src="image/hannin.png">
 </body>
 </html>
