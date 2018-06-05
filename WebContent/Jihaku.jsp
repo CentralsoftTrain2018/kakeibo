@@ -9,6 +9,6 @@
 </head>
 <body>
 自白を表示する所<br>
-<img src="image/犯人.png">
+<img src="image/hannin.png">
 </body>
 </html>
