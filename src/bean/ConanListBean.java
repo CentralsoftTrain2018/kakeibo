@@ -53,7 +53,7 @@ public class ConanListBean {
     public String toString() {
         return thisMonth + "月は目標達成だね！おめでとう(^_^)/♪<br>" +
                 "君のおかげで犯人を逮捕することができたよ！<br>" +
-                "合計目標金額は" + totalGoal + "円、支出合計は" + totalSpending + "円、差額は" + totalDifference + "円だよ。<br>";
+                "合計目標金額は\t" + totalGoal + "円、\t支出合計は" + totalSpending + "円、\t差額は" + totalDifference + "円\tだよ。<br>";
     }
 
 }

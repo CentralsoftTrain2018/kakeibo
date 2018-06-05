@@ -25,17 +25,32 @@ public class ConanServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //カテゴリ数
+        //カテゴリ数を取得（SQLでやる）
         int categorySu = 3;
 
-        List<ConanBean> list =new  ArrayList<ConanBean>();
-        for( int i= 0; i < categorySu; i ++)
-        {
+        String categoryName;
+        int goal;		 //目標
+        int spending;	 //支出
+
+        int sumg = 0;
+        int sums = 0;
+
+        //カテゴリの数だけ差額とかをリストにぶち込む
+        List<ConanBean> list = new ArrayList<ConanBean>();
+        for (int i = 0; i < categorySu; i++) {
             ConanBean cb = new ConanBean();
-            cb.setCategoryName("食費");
-            cb.setGoal(30000);
-            cb.setSpending(25000);
-            cb.setDifference(30000-25000);
+            categoryName = "食費";
+            cb.setCategoryName(categoryName);
+
+            goal = (int)(Math.random() * 10000 + 1);
+            cb.setGoal(goal);
+            sumg += goal;
+
+            spending = 250;
+            cb.setSpending(spending);
+            sums += spending;
+
+            cb.setDifference(goal - spending);
 
             list.add(cb);
         }
@@ -43,13 +58,12 @@ public class ConanServlet extends HttpServlet {
         //次の画面で表示するための入れ物を準備する
         ConanListBean bean = new ConanListBean();
         bean.setList(list);
+        //何とかする
         bean.setThisMonth(5);
-        bean.setTotalGoal(150000);
-        bean.setTotalSpending(140000);
-        bean.setTotalDifference(150000-140000);
+        bean.setTotalGoal(sumg);
+        bean.setTotalSpending(sums);
+        bean.setTotalDifference(sumg - sums);
 
-
-        //beanをリクエストにセット キー名は「bean」とする
         request.setAttribute("bean", bean);
 
         //JSPに遷移する

@@ -40,6 +40,6 @@ public class ConanBean {
 
     @Override
     public String toString() {
-        return categoryName + "の目標金額は" + goal + "円、" + "支出合計は" + spending + "円、差額は" + difference + "円だよ。";
+        return categoryName + "の目標金額は" + goal + "円、\t" + "支出合計は" + spending + "円、\t差額は" + difference + "円\tだよ。";
     }
 }
