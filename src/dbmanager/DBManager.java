@@ -1,25 +1,10 @@
 package dbmanager;
 
-<<<<<<< HEAD
-import vo.ExpenseVo;
-
-public class DBManager {
-    public static void addExpense(ExpenseVo ev) {
-
-    }
-
-    public static void updateExpense(ExpenseVo ev) {
-
-    }
-
-    public static void deleteExpense(ExpenseVo ev) {
-    }
-=======
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import vo.ExpenseVo;
+import vo.ExpenseVo;;
 
 public class DBManager {
     public static void addExpense(ExpenseVo ev) {
@@ -89,5 +74,4 @@ public class DBManager {
 
         return c;
      }
->>>>>>> refs/remotes/origin/master
 }

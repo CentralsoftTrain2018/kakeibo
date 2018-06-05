@@ -9,14 +9,9 @@
 <title>自白</title>
 </head>
 <body>
-<<<<<<< HEAD
 <div class="Jihaku">
   <p><%=bean.toString() +"目標を超えたから殺したんだ!!!"%></p>
 </div>
 <h1><img src="image/hannin.png"width="50%" height="50%"></h1>
-=======
-自白を表示する所<br>
-<img src="image/hannin.png">
->>>>>>> refs/remotes/origin/master
 </body>
 </html>

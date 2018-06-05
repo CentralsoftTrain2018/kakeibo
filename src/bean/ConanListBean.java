@@ -1,8 +1,6 @@
 package bean;
 
-<<<<<<< HEAD
-public class ConanListBean {
-=======
+
 import java.util.List;
 
 public class ConanListBean {
@@ -58,6 +56,5 @@ public class ConanListBean {
                 "君のおかげで犯人を逮捕することができたよ！<br>" +
                 "合計目標金額は" + totalGoal + "円、支出合計は" + totalSpending + "円、差額は" + totalDifference + "円だよ。<br>";
     }
->>>>>>> refs/remotes/origin/master
 
 }
