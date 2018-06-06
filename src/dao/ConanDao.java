@@ -16,6 +16,7 @@ public class ConanDao {
             "categoryName " +
             ",SUM(e.Kingaku) " +
             ",m.Kingaku " +
+            ",SUM(e.Kingaku) - m.Kingaku"+
             "FROM " +
             "kakeibo.expenses e " +
             ",kakeibo.category c" +
@@ -53,6 +54,7 @@ public class ConanDao {
                 cv.setCategoryName(rset.getString(1));
                 cv.setSumSpending(rset.getInt(2));
                 cv.setMokuhyouKingaku(rset.getInt(3));
+                cv.setDifference(rset.getInt(4));
                 list.add(cv);
             }
 

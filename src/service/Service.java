@@ -43,13 +43,32 @@ public class Service {
         List<ConanVo> resultList = DBManager.selectAdvice();
         ConanListBean clb = new ConanListBean();
 
+        int totalGoal = 0;
+        int totalSpending = 0;
+        int totalDifference = 0;
+
         for( ConanVo cv: resultList )
         {
             ConanBean cb = new ConanBean();
             cb.setCategoryName(cv.getCategoryName());
-            cb.setSumSpending(cv.getSumSpending());
-            cb.setMokuhyouKingaku(cv.getMokuhyouKingaku());
+
+            int spanding = cv.getSumSpending();
+            totalSpending += spanding;
+            cb.setSumSpending(spanding);
+
+            int goal = cv.getMokuhyouKingaku();
+            totalGoal += goal;
+            cb.setMokuhyouKingaku(goal);
+
+            int difference = cv.getDifference();
+            totalDifference += difference;
+            cb.setDifference(difference);
+
             clb.getList().add(cb);
+            clb.setThisMonth(5);
+            clb.setTotalGoal(totalGoal);
+            clb.setTotalSpending(totalSpending);
+            clb.setTotalDifference(totalDifference);
         }
 
         return clb;
