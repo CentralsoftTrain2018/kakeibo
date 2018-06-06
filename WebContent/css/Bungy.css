@@ -1,0 +1,31 @@
+@charset "UTF-8";
+.pattern1 {
+  width: 800px;
+  height: 600px;
+  overflow: hidden;
+  margin-bottom:0px;padding-bottom:0px;
+  position: relative;
+}
+
+.pattern1 .base {
+  position: absolute;
+  left: 10px;
+  bottom:0px;
+  margin-bottom:0px;padding-bottom:0px;
+}
+.pattern1 .hannin
+{
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 0px;
+
+}
+.pattern1 .jumper
+{
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  right: 30%;
+
+}

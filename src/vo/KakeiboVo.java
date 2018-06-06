@@ -2,7 +2,7 @@ package vo;
 
 import java.sql.Date;
 
-public class ExpenseVo {
+public class KakeiboVo {
     private int expenseId;
     private int expenseKingaku;
     private int categoryId;
@@ -11,11 +11,11 @@ public class ExpenseVo {
     private String userId;
 
 
-    public ExpenseVo() {
+    public KakeiboVo() {
         super();
     }
 
-    public ExpenseVo(int expenseId, int expenseKingaku, int categoryId, String expenseName, Date expenseDate,
+    public KakeiboVo(int expenseId, int expenseKingaku, int categoryId, String expenseName, Date expenseDate,
             String userId) {
         super();
         this.expenseId = expenseId;

@@ -3,18 +3,23 @@ package dbmanager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
-import dao.ExpenseDao;
-import vo.ExpenseVo;;
+import dao.ConanDao;
+import dao.KakeiboDao;
+import vo.ConanVo;
+import vo.KakeiboVo;
+
+
 
 public class DBManager {
-    public static void addExpense(ExpenseVo ev) {
+    public static void addExpense(KakeiboVo ev) {
         try
         (
             Connection con = getConnection();
         )
         {
-            ExpenseDao edao = new ExpenseDao(con);
+            KakeiboDao edao = new KakeiboDao(con);
             edao.addExpense(ev);
         }
         catch(SQLException | ClassNotFoundException e)
@@ -24,13 +29,13 @@ public class DBManager {
         }
     }
 
-    public static void updateExpense(ExpenseVo ev) {
+    public static void updateExpense(KakeiboVo ev) {
         try
         (
             Connection con = getConnection();
         )
         {
-            ExpenseDao edao = new ExpenseDao(con);
+            KakeiboDao edao = new KakeiboDao(con);
             edao.updateExpense(ev);
         }
         catch(SQLException | ClassNotFoundException e)
@@ -40,14 +45,32 @@ public class DBManager {
         }
     }
 
-    public static void deleteExpense(ExpenseVo ev) {
+    public static void deleteExpense(KakeiboVo ev) {
         try
         (
             Connection con = getConnection();
         )
         {
-            ExpenseDao edao = new ExpenseDao(con);
+            KakeiboDao edao = new KakeiboDao(con);
             edao.deleteExpense(ev);
+        }
+        catch(SQLException | ClassNotFoundException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    //アドバイスに必要なやつを取ってくる
+    public static List<ConanVo> selectAdvice() {
+        try
+        (
+            Connection con = getConnection();
+        )
+        {
+            ConanDao cdao = new ConanDao(con);
+            List<ConanVo> list = cdao.advice();
+           return list;
         }
         catch(SQLException | ClassNotFoundException e)
         {

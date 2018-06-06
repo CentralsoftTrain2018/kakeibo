@@ -1,10 +1,20 @@
-package bean;
+package vo;
 
-public class ConanBean {
+public class ConanVo {
     private String categoryName;
-    private int sumSpending;		//支出合計
-    private int mokuhyouKingaku;	//目標金額
-    private int difference;		//差額（目標ー支出）
+    private int sumSpending;
+    private int mokuhyouKingaku;
+
+    public ConanVo() {
+        super();
+    }
+
+    public ConanVo(String categoryName, int sumSpending, int mokuhyouKingaku) {
+        super();
+        this.categoryName = categoryName;
+        this.sumSpending = sumSpending;
+        this.mokuhyouKingaku = mokuhyouKingaku;
+    }
 
     public String getCategoryName() {
         return categoryName;
@@ -30,16 +40,10 @@ public class ConanBean {
         this.mokuhyouKingaku = mokuhyouKingaku;
     }
 
-    public int getDifference() {
-        return difference;
-    }
-
-    public void setDifference(int difference) {
-        this.difference = this.mokuhyouKingaku - this.sumSpending;
-    }
-
     @Override
     public String toString() {
-        return categoryName + "の目標金額は" + mokuhyouKingaku + "円、\t" + "支出合計は" + sumSpending + "円、\t差額は" + difference + "円\tだよ。";
+        return "ConanVo [categoryName="
+                + categoryName + ", sumSpending=" + sumSpending + ", mokuhyouKingaku=" + mokuhyouKingaku + "]";
     }
+
 }
