@@ -13,12 +13,25 @@
   <div class="balloon">
     <%=bean.getThisMonth()%>月は目標達成だね！おめでとう(^_^)/♪<br>
     君のおかげで犯人を逮捕することができたよ！<br>
-    合計目標金額は<%=bean.getTotalGoal() %>円、支出合計は<%=bean.getTotalSpending() %>円、
-    差額は<%=bean.getTotalDifference() %>円だよ。<br>
-    <% for (bean.ConanBean cb : bean.getList()) { %>
-    <%=cb.getCategoryName() %>の目標金額は<%=cb.getMokuhyouKingaku() %>円、
-    支出合計は<%=cb.getSumSpending() %>円、差額は<%=cb.getDifference() %>円だよ。<br>
-    <%}%>
+
+    <%
+      for (bean.ConanBean cb : bean.getList()) {
+    %>
+    <%
+        if (cb.getDifference() > 0) {
+    %>
+    <%=cb.getCategoryName()%>はプラスだよ。やったね！<br>
+    <%
+      } else {
+    %>
+    <%=cb.getCategoryName()%>はマイナスだよ。気をつけよう！<br>
+    <%
+      }
+    %>
+    <%
+      }
+    %>
+   <%=bean.getThisMonth() + 1 %>月もがんばろう！<br><br>
     <a href="BungyServlet">TOPに戻る</a>
   </div>
 </body>

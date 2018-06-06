@@ -16,7 +16,7 @@ public class ConanDao {
             "categoryName " +
             ",m.Kingaku " +
             ",SUM(e.Kingaku) " +
-            ",SUM(m.Kingaku - e.Kingaku) "+
+            ",m.Kingaku - SUM(e.Kingaku) "+
             "FROM " +
             "kakeibo.expenses e " +
             ",kakeibo.category c " +
@@ -26,7 +26,8 @@ public class ConanDao {
             "AND e.category_categoryId = c.categoryId " +
             "AND e.user_userid = m.user_userid " +
             "AND c.categoryId = m.category_categoryId " +
-            "GROUP BY e.category_categoryId;";
+            "GROUP BY e.category_categoryId "+
+            "ORDER BY m.Kingaku - e.Kingaku DESC;";
 
     public ConanDao(Connection con) {
         this.con = con;
