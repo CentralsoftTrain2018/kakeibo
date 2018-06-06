@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.Service;
+
 /**
  * Servlet implementation class IndexStartServlet
  */
@@ -27,8 +29,30 @@ public class KakeiboServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         System.out.println("KakeiboServletが実行されました。");
+
+
+        String choice = request.getParameter("choice");
+
+        if(choice.equals("touroku")) {
+            int kingaku = Integer.parseInt(request.getParameter("kingaku"));
+            int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+            String expenseName = request.getParameter("expenseName");
+            String userId = request.getParameter("userId");
+            Service.addExpense(kingaku, categoryId, expenseName, userId);
+        }
+        if(choice.equals("henkou")) {
+            int expenseId = Integer.parseInt(request.getParameter("expenseId"));
+            int kingaku = Integer.parseInt(request.getParameter("kingaku"));
+            int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+            String expenseName = request.getParameter("expenseName");
+            Service.updateExpense(expenseId, kingaku, categoryId, expenseName);
+        }
+        if(choice.equals("sakujo")) {
+
+            int expenseId = Integer.parseInt(request.getParameter("expenseId"));
+            Service.deleteExpense(expenseId);
+        }
         //JSPに遷移する
         RequestDispatcher disp = request.getRequestDispatcher("Kakeibo.jsp");
         disp.forward(request, response);

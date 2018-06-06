@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.JihakuBean;
+
 /**
  * Servlet implementation class IndexStartServlet
  */
@@ -29,6 +31,15 @@ public class JihakuServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         System.out.println("JihakuServlet実行");
+
+        JihakuBean bean = new JihakuBean();
+
+        //計算結果と表示するメッセージを入れ物（bean)にセットする
+        bean.setCategoryname("雑費");
+        bean.setExcess(10000,5000);
+      //beanをリクエストにセット キー名は「bean」とする
+        request.setAttribute("bean", bean);
+
         //JSPに遷移する
         RequestDispatcher disp = request.getRequestDispatcher("Jihaku.jsp");
         disp.forward(request, response);
