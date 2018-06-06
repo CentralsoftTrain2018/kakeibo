@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.JihakuBean;
+import bean.JihakuListBean;
+import service.ConanService;
 
 /**
  * Servlet implementation class IndexStartServlet
@@ -30,22 +31,17 @@ public class JihakuServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
         System.out.println("JihakuServlet実行");
 
-        JihakuBean bean = new JihakuBean();
-        int sisyutu = 10000;
-        int mokuhyou = 5000;
-        String categoryname = ("雑費");
-        //計算結果と表示するメッセージを入れ物（bean)にセットする
-        bean.setCategoryname(categoryname);
-        bean.setExcess(sisyutu,mokuhyou);
+        ConanService conan = new ConanService();
+        JihakuListBean bean =conan.jihaku();
       //beanをリクエストにセット キー名は「bean」とする
         request.setAttribute("bean", bean);
 
         //JSPに遷移する
         RequestDispatcher disp = request.getRequestDispatcher("Jihaku.jsp");
-        disp.forward(request, response);
-    }
+        disp.forward(request, response);    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
