@@ -8,10 +8,18 @@
 <link rel="stylesheet" type="text/css" href="Jihakucss.css" />
 <title>自白</title>
 </head>
+<<<<<<< HEAD
 <body>
 <div class="Jihaku">
   <p><%=bean.toString() +"目標を超えたから殺したんだ!!!"%></p>
 </div>
 <h1><img src="image/hannin.png"width="50%" height="50%"></h1>
+=======
+<body>
+<div class="Jihaku">
+  <p><%=bean.toString() +"目標を超えたから殺したんだ!!!"%></p>
+</div>
+<h1><img src="image/hannin.png"width="50%" height="50%"></h1>
+>>>>>>> refs/remotes/origin/master
 </body>
 </html>
