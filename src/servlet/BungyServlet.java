@@ -28,14 +28,30 @@ public class BungyServlet extends HttpServlet
     {
         BungyBean bb = new BungyBean();
 
-        bb.setMokuhyou(100000);
-        bb.setSisyutu(80000);
-        bb.setHanninIchi(60);
-        bb.setDate(20);
+        try {
+            String mokuhyouStr = request.getParameter("mokuhyou");
+            String shisyutuStr = request.getParameter("shisyutu");
+            String hanninIchiStr = request.getParameter("hanninIchi");
+            String dateStr = request.getParameter("date");
+            int mokuhyou = Integer.parseInt(mokuhyouStr);
+            int shisyutu = Integer.parseInt(shisyutuStr);
+            int hanninIchi = Integer.parseInt(hanninIchiStr);
+            int date = Integer.parseInt(dateStr);
+            bb.setMokuhyou(mokuhyou);
+            bb.setSisyutu(shisyutu);
+            bb.setHanninIchi(hanninIchi);
+            bb.setDate(date);
 
-        request.setAttribute("bean", bb);
-        RequestDispatcher disp = request.getRequestDispatcher("/Bungy.jsp");
-        disp.forward(request, response);
+            request.setAttribute("bean", bb);
+            RequestDispatcher disp = request.getRequestDispatcher("/Bungy.jsp");
+            disp.forward(request, response);
+        }
+        catch(NumberFormatException e) {
+            bb.setMessage("入力が不正です");
+            request.setAttribute("bean", bb);
+            RequestDispatcher disp = request.getRequestDispatcher("/Bungy.jsp");
+            disp.forward(request, response);
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
