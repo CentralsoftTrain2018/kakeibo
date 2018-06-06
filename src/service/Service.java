@@ -6,12 +6,9 @@ import java.util.List;
 import bean.ConanBean;
 import bean.ConanListBean;
 import dbmanager.DBManager;
-<<<<<<< HEAD
 import vo.ConanVo;
-import vo.ExpenseVo;
-=======
 import vo.KakeiboVo;
->>>>>>> refs/remotes/origin/master
+
 
 public class Service {
     public static void addExpense(int kingaku, int categoryId, String expenseName, String userId) {
