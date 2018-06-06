@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.BungyBean;
+
 
 
 
@@ -24,6 +26,14 @@ public class BungyServlet extends HttpServlet
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        BungyBean bb = new BungyBean();
+
+        bb.setMokuhyou(100000);
+        bb.setSisyutu(80000);
+        bb.setHanninIchi(60);
+        bb.setDate(20);
+
+        request.setAttribute("bean", bb);
         RequestDispatcher disp = request.getRequestDispatcher("/Bungy.jsp");
         disp.forward(request, response);
     }

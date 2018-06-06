@@ -6,18 +6,20 @@ import java.sql.SQLException;
 import java.util.List;
 
 import dao.ConanDao;
-import dao.ExpenseDao;
+import dao.KakeiboDao;
 import vo.ConanVo;
-import vo.ExpenseVo;;
+import vo.KakeiboVo;
+
+
 
 public class DBManager {
-    public static void addExpense(ExpenseVo ev) {
+    public static void addExpense(KakeiboVo ev) {
         try
         (
             Connection con = getConnection();
         )
         {
-            ExpenseDao edao = new ExpenseDao(con);
+            KakeiboDao edao = new KakeiboDao(con);
             edao.addExpense(ev);
         }
         catch(SQLException | ClassNotFoundException e)
@@ -27,13 +29,13 @@ public class DBManager {
         }
     }
 
-    public static void updateExpense(ExpenseVo ev) {
+    public static void updateExpense(KakeiboVo ev) {
         try
         (
             Connection con = getConnection();
         )
         {
-            ExpenseDao edao = new ExpenseDao(con);
+            KakeiboDao edao = new KakeiboDao(con);
             edao.updateExpense(ev);
         }
         catch(SQLException | ClassNotFoundException e)
@@ -43,13 +45,13 @@ public class DBManager {
         }
     }
 
-    public static void deleteExpense(ExpenseVo ev) {
+    public static void deleteExpense(KakeiboVo ev) {
         try
         (
             Connection con = getConnection();
         )
         {
-            ExpenseDao edao = new ExpenseDao(con);
+            KakeiboDao edao = new KakeiboDao(con);
             edao.deleteExpense(ev);
         }
         catch(SQLException | ClassNotFoundException e)

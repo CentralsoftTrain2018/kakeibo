@@ -6,12 +6,16 @@ import java.util.List;
 import bean.ConanBean;
 import bean.ConanListBean;
 import dbmanager.DBManager;
+<<<<<<< HEAD
 import vo.ConanVo;
 import vo.ExpenseVo;
+=======
+import vo.KakeiboVo;
+>>>>>>> refs/remotes/origin/master
 
 public class Service {
     public static void addExpense(int kingaku, int categoryId, String expenseName, String userId) {
-        ExpenseVo ev = new ExpenseVo();
+        KakeiboVo ev = new KakeiboVo();
         ev.setExpenseKingaku(kingaku);
         ev.setCategoryId(categoryId);
         ev.setExpenseName(expenseName);
@@ -23,7 +27,7 @@ public class Service {
 
 
     public static void updateExpense(int expenseId, int kingaku, int categoryId, String expenseName) {
-        ExpenseVo ev = new ExpenseVo();
+        KakeiboVo ev = new KakeiboVo();
         ev.setExpenseId(expenseId);
         ev.setExpenseKingaku(kingaku);
         ev.setCategoryId(categoryId);
@@ -32,7 +36,7 @@ public class Service {
     }
 
     public static void deleteExpense(int expenseId) {
-        ExpenseVo ev = new ExpenseVo();
+        KakeiboVo ev = new KakeiboVo();
         ev.setExpenseId(expenseId);
         DBManager.deleteExpense(ev);
     }
