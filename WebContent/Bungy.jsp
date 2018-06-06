@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <jsp:useBean id="bean" class="bean.BungyBean" scope="request" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,22 +24,32 @@
   bottom:0px;
   margin-bottom:0px;padding-bottom:0px;"
   >
-  <img src="image/hanninkaidan.png" alt="" class="hannin" id="hannin"
+  <img src="image/hanninkaidan.png" alt="" class="hannin"
   style=
   "position: absolute;
   width: 100px;
   height: 100px;
-  left: 0px;
-  bottom:0%;"
+  left: 10%;
+  bottom:
+       <%=bean.getHanninIchi() %>%;"
   >
-  <img src="image/jump.png" alt="" class="jumper" id="jumper"
+  <img src="image/himo.png" alt="" class="himo"
+  style=
+  "position: absolute;
+  width: 50px;
+  height:<%=bean.getDate()+7%>%;
+  right: 35%;
+  top:25%;"
+  >
+  <img src="image/jump.png" alt="" class="jumper"
   style=
   "position: absolute;
   width: 100px;
   height: 100px;
   right: 30%;
-  top:0%;"
+  top:<%=bean.getDate()%>%;"
   >
+
  </div>
 
 <form  method="POST" action="GameOverServlet">

@@ -24,13 +24,16 @@ public class BungyBean {
     }
     public int getHanninIchi() {
         return hanninIchi;
+        //return sisyutu/mokuhyou*100;
     }
     public void setHanninIchi(int hanninIchi) {
+
         this.hanninIchi = hanninIchi;
     }
 
     public int getDate() {
-        return date;
+
+        return (int)((double)this.date/(double)30*100.0);
     }
 
     public void setDate(int date) {
