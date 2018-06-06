@@ -1,10 +1,10 @@
 package bean;
 
 public class ConanBean {
-    String categoryName;
-    int goal;
-    int spending;
-    int difference;
+    private String categoryName;
+    private int sumSpending;		//支出合計
+    private int mokuhyouKingaku;	//目標金額
+    private int difference;		//差額（目標ー支出）
 
     public String getCategoryName() {
         return categoryName;
@@ -14,20 +14,20 @@ public class ConanBean {
         this.categoryName = categoryName;
     }
 
-    public int getGoal() {
-        return goal;
+    public int getSumSpending() {
+        return sumSpending;
     }
 
-    public void setGoal(int goal) {
-        this.goal = goal;
+    public void setSumSpending(int sumSpending) {
+        this.sumSpending = sumSpending;
     }
 
-    public int getSpending() {
-        return spending;
+    public int getMokuhyouKingaku() {
+        return mokuhyouKingaku;
     }
 
-    public void setSpending(int spending) {
-        this.spending = spending;
+    public void setMokuhyouKingaku(int mokuhyouKingaku) {
+        this.mokuhyouKingaku = mokuhyouKingaku;
     }
 
     public int getDifference() {
@@ -35,11 +35,11 @@ public class ConanBean {
     }
 
     public void setDifference(int difference) {
-        this.difference = difference;
+        this.difference = this.mokuhyouKingaku - this.sumSpending;
     }
 
     @Override
     public String toString() {
-        return categoryName + "の目標金額は" + goal + "円、\t" + "支出合計は" + spending + "円、\t差額は" + difference + "円\tだよ。";
+        return categoryName + "の目標金額は" + mokuhyouKingaku + "円、\t" + "支出合計は" + sumSpending + "円、\t差額は" + difference + "円\tだよ。";
     }
 }

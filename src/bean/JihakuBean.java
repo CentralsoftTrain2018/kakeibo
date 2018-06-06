@@ -1,9 +1,9 @@
 package bean;
 
 public class JihakuBean {
-    String categoryname;
-    int difference;
-    int excess;
+    private String categoryname;
+    private int difference;
+    private int excess;
 
     public String getCategoryname() {
         return categoryname;

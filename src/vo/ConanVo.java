@@ -4,6 +4,7 @@ public class ConanVo {
     private String categoryName;
     private int sumSpending;
     private int mokuhyouKingaku;
+    private int difference;
 
     public ConanVo() {
         super();
@@ -38,6 +39,14 @@ public class ConanVo {
 
     public void setMokuhyouKingaku(int mokuhyouKingaku) {
         this.mokuhyouKingaku = mokuhyouKingaku;
+    }
+
+    public int getDifference() {
+        return difference;
+    }
+
+    public void setDifference(int difference) {
+        this.difference = difference;
     }
 
     @Override
