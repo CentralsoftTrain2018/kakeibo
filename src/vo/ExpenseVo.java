@@ -5,7 +5,7 @@ import java.sql.Date;
 public class ExpenseVo {
     private int expenseId;
     private int expenseKingaku;
-    private String categoryName;
+    private int categoryId;
     private String expenseName;
     private Date expenseDate;
     private String userId;
@@ -15,12 +15,12 @@ public class ExpenseVo {
         super();
     }
 
-    public ExpenseVo(int expenseId, int expenseKingaku, String categoryName, String expenseName, Date expenseDate,
+    public ExpenseVo(int expenseId, int expenseKingaku, int categoryId, String expenseName, Date expenseDate,
             String userId) {
         super();
         this.expenseId = expenseId;
         this.expenseKingaku = expenseKingaku;
-        this.categoryName = categoryName;
+        this.categoryId = categoryId;
         this.expenseName = expenseName;
         this.expenseDate = expenseDate;
         this.userId = userId;
@@ -42,12 +42,12 @@ public class ExpenseVo {
         this.expenseKingaku = expenseKingaku;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getExpenseName() {
@@ -76,8 +76,8 @@ public class ExpenseVo {
 
     @Override
     public String toString() {
-        return "ExpenseVo [expenseId=" + expenseId + ", expenseKingaku=" + expenseKingaku + ", categoryName="
-                + categoryName + ", expenseName=" + expenseName + ", expenseDate=" + expenseDate + ", userId=" + userId
+        return "ExpenseVo [expenseId=" + expenseId + ", expenseKingaku=" + expenseKingaku + ", categoryId="
+                + categoryId + ", expenseName=" + expenseName + ", expenseDate=" + expenseDate + ", userId=" + userId
                 + "]";
     }
 
