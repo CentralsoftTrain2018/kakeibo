@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+<<<<<<< HEAD
 import dao.ConanDao;
 import vo.ConanVo;
+=======
+import dao.ExpenseDao;
+>>>>>>> branch 'master' of https://github.com/CentralsoftTrain2018/kakeibo
 import vo.ExpenseVo;;
 
 public class DBManager {
@@ -15,8 +19,8 @@ public class DBManager {
             Connection con = getConnection();
         )
         {
-            //ExpensesDao edao = new ExpensesDao(con);
-            //edao.addExpense(ev);
+            ExpenseDao edao = new ExpenseDao(con);
+            edao.addExpense(ev);
         }
         catch(SQLException | ClassNotFoundException e)
         {
@@ -31,8 +35,8 @@ public class DBManager {
             Connection con = getConnection();
         )
         {
-            //ExpensesDao edao = new ExpensesDao(con);
-            //edao.updateExpense(ev);
+            ExpenseDao edao = new ExpenseDao(con);
+            edao.updateExpense(ev);
         }
         catch(SQLException | ClassNotFoundException e)
         {
@@ -47,8 +51,8 @@ public class DBManager {
             Connection con = getConnection();
         )
         {
-            //ExpensesDao edao = new ExpensesDao(con);
-            //edao.deleteExpense(ev);
+            ExpenseDao edao = new ExpenseDao(con);
+            edao.deleteExpense(ev);
         }
         catch(SQLException | ClassNotFoundException e)
         {

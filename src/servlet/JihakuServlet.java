@@ -33,10 +33,12 @@ public class JihakuServlet extends HttpServlet {
         System.out.println("JihakuServlet実行");
 
         JihakuBean bean = new JihakuBean();
-
+        int sisyutu = 10000;
+        int mokuhyou = 5000;
+        String categoryname = ("雑費");
         //計算結果と表示するメッセージを入れ物（bean)にセットする
-        bean.setCategoryname("雑費");
-        bean.setExcess(10000,5000);
+        bean.setCategoryname(categoryname);
+        bean.setExcess(sisyutu,mokuhyou);
       //beanをリクエストにセット キー名は「bean」とする
         request.setAttribute("bean", bean);
 
