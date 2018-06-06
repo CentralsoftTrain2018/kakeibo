@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import dao.ConanDao;
+import vo.ConanVo;
 import vo.ExpenseVo;;
 
 public class DBManager {
@@ -47,6 +49,23 @@ public class DBManager {
         {
             //ExpensesDao edao = new ExpensesDao(con);
             //edao.deleteExpense(ev);
+        }
+        catch(SQLException | ClassNotFoundException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    //アドバイスに必要なやつを取ってくる
+    public static void selectAdvice(ConanVo cv) {
+        try
+        (
+            Connection con = getConnection();
+        )
+        {
+            ConanDao cdao = new ConanDao(con);
+            cdao.deleteExpense(cv);
         }
         catch(SQLException | ClassNotFoundException e)
         {
