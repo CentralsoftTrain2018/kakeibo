@@ -3,6 +3,7 @@ package dbmanager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 import dao.ConanDao;
 import dao.ExpenseDao;
@@ -59,14 +60,15 @@ public class DBManager {
     }
 
     //アドバイスに必要なやつを取ってくる
-    public static void selectAdvice(ConanVo cv) {
+    public static List<ConanVo> selectAdvice() {
         try
         (
             Connection con = getConnection();
         )
         {
             ConanDao cdao = new ConanDao(con);
-            cdao.advice();
+            List<ConanVo> list = cdao.advice();
+           return list;
         }
         catch(SQLException | ClassNotFoundException e)
         {
