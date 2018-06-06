@@ -12,6 +12,8 @@
 <div class="Jihaku">
   <p><%=bean.toString() +"目標を超えたから殺したんだ!!!"%></p>
 </div>
-<h1><img src="image/hannin.png"width="50%" height="50%"></h1>
+<div class="hannin1">
+  <img src="image/hannin1.png">
+</div>
 </body>
 </html>
