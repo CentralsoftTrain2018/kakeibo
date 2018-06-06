@@ -1,9 +1,14 @@
 package service;
 
 import java.sql.Date;
+import java.util.List;
 
+import bean.ConanBean;
+import bean.ConanListBean;
 import dbmanager.DBManager;
+import vo.ConanVo;
 import vo.KakeiboVo;
+
 
 public class Service {
     public static void addExpense(int kingaku, int categoryId, String expenseName, String userId) {
@@ -31,5 +36,41 @@ public class Service {
         KakeiboVo ev = new KakeiboVo();
         ev.setExpenseId(expenseId);
         DBManager.deleteExpense(ev);
+    }
+
+    //ConanVo型のListをConanBean型のListに変換
+    public static ConanListBean selectAdvice() {
+        List<ConanVo> resultList = DBManager.selectAdvice();
+        ConanListBean clb = new ConanListBean();
+
+        int totalGoal = 0;
+        int totalSpending = 0;
+        int totalDifference = 0;
+
+        for( ConanVo cv: resultList )
+        {
+            ConanBean cb = new ConanBean();
+            cb.setCategoryName(cv.getCategoryName());
+
+            int spanding = cv.getSumSpending();
+            totalSpending += spanding;
+            cb.setSumSpending(spanding);
+
+            int goal = cv.getMokuhyouKingaku();
+            totalGoal += goal;
+            cb.setMokuhyouKingaku(goal);
+
+            int difference = cv.getDifference();
+            totalDifference += difference;
+            cb.setDifference(difference);
+
+            clb.getList().add(cb);
+            clb.setThisMonth(5);
+            clb.setTotalGoal(totalGoal);
+            clb.setTotalSpending(totalSpending);
+            clb.setTotalDifference(totalDifference);
+        }
+
+        return clb;
     }
 }
