@@ -4,12 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-<<<<<<< HEAD
 import dao.ConanDao;
-import vo.ConanVo;
-=======
 import dao.ExpenseDao;
->>>>>>> branch 'master' of https://github.com/CentralsoftTrain2018/kakeibo
+import vo.ConanVo;
 import vo.ExpenseVo;;
 
 public class DBManager {
@@ -69,7 +66,7 @@ public class DBManager {
         )
         {
             ConanDao cdao = new ConanDao(con);
-            cdao.deleteExpense(cv);
+            cdao.advice();
         }
         catch(SQLException | ClassNotFoundException e)
         {
