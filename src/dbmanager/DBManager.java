@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import dao.ConanDao;
 import dao.KakeiboDao;
-import vo.KakeiboVo;;
+import vo.ConanVo;
+import vo.KakeiboVo;
+
+
 
 public class DBManager {
     public static void addExpense(KakeiboVo ev) {
@@ -48,6 +52,23 @@ public class DBManager {
         {
             KakeiboDao edao = new KakeiboDao(con);
             edao.deleteExpense(ev);
+        }
+        catch(SQLException | ClassNotFoundException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    //アドバイスに必要なやつを取ってくる
+    public static void selectAdvice(ConanVo cv) {
+        try
+        (
+            Connection con = getConnection();
+        )
+        {
+            ConanDao cdao = new ConanDao(con);
+            cdao.advice();
         }
         catch(SQLException | ClassNotFoundException e)
         {
