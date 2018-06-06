@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.KakeiboBean;
+import exception.NoTextException;
 import service.Service;
 
 /**
@@ -31,29 +33,57 @@ public class KakeiboServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("KakeiboServletが実行されました。");
 
-
+        KakeiboBean kb = new KakeiboBean();
         String choice = request.getParameter("choice");
 
         if(choice.equals("touroku")) {
-            int kingaku = Integer.parseInt(request.getParameter("kingaku"));
-            int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-            String expenseName = request.getParameter("expenseName");
-            String userId = request.getParameter("userId");
-            Service.addExpense(kingaku, categoryId, expenseName, userId);
-        }
-        if(choice.equals("henkou")) {
-            int expenseId = Integer.parseInt(request.getParameter("expenseId"));
-            int kingaku = Integer.parseInt(request.getParameter("kingaku"));
-            int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-            String expenseName = request.getParameter("expenseName");
-            Service.updateExpense(expenseId, kingaku, categoryId, expenseName);
-        }
-        if(choice.equals("sakujo")) {
+            try {
+                int kingaku = Integer.parseInt(request.getParameter("kingaku"));
+                int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+                String expenseName = request.getParameter("expenseName");
+                String userId = request.getParameter("userId");
 
-            int expenseId = Integer.parseInt(request.getParameter("expenseId"));
-            Service.deleteExpense(expenseId);
+                if(expenseName.equals("") || userId.equals("")) {
+                    throw new NoTextException();
+                }
+
+                Service.addExpense(kingaku, categoryId, expenseName, userId);
+            }
+            catch(NumberFormatException | NoTextException e) {
+                kb.setMessage("入力が不正です");
+            }
         }
+
+        if(choice.equals("henkou")) {
+            try {
+                int expenseId = Integer.parseInt(request.getParameter("expenseId"));
+                int kingaku = Integer.parseInt(request.getParameter("kingaku"));
+                int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+                String expenseName = request.getParameter("expenseName");
+
+                if(expenseName.equals("")) {
+                    throw new NoTextException();
+                }
+
+                Service.updateExpense(expenseId, kingaku, categoryId, expenseName);
+            }
+            catch(NumberFormatException | NoTextException e){
+                kb.setMessage("入力が不正です");
+            }
+        }
+
+        if(choice.equals("sakujo")) {
+            try {
+                int expenseId = Integer.parseInt(request.getParameter("expenseId"));
+                Service.deleteExpense(expenseId);
+            }
+            catch(NumberFormatException e) {
+                kb.setMessage("入力が不正です");
+            }
+        }
+
         //JSPに遷移する
+        request.setAttribute("bean", kb);
         RequestDispatcher disp = request.getRequestDispatcher("Kakeibo.jsp");
         disp.forward(request, response);
     }

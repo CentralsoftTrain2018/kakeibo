@@ -1,5 +1,7 @@
 package service;
 
+import java.sql.Date;
+
 import dbmanager.DBManager;
 import vo.ExpenseVo;
 
@@ -9,6 +11,8 @@ public class Service {
         ev.setExpenseKingaku(kingaku);
         ev.setCategoryId(categoryId);
         ev.setExpenseName(expenseName);
+        Date expenseDate = new Date(new java.util.Date().getTime());
+        ev.setExpenseDate(expenseDate);
         ev.setUserId(userId);
         DBManager.addExpense(ev);
     }
