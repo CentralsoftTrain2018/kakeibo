@@ -1,6 +1,7 @@
 package service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import bean.ConanBean;
@@ -43,10 +44,10 @@ public class Service {
         List<ConanVo> resultList = DBManager.selectAdvice();
         ConanListBean clb = new ConanListBean();
 
-        int totalGoal = 0;
-        int totalSpending = 0;
-        int totalDifference = 0;
-
+        int totalGoal = 0;		//月の目標
+        int totalSpending = 0;	//月の支出合計
+        int totalDifference = 0;	//月の目標ー支出
+        List<ConanBean> list = new ArrayList<ConanBean>();
         for( ConanVo cv: resultList )
         {
             ConanBean cb = new ConanBean();
@@ -64,12 +65,14 @@ public class Service {
             totalDifference += difference;
             cb.setDifference(difference);
 
-            clb.getList().add(cb);
-            clb.setThisMonth(5);
-            clb.setTotalGoal(totalGoal);
-            clb.setTotalSpending(totalSpending);
-            clb.setTotalDifference(totalDifference);
+            list.add(cb);
         }
+        //ConanListBeanに入れる
+        clb.setList(list);
+        clb.setThisMonth(5);
+        clb.setTotalGoal(totalGoal);
+        clb.setTotalSpending(totalSpending);
+        clb.setTotalDifference(totalDifference);
 
         return clb;
     }

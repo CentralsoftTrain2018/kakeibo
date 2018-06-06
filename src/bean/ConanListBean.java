@@ -49,11 +49,11 @@ public class ConanListBean {
     public void setList(List<ConanBean> list) {
         this.list = list;
     }
-    @Override
-    public String toString() {
-        return thisMonth + "月は目標達成だね！おめでとう(^_^)/♪<br>" +
-                "君のおかげで犯人を逮捕することができたよ！<br>" +
-                "合計目標金額は\t" + totalGoal + "円、\t支出合計は" + totalSpending + "円、\t差額は" + totalDifference + "円\tだよ。<br>";
-    }
+//    @Override
+//    public String toString() {
+//        return thisMonth + "月は目標達成だね！おめでとう(^_^)/♪<br>" +
+//                "君のおかげで犯人を逮捕することができたよ！<br>" +
+//                "合計目標金額は\t" + totalGoal + "円、\t支出合計は" + totalSpending + "円、\t差額は" + totalDifference + "円\tだよ。<br>";
+//    }
 
 }

@@ -19,6 +19,7 @@
     <%=cb.getCategoryName() %>の目標金額は<%=cb.getMokuhyouKingaku() %>円、
     支出合計は<%=cb.getSumSpending() %>円、差額は<%=cb.getDifference() %>円だよ。<br>
     <%}%>
+    <a href="BungyServlet">TOPに戻る</a>
   </div>
 </body>
 </html>

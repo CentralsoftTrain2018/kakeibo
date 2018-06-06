@@ -14,13 +14,13 @@ public class ConanDao {
 
     private static final String SELECT = "SELECT " +
             "categoryName " +
-            ",SUM(e.Kingaku) " +
             ",m.Kingaku " +
-            ",SUM(e.Kingaku) - m.Kingaku"+
+            ",SUM(e.Kingaku) " +
+            ",SUM(m.Kingaku - e.Kingaku) "+
             "FROM " +
             "kakeibo.expenses e " +
-            ",kakeibo.category c" +
-            ",kakeibo.mokuhyou m" +
+            ",kakeibo.category c " +
+            ",kakeibo.mokuhyou m " +
             "WHERE " +
             "e.expenseDate BETWEEN '2018-05-01' AND '2018-05-31' " +
             "AND e.category_categoryId = c.categoryId " +
@@ -52,8 +52,8 @@ public class ConanDao {
                 ConanVo cv = new ConanVo();
 
                 cv.setCategoryName(rset.getString(1));
-                cv.setSumSpending(rset.getInt(2));
-                cv.setMokuhyouKingaku(rset.getInt(3));
+                cv.setMokuhyouKingaku(rset.getInt(2));
+                cv.setSumSpending(rset.getInt(3));
                 cv.setDifference(rset.getInt(4));
                 list.add(cv);
             }
