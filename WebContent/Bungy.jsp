@@ -4,10 +4,43 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>Bungy</title>
 </head>
 <body>
 <h1>Bungy</h1>
+ <div class="pattern1"
+ style="width: 800px;
+  height: 742px;
+  overflow: hidden;
+  margin-bottom:0px;padding-bottom:0px;
+  position: relative;"
+  >
+  <img src="image/kaidan.png" alt="" class ="base"
+  style="
+  position: absolute;
+  left: 10px;
+  bottom:0px;
+  margin-bottom:0px;padding-bottom:0px;"
+  >
+  <img src="image/hanninkaidan.png" alt="" class="hannin" id="hannin"
+  style=
+  "position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 0px;
+  bottom:0%;"
+  >
+  <img src="image/jump.png" alt="" class="jumper" id="jumper"
+  style=
+  "position: absolute;
+  width: 100px;
+  height: 100px;
+  right: 30%;
+  top:0%;"
+  >
+ </div>
+
 <form  method="POST" action="GameOverServlet">
   <input type="submit" value="GameOver">
 </form>
