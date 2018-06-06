@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import vo.ExpenseVo;
+import vo.KakeiboVo;
 
-public class ExpenseDao {
+public class KakeiboDao {
 
     Connection con;
 
@@ -39,13 +39,13 @@ public class ExpenseDao {
             + " where "
             + " expenseid = ?";
 
-    public ExpenseDao(Connection con) {
+    public KakeiboDao(Connection con) {
         this.con = con;
     }
 
     //-------------------------------------------------------
     // 会員登録
-    public void addExpense(ExpenseVo ev) throws SQLException {
+    public void addExpense(KakeiboVo ev) throws SQLException {
         PreparedStatement stmt = null;
         try{
 
@@ -70,7 +70,7 @@ public class ExpenseDao {
 
     //-------------------------------------------------------
     // 会員取得
-    public void updateExpense(ExpenseVo ev) throws SQLException {
+    public void updateExpense(KakeiboVo ev) throws SQLException {
         PreparedStatement stmt = null;
         try{
 
@@ -92,7 +92,7 @@ public class ExpenseDao {
     }
 
 
-    public void deleteExpense(ExpenseVo ev) throws SQLException {
+    public void deleteExpense(KakeiboVo ev) throws SQLException {
         PreparedStatement stmt = null;
 
         try{
