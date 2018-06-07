@@ -1,6 +1,7 @@
 package dbmanager;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -22,7 +23,6 @@ public class AdviceDBManager {
 
             ConanDao cdao = new ConanDao(con);
             List<AdviceVo> list = cdao.getAdvice(month);
-
            return list;
         }
         catch(SQLException e)
@@ -33,7 +33,7 @@ public class AdviceDBManager {
     }
 
     //アドバイス(自白)に必要なデータを取得する
-    public static List<AdviceVo> selectJihakuAdvice() {
+    public static List<AdviceVo> selectJihakuAdvice(Date date, String userId) {
         try
         (
             Connection con = PoolConnection.getConnection();
@@ -41,7 +41,7 @@ public class AdviceDBManager {
         {
 
             JihakuDao jdao = new JihakuDao(con);
-            List<AdviceVo> list = jdao.JihakuAdvice() /**jdao.jihakuAdvice()**/;
+            List<AdviceVo> list = jdao.JihakuAdvice(date, userId) /**jdao.jihakuAdvice()**/;
             return list;
 
         }
