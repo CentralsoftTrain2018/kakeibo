@@ -23,7 +23,6 @@ public class AdviceDBManager {
 
             ConanDao cdao = new ConanDao(con);
             List<AdviceVo> list = cdao.getAdvice(month);
-
            return list;
         }
         catch(SQLException e)

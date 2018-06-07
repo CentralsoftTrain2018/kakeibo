@@ -35,7 +35,9 @@ public class AdviceService {
 
 //---------------------------コナン機能---------------------------------------------------------
     //AdviceVo型のListをConanBean型のListに変換
+
     public static ConanListBean selectConanAdvice() {
+
         //現在の月を取得（201806）
         Calendar calendar = Calendar.getInstance();
         String thisMonth = new SimpleDateFormat( "yyyyMM" ).format( calendar.getTime() );
