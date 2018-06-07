@@ -4,7 +4,7 @@ public class BungyBean {
     private int mokuhyou;
     private int sisyutu;
     private int hanninIchi;
-    private int date;
+    private String month;
     private String message;
 
     public BungyBean() {
@@ -35,12 +35,12 @@ public class BungyBean {
         this.hanninIchi = hanninIchi;
     }
 
-    public int getDate() {
-        return date;
+    public String getMonth() {
+        return month;
     }
 
-    public void setDate(int date) {
-        this.date = date;
+    public void setMonth(String month) {
+        this.month = month;
     }
 
     public String getMessage() {
@@ -54,7 +54,7 @@ public class BungyBean {
     @Override
     public String toString() {
         return "BungyBean [mokuhyou=" + mokuhyou + ", sisyutu=" + sisyutu + ", hanninIchi=" + hanninIchi + ", date="
-                + date + ", message=" + message + "]";
+                + month + ", message=" + message + "]";
     }
 
 
