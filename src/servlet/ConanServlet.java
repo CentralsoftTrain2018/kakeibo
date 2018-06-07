@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.ConanListBean;
-import service.ExpenseService;
+import service.AdviceService;
 
 @WebServlet("/ConanServlet")
 public class ConanServlet extends HttpServlet {
@@ -24,7 +24,7 @@ public class ConanServlet extends HttpServlet {
             throws ServletException, IOException {
 
         //次の画面で表示するための入れ物を準備する
-        ConanListBean bean = ExpenseService.selectAdvice();
+        ConanListBean bean = AdviceService.selectConanAdvice();
 
         request.setAttribute("bean", bean);
 
