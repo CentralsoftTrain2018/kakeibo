@@ -29,7 +29,8 @@
   "position: absolute;
   width: 100px;
   height: 100px;
-  left: 10%;
+  transform: scale(<%=bean.getHanninMuki() %>,1);
+  left: <%=bean.getHanninYoko() %>%;
   bottom:
        <%=bean.getHanninIchi() %>%;"
   >
@@ -47,11 +48,11 @@
   width: 100px;
   height: 100px;
   right: 30%;
-  top:<%=bean.getDate()%>%;"
+  top:<%=bean.getDate()+30%>%;"
   >
 
  </div>
-
+<%=bean.getHanninYoko() %>
 <form  method="POST" action="GameOverServlet">
   <input type="submit" value="GameOver">
 </form>
