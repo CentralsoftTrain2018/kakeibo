@@ -2,7 +2,6 @@ package dbmanager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import dao.ConanDao;
@@ -41,8 +40,8 @@ public class AdviceDBManager {
         )
         {
 
-            JihakuDao jdao = new JihakuDao();
-            List<AdviceVo> list = new ArrayList<>() /**jdao.jihakuAdvice()**/;
+            JihakuDao jdao = new JihakuDao(con);
+            List<AdviceVo> list = jdao.JihakuAdvice() /**jdao.jihakuAdvice()**/;
             return list;
 
         }
