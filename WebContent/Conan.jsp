@@ -20,11 +20,11 @@
     <%
         if (cb.getDifference() > 0) {
     %>
-    <%=cb.getCategoryName()%>は<%=cb.getDifference() %>円　目標より節約できたよ。やったね！<br>
+    <%=cb.getCategoryName()%>は目標より<%=cb.getDifference() %>円節約できたよ。やったね！<br>
     <%
       } else {
     %>
-    <%=cb.getCategoryName()%>は<%=cb.getDifference()* -1 %>円　目標よりオーバーだよ。気をつけよう！<br>
+    <%=cb.getCategoryName()%>は目標より<%=cb.getDifference()* -1 %>円オーバーだよ。気をつけよう！<br>
     <%
       }
     %>
