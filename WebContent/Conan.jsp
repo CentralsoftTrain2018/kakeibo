@@ -20,17 +20,18 @@
     <%
         if (cb.getDifference() > 0) {
     %>
-    <%=cb.getCategoryName()%>はプラスだよ。やったね！<br>
+    <%=cb.getCategoryName()%>は<%=cb.getDifference() %>円　目標より節約できたよ。やったね！<br>
     <%
       } else {
     %>
-    <%=cb.getCategoryName()%>はマイナスだよ。気をつけよう！<br>
+    <%=cb.getCategoryName()%>は<%=cb.getDifference()* -1 %>円　目標よりオーバーだよ。気をつけよう！<br>
     <%
       }
     %>
     <%
       }
     %>
+    <!-- 12月が13月になってしまうバグ -->
    <%=bean.getThisMonth() + 1 %>月もがんばろう！<br><br>
     <a href="BungyServlet">TOPに戻る</a>
   </div>
