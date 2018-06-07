@@ -1,5 +1,9 @@
 package bean;
 
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 public class BungyBean {
     private int mokuhyou;
     private int sisyutu;
@@ -70,13 +74,19 @@ public class BungyBean {
         this.hanninIchi = hanninIchi;
     }
 
-    public String getMonth() {
-        return month;
+    public int getMonth() {
+        String[] YearAndMonth = month.split("/");
+
+        Calendar c = new GregorianCalendar(Integer.parseInt(YearAndMonth[0]),Integer.parseInt(YearAndMonth[1]),1);
+        LocalDate d1 = LocalDate.now();
+
+        int days=c.getActualMaximum(Calendar.DAY_OF_MONTH);
+        return  (int)((double)Integer.parseInt(YearAndMonth[1])/(double)days*50.0);
     }
         /**
     public int getDate() {
         //バンジージャンパの表示位置と紐の長さの調整を行う
-        return (int)((double)this.date/(double)30*50.0);
+
     }
     **/
 

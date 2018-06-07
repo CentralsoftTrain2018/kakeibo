@@ -38,7 +38,7 @@
   style=
   "position: absolute;
   width: 50px;
-  height:<%=bean.getDate()+7%>%;
+  height:<%=bean.getMonth()+7%>%;
   right: 35%;
   top:25%;"
   >
@@ -48,7 +48,7 @@
   width: 100px;
   height: 100px;
   right: 30%;
-  top:<%=bean.getDate()+30%>%;"
+  top:<%=bean.getMonth()+30%>%;"
   >
 
 
