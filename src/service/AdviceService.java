@@ -1,7 +1,14 @@
 package service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import bean.ConanBean;
+import bean.ConanListBean;
 import bean.JihakuBean;
 import bean.JihakuListBean;
+import dbmanager.AdviceDBManager;
+import vo.ConanVo;
 
 public class AdviceService {
 
@@ -27,5 +34,44 @@ public class AdviceService {
         jihakulist.getJihakulist().add(bean);
         jihakulist.getJihakulist().add(bean1);
         return jihakulist;
+    }
+
+//---------------------------コナン機能---------------------------------------------------------
+    //ConanVo型のListをConanBean型のListに変換
+    public static ConanListBean selectConanAdvice() {
+        List<ConanVo> resultList = AdviceDBManager.selectConanAdvice();
+        ConanListBean clb = new ConanListBean();
+
+        int totalGoal = 0;		//月の目標
+        int totalSpending = 0;	//月の支出合計
+        int totalDifference = 0;	//月の目標ー支出
+        List<ConanBean> list = new ArrayList<ConanBean>();
+        for( ConanVo cv: resultList )
+        {
+            ConanBean cb = new ConanBean();
+            cb.setCategoryName(cv.getCategoryName());
+
+            int spanding = cv.getSumSpending();
+            totalSpending += spanding;
+            cb.setSumSpending(spanding);
+
+            int goal = cv.getMokuhyouKingaku();
+            totalGoal += goal;
+            cb.setMokuhyouKingaku(goal);
+
+            int difference = cv.getDifference();
+            totalDifference += difference;
+            cb.setDifference(difference);
+
+            list.add(cb);
+        }
+        //ConanListBeanに入れる
+        clb.setList(list);
+        clb.setThisMonth(5);
+        clb.setTotalGoal(totalGoal);
+        clb.setTotalSpending(totalSpending);
+        clb.setTotalDifference(totalDifference);
+
+        return clb;
     }
 }

@@ -1,14 +1,8 @@
 package service;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
-import bean.ConanBean;
-import bean.ConanListBean;
-import dbmanager.AdviceDBManager;
 import dbmanager.ExpenseDBManager;
-import vo.ConanVo;
 import vo.KakeiboVo;
 
 
@@ -40,41 +34,4 @@ public class ExpenseService {
         ExpenseDBManager.deleteExpense(ev);
     }
 
-    //ConanVo型のListをConanBean型のListに変換
-    public static ConanListBean selectAdvice() {
-        List<ConanVo> resultList = AdviceDBManager.selectAdvice();
-        ConanListBean clb = new ConanListBean();
-
-        int totalGoal = 0;		//月の目標
-        int totalSpending = 0;	//月の支出合計
-        int totalDifference = 0;	//月の目標ー支出
-        List<ConanBean> list = new ArrayList<ConanBean>();
-        for( ConanVo cv: resultList )
-        {
-            ConanBean cb = new ConanBean();
-            cb.setCategoryName(cv.getCategoryName());
-
-            int spanding = cv.getSumSpending();
-            totalSpending += spanding;
-            cb.setSumSpending(spanding);
-
-            int goal = cv.getMokuhyouKingaku();
-            totalGoal += goal;
-            cb.setMokuhyouKingaku(goal);
-
-            int difference = cv.getDifference();
-            totalDifference += difference;
-            cb.setDifference(difference);
-
-            list.add(cb);
-        }
-        //ConanListBeanに入れる
-        clb.setList(list);
-        clb.setThisMonth(5);
-        clb.setTotalGoal(totalGoal);
-        clb.setTotalSpending(totalSpending);
-        clb.setTotalDifference(totalDifference);
-
-        return clb;
-    }
 }
