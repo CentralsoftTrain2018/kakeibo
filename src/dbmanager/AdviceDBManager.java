@@ -9,14 +9,14 @@ import vo.ConanVo;
 
 public class AdviceDBManager {
     //アドバイス（コナン）に必要なやつを取ってくる
-    public static List<ConanVo> selectConanAdvice() {
+    public static List<ConanVo> selectConanAdvice(int month) {
         try
         (
             Connection con = PoolConnection.getConnection();
         )
         {
             ConanDao cdao = new ConanDao(con);
-            List<ConanVo> list = cdao.advice(201805);
+            List<ConanVo> list = cdao.advice(month);
            return list;
         }
         catch(SQLException e)

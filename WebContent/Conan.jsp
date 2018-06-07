@@ -31,8 +31,7 @@
     <%
       }
     %>
-    <!-- 12月が13月になってしまうバグ -->
-   <%=bean.getThisMonth() + 1 %>月もがんばろう！<br><br>
+    来月もがんばろう！<br><br>
     <a href="BungyServlet">TOPに戻る</a>
   </div>
 </body>
