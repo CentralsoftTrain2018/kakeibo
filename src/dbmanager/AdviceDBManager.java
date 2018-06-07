@@ -16,7 +16,7 @@ public class AdviceDBManager {
         )
         {
             ConanDao cdao = new ConanDao(con);
-            List<ConanVo> list = cdao.advice();
+            List<ConanVo> list = cdao.advice(201805);
            return list;
         }
         catch(SQLException e)
