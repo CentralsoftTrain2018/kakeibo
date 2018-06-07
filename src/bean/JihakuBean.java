@@ -20,8 +20,8 @@ public class JihakuBean {
     public int getExcess() {
         return excess;
     }
-    public void setExcess(int a , int b) {
-        this.excess = a-b;
+    public void setExcess(int excess) {
+        this.excess = excess;
     }
     @Override
     public String toString() {
