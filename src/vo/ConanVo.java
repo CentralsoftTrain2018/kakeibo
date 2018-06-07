@@ -1,8 +1,17 @@
-package bean;
+package vo;
 
-public class ConanBean {
+public class ConanVo {
     private String categoryName;
-    private int difference;		//差額（目標ー支出）
+    private int difference;
+
+    public ConanVo() {
+        super();
+    }
+
+    public ConanVo(String categoryName) {
+        super();
+        this.categoryName = categoryName;
+    }
 
     public String getCategoryName() {
         return categoryName;
@@ -18,6 +27,11 @@ public class ConanBean {
 
     public void setDifference(int difference) {
         this.difference = difference;
+    }
+
+    @Override
+    public String toString() {
+        return "ConanVo [categoryName=" + categoryName + ", difference=" + difference + "]";
     }
 
 }

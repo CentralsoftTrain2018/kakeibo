@@ -14,15 +14,14 @@ public class ConanDao {
 
     private static final String SELECT = "SELECT " +
             "categoryName " +
-            ",m.Kingaku " +
-            ",SUM(e.Kingaku) " +
             ",m.Kingaku - SUM(e.Kingaku) "+
             "FROM " +
             "kakeibo.expenses e " +
             ",kakeibo.category c " +
             ",kakeibo.mokuhyou m " +
             "WHERE " +
-            "e.expenseDate BETWEEN '2018-05-01' AND '2018-05-31' " +
+            "DATE_FORMAT(e.expenseDate, '%Y%m') = ? " +
+            "AND DATE_FORMAT(m.Month, '%Y%m') = ? " +
             "AND e.category_categoryId = c.categoryId " +
             "AND e.user_userid = m.user_userid " +
             "AND c.categoryId = m.category_categoryId " +
@@ -35,7 +34,8 @@ public class ConanDao {
 
     //-------------------------------------------------------
     // カテゴリ名、支出合計、目標
-    public List<AdviceVo> advice() throws SQLException {
+
+    public List<AdviceVo> advice(int month) throws SQLException {
 
         PreparedStatement stmt = null;
         ResultSet rset = null;
@@ -45,6 +45,9 @@ public class ConanDao {
 
             /* Statementの作成 */
             stmt = con.prepareStatement(SELECT);
+            stmt.setInt(1, month);
+            stmt.setInt(2, month);
+
             /* SQL実行 */
             rset = stmt.executeQuery();
 
@@ -53,9 +56,7 @@ public class ConanDao {
                 AdviceVo cv = new AdviceVo();
 
                 cv.setCategoryName(rset.getString(1));
-                cv.setMokuhyouKingaku(rset.getInt(2));
-                cv.setSumSpending(rset.getInt(3));
-                cv.setDifference(rset.getInt(4));
+                cv.setDifference(rset.getInt(2));
                 list.add(cv);
             }
 
