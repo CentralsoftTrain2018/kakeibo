@@ -42,22 +42,12 @@ public class AdviceService {
         List<ConanVo> resultList = AdviceDBManager.selectConanAdvice();
         ConanListBean clb = new ConanListBean();
 
-        int totalGoal = 0;		//月の目標
-        int totalSpending = 0;	//月の支出合計
         int totalDifference = 0;	//月の目標ー支出
         List<ConanBean> list = new ArrayList<ConanBean>();
         for( ConanVo cv: resultList )
         {
             ConanBean cb = new ConanBean();
             cb.setCategoryName(cv.getCategoryName());
-
-            int spanding = cv.getSumSpending();
-            totalSpending += spanding;
-            cb.setSumSpending(spanding);
-
-            int goal = cv.getMokuhyouKingaku();
-            totalGoal += goal;
-            cb.setMokuhyouKingaku(goal);
 
             int difference = cv.getDifference();
             totalDifference += difference;
@@ -68,8 +58,6 @@ public class AdviceService {
         //ConanListBeanに入れる
         clb.setList(list);
         clb.setThisMonth(5);
-        clb.setTotalGoal(totalGoal);
-        clb.setTotalSpending(totalSpending);
         clb.setTotalDifference(totalDifference);
 
         return clb;

@@ -4,8 +4,6 @@ import java.util.List;
 
 public class ConanListBean {
 
-    private int totalGoal;
-    private int totalSpending;
     private int totalDifference;
     private int thisMonth;
     private List<ConanBean> list;
@@ -16,22 +14,6 @@ public class ConanListBean {
 
     public void setThisMonth(int thisMonth) {
         this.thisMonth = thisMonth;
-    }
-
-    public int getTotalGoal() {
-        return totalGoal;
-    }
-
-    public void setTotalGoal(int totalGoal) {
-        this.totalGoal = totalGoal;
-    }
-
-    public int getTotalSpending() {
-        return totalSpending;
-    }
-
-    public void setTotalSpending(int totalSpending) {
-        this.totalSpending = totalSpending;
     }
 
     public int getTotalDifference() {

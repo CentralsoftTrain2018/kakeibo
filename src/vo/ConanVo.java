@@ -2,19 +2,15 @@ package vo;
 
 public class ConanVo {
     private String categoryName;
-    private int sumSpending;
-    private int mokuhyouKingaku;
     private int difference;
 
     public ConanVo() {
         super();
     }
 
-    public ConanVo(String categoryName, int sumSpending, int mokuhyouKingaku) {
+    public ConanVo(String categoryName) {
         super();
         this.categoryName = categoryName;
-        this.sumSpending = sumSpending;
-        this.mokuhyouKingaku = mokuhyouKingaku;
     }
 
     public String getCategoryName() {
@@ -23,22 +19,6 @@ public class ConanVo {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
-    }
-
-    public int getSumSpending() {
-        return sumSpending;
-    }
-
-    public void setSumSpending(int sumSpending) {
-        this.sumSpending = sumSpending;
-    }
-
-    public int getMokuhyouKingaku() {
-        return mokuhyouKingaku;
-    }
-
-    public void setMokuhyouKingaku(int mokuhyouKingaku) {
-        this.mokuhyouKingaku = mokuhyouKingaku;
     }
 
     public int getDifference() {
@@ -51,8 +31,7 @@ public class ConanVo {
 
     @Override
     public String toString() {
-        return "ConanVo [categoryName="
-                + categoryName + ", sumSpending=" + sumSpending + ", mokuhyouKingaku=" + mokuhyouKingaku + "]";
+        return "ConanVo [categoryName=" + categoryName + ", difference=" + difference + "]";
     }
 
 }
