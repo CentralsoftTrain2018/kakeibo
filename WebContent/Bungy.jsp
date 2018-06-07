@@ -41,8 +41,11 @@
   >
  </div>
 
-<form  method="POST" action="GameOverServlet">
-  <input type="submit" value="GameOver">
+<form  method="POST" action="JihakuServlet">
+  <input type="submit" value="殺される">
+</form>
+<form  method="POST" action="ConanServlet">
+  <input type="submit" value="生き延びる">
 </form>
 </body>
 </html>
