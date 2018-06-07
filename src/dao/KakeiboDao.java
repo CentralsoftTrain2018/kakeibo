@@ -12,11 +12,11 @@ public class KakeiboDao {
 
     private static final String ADD =
             "insert into expenses ( "
-            + " expensekingaku "
-            + " ,categoryid "
+            + " kingaku "
+            + " ,category_categoryid "
             + " ,expensename "
             + " ,expensedate "
-            + " ,userid "
+            + " ,user_userid "
             + " ) "
             + " values ( "
             + "  ?,?,?,?,? ) ";
@@ -24,9 +24,9 @@ public class KakeiboDao {
     private static final String UPDATE =
              "update expenses "
             + " set "
-            + " expensekingaku "
+            + " kingaku "
             + " = ? "
-            + " ,categoryid "
+            + " ,category_categoryid "
             + " = ? "
             + " ,expensename "
             + " = ? "

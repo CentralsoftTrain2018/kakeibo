@@ -1,5 +1,6 @@
 package service;
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,8 +16,8 @@ import vo.AdviceVo;
 public class AdviceService {
 
     //AdviceVo型のListをConanBean型のListに変換
-    public JihakuListBean jihaku() {
-        List<AdviceVo> resultList = AdviceDBManager.selectJihakuAdvice();
+    public JihakuListBean jihaku(Date date, String userId) {
+        List<AdviceVo> resultList = AdviceDBManager.selectJihakuAdvice(date, userId);
         JihakuListBean jlb= new JihakuListBean();
 
         //計算結果と表示するメッセージを入れ物（bean)にセットする
@@ -34,12 +35,15 @@ public class AdviceService {
 
 //---------------------------コナン機能---------------------------------------------------------
     //AdviceVo型のListをConanBean型のListに変換
-    public static ConanListBean selectConanAdvice() {
-        //現在の月を取得
-        Calendar calendar = Calendar.getInstance();
-        String lastMonth = new SimpleDateFormat( "yyyyMM" ).format( calendar.getTime() );
 
-        int month = Integer.parseInt(lastMonth) -1;
+    public static ConanListBean selectConanAdvice() {
+
+        //現在の月を取得（201806）
+        Calendar calendar = Calendar.getInstance();
+        String thisMonth = new SimpleDateFormat( "yyyyMM" ).format( calendar.getTime() );
+
+        //取得したい値は201805なので-1している
+        int month = Integer.parseInt(thisMonth) -1;
 
         List<AdviceVo> resultList = AdviceDBManager.selectConanAdvice(month);
 
@@ -51,10 +55,12 @@ public class AdviceService {
             ConanBean cb = new ConanBean();
             cb.setCategoryName(av.getCategoryName());
             cb.setDifference(av.getDifference());
+
             list.add(cb);
         }
         //ConanListBeanに入れる
         clb.setList(list);
+        //月の値を入れる（6月の場合5が出力されるので、本番では+1すること）
         clb.setThisMonth(calendar.get(Calendar.MONTH));
 
         return clb;

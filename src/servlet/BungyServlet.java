@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.BungyBean;
 import exception.IllegalNumberException;
+import service.ExpenseService;
+import vo.BungyVo;
 
 
 
@@ -30,27 +32,33 @@ public class BungyServlet extends HttpServlet
         BungyBean bb = new BungyBean();
 
         try {
+            /**
             String mokuhyouStr = request.getParameter("mokuhyou");
             String shisyutuStr = request.getParameter("shisyutu");
             String dateStr = request.getParameter("date");
             int mokuhyou = Integer.parseInt(mokuhyouStr);
             int shisyutu = Integer.parseInt(shisyutuStr);
             int date = Integer.parseInt(dateStr);
+            **/
+
+            BungyVo bv = ExpenseService.getMokuhyouAndExpenses("aaa", "201810");
 
 
-            if(mokuhyou < 0) {
+            if(bv.getMokuhyou() < 0) {
                 throw new IllegalNumberException();
             }
-            if(shisyutu < 0) {
+            if(bv.getTotalexpenses() < 0) {
                 throw new IllegalNumberException();
             }
+            /**
             if(date < 0 || 100 < date) {
                 throw new IllegalNumberException();
             }
+            **/
 
-            bb.setMokuhyou(mokuhyou);
-            bb.setSisyutu(shisyutu);
-            bb.setDate(date);
+            bb.setMokuhyou(bv.getMokuhyou());
+            bb.setSisyutu(bv.getTotalexpenses());
+            bb.setMonth("201810");
 
             request.setAttribute("bean", bb);
             RequestDispatcher disp = request.getRequestDispatcher("/Bungy.jsp");
