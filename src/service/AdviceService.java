@@ -3,7 +3,7 @@ package service;
 import bean.JihakuBean;
 import bean.JihakuListBean;
 
-public class ConanService {
+public class AdviceService {
 
     public JihakuListBean jihaku() {
         JihakuListBean jihakulist= new JihakuListBean();

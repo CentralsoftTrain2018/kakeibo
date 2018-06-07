@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.KakeiboBean;
 import exception.NoTextException;
-import service.Service;
+import service.ExpenseService;
 
 /**
  * Servlet implementation class IndexStartServlet
@@ -47,7 +47,7 @@ public class KakeiboServlet extends HttpServlet {
                     throw new NoTextException();
                 }
 
-                Service.addExpense(kingaku, categoryId, expenseName, userId);
+                ExpenseService.addExpense(kingaku, categoryId, expenseName, userId);
             }
             catch(NumberFormatException | NoTextException e) {
                 kb.setMessage("入力が不正です");
@@ -65,7 +65,7 @@ public class KakeiboServlet extends HttpServlet {
                     throw new NoTextException();
                 }
 
-                Service.updateExpense(expenseId, kingaku, categoryId, expenseName);
+                ExpenseService.updateExpense(expenseId, kingaku, categoryId, expenseName);
             }
             catch(NumberFormatException | NoTextException e){
                 kb.setMessage("入力が不正です");
@@ -75,7 +75,7 @@ public class KakeiboServlet extends HttpServlet {
         if(choice.equals("sakujo")) {
             try {
                 int expenseId = Integer.parseInt(request.getParameter("expenseId"));
-                Service.deleteExpense(expenseId);
+                ExpenseService.deleteExpense(expenseId);
             }
             catch(NumberFormatException e) {
                 kb.setMessage("入力が不正です");
