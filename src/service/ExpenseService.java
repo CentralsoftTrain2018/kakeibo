@@ -6,12 +6,13 @@ import java.util.List;
 
 import bean.ConanBean;
 import bean.ConanListBean;
-import dbmanager.DBManager;
+import dbmanager.AdviceDBManager;
+import dbmanager.ExpenseDBManager;
 import vo.ConanVo;
 import vo.KakeiboVo;
 
 
-public class Service {
+public class ExpenseService {
     public static void addExpense(int kingaku, int categoryId, String expenseName, String userId) {
         KakeiboVo ev = new KakeiboVo();
         ev.setExpenseKingaku(kingaku);
@@ -20,7 +21,7 @@ public class Service {
         Date expenseDate = new Date(new java.util.Date().getTime());
         ev.setExpenseDate(expenseDate);
         ev.setUserId(userId);
-        DBManager.addExpense(ev);
+        ExpenseDBManager.addExpense(ev);
     }
 
 
@@ -30,18 +31,18 @@ public class Service {
         ev.setExpenseKingaku(kingaku);
         ev.setCategoryId(categoryId);
         ev.setExpenseName(expenseName);
-        DBManager.updateExpense(ev);
+        ExpenseDBManager.updateExpense(ev);
     }
 
     public static void deleteExpense(int expenseId) {
         KakeiboVo ev = new KakeiboVo();
         ev.setExpenseId(expenseId);
-        DBManager.deleteExpense(ev);
+        ExpenseDBManager.deleteExpense(ev);
     }
 
     //ConanVo型のListをConanBean型のListに変換
     public static ConanListBean selectAdvice() {
-        List<ConanVo> resultList = DBManager.selectAdvice();
+        List<ConanVo> resultList = AdviceDBManager.selectAdvice();
         ConanListBean clb = new ConanListBean();
 
         int totalGoal = 0;		//月の目標

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.JihakuListBean;
-import service.ConanService;
+import service.AdviceService;
 
 /**
  * Servlet implementation class IndexStartServlet
@@ -34,7 +34,7 @@ public class JihakuServlet extends HttpServlet {
 
         System.out.println("JihakuServlet実行");
 
-        ConanService conan = new ConanService();
+        AdviceService conan = new AdviceService();
         JihakuListBean bean =conan.jihaku();
       //beanをリクエストにセット キー名は「bean」とする
         request.setAttribute("bean", bean);
