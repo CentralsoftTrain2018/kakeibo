@@ -20,7 +20,8 @@ public class ConanDao {
             ",kakeibo.category c " +
             ",kakeibo.mokuhyou m " +
             "WHERE " +
-            "DATE_FORMAT(expenseDate, '%Y%m')=201805" +
+            "DATE_FORMAT(e.expenseDate, '%Y%m') = ? " +
+            "AND DATE_FORMAT(m.Month, '%Y%m') = ? " +
             "AND e.category_categoryId = c.categoryId " +
             "AND e.user_userid = m.user_userid " +
             "AND c.categoryId = m.category_categoryId " +
@@ -33,7 +34,7 @@ public class ConanDao {
 
     //-------------------------------------------------------
     // カテゴリ名、支出合計、目標
-    public List<ConanVo> advice() throws SQLException {
+    public List<ConanVo> advice(int month) throws SQLException {
 
         PreparedStatement stmt = null;
         ResultSet rset = null;
@@ -43,6 +44,9 @@ public class ConanDao {
 
             /* Statementの作成 */
             stmt = con.prepareStatement(SELECT);
+            stmt.setInt(1, month);
+            stmt.setInt(2, month);
+
             /* SQL実行 */
             rset = stmt.executeQuery();
 
