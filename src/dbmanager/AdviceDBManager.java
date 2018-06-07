@@ -10,15 +10,19 @@ import dao.JihakuDao;
 import vo.AdviceVo;
 
 public class AdviceDBManager {
+
     //アドバイス（コナン）に必要なやつを取ってくる
-    public static List<AdviceVo> selectConanAdvice() {
+    public static List<AdviceVo> selectConanAdvice(int month) {
+
+
         try
         (
             Connection con = PoolConnection.getConnection();
         )
         {
+
             ConanDao cdao = new ConanDao(con);
-            List<AdviceVo> list = cdao.advice(201805);
+            List<AdviceVo> list = cdao.advice(month);
 
            return list;
         }

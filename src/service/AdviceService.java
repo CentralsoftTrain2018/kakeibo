@@ -1,6 +1,8 @@
 package service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import bean.ConanBean;
@@ -33,27 +35,28 @@ public class AdviceService {
 //---------------------------コナン機能---------------------------------------------------------
     //AdviceVo型のListをConanBean型のListに変換
     public static ConanListBean selectConanAdvice() {
-        List<AdviceVo> resultList = AdviceDBManager.selectConanAdvice();
+        //現在の月を取得
+        Calendar calendar = Calendar.getInstance();
+        String lastMonth = new SimpleDateFormat( "yyyyMM" ).format( calendar.getTime() );
+
+        int month = Integer.parseInt(lastMonth) -1;
+
+        List<AdviceVo> resultList = AdviceDBManager.selectConanAdvice(month);
+
         ConanListBean clb = new ConanListBean();
 
-        int totalDifference = 0;	//月の目標ー支出
         List<ConanBean> list = new ArrayList<ConanBean>();
         for( AdviceVo av: resultList )
         {
             ConanBean cb = new ConanBean();
             cb.setCategoryName(av.getCategoryName());
-
-            int difference = av.getDifference();
-
-            totalDifference += difference;
-            cb.setDifference(difference);
+            cb.setDifference(av.getDifference());
 
             list.add(cb);
         }
         //ConanListBeanに入れる
         clb.setList(list);
-        clb.setThisMonth(5);
-        clb.setTotalDifference(totalDifference);
+        clb.setThisMonth(calendar.get(Calendar.MONTH));
 
         return clb;
     }
