@@ -51,6 +51,7 @@ public class AdviceService {
             ConanBean cb = new ConanBean();
             cb.setCategoryName(av.getCategoryName());
             cb.setDifference(av.getDifference());
+
             list.add(cb);
         }
         //ConanListBeanに入れる
