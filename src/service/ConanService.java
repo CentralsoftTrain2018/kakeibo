@@ -22,7 +22,7 @@ public class ConanService {
         String categoryname1 = ("食費");
         //計算結果と表示するメッセージを入れ物（bean)にセットする
         bean1.setCategoryname(categoryname1);
-        bean1.setExcess(sisyutu,mokuhyou1);
+        bean1.setExcess(sisyutu1,mokuhyou1);
 
         jihakulist.getJihakulist().add(bean);
         jihakulist.getJihakulist().add(bean1);
