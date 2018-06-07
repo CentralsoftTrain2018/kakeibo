@@ -8,8 +8,8 @@ import dao.ConanDao;
 import vo.ConanVo;
 
 public class AdviceDBManager {
-    //アドバイスに必要なやつを取ってくる
-    public static List<ConanVo> selectAdvice() {
+    //アドバイス（コナン）に必要なやつを取ってくる
+    public static List<ConanVo> selectConanAdvice() {
         try
         (
             Connection con = PoolConnection.getConnection();

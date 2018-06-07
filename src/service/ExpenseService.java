@@ -42,7 +42,7 @@ public class ExpenseService {
 
     //ConanVo型のListをConanBean型のListに変換
     public static ConanListBean selectAdvice() {
-        List<ConanVo> resultList = AdviceDBManager.selectAdvice();
+        List<ConanVo> resultList = AdviceDBManager.selectConanAdvice();
         ConanListBean clb = new ConanListBean();
 
         int totalGoal = 0;		//月の目標
