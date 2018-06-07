@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import vo.ConanVo;
+import vo.AdviceVo;
 
 public class ConanDao {
     Connection con;
@@ -34,13 +34,14 @@ public class ConanDao {
 
     //-------------------------------------------------------
     // カテゴリ名、支出合計、目標
-    public List<ConanVo> advice(int month) throws SQLException {
+
+    public List<AdviceVo> advice(int month) throws SQLException {
 
         PreparedStatement stmt = null;
         ResultSet rset = null;
 
         try {
-            List<ConanVo> list = new ArrayList<ConanVo>();
+            List<AdviceVo> list = new ArrayList<AdviceVo>();
 
             /* Statementの作成 */
             stmt = con.prepareStatement(SELECT);
@@ -52,7 +53,7 @@ public class ConanDao {
 
             /* 取得したデータを表示します。 */
             while (rset.next()) {
-                ConanVo cv = new ConanVo();
+                AdviceVo cv = new AdviceVo();
 
                 cv.setCategoryName(rset.getString(1));
                 cv.setDifference(rset.getInt(2));
