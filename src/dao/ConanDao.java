@@ -35,16 +35,17 @@ public class ConanDao {
     //-------------------------------------------------------
     // カテゴリ名、支出合計、目標
 
-    public List<AdviceVo> advice(int month) throws SQLException {
+    public List<AdviceVo> getAdvice(int month) throws SQLException {
 
-        PreparedStatement stmt = null;
         ResultSet rset = null;
 
-        try {
+        try(
+                PreparedStatement stmt = con.prepareStatement(SELECT);
+            )
+            {
             List<AdviceVo> list = new ArrayList<AdviceVo>();
 
             /* Statementの作成 */
-            stmt = con.prepareStatement(SELECT);
             stmt.setInt(1, month);
             stmt.setInt(2, month);
 
@@ -65,16 +66,6 @@ public class ConanDao {
 
         catch (SQLException e) {
             throw e;
-        } finally {
-
-            if (stmt != null) {
-                stmt.close();
-                stmt = null;
-            }
-            if (rset != null) {
-                rset.close();
-                rset = null;
-            }
         }
 
     }

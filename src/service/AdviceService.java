@@ -36,11 +36,12 @@ public class AdviceService {
 //---------------------------コナン機能---------------------------------------------------------
     //AdviceVo型のListをConanBean型のListに変換
     public static ConanListBean selectConanAdvice() {
-        //現在の月を取得
+        //現在の月を取得（201806）
         Calendar calendar = Calendar.getInstance();
-        String lastMonth = new SimpleDateFormat( "yyyyMM" ).format( calendar.getTime() );
+        String thisMonth = new SimpleDateFormat( "yyyyMM" ).format( calendar.getTime() );
 
-        int month = Integer.parseInt(lastMonth) -1;
+        //取得したい値は201805なので-1している
+        int month = Integer.parseInt(thisMonth) -1;
 
         List<AdviceVo> resultList = AdviceDBManager.selectConanAdvice(month);
 
@@ -57,6 +58,7 @@ public class AdviceService {
         }
         //ConanListBeanに入れる
         clb.setList(list);
+        //月の値を入れる（6月の場合5が出力されるので、本番では+1すること）
         clb.setThisMonth(calendar.get(Calendar.MONTH));
 
         return clb;

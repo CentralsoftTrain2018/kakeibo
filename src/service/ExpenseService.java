@@ -3,6 +3,7 @@ package service;
 import java.sql.Date;
 
 import dbmanager.ExpenseDBManager;
+import vo.BungyVo;
 import vo.KakeiboVo;
 
 
@@ -32,6 +33,12 @@ public class ExpenseService {
         KakeiboVo ev = new KakeiboVo();
         ev.setExpenseId(expenseId);
         ExpenseDBManager.deleteExpense(ev);
+    }
+
+    public static BungyVo getMokuhyouAndExpenses(String userid, String month) {
+        BungyVo bv = ExpenseDBManager.getMokuhyouAndExpenses(userid, month);
+
+        return bv;
     }
 
 }
