@@ -1,16 +1,16 @@
 package vo;
 
-public class ConanVo {
+public class AdviceVo {
     private String categoryName;
     private int sumSpending;
     private int mokuhyouKingaku;
     private int difference;
 
-    public ConanVo() {
+    public AdviceVo() {
         super();
     }
 
-    public ConanVo(String categoryName, int sumSpending, int mokuhyouKingaku) {
+    public AdviceVo(String categoryName, int sumSpending, int mokuhyouKingaku) {
         super();
         this.categoryName = categoryName;
         this.sumSpending = sumSpending;

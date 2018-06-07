@@ -1,6 +1,8 @@
 package service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import bean.ConanBean;
@@ -8,69 +10,55 @@ import bean.ConanListBean;
 import bean.JihakuBean;
 import bean.JihakuListBean;
 import dbmanager.AdviceDBManager;
-import vo.ConanVo;
+import vo.AdviceVo;
 
 public class AdviceService {
 
+    //AdviceVo型のListをConanBean型のListに変換
     public JihakuListBean jihaku() {
-        JihakuListBean jihakulist= new JihakuListBean();
+        List<AdviceVo> resultList = AdviceDBManager.selectJihakuAdvice();
+        JihakuListBean jlb= new JihakuListBean();
 
-        JihakuBean bean = new JihakuBean();
-        int sisyutu = 10000;
-        int mokuhyou = 5000;
-        String categoryname = ("雑費");
         //計算結果と表示するメッセージを入れ物（bean)にセットする
-        bean.setCategoryname(categoryname);
-        bean.setExcess(sisyutu,mokuhyou);
+        for(AdviceVo av : resultList)
+        {
+            JihakuBean jb = new JihakuBean();
+            jb.setCategoryname( av.getCategoryName());
+            jb.setExcess( av.getDifference() );
 
-        JihakuBean bean1 = new JihakuBean();
-        int sisyutu1 = 10000;
-        int mokuhyou1= 5000;
-        String categoryname1 = ("食費");
-        //計算結果と表示するメッセージを入れ物（bean)にセットする
-        bean1.setCategoryname(categoryname1);
-        bean1.setExcess(sisyutu1,mokuhyou1);
+            jlb.getJihakulist().add(jb);
+        }
 
-        jihakulist.getJihakulist().add(bean);
-        jihakulist.getJihakulist().add(bean1);
-        return jihakulist;
+        return jlb;
     }
 
 //---------------------------コナン機能---------------------------------------------------------
-    //ConanVo型のListをConanBean型のListに変換
+    //AdviceVo型のListをConanBean型のListに変換
     public static ConanListBean selectConanAdvice() {
-        List<ConanVo> resultList = AdviceDBManager.selectConanAdvice();
+        //現在の月を取得（201806）
+        Calendar calendar = Calendar.getInstance();
+        String thisMonth = new SimpleDateFormat( "yyyyMM" ).format( calendar.getTime() );
+
+        //取得したい値は201805なので-1している
+        int month = Integer.parseInt(thisMonth) -1;
+
+        List<AdviceVo> resultList = AdviceDBManager.selectConanAdvice(month);
+
         ConanListBean clb = new ConanListBean();
 
-        int totalGoal = 0;		//月の目標
-        int totalSpending = 0;	//月の支出合計
-        int totalDifference = 0;	//月の目標ー支出
         List<ConanBean> list = new ArrayList<ConanBean>();
-        for( ConanVo cv: resultList )
+        for( AdviceVo av: resultList )
         {
             ConanBean cb = new ConanBean();
-            cb.setCategoryName(cv.getCategoryName());
-
-            int spanding = cv.getSumSpending();
-            totalSpending += spanding;
-            cb.setSumSpending(spanding);
-
-            int goal = cv.getMokuhyouKingaku();
-            totalGoal += goal;
-            cb.setMokuhyouKingaku(goal);
-
-            int difference = cv.getDifference();
-            totalDifference += difference;
-            cb.setDifference(difference);
+            cb.setCategoryName(av.getCategoryName());
+            cb.setDifference(av.getDifference());
 
             list.add(cb);
         }
         //ConanListBeanに入れる
         clb.setList(list);
-        clb.setThisMonth(5);
-        clb.setTotalGoal(totalGoal);
-        clb.setTotalSpending(totalSpending);
-        clb.setTotalDifference(totalDifference);
+        //月の値を入れる（6月の場合5が出力されるので、本番では+1すること）
+        clb.setThisMonth(calendar.get(Calendar.MONTH));
 
         return clb;
     }

@@ -51,10 +51,8 @@
   top:<%=bean.getDate()+30%>%;"
   >
 
+
  </div>
-<%=bean.getHanninYoko() %>
-<form  method="POST" action="GameOverServlet">
-  <input type="submit" value="GameOver">
-</form>
+
 </body>
 </html>
