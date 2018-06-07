@@ -17,7 +17,6 @@
   金額<input type="text" name="kingaku"><br>
   カテゴリー<input type="text" name="categoryId"><br>
   支出名<input type="text" name="expenseName"><br>
-  ユーザーID<input type="text" name="userId"><br>
   登録<input type="radio" name="choice" value="touroku" checked>
   変更<input type="radio" name="choice" value="henkou">
   削除<input type="radio" name="choice" value="sakujo">

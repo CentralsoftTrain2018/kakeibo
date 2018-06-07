@@ -2,7 +2,6 @@ package dbmanager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import dao.ConanDao;
@@ -10,14 +9,17 @@ import dao.JihakuDao;
 import vo.AdviceVo;
 
 public class AdviceDBManager {
+
     //アドバイス（コナン）に必要なやつを取ってくる
     public static List<AdviceVo> selectConanAdvice(int month) {
+
 
         try
         (
             Connection con = PoolConnection.getConnection();
         )
         {
+
             ConanDao cdao = new ConanDao(con);
             List<AdviceVo> list = cdao.advice(month);
 
@@ -38,8 +40,8 @@ public class AdviceDBManager {
         )
         {
 
-            JihakuDao jdao = new JihakuDao();
-            List<AdviceVo> list = new ArrayList<>() /**jdao.jihakuAdvice()**/;
+            JihakuDao jdao = new JihakuDao(con);
+            List<AdviceVo> list = jdao.JihakuAdvice() /**jdao.jihakuAdvice()**/;
             return list;
 
         }
