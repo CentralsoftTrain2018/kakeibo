@@ -47,9 +47,12 @@ public class BungyDao {
 
             /* SQL実行 */
             rset = stmt.executeQuery();
-            bv.setMokuhyou(rset.getInt(1));
-            bv.setTotalexpenses(rset.getInt(2));
 
+            while (rset.next())
+            {
+                bv.setMokuhyou(rset.getInt(1));
+                bv.setTotalexpenses(rset.getInt(2));
+            }
             /* 取得したデータを表示します。 */
 
 
