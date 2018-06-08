@@ -10,8 +10,8 @@ import vo.BungyVo;
 public class BungyDao extends Dao{
 
     private static final String GETDATA = "SELECT "
+            + " totalexpenses ,"
             + " mokuhyou "
-            + " totalexpenses "
             + " FROM "
             + " history "
             + " WHERE "
@@ -48,14 +48,13 @@ public class BungyDao extends Dao{
 
             rset = stmt.executeQuery();
 
+
             while (rset.next())
             {
                 bv.setMokuhyou(rset.getInt(1));
                 bv.setTotalexpenses(rset.getInt(2));
             }
             /* 取得したデータを表示します。 */
-
-
             return bv;
         }
 
