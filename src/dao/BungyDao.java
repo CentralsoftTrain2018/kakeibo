@@ -48,7 +48,6 @@ public class BungyDao extends Dao{
 
             rset = stmt.executeQuery();
 
-
             while (rset.next())
             {
                 bv.setMokuhyou(rset.getInt(1));
