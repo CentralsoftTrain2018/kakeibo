@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.BungyBean;
 import exception.IllegalNumberException;
@@ -39,8 +40,11 @@ public class BungyServlet extends HttpServlet
             int shisyutu = Integer.parseInt(shisyutuStr);
             int date = Integer.parseInt(dateStr);
             **/
-
-            bb = ExpenseService.getMokuhyouAndExpenses("aaa", "2018/06");
+            HttpSession session = request.getSession();
+            String userId = (String)session.getAttribute("userId");
+            String nengetu=new String(request.getParameter("nengetu").getBytes("iso-8859-1"),"UTF-8");
+            //String nengetu=request.getParameter("nengetu");
+            bb = ExpenseService.getMokuhyouAndExpenses(userId,nengetu);
 
 
             if(bb.getMokuhyou() < 0) {

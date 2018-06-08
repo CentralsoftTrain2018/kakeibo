@@ -21,6 +21,19 @@ public class KakeiboDao {
             + " values ( "
             + "  ?,?,?,?,? ) ";
 
+    private static final String ADDHISTORY=
+            "insert into history ( "
+            + " historyId"
+            + " ,userId "
+            + " ,totalExpenses "
+            + " ,Mokuhyou "
+            + " ,Income "
+            + " ,Result "
+            + " ,Month"
+            + " ) "
+            + " values ( "
+            + "  ?,?,?,?,?,?,? ) ";
+
     private static final String UPDATE =
              "update expenses "
             + " set "
@@ -56,8 +69,6 @@ public class KakeiboDao {
             stmt.setString(3, ev.getExpenseName());
             stmt.setDate(4, ev.getExpenseDate());
             stmt.setString(5, ev.getUserId());
-
-
 
             /* ｓｑｌ実行 */
             stmt.executeUpdate();

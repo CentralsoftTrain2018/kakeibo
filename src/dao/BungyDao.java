@@ -11,8 +11,8 @@ public class BungyDao {
     Connection con;
 
     private static final String GETDATA = "SELECT "
+            + " totalexpenses ,"
             + " mokuhyou "
-            + " totalexpenses "
             + " FROM "
             + " history "
             + " WHERE "
@@ -47,12 +47,17 @@ public class BungyDao {
 
             /* SQL実行 */
             rset = stmt.executeQuery();
-            bv.setMokuhyou(rset.getInt(1));
-            bv.setTotalexpenses(rset.getInt(2));
+
+            //検索結果が存在しなければ
+            rset.next();
+                bv.setMokuhyou(rset.getInt(2));
+                bv.setTotalexpenses(rset.getInt(1));
+
+                //return bv;
+
+
 
             /* 取得したデータを表示します。 */
-
-
             return bv;
         }
 
