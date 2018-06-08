@@ -14,7 +14,7 @@
 <form  method="POST" action="BungyServlet">
   目標<input type="text" name="mokuhyou"><br>
   支出<input type="text" name="shisyutu"><br>
-  経過日数<input type="text" name="date"><br>
+  経過日数<input type="text" name="nengetu"><br>
   <input type="submit" value="Bungy"><br>
 </form>
 <form  method="POST" action="ConanServlet">

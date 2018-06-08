@@ -38,7 +38,7 @@
   style=
   "position: absolute;
   width: 50px;
-  height:<%=bean.getMonth()+7%>%;
+  height:<%=bean.getJumperDispPosition()+7%>%;
   right: 35%;
   top:25%;"
   >
@@ -48,11 +48,17 @@
   width: 100px;
   height: 100px;
   right: 30%;
-  top:<%=bean.getMonth()+30%>%;"
+  top:<%=bean.getJumperDispPosition()+30%>%;"
   >
 
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> refs/remotes/origin/master
  </div>
-
+<form  method="POST" action="BungyServlet">
+  何年何月<input type="text" name="nengetu"><br>
+  </form>
 </body>
 </html>

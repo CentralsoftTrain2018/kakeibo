@@ -27,8 +27,9 @@ public class JihakuDao extends Dao{
             "            AND c.categoryId = m.category_categoryId" +
             "			 AND e.user_userid = ?" +
             "            GROUP BY e.category_categoryId" +
-            "			HAVING SUM(m.Kingaku) / Count(m.Kingaku) - SUM(e.Kingaku) < 0" +
-            "            ORDER BY m.Kingaku - e.Kingaku ASC;";
+            "			HAVING SUM(m.Kingaku) - SUM(e.Kingaku) < 0" +
+            "            ORDER BY SUM(m.Kingaku) / Count(m.Kingaku) - SUM(e.Kingaku) ASC;";
+
 
 
     public  JihakuDao(Connection con) {
