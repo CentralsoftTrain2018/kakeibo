@@ -41,7 +41,7 @@ public class ExpenseService {
         BungyBean bb=new BungyBean();
         bb.setMokuhyou(bv.getMokuhyou());
         bb.setSisyutu(bv.getTotalexpenses());
-        bb.setMonth("2018/05");
+        bb.setMonth(month);
 
         return bb;
     }
