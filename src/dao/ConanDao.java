@@ -23,7 +23,7 @@ public class ConanDao extends Dao{
             ",kakeibo.mokuhyou m " +
             "WHERE " +
             "DATE_FORMAT(e.expenseDate, '%Y%m') = ? " +
-            "AND DATE_FORMAT(m.Month, '%Y%m') = ? " +
+            "AND m.Month = ? " +
             "AND e.category_categoryId = c.categoryId " +
             "AND e.user_userid = m.user_userid " +
             "AND e.user_userid = ? " +

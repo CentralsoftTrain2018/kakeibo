@@ -33,7 +33,6 @@ public class AdviceService {
         return jlb;
     }
 
-//---------------------------コナン機能---------------------------------------------------------
     /**
      * selectConanAdvice
      * AdviceVo型のListをConanBean型のListに変換
