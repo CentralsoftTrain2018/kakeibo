@@ -31,6 +31,7 @@ public class JihakuDao extends Dao{
             "            ORDER BY SUM(m.Kingaku) / Count(m.Kingaku) - SUM(e.Kingaku) ASC;";
 
 
+
     public  JihakuDao(Connection con) {
         super(con);
     }

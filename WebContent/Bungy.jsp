@@ -51,7 +51,11 @@
   top:<%=bean.getJumperDispPosition()+30%>%;"
   >
 
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> refs/remotes/origin/master
  </div>
 <form  method="POST" action="BungyServlet">
   何年何月<input type="text" name="nengetu"><br>
