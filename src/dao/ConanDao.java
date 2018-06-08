@@ -9,8 +9,7 @@ import java.util.List;
 
 import vo.AdviceVo;
 
-public class ConanDao {
-    Connection con;
+public class ConanDao extends Dao{
 
     private static final String SELECT = "SELECT " +
             "categoryName " +
@@ -29,7 +28,7 @@ public class ConanDao {
             "ORDER BY m.Kingaku - e.Kingaku DESC;";
 
     public ConanDao(Connection con) {
-        this.con = con;
+        super(con);
     }
 
     //-------------------------------------------------------

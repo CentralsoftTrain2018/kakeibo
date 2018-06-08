@@ -10,9 +10,7 @@ import java.util.List;
 
 import vo.AdviceVo;
 
-public class JihakuDao {
-
-    Connection con;
+public class JihakuDao extends Dao{
 
     private static final String SELECT =
             "            SELECT" +
@@ -34,7 +32,7 @@ public class JihakuDao {
 
 
     public  JihakuDao(Connection con) {
-        this.con = con;
+        super(con);
     }
 
     //-------------------------------------------------------
