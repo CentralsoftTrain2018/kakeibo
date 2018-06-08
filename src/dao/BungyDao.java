@@ -50,8 +50,8 @@ public class BungyDao extends Dao{
 
             while (rset.next())
             {
-                bv.setMokuhyou(rset.getInt(1));
-                bv.setTotalexpenses(rset.getInt(2));
+                bv.setTotalexpenses(rset.getInt(1));
+                bv.setMokuhyou(rset.getInt(2));
             }
             /* 取得したデータを表示します。 */
             return bv;

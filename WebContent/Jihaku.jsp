@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="Jihakucss.css" />
+<link rel="stylesheet" type="text/css" href="css/Jihaku.css" />
 <title>自白</title>
 </head>
 <body>
