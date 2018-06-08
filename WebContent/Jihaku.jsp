@@ -15,5 +15,9 @@
 <div class="hannin1">
   <img src="image/hannin1.png">
 </div>
+
+<form  method="POST" action="BungyServlet">
+  <input type="submit" value="Bungy"><br>
+</form>
 </body>
 </html>

@@ -2,6 +2,7 @@ package service;
 
 import java.sql.Date;
 
+import bean.BungyBean;
 import dbmanager.ExpenseDBManager;
 import vo.BungyVo;
 import vo.KakeiboVo;
@@ -35,10 +36,14 @@ public class ExpenseService {
         ExpenseDBManager.deleteExpense(ev);
     }
 
-    public static BungyVo getMokuhyouAndExpenses(String userid, String month) {
+    public static BungyBean getMokuhyouAndExpenses(String userid, String month) {
         BungyVo bv = ExpenseDBManager.getMokuhyouAndExpenses(userid, month);
+        BungyBean bb=new BungyBean();
+        bb.setMokuhyou(bv.getMokuhyou());
+        bb.setSisyutu(bv.getTotalexpenses());
+        bb.setMonth("2018/05");
 
-        return bv;
+        return bb;
     }
 
 }

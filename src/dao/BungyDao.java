@@ -46,6 +46,7 @@ public class BungyDao {
             stmt.setString(2, month);
 
             /* SQL実行 */
+
             rset = stmt.executeQuery();
             bv.setMokuhyou(rset.getInt(1));
             bv.setTotalexpenses(rset.getInt(2));
