@@ -1,6 +1,5 @@
 package bean;
 
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -10,6 +9,7 @@ public class BungyBean {
     private int hanninIchi;
     private String month;
     private String message;
+    private boolean finflg=false;
 
     public BungyBean() {
         super();
@@ -76,12 +76,19 @@ public class BungyBean {
 
     public int getMonth() {
         String[] YearAndMonth = month.split("/");
-
+        //今日の日付を取得
+        Calendar calendar = Calendar.getInstance();
+        int today=calendar.get(Calendar.DATE);
+        int month=calendar.get(Calendar.MONTH);
+        //指定年月の日数を取得
         Calendar c = new GregorianCalendar(Integer.parseInt(YearAndMonth[0]),Integer.parseInt(YearAndMonth[1]),1);
-        LocalDate d1 = LocalDate.now();
-
         int days=c.getActualMaximum(Calendar.DAY_OF_MONTH);
-        return  (int)((double)Integer.parseInt(YearAndMonth[1])/(double)days*50.0);
+        //DBに記録されている月が現在の月と異なる場合フラグの切り替え
+        if(month==Integer.parseInt(YearAndMonth[0]))
+        {
+            finflg=true;
+        }
+        return  (int)((double)today/(double)days*50.0);
     }
         /**
     public int getDate() {
