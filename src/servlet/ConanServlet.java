@@ -27,9 +27,7 @@ public class ConanServlet extends HttpServlet {
         String userId = (String)session.getAttribute("userId");
 
         //次の画面で表示するための入れ物を準備する
-        AdviceService as = new AdviceService();
         ConanListBean bean = AdviceService.selectConanAdvice(userId);
-
 
         request.setAttribute("bean", bean);
 
