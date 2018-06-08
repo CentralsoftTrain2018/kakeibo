@@ -54,6 +54,7 @@ public class KakeiboServlet extends HttpServlet {
                 ExpenseService.addExpense(kingaku, categoryId, expenseName, userId);
             }
             catch(NumberFormatException | NoTextException e) {
+                kb.setMessage("入力が不正です");
             }
         }
 
@@ -68,6 +69,7 @@ public class KakeiboServlet extends HttpServlet {
                 ExpenseService.updateExpense(expenseId, kingaku, categoryId, expenseName);
             }
             catch(NumberFormatException | NoTextException e) {
+                kb.setMessage("入力が不正です");
             }
         }
 
@@ -77,10 +79,10 @@ public class KakeiboServlet extends HttpServlet {
                 ExpenseService.deleteExpense(expenseId);
             }
             catch(NumberFormatException e) {
+                kb.setMessage("入力が不正です");
             }
         }
         //JSPに遷移する
-        kb.setMessage("入力が不正です");
         request.setAttribute("bean", kb);
         RequestDispatcher disp = request.getRequestDispatcher("Kakeibo.jsp");
         disp.forward(request, response);

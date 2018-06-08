@@ -7,8 +7,7 @@ import java.sql.SQLException;
 
 import vo.BungyVo;
 
-public class BungyDao {
-    Connection con;
+public class BungyDao extends Dao{
 
     private static final String GETDATA = "SELECT "
             + " mokuhyou "
@@ -24,7 +23,7 @@ public class BungyDao {
 ;
 
     public BungyDao(Connection con) {
-        this.con = con;
+        super(con);
     }
 
     //-------------------------------------------------------
@@ -46,6 +45,7 @@ public class BungyDao {
             stmt.setString(2, month);
 
             /* SQL実行 */
+
             rset = stmt.executeQuery();
 
             while (rset.next())

@@ -6,17 +6,15 @@ import java.sql.SQLException;
 
 import vo.KakeiboVo;
 
-public class KakeiboDao {
-
-    Connection con;
+public class KakeiboDao extends Dao{
 
     private static final String ADD =
             "insert into expenses ( "
-            + " expensekingaku "
-            + " ,categoryid "
+            + " kingaku "
+            + " ,category_categoryid "
             + " ,expensename "
             + " ,expensedate "
-            + " ,userid "
+            + " ,user_userid "
             + " ) "
             + " values ( "
             + "  ?,?,?,?,? ) ";
@@ -24,9 +22,9 @@ public class KakeiboDao {
     private static final String UPDATE =
              "update expenses "
             + " set "
-            + " expensekingaku "
+            + " kingaku "
             + " = ? "
-            + " ,categoryid "
+            + " ,category_categoryid "
             + " = ? "
             + " ,expensename "
             + " = ? "
@@ -40,7 +38,7 @@ public class KakeiboDao {
             + " expenseid = ?";
 
     public KakeiboDao(Connection con) {
-        this.con = con;
+        super(con);
     }
 
     //-------------------------------------------------------

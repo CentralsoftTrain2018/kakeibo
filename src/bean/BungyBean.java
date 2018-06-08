@@ -1,11 +1,15 @@
 package bean;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 public class BungyBean {
     private int mokuhyou;
     private int sisyutu;
     private int hanninIchi;
     private String month;
     private String message;
+    private boolean finflg=false;
 
     public BungyBean() {
         super();
@@ -70,13 +74,26 @@ public class BungyBean {
         this.hanninIchi = hanninIchi;
     }
 
-    public String getMonth() {
-        return month;
+    public int getMonth() {
+        String[] YearAndMonth = month.split("/");
+        //今日の日付を取得
+        Calendar calendar = Calendar.getInstance();
+        int today=calendar.get(Calendar.DATE);
+        int month=calendar.get(Calendar.MONTH);
+        //指定年月の日数を取得
+        Calendar c = new GregorianCalendar(Integer.parseInt(YearAndMonth[0]),Integer.parseInt(YearAndMonth[1]),1);
+        int days=c.getActualMaximum(Calendar.DAY_OF_MONTH);
+        //DBに記録されている月が現在の月と異なる場合フラグの切り替え
+        if(month==Integer.parseInt(YearAndMonth[0]))
+        {
+            finflg=true;
+        }
+        return  (int)((double)today/(double)days*50.0);
     }
         /**
     public int getDate() {
         //バンジージャンパの表示位置と紐の長さの調整を行う
-        return (int)((double)this.date/(double)30*50.0);
+
     }
     **/
 
