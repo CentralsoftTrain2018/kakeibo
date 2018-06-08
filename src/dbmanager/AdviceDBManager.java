@@ -8,12 +8,19 @@ import java.util.List;
 import dao.ConanDao;
 import dao.JihakuDao;
 import vo.AdviceVo;
-
+/**
+* アドバイス機能のマネージャー
+* コナン・自白の２機能の処理を行う
+*/
 public class AdviceDBManager {
-
-    //アドバイス（コナン）に必要なやつを取ってくる
-    public static List<AdviceVo> selectConanAdvice(int month) {
-
+     /**
+       * selectConanAdvice
+       * アドバイス（コナン）に必要なやつを取ってくる
+       * @param month 年月
+       * @param userId ユーザーID
+       * @return カテゴリごとの名前、目標-支出合計が格納されたAdviceVo型のリスト
+       */
+    public static List<AdviceVo> selectConanAdvice(String month, String userId) {
 
         try
         (
@@ -22,7 +29,7 @@ public class AdviceDBManager {
         {
 
             ConanDao cdao = new ConanDao(con);
-            List<AdviceVo> list = cdao.getAdvice(month);
+            List<AdviceVo> list = cdao.getAdvice(month, userId);
            return list;
         }
         catch(SQLException e)

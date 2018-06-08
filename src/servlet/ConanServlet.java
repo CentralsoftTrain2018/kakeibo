@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.ConanListBean;
 import service.AdviceService;
@@ -22,9 +23,13 @@ public class ConanServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String userId = (String)session.getAttribute("userId");
 
         //次の画面で表示するための入れ物を準備する
-        ConanListBean bean = AdviceService.selectConanAdvice();
+        AdviceService as = new AdviceService();
+        ConanListBean bean = as.selectConanAdvice(userId);
+
 
         request.setAttribute("bean", bean);
 

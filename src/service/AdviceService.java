@@ -34,18 +34,21 @@ public class AdviceService {
     }
 
 //---------------------------コナン機能---------------------------------------------------------
-    //AdviceVo型のListをConanBean型のListに変換
+    /**
+     * selectConanAdvice
+     * AdviceVo型のListをConanBean型のListに変換
+     * @param userId ユーザーID
+     * @return ConanListBean
+     */
 
-    public static ConanListBean selectConanAdvice() {
+    public static ConanListBean selectConanAdvice(String userId) {
 
-        //現在の月を取得（201806）
+        //現在の月を取得（2018/05）
         Calendar calendar = Calendar.getInstance();
-        String thisMonth = new SimpleDateFormat( "yyyyMM" ).format( calendar.getTime() );
+        calendar.add( Calendar.MONTH, -1 );
+        String thisMonth = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
 
-        //取得したい値は201805なので-1している
-        int month = Integer.parseInt(thisMonth) -1;
-
-        List<AdviceVo> resultList = AdviceDBManager.selectConanAdvice(month);
+        List<AdviceVo> resultList = AdviceDBManager.selectConanAdvice(thisMonth, userId);
 
         ConanListBean clb = new ConanListBean();
 
@@ -60,8 +63,8 @@ public class AdviceService {
         }
         //ConanListBeanに入れる
         clb.setList(list);
-        //月の値を入れる（6月の場合5が出力されるので、本番では+1すること）
-        clb.setThisMonth(calendar.get(Calendar.MONTH));
+        //月の値を入れる
+        clb.setThisMonth(calendar.get(Calendar.MONTH) + 1);
 
         return clb;
     }
