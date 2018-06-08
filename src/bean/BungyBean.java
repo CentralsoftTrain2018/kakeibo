@@ -48,7 +48,7 @@ public class BungyBean {
 
         //表示されている画像に合わせて表示位置を調整する
         double yoko=getHanninIchi()%19.0/19.0*15.0;
-        if(hanninIchi>=0&&hanninIchi<19||hanninIchi>=38&&hanninIchi<57)
+        if((hanninIchi>=0&&hanninIchi<19)||(hanninIchi>=38&&hanninIchi<57))
         {
             return 15-(int)yoko;
         }
@@ -56,8 +56,12 @@ public class BungyBean {
         //犯人の表示位置（高さ）が７５％を超えた場合、特定位置までの横移動に切り替える
         if(hanninIchi>=75)
         {
-
-            return (int)((((double)sisyutu/(double)mokuhyou*100.0-75.0)/25.0)*35.0)+15;
+            int specialYoko=(int)((((double)sisyutu/(double)mokuhyou*100.0-75.0)/25.0)*35.0)+15;
+            if(specialYoko>50)
+            {
+                specialYoko=50;
+            }
+            return specialYoko;
         }
         return (int)yoko;
     }
@@ -66,7 +70,7 @@ public class BungyBean {
         //犯人画像の表示向きを切り替える
         int hanninIchi=getHanninIchi();
         //犯人の位置が特定位置の場合、元画像から左右反転させる。
-        if(hanninIchi>=0&&hanninIchi<19||hanninIchi>=38&&hanninIchi<57)
+        if((hanninIchi>=0&&hanninIchi<19)||(hanninIchi>=38&&hanninIchi<57))
         {
             return -1;
         }
