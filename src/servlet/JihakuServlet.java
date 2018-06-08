@@ -40,7 +40,7 @@ public class JihakuServlet extends HttpServlet {
         String userId = (String)session.getAttribute("userId");
         Date date = new Date(2018, 5, 21);
         AdviceService conan = new AdviceService();
-        JihakuListBean bean =conan.jihaku(date, userId);
+        JihakuListBean bean = conan.jihaku(date, userId);
       //beanをリクエストにセット キー名は「bean」とする
         request.setAttribute("bean", bean);
 
