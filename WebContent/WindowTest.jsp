@@ -23,8 +23,8 @@
 <form  method="POST" action="JihakuServlet">
   <input type="submit" value="jihaku">
 </form>
-<form  method="POST" action="Kakeibo.jsp">
-  <input type="submit" value="Kakeibo">
+<form  method="POST" action="Expense.jsp">
+  <input type="submit" value="Expense">
 </form>
 </body>
 </html>

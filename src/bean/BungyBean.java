@@ -48,7 +48,15 @@ public class BungyBean {
 
         //表示されている画像に合わせて表示位置を調整する
         double yoko=getHanninIchi()%19.0/19.0*15.0;
-        if(hanninIchi>=0&&hanninIchi<19||hanninIchi>=38&&hanninIchi<57)
+        if(
+            (	hanninIchi	>= 0
+            &&	hanninIchi	<  19
+            )
+            ||
+            (	hanninIchi	>= 38
+            &&  hanninIchi	<  57
+            )
+          )
         {
             return 15-(int)yoko;
         }

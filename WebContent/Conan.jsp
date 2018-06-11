@@ -32,7 +32,7 @@
       }
     %>
     来月もがんばろう！<br><br>
-    <a href="BungyServlet">TOPに戻る</a>
+    <a href="LoginServlet">TOPに戻る</a>
   </div>
 </body>
 </html>
