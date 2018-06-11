@@ -47,23 +47,13 @@ public class BungyDao extends Dao{
             /* SQL実行 */
 
             rset = stmt.executeQuery();
-<<<<<<< HEAD
 
-
-=======
-
-
->>>>>>> refs/remotes/origin/master
             while (rset.next())
             {
                 bv.setTotalexpenses(rset.getInt(1));
                 bv.setMokuhyou(rset.getInt(2));
             }
-<<<<<<< HEAD
-//github.com/CentralsoftTrain2018/kakeibo
-=======
-//github.com/CentralsoftTrain2018/kakeibo
->>>>>>> refs/remotes/origin/master
+
             /* 取得したデータを表示します。 */
             return bv;
         }
