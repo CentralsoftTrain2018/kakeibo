@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean id="bean" class="bean.KakeiboBean" scope="request" />
+<jsp:useBean id="bean" class="bean.ExpenseBean" scope="request" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,7 +21,7 @@
   変更<input type="radio" name="choice" value="henkou">
   削除<input type="radio" name="choice" value="sakujo">
   <input type="submit" value="実行">
-
 </form>
+
 </body>
 </html>

@@ -49,11 +49,12 @@ public class BungyDao extends Dao{
             rset = stmt.executeQuery();
 
 
-            rset.next();
-            bv.setTotalexpenses(rset.getInt(1));
-            bv.setMokuhyou(rset.getInt(2));
-
-
+            while (rset.next())
+            {
+                bv.setTotalexpenses(rset.getInt(1));
+                bv.setMokuhyou(rset.getInt(2));
+            }
+//github.com/CentralsoftTrain2018/kakeibo
             /* 取得したデータを表示します。 */
             return bv;
         }

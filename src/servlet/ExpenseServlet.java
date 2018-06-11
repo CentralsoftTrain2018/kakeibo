@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.KakeiboBean;
+import bean.ExpenseBean;
 import exception.NoTextException;
 import service.ExpenseService;
 
@@ -18,13 +18,13 @@ import service.ExpenseService;
  * Servlet implementation class IndexStartServlet
  */
 @WebServlet("/KakeiboServlet")
-public class KakeiboServlet extends HttpServlet {
+public class ExpenseServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public KakeiboServlet() {
+    public ExpenseServlet() {
         super();
     }
 
@@ -34,7 +34,7 @@ public class KakeiboServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("KakeiboServletが実行されました。");
 
-        KakeiboBean kb = new KakeiboBean();
+        ExpenseBean kb = new ExpenseBean();
         String choice = request.getParameter("choice");
 
         String expenseIdStr = request.getParameter("expenseId");
