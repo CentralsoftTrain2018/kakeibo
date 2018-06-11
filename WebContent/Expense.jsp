@@ -22,6 +22,54 @@
   削除<input type="radio" name="choice" value="sakujo">
   <input type="submit" value="実行">
 </form>
-
+<table>
+<tr>
+<td>日</td>
+<td>月</td>
+<td>火</td>
+<td>水</td>
+<td>木</td>
+<td>金</td>
+<td>土</td>
+</tr>
+<%boolean shouldWrite = false;
+  int day = 1;
+%>
+<tr>
+<%for(int i = 0; i < 7; i++){ %>
+<td>
+<%if(shouldWrite){%>
+<%=day %>
+<%day++; %>
+<%}%>
+<%if(i == bean.getStartDayOfTheWeek()){ %>
+<%=day %>
+<%day++; %>
+<%shouldWrite = true; %>
+<%} %>
+</td>
+<%} %>
+</tr>
+<%boolean endCalender = false; %>
+<%while(true){ %>
+<tr>
+<%for(int i = 0; i < 7; i++){ %>
+<td>
+<%if(shouldWrite){ %>
+<%=day %>
+<%day++; %>
+<%} %>
+<%if(day > bean.getEndDay()){ %>
+<%shouldWrite = false; %>
+<%endCalender = true; %>
+<%} %>
+</td>
+<%} %>
+</tr>
+<%if(endCalender){ %>
+<%break; %>
+<%} %>
+<%} %>
+</table>
 </body>
 </html>
