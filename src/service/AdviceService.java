@@ -44,17 +44,19 @@ public class AdviceService
 
     public static ConanListBean selectConanAdvice( String userId )
     {
+        ConanListBean clb = new ConanListBean();
+        List<ConanBean> list = new ArrayList<ConanBean>();
 
         //現在の月を取得（2018/05）
         Calendar calendar = Calendar.getInstance();
-        calendar.add( Calendar.MONTH, -1 );
         String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
+        clb.setNengetsu( nengetsu );
+
+        calendar.add( Calendar.MONTH, -1 );
+        nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
 
         List<AdviceVo> resultList = AdviceDBManager.selectConanAdvice( nengetsu, userId );
 
-        ConanListBean clb = new ConanListBean();
-
-        List<ConanBean> list = new ArrayList<ConanBean>();
         for ( AdviceVo av : resultList )
         {
             ConanBean cb = new ConanBean();
@@ -67,7 +69,6 @@ public class AdviceService
         clb.setList( list );
         //月の値を入れる
         clb.setThisMonth( calendar.get( Calendar.MONTH ) + 1 );
-        clb.setNengetsu( nengetsu );
 
         return clb;
     }
