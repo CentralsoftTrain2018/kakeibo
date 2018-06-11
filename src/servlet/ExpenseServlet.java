@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,21 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.KakeiboBean;
+import bean.ExpenseBean;
 import exception.NoTextException;
 import service.ExpenseService;
 
 /**
  * Servlet implementation class IndexStartServlet
  */
-@WebServlet("/KakeiboServlet")
-public class KakeiboServlet extends HttpServlet {
+@WebServlet("/ExpenseServlet")
+public class ExpenseServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public KakeiboServlet() {
+    public ExpenseServlet() {
         super();
     }
 
@@ -34,9 +35,12 @@ public class KakeiboServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("KakeiboServletが実行されました。");
 
-        KakeiboBean kb = new KakeiboBean();
-        String choice = request.getParameter("choice");
+        ExpenseBean eb = new ExpenseBean();
+        eb.setDate(new Date(new java.util.Date().getTime()));
+        eb.setEndDay(31);
+        eb.setStartDayOfTheWeek(3);
 
+        String choice = request.getParameter("choice");
         String expenseIdStr = request.getParameter("expenseId");
         String kingakuStr = request.getParameter("kingaku");
         String categoryIdStr = request.getParameter("categoryId");
@@ -54,7 +58,7 @@ public class KakeiboServlet extends HttpServlet {
                 ExpenseService.addExpense(kingaku, categoryId, expenseName, userId);
             }
             catch(NumberFormatException | NoTextException e) {
-                kb.setMessage("入力が不正です");
+                eb.setMessage("入力が不正です");
             }
         }
 
@@ -69,7 +73,7 @@ public class KakeiboServlet extends HttpServlet {
                 ExpenseService.updateExpense(expenseId, kingaku, categoryId, expenseName);
             }
             catch(NumberFormatException | NoTextException e) {
-                kb.setMessage("入力が不正です");
+                eb.setMessage("入力が不正です");
             }
         }
 
@@ -79,12 +83,12 @@ public class KakeiboServlet extends HttpServlet {
                 ExpenseService.deleteExpense(expenseId);
             }
             catch(NumberFormatException e) {
-                kb.setMessage("入力が不正です");
+                eb.setMessage("入力が不正です");
             }
         }
         //JSPに遷移する
-        request.setAttribute("bean", kb);
-        RequestDispatcher disp = request.getRequestDispatcher("Kakeibo.jsp");
+        request.setAttribute("bean", eb);
+        RequestDispatcher disp = request.getRequestDispatcher("Expense.jsp");
         disp.forward(request, response);
     }
 

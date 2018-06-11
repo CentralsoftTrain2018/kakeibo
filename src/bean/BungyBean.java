@@ -9,10 +9,11 @@ public class BungyBean {
     private int hanninIchi;
     private String month;
     private String message;
-    private boolean finflg=false;
-
+    private boolean monthfinflg=false;
+    private boolean gameoverflg=false;
     public BungyBean() {
         super();
+
     }
 
     public int getMokuhyou() {
@@ -48,7 +49,7 @@ public class BungyBean {
 
         //表示されている画像に合わせて表示位置を調整する
         double yoko=getHanninIchi()%19.0/19.0*15.0;
-        if(hanninIchi>=0&&hanninIchi<19||hanninIchi>=38&&hanninIchi<57)
+        if((hanninIchi>=0&&hanninIchi<19)||(hanninIchi>=38&&hanninIchi<57))
         {
             return 15-(int)yoko;
         }
@@ -56,21 +57,30 @@ public class BungyBean {
         //犯人の表示位置（高さ）が７５％を超えた場合、特定位置までの横移動に切り替える
         if(hanninIchi>=75)
         {
-            int specialYoko = (int)((((double)sisyutu/(double)mokuhyou*100.0-75.0)/25.0)*35.0)+15;
-            if( specialYoko > 50 )
+            int specialYoko=(int)((((double)sisyutu/(double)mokuhyou*100.0-75.0)/25.0)*35.0)+15;
+            if(specialYoko>=50)
             {
-                specialYoko = 50;
+                specialYoko=50;
+                gameoverflg=true;
             }
             return specialYoko;
         }
         return (int)yoko;
     }
+    public boolean isMonthfinflg() {
+        return monthfinflg;
+    }
+
+    public boolean isGameoverflg() {
+        return gameoverflg;
+    }
+
     public int getHanninMuki()
     {
         //犯人画像の表示向きを切り替える
         int hanninIchi=getHanninIchi();
         //犯人の位置が特定位置の場合、元画像から左右反転させる。
-        if(hanninIchi>=0&&hanninIchi<19||hanninIchi>=38&&hanninIchi<57)
+        if((hanninIchi>=0&&hanninIchi<19)||(hanninIchi>=38&&hanninIchi<57))
         {
             return -1;
         }
@@ -94,9 +104,9 @@ public class BungyBean {
         int days=c.getActualMaximum(Calendar.DAY_OF_MONTH);
 
         //DBに記録されている月が現在の月と異なる場合フラグの切り替え
-        if(month==Integer.parseInt(YearAndMonth[0]))
+        if(month!=Integer.parseInt(YearAndMonth[0]))
         {
-            finflg=true;
+            monthfinflg=true;
         }
         return  (int)((double)today/(double)days*50.0);
     }
@@ -119,11 +129,26 @@ public class BungyBean {
         this.message = message;
     }
 
+    public String getButtonImage()
+    {
+        if(gameoverflg)
+        {
+            return "image/fin2.png";
+        }
+        return "image/fin.png";
+    }
+    public String getAdovicePage()
+    {
+        if(gameoverflg)
+        {
+            return "JihakuServlet";
+        }
+        return "ConanServlet";
+    }
     @Override
     public String toString() {
         return "BungyBean [mokuhyou=" + mokuhyou + ", sisyutu=" + sisyutu + ", hanninIchi=" + hanninIchi + ", date="
                 + month + ", message=" + message + "]";
     }
-
 
 }
