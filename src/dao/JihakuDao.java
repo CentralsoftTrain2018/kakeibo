@@ -47,7 +47,6 @@ public class JihakuDao extends Dao
             "			WHERE" +
             "			m.Month = 2018/05" +
             "			AND m.user_userid = ?;";
-
     public JihakuDao( Connection con )
     {
         super( con );
