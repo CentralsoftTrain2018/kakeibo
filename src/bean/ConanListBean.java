@@ -2,40 +2,52 @@ package bean;
 
 import java.util.List;
 
-public class ConanListBean {
+public class ConanListBean
+{
 
     private int totalDifference;
     private int thisMonth;
+    private String nengetsu;
     private List<ConanBean> list;
 
-    public int getThisMonth() {
+    public int getThisMonth()
+    {
         return thisMonth;
     }
 
-    public void setThisMonth(int thisMonth) {
+    public void setThisMonth( int thisMonth )
+    {
         this.thisMonth = thisMonth;
     }
 
-    public int getTotalDifference() {
+    public int getTotalDifference()
+    {
         return totalDifference;
     }
 
-    public void setTotalDifference(int totalDifference) {
+    public void setTotalDifference( int totalDifference )
+    {
         this.totalDifference = totalDifference;
     }
 
-    public List<ConanBean> getList() {
+    public List<ConanBean> getList()
+    {
         return list;
     }
 
-    public void setList(List<ConanBean> list) {
+    public void setList( List<ConanBean> list )
+    {
         this.list = list;
     }
-//    @Override
-//    public String toString() {
-//        return thisMonth + "月は目標達成だね！おめでとう(^_^)/♪<br>" +
-//                "君のおかげで犯人を逮捕することができたよ！<br>" +
-//                "合計目標金額は\t" + totalGoal + "円、\t支出合計は" + totalSpending + "円、\t差額は" + totalDifference + "円\tだよ。<br>";
-//    }
+
+    public String getNengetsu()
+    {
+        return nengetsu;
+    }
+
+    public void setNengetsu( String nengetsu )
+    {
+        this.nengetsu = nengetsu;
+    }
 
 }
