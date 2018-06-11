@@ -11,9 +11,11 @@
 <body>
 <h1>Bungy</h1>
  <div class="pattern1"
- style="width: 800px;
+
+  style="width: 800px;
   height: 742px;
   overflow: hidden;
+  background-image: url(image/kawa.png);
   margin-bottom:0px;padding-bottom:0px;
   position: relative;"
   >
@@ -50,9 +52,18 @@
   right: 30%;
   top:<%=bean.getJumperDispPosition()+30%>%;"
   >
-
-
+   <form method="POST" action="<%=bean.getAdovicePage()%>">
+  <%if(bean.isGameoverflg()){ %>
+   <input type="image" src="<%=bean.getButtonImage() %>"
+   style="
+   position: absolute;
+   right:30%;
+   top:30%;
+   ">
+   <%} %>
+ </form>
  </div>
+
 <form  method="POST" action="BungyServlet">
   何年何月<input type="text" name="nengetu"><br>
   </form>
