@@ -77,7 +77,6 @@ public class ExpenseService
 
         ExpenseBean eb = new ExpenseBean();
         List<CategoryVo> list = new ArrayList<CategoryVo>();
-        CategoryVo cv = new CategoryVo();
 
         List<ExpenseVo> expenseOfDayList = new ArrayList<>();
 
@@ -102,7 +101,7 @@ public class ExpenseService
     {
         ExpenseBean eb = new ExpenseBean();
         List<CategoryVo> list = new ArrayList<CategoryVo>();
-        CategoryVo cv = new CategoryVo();
+        CategoryVo cv = new CategoryVo(1);
 
         cv.setCategoryid( 0 );
         cv.setCategoryname( "食費" );
