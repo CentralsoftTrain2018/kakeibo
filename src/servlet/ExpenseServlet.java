@@ -54,6 +54,7 @@ public class ExpenseServlet extends HttpServlet {
         calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
         eb.setEndDay(calendar.get(Calendar.DATE));
 
+        eb = ExpenseService.getCategory();
         if(choice.equals("touroku")) {
             try {
                 int kingaku = Integer.parseInt(kingakuStr);

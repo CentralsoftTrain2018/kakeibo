@@ -111,13 +111,16 @@
 <form method="POST" action="ExpenseServlet">
 <%for(int i=0; i<10; i++){ %>
 <tr>
-
   <td>
     <select name = "categoryId">
+        <%
+      for ( vo.CategoryVo cv : bean.getCategoryList() )
+      {
+    %>
+    <option value = <%=cv.getCategoryid() %>> <%=cv.getCategoryname() %> </option>
+        <%} %>
     <option value = "1"> カテゴリー名 </option>
     <option value = "2"> カテゴリー名 </option>
-    <option value = "3"> カテゴリー名 </option>
-    <option value = "4"> カテゴリー名 </option>
     </select>
   </td>
 
@@ -148,6 +151,7 @@
     <option value = "2"> カテゴリー名 </option>
     <option value = "3"> カテゴリー名 </option>
     <option value = "4"> カテゴリー名 </option>
+
     </select>
   </td>
 

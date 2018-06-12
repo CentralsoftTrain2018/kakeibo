@@ -12,7 +12,6 @@ import java.io.Serializable;
  * @version 1.0
  * history
  * Symbol	Date		Person		Note
- * [1]		2018/06/12	yuka.tokoro		Generated.
  */
 public class CategoryVo implements Serializable{
 

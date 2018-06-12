@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import vo.CategoryVo;
+
 public class ExpenseBean
 {
     private String message;
@@ -15,7 +17,7 @@ public class ExpenseBean
     //一日の合計が30日分入っている配列
     private int[] expenses;
 
-    private List<CategoryBean> categoryList;
+    private List<CategoryVo> categoryList;
 
     public ExpenseBean()
     {
@@ -62,12 +64,12 @@ public class ExpenseBean
         this.endDay = endDay;
     }
 
-    public List<CategoryBean> getCategoryList()
+    public List<CategoryVo> getCategoryList()
     {
         return categoryList;
     }
 
-    public void setCategoryList( List<CategoryBean> categoryList )
+    public void setCategoryList( List<CategoryVo> categoryList )
     {
         this.categoryList = categoryList;
     }
