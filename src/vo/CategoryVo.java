@@ -6,13 +6,6 @@ package vo;
  */
 import java.io.Serializable;
 
-/**
- * CategoryVo.
- * @author yuka.tokoro
- * @version 1.0
- * history
- * Symbol	Date		Person		Note
- */
 public class CategoryVo implements Serializable{
 
     public static final String TABLE = "CATEGORY";
@@ -31,11 +24,6 @@ public class CategoryVo implements Serializable{
      * useflag:tinyint(3)
      */
     private byte useflag;
-
-    /**
-    * Constractor
-    */
-    public CategoryVo(){}
 
     /**
     * Constractor
