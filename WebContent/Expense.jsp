@@ -22,7 +22,7 @@
   削除<input type="radio" name="choice" value="sakujo">
   <input type="submit" value="実行">
 </form>
-<table>
+<table border="1">
 <tr>
 <td>日</td>
 <td>月</td>
@@ -32,43 +32,40 @@
 <td>金</td>
 <td>土</td>
 </tr>
-<%boolean shouldWrite = false;
-  int day = 1;
-%>
+<%boolean shouldWrite = false;%>
+<%int day = 1;%>
 <tr>
 <%for(int i = 0; i < 7; i++){ %>
 <td>
-<%if(shouldWrite){%>
-<%=day %>
-<%day++; %>
-<%}%>
-<%if(i == bean.getStartDayOfTheWeek()){ %>
-<%=day %>
-<%day++; %>
-<%shouldWrite = true; %>
-<%} %>
+  <%if(shouldWrite){%>
+    <%=day %>
+    <%day++; %>
+  <%}%>
+  <%if(i == bean.getStartDayOfTheWeek()){ %>
+    <%=day %>
+    <%day++; %>
+    <%shouldWrite = true; %>
+  <%} %>
 </td>
 <%} %>
 </tr>
 <%boolean endCalender = false; %>
 <%while(true){ %>
 <tr>
-<%for(int i = 0; i < 7; i++){ %>
+  <%for(int i = 0; i < 7; i++){ %>
 <td>
-<%if(shouldWrite){ %>
-<%=day %>
-<%day++; %>
-<%} %>
-<%if(day > bean.getEndDay()){ %>
-<%shouldWrite = false; %>
-<%endCalender = true; %>
-<%} %>
+    <%if(shouldWrite){ %>
+      <%=day %>
+      <%day++; %>
+    <%} %>
+    <%if(day > bean.getEndDay()){ %>
+      <%shouldWrite = false; %>
+      <%endCalender = true; %>
+    <%} %>
 </td>
-<%} %>
+  <%} %>
 </tr>
-<%if(endCalender){ %>
-<%break; %>
-<%} %>
+  <%if(endCalender) break;%>
 <%} %>
 </table>
 </body>

@@ -41,6 +41,9 @@ public class ExpenseServlet extends HttpServlet {
         eb.setStartDayOfTheWeek(3);
 
         String choice = request.getParameter("choice");
+        if(choice == null) {
+            choice = "";
+        }
         String expenseIdStr = request.getParameter("expenseId");
         String kingakuStr = request.getParameter("kingaku");
         String categoryIdStr = request.getParameter("categoryId");
