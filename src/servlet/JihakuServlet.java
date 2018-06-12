@@ -38,7 +38,7 @@ public class JihakuServlet extends HttpServlet
 
         HttpSession session = request.getSession();
         String userId = ( String ) session.getAttribute( "userId" );
-        String date = "2018/05";
+        String date = "201805";
         AdviceService conan = new AdviceService();
         JihakuListBean bean = conan.jihaku( date, userId );
         //beanをリクエストにセット キー名は「bean」とする

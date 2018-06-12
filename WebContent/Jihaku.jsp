@@ -20,14 +20,15 @@
         }
       %>
     </p>
+    <br> <br>
+    <form method="POST" action="BungyServlet">
+      <input type="hidden" name="nengetu" value=<%=bean.getNengetsu()%>><br>
+      <input type="submit" value="TOPにもどる"><br>
+    </form>
   </div>
-  <div class="hannin1">
+  <div class="hannin">
     <img src="image/hannin1.png">
   </div>
 
-  <form method="POST" action="BungyServlet">
-    <input type="hidden" name="nengetu" value=<%=bean.getNengetsu()%>><br>
-    <input type="submit" value="TOPにもどる"><br>
-  </form>
 </body>
 </html>
