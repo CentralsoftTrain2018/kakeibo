@@ -25,6 +25,5 @@
 <form  method="POST" action="ExpenseServlet">
   <input type="submit" value="Expense">
 </form>
-
 </body>
 </html>
