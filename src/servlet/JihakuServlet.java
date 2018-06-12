@@ -17,39 +17,45 @@ import service.AdviceService;
  * Servlet implementation class IndexStartServlet
  */
 @WebServlet("/JihakuServlet")
-public class JihakuServlet extends HttpServlet {
+public class JihakuServlet extends HttpServlet
+{
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JihakuServlet() {
+    public JihakuServlet()
+    {
         super();
     }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException
+    {
 
         HttpSession session = request.getSession();
-        String userId = (String)session.getAttribute("userId");
-        String date = "2018/05";
+        String userId = ( String ) session.getAttribute( "userId" );
+        String date = "201805";
         AdviceService conan = new AdviceService();
-        JihakuListBean bean = conan.jihaku(date, userId);
-      //beanをリクエストにセット キー名は「bean」とする
-        request.setAttribute("bean", bean);
+        JihakuListBean bean = conan.jihaku( date, userId );
+        //beanをリクエストにセット キー名は「bean」とする
+        request.setAttribute( "bean", bean );
 
         //JSPに遷移する
-        RequestDispatcher disp = request.getRequestDispatcher("Jihaku.jsp");
-        disp.forward(request, response);    }
+        RequestDispatcher disp = request.getRequestDispatcher( "Jihaku.jsp" );
+        disp.forward( request, response );
+    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+    protected void doPost( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException
+    {
+        doGet( request, response );
     }
 
 }
-
