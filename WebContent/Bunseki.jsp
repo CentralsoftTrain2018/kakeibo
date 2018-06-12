@@ -19,7 +19,7 @@
     <form method="POST" action="ExpenseServlet">
       <input type="submit" value="家計簿">
     </form>
-    <form method="POST" action="Bunseki.jsp">
+    <form method="POST" action="BunsekiServlet">
       <input type="submit" value="分析" disabled="disabled">
     </form>
   </div>

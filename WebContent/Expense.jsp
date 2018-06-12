@@ -17,7 +17,7 @@
     <form method="POST" action="ExpenseServlet">
       <input type="submit" value="家計簿" disabled="disabled">
     </form>
-    <form method="POST" action="Bunseki.jsp">
+    <form method="POST" action="BunsekiServlet">
       <input type="submit" value="分析">
     </form>
   </div>
@@ -109,6 +109,11 @@
 
   <td>
     <select>
+        <%
+      for ( bean.CategoryBean cb : bean.getCategoryList() )
+      {
+    %>
+    <%} %>
     <option value = "category1"> カテゴリー1 </option>
     <option value = "category2"> カテゴリー2 </option>
     <option value = "category3"> カテゴリー3 </option>
