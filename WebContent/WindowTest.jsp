@@ -6,7 +6,6 @@
 <head>
 <title>WindowTest</title>
 </head>
-<<<<<<< HEAD
 <body>
   <%
     if ( bean.getMessage() != null )
@@ -29,27 +28,5 @@
   <form method="POST" action="Expense.jsp">
     <input type="submit" value="Expense">
   </form>
-
-=======
-<body>
-<%if(bean.getMessage() != null){%>
-<%= bean.getMessage() %><br>
-<%} %>
-<form  method="POST" action="BungyServlet">
-  目標<input type="text" name="mokuhyou"><br>
-  支出<input type="text" name="shisyutu"><br>
-  経過日数<input type="text" name="nengetu"><br>
-  <input type="submit" value="Bungy"><br>
-</form>
-<form  method="POST" action="ConanServlet">
-  <input type="submit" value="Conan">
-</form>
-<form  method="POST" action="JihakuServlet">
-  <input type="submit" value="jihaku">
-</form>
-<form  method="POST" action="ExpenseServlet">
-  <input type="submit" value="Expense">
-</form>
->>>>>>> refs/remotes/origin/master
 </body>
 </html>

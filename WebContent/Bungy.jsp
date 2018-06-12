@@ -50,11 +50,6 @@
   width: 100px;
   height: 100px;
   right: 30%;
-<<<<<<< HEAD
-  top:<%=bean.getJumperDispPosition()+30%>%;"
-  >
-   <form method="POST" action="<%=bean.getAdovicePage()%>">
-=======
   top:<%=bean.getJumperDispPosition()+30%>%;">
 
    <form method="POST" action="<%=bean.getAdovicePage()%>">
@@ -67,12 +62,7 @@
    top:30%;
    ">
    <%} %>
- </form>
 
-
-
-
->>>>>>> refs/remotes/origin/master
   <%if(bean.isMonthfinflg()){ %>
    <input type="image" src="<%=bean.getButtonImage() %>"
    style="
@@ -82,10 +72,6 @@
    ">
    <%} %>
  </form>
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/master
  </div>
 
 <form  method="POST" action="BungyServlet">
