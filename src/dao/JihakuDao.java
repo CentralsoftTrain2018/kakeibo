@@ -37,7 +37,7 @@ public class JihakuDao extends Dao
             "			AND m.month like '2018/05'" +
             "			AND k.sum1 - m.kingaku > 0" +
             "		order by" +
-            "			k.sum1 - m.kingaku desc;";
+            "			k.sum1 - m.kingaku desc limit 3;";
 
     private static final String GOUKEI =
             "			SELECT" +
