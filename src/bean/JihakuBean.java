@@ -16,10 +16,4 @@ public class JihakuBean {
     public void setExcess(int excess) {
         this.excess = excess;
     }
-    @Override
-    public String toString() {
-        return categoryname+"が"+excess+"円<br>";
-    }
-
-
 }

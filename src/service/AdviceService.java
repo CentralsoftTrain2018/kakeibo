@@ -1,6 +1,5 @@
 package service;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,10 +16,14 @@ public class AdviceService
 {
 
     //AdviceVo型のListをConanBean型のListに変換
-    public JihakuListBean jihaku( Date date, String userId )
+    public JihakuListBean jihaku( String date, String userId )
     {
         List<AdviceVo> resultList = AdviceDBManager.selectJihakuAdvice( date, userId );
         JihakuListBean jlb = new JihakuListBean();
+        List<JihakuBean> list = new ArrayList<JihakuBean>();
+
+        //現在の月を取得（2018/05）
+        jlb.setNengetsu( getNengetsu() );
 
         //計算結果と表示するメッセージを入れ物（bean)にセットする
         for ( AdviceVo av : resultList )
@@ -29,9 +32,9 @@ public class AdviceService
             jb.setCategoryname( av.getCategoryName() );
             jb.setExcess( av.getDifference() );
 
-            jlb.getJihakulist().add( jb );
+            list.add( jb );
         }
-
+        jlb.setJihakulist( list );
         return jlb;
     }
 
@@ -41,19 +44,17 @@ public class AdviceService
      * @param userId ユーザーID
      * @return ConanListBean
      */
-
     public static ConanListBean selectConanAdvice( String userId )
     {
         ConanListBean clb = new ConanListBean();
         List<ConanBean> list = new ArrayList<ConanBean>();
 
         //現在の月を取得（2018/05）
-        Calendar calendar = Calendar.getInstance();
-        String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
-        clb.setNengetsu( nengetsu );
+        clb.setNengetsu( getNengetsu() );
 
+        Calendar calendar = Calendar.getInstance();
         calendar.add( Calendar.MONTH, -1 );
-        nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
+        String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
 
         List<AdviceVo> resultList = AdviceDBManager.selectConanAdvice( nengetsu, userId );
 
@@ -71,5 +72,17 @@ public class AdviceService
         clb.setThisMonth( calendar.get( Calendar.MONTH ) + 1 );
 
         return clb;
+    }
+
+    /**
+     * getNengetsu
+     * 現在の年月をyyyy/MMで取得
+     * @return nengetsu
+     */
+    public static String getNengetsu()
+    {
+        Calendar calendar = Calendar.getInstance();
+        String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
+        return nengetsu;
     }
 }

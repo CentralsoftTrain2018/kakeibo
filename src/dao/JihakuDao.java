@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -54,7 +53,7 @@ public class JihakuDao extends Dao
 
     //-------------------------------------------------------
     // カテゴリ名、支出合計、目標
-    public List<AdviceVo> JihakuAdvice( Date date, String userId ) throws SQLException
+    public List<AdviceVo> JihakuAdvice( String date, String userId ) throws SQLException
     {
 
         System.out.println( date.toString() );
@@ -82,7 +81,6 @@ public class JihakuDao extends Dao
                 cv.setDifference( rset.getInt( 2 ) * -1 );
                 list.add( cv );
             }
-
             return list;
         }
 
@@ -91,7 +89,6 @@ public class JihakuDao extends Dao
             throw e;
         } finally
         {
-
             if ( stmt != null )
             {
                 stmt.close();
@@ -103,6 +100,99 @@ public class JihakuDao extends Dao
                 rset = null;
             }
         }
+    }
+    public List<AdviceVo> JihakuGoukei( String month, String userId ) throws SQLException
+    {
 
+        //System.out.println( month.toString() );
+        PreparedStatement stmt = null;
+        ResultSet rset = null;
+
+        try
+        {
+            List<AdviceVo> list = new ArrayList<AdviceVo>();
+
+            /* Statementの作成 */
+            stmt = con.prepareStatement( GOUKEI );
+            //stmt.setString(1, date.toString().substring(7));
+            //stmt.setString(2, date.toString().substring(7));
+            stmt.setString( 1, userId );
+            /* SQL実行 */
+            rset = stmt.executeQuery();
+
+            /* 取得したデータを表示します。 */
+            while ( rset.next() )
+            {
+                AdviceVo cv = new AdviceVo();
+
+                cv.setSumSpending( rset.getInt( 1 ) );
+                list.add( cv );
+            }
+            return list;
+        }
+
+        catch ( SQLException e )
+        {
+            throw e;
+        } finally
+        {
+            if ( stmt != null )
+            {
+                stmt.close();
+                stmt = null;
+            }
+            if ( rset != null )
+            {
+                rset.close();
+                rset = null;
+            }
+        }
+    }
+    public List<AdviceVo> JihakuMokuhyou( String month, String userId ) throws SQLException
+    {
+
+        //System.out.println( month.toString() );
+        PreparedStatement stmt = null;
+        ResultSet rset = null;
+
+        try
+        {
+            List<AdviceVo> list = new ArrayList<AdviceVo>();
+
+            /* Statementの作成 */
+            stmt = con.prepareStatement( MOKUHYOU );
+            //stmt.setString(1, date.toString().substring(7));
+            //stmt.setString(2, date.toString().substring(7));
+            stmt.setString( 1, userId );
+            /* SQL実行 */
+            rset = stmt.executeQuery();
+
+            /* 取得したデータを表示します。 */
+            while ( rset.next() )
+            {
+                AdviceVo cv = new AdviceVo();
+
+                cv.setMokuhyouKingaku( rset.getInt( 1 ) );
+                list.add( cv );
+            }
+            return list;
+        }
+
+        catch ( SQLException e )
+        {
+            throw e;
+        } finally
+        {
+            if ( stmt != null )
+            {
+                stmt.close();
+                stmt = null;
+            }
+            if ( rset != null )
+            {
+                rset.close();
+                rset = null;
+            }
+        }
     }
 }

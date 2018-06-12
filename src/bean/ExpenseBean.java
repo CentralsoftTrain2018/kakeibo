@@ -1,10 +1,10 @@
 package bean;
 
-import java.sql.Date;
+import java.util.Calendar;
 
 public class ExpenseBean {
     private String message;
-    private Date date;
+    private Calendar date;
     //その月の1日が何曜日か0なら日曜日
     private int startDayOfTheWeek;
     //その月が何日まであるか
@@ -22,11 +22,11 @@ public class ExpenseBean {
         this.message = message;
     }
 
-    public Date getDate() {
+    public Calendar getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Calendar date) {
         this.date = date;
     }
 
