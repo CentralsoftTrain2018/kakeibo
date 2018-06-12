@@ -46,14 +46,22 @@ public class ExpenseServlet extends HttpServlet {
         String expenseName = request.getParameter("expenseName");
         HttpSession session = request.getSession();
         String userId = (String)session.getAttribute("userId");
+        String year = request.getParameter("year");
+        String month = request.getParameter("month");
 
         Calendar calendar = Calendar.getInstance();
+        if(year != null && month != null) {
+            calendar.set(Calendar.YEAR, Integer.parseInt(year));
+            calendar.set(Calendar.MONTH, Integer.parseInt(month));
+        }
         calendar.set(Calendar.DATE, 1);
         ExpenseBean eb = ExpenseService.getAllSumOfDay(calendar, userId);
         eb.setStartDayOfTheWeek(calendar.get(Calendar.DAY_OF_WEEK));
         calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
         eb.setEndDay(calendar.get(Calendar.DATE));
+        eb.setDate(calendar);
 
+        eb = ExpenseService.getCategory();
         if(choice.equals("touroku")) {
             try {
                 int kingaku = Integer.parseInt(kingakuStr);

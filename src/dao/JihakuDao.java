@@ -12,22 +12,32 @@ import vo.AdviceVo;
 public class JihakuDao extends Dao
 {
 
-    private static final String SELECT = "            SELECT" +
-            "            c.categoryName" +
-            "            ,m.Kingaku - SUM(e.Kingaku)" +
-            "            FROM" +
-            "            expenses as e " +
-            "            ,category as c " +
-            "            ,mokuhyou as m " +
-            "            WHERE " +
-            "            e.expenseDate BETWEEN '2018-5-01' AND '2018-5-31'" +
-            "            AND e.category_categoryId = c.categoryId" +
-            "            AND e.user_userid = m.user_userid " +
-            "            AND c.categoryId = m.category_categoryId" +
-            "			 AND e.user_userid = ?" +
-            "            GROUP BY e.category_categoryId" +
-            "			HAVING SUM(m.Kingaku) - SUM(e.Kingaku) < 0" +
-            "            ORDER BY SUM(m.Kingaku) - SUM(e.Kingaku) ASC;";
+    private static final String SELECT =
+            "		select" +
+            "			k.cname" +
+            "			,k.sum1 - m.kingaku" +
+            "		from" +
+            "			mokuhyou m" +
+            "			,(select" +
+            "				c.categoryid as cid" +
+            "				,c.categoryname as cname" +
+            "				,sum(e.kingaku) as sum1" +
+            "			from" +
+            "				expenses e" +
+            "				,category c" +
+            "			where" +
+            "				e.category_categoryid = c.categoryid" +
+            "				AND e.expensedate between '2018-5-1' AND '2018-5-31'" +
+            "				AND e.user_userid = ?"+
+            "			group by" +
+            "				c.categoryid" +
+            "			) as k" +
+            "		where" +
+            "			m.category_categoryid = k.cid" +
+            "			AND m.month like '2018/05'" +
+            "			AND k.sum1 - m.kingaku > 0" +
+            "		order by" +
+            "			k.sum1 - m.kingaku desc limit 3;";
 
     private static final String GOUKEI =
             "			SELECT" +
@@ -44,7 +54,7 @@ public class JihakuDao extends Dao
             "			FROM" +
             "			mokuhyou as m" +
             "			WHERE" +
-            "			m.Month = 2018/05" +
+            "			m.Month = '2018/05'" +
             "			AND m.user_userid = ?;";
     public JihakuDao( Connection con )
     {
@@ -78,7 +88,7 @@ public class JihakuDao extends Dao
                 AdviceVo cv = new AdviceVo();
 
                 cv.setCategoryName( rset.getString( 1 ) );
-                cv.setDifference( rset.getInt( 2 ) * -1 );
+                cv.setDifference( rset.getInt( 2 )  );
                 list.add( cv );
             }
             return list;
@@ -166,7 +176,6 @@ public class JihakuDao extends Dao
             /* 取得したデータを表示します。 */
                 rset.next();
                 mokuhyou=(rset.getInt( 1 ) );
-
             return mokuhyou;
         }
 
