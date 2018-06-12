@@ -101,7 +101,7 @@ public class JihakuDao extends Dao
             }
         }
     }
-    public List<AdviceVo> JihakuGoukei( String month, String userId ) throws SQLException
+    public int JihakuGoukei( String month, String userId ) throws SQLException
     {
 
         //System.out.println( month.toString() );
@@ -110,7 +110,7 @@ public class JihakuDao extends Dao
 
         try
         {
-            List<AdviceVo> list = new ArrayList<AdviceVo>();
+            int goukei;
 
             /* Statementの作成 */
             stmt = con.prepareStatement( GOUKEI );
@@ -121,14 +121,10 @@ public class JihakuDao extends Dao
             rset = stmt.executeQuery();
 
             /* 取得したデータを表示します。 */
-            while ( rset.next() )
-            {
-                AdviceVo cv = new AdviceVo();
 
-                cv.setSumSpending( rset.getInt( 1 ) );
-                list.add( cv );
-            }
-            return list;
+                rset.next();
+                goukei=( rset.getInt( 1 ) );
+            return goukei;
         }
 
         catch ( SQLException e )
@@ -148,7 +144,7 @@ public class JihakuDao extends Dao
             }
         }
     }
-    public List<AdviceVo> JihakuMokuhyou( String month, String userId ) throws SQLException
+    public int  JihakuMokuhyou( String month, String userId ) throws SQLException
     {
 
         //System.out.println( month.toString() );
@@ -157,7 +153,7 @@ public class JihakuDao extends Dao
 
         try
         {
-            List<AdviceVo> list = new ArrayList<AdviceVo>();
+            int mokuhyou;
 
             /* Statementの作成 */
             stmt = con.prepareStatement( MOKUHYOU );
@@ -168,14 +164,10 @@ public class JihakuDao extends Dao
             rset = stmt.executeQuery();
 
             /* 取得したデータを表示します。 */
-            while ( rset.next() )
-            {
-                AdviceVo cv = new AdviceVo();
+                rset.next();
+                mokuhyou=(rset.getInt( 1 ) );
 
-                cv.setMokuhyouKingaku( rset.getInt( 1 ) );
-                list.add( cv );
-            }
-            return list;
+            return mokuhyou;
         }
 
         catch ( SQLException e )
