@@ -27,6 +27,11 @@ public class CategoryVo implements Serializable{
 
     /**
     * Constractor
+    */
+    public CategoryVo(){}
+
+    /**
+    * Constractor
     * @param <code>categoryid</code>
     */
     public CategoryVo(int categoryid){
