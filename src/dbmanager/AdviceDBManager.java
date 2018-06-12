@@ -1,7 +1,6 @@
 package dbmanager;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -40,7 +39,7 @@ public class AdviceDBManager {
     }
 
     //アドバイス(自白)に必要なデータを取得する
-    public static List<AdviceVo> selectJihakuAdvice(Date date, String userId) {
+    public static List<AdviceVo> selectJihakuAdvice(String date, String userId) {
         try
         (
             Connection con = PoolConnection.getConnection();

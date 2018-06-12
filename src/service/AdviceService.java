@@ -1,6 +1,5 @@
 package service;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,7 +16,7 @@ public class AdviceService
 {
 
     //AdviceVo型のListをConanBean型のListに変換
-    public JihakuListBean jihaku( Date date, String userId )
+    public JihakuListBean jihaku( String date, String userId )
     {
         List<AdviceVo> resultList = AdviceDBManager.selectJihakuAdvice( date, userId );
         JihakuListBean jlb = new JihakuListBean();
