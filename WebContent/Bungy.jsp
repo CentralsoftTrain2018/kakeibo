@@ -24,30 +24,36 @@
   </div>
 
   <h1>Bungy</h1>
-  <div class="pattern1"
-    style="width: 800px; height: 742px; overflow: hidden; background-image: url(image/kawa.png); margin-bottom: 0px; padding-bottom: 0px; position: relative;">
+    <div class="pattern1"
+    style="width: 800px; height: 742px;
+    overflow: hidden;
+    background-image: url(image/kawa.png);
+    margin-bottom: 0px; padding-bottom: 0px; position: relative;">
+
     <img src="image/kaidan.png" alt="" class="base"
-      style="position: absolute; left: 10px; bottom: 0px; margin-bottom: 0px; padding-bottom: 0px;">
+      style="position: absolute;
+      left: 10px; bottom: 0px;
+      margin-bottom: 0px;
+      padding-bottom: 0px;">
     <img src="image/hanninkaidan.png" alt="" class="hannin"
       style="position: absolute;
-  width: 100px;
-  height: 100px;
-  transform: scale(<%=bean.getHanninMuki()%>,1);
-  left: <%=bean.getHanninYoko()%>%;
-  bottom:
-       <%=bean.getHanninIchi()%>%;">
+      width: 100px;
+      height: 100px;
+      transform: scale(<%=bean.getHanninMuki()%>,1);
+      left: <%=bean.getHanninYoko()%>%;
+      bottom:<%=bean.getHanninIchi()%>%;">
     <img src="image/himo.png" alt="" class="himo"
       style="position: absolute;
-  width: 50px;
-  height:<%=bean.getJumperDispPosition() + 7%>%;
-  right: 35%;
-  top:25%;">
+      width: 50px;
+      height:<%=bean.getJumperDispPosition() + 7%>%;
+      right: 35%;
+      top:25%;">
     <img src="image/jump.png" alt="" class="jumper"
       style="position: absolute;
-  width: 100px;
-  height: 100px;
-  right: 30%;
-  top:<%=bean.getJumperDispPosition() + 30%>%;">
+      width: 100px;
+      height: 100px;
+      right: 30%;
+      top:<%=bean.getJumperDispPosition() + 30%>%;">
 
 <form method="POST" action="<%=bean.getAdovicePage()%>">
 
@@ -62,19 +68,6 @@
 
 </form>
 
- </div>
-
-    <form method="POST" action="<%=bean.getAdovicePage()%>">
-      <%
-        if ( bean.isMonthfinflg() )
-        {
-      %>
-      <input type="image" src="<%=bean.getButtonImage()%>"
-        style="position: absolute; right: 30%; top: 30%;">
-      <%
-        }
-      %>
-    </form>
-  </div>
+</div>
 </body>
 </html>
