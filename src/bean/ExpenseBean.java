@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import vo.CategoryVo;
 import vo.ExpenseVo;
 
 public class ExpenseBean
@@ -19,7 +20,7 @@ public class ExpenseBean
     //一日分の支出のデータが入っている配列
     private List<ExpenseVo> expenseOfDay;
 
-    private List<CategoryBean> categoryList;
+    private List<CategoryVo> categoryList;
 
     public ExpenseBean()
     {
@@ -74,12 +75,12 @@ public class ExpenseBean
         this.expenseOfDay = expenseOfDay;
     }
 
-    public List<CategoryBean> getCategoryList()
+    public List<CategoryVo> getCategoryList()
     {
         return categoryList;
     }
 
-    public void setCategoryList( List<CategoryBean> categoryList )
+    public void setCategoryList( List<CategoryVo> categoryList )
     {
         this.categoryList = categoryList;
     }
