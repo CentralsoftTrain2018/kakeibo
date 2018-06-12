@@ -11,14 +11,20 @@
 <body>
   <div class="Jihaku">
     <p>
+       目標が<%=bean.getGoukei()%>円で<br>
+      <%int go = bean.getGoukei();
+        int mo = bean.getMokuhyou();
+        int sagaku = go - mo;%>
+      <%=sagaku %>円超えたから殺したんだよ!!<br>
       <%
         for ( bean.JihakuBean jb : bean.getJihakulist() )
         {
       %>
-      <%=jb.getCategoryname()%>が<%=jb.getExcess()%>円 目標を超えたから殺したんだ!!!<br>
+      <%=jb.getCategoryname()%>が<%=jb.getExcess()%>円 <br>
       <%
         }
       %>
+      が特に多いんだよ!!!<br>
     </p>
     <br> <br>
     <form method="POST" action="BungyServlet">

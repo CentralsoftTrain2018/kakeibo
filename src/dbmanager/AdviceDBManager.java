@@ -19,7 +19,8 @@ public class AdviceDBManager {
        * @param userId ユーザーID
        * @return カテゴリごとの名前、目標-支出合計が格納されたAdviceVo型のリスト
        */
-    public static List<AdviceVo> selectConanAdvice(String nengetsu, String userId) {
+    public static List<AdviceVo> selectConanAdvice(String nengetsu, String userId)
+    {
 
         try
         (
@@ -39,7 +40,8 @@ public class AdviceDBManager {
     }
 
     //アドバイス(自白)に必要なデータを取得する
-    public static List<AdviceVo> selectJihakuAdvice(String date, String userId) {
+    public static List<AdviceVo> selectJihakuAdvice(String date, String userId)
+    {
         try
         (
             Connection con = PoolConnection.getConnection();
@@ -49,6 +51,44 @@ public class AdviceDBManager {
             JihakuDao jdao = new JihakuDao(con);
             List<AdviceVo> list = jdao.JihakuAdvice(date, userId) /**jdao.jihakuAdvice()**/;
             return list;
+
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+    public static int sumGoukei(String date, String userId)
+    {
+        try
+        (
+            Connection con = PoolConnection.getConnection();
+        )
+        {
+
+            JihakuDao jdao = new JihakuDao(con);
+            int goukei = jdao.JihakuGoukei(date, userId) /**jdao.jihakuAdvice()**/;
+            return goukei;
+
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+    public static int sumMokuhyou(String date, String userId)
+    {
+        try
+        (
+            Connection con = PoolConnection.getConnection();
+        )
+        {
+
+            JihakuDao jdao = new JihakuDao(con);
+            int mokuhyou = jdao.JihakuMokuhyou(date, userId) /**jdao.jihakuAdvice()**/;
+            return mokuhyou;
 
         }
         catch(SQLException e)

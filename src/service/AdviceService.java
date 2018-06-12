@@ -19,6 +19,8 @@ public class AdviceService
     public JihakuListBean jihaku( String date, String userId )
     {
         List<AdviceVo> resultList = AdviceDBManager.selectJihakuAdvice( date, userId );
+        int goukei = AdviceDBManager.sumGoukei( date, userId );
+        int mokuhyou = AdviceDBManager.sumMokuhyou( date, userId );
         JihakuListBean jlb = new JihakuListBean();
         List<JihakuBean> list = new ArrayList<JihakuBean>();
 
@@ -35,6 +37,8 @@ public class AdviceService
             list.add( jb );
         }
         jlb.setJihakulist( list );
+        jlb.setGoukei(goukei);
+        jlb.setMokuhyou(mokuhyou);
         return jlb;
     }
 

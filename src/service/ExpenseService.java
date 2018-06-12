@@ -3,11 +3,13 @@ package service;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import bean.BungyBean;
 import bean.ExpenseBean;
 import dbmanager.ExpenseDBManager;
 import vo.BungyVo;
+import vo.CategoryVo;
 import vo.ExpenseVo;
 
 public class ExpenseService
@@ -71,4 +73,28 @@ public class ExpenseService
         return eb;
     }
 
+    public static ExpenseBean getExpensesOfDay() {
+        ExpenseBean ev = new ExpenseBean();
+        return null;
+    }
+    /**
+     * カテゴリの取得
+     * @return
+     */
+    public static ExpenseBean getCategory()
+    {
+        ExpenseBean eb = new ExpenseBean();
+        List<CategoryVo> list = new ArrayList<CategoryVo>();
+        CategoryVo cv = new CategoryVo();
+
+        cv.setCategoryid( 0 );
+        cv.setCategoryname( "食費" );
+        list.add( cv );
+        cv.setCategoryid( 1 );
+        cv.setCategoryname( "光熱費" );
+        list.add( cv );
+
+        eb.setCategoryList( list );
+        return eb;
+    }
 }

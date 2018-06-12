@@ -36,6 +36,7 @@ public class ExpenseServlet extends HttpServlet {
         System.out.println("ExpenseServletが実行されました。");
 
         String choice = request.getParameter("choice");
+        System.out.println(choice + "が実行されました");
         if(choice == null) {
             choice = "";
         }
@@ -45,14 +46,22 @@ public class ExpenseServlet extends HttpServlet {
         String expenseName = request.getParameter("expenseName");
         HttpSession session = request.getSession();
         String userId = (String)session.getAttribute("userId");
+        String year = request.getParameter("year");
+        String month = request.getParameter("month");
 
         Calendar calendar = Calendar.getInstance();
+        if(year != null && month != null) {
+            calendar.set(Calendar.YEAR, Integer.parseInt(year));
+            calendar.set(Calendar.MONTH, Integer.parseInt(month));
+        }
         calendar.set(Calendar.DATE, 1);
         ExpenseBean eb = ExpenseService.getAllSumOfDay(calendar, userId);
         eb.setStartDayOfTheWeek(calendar.get(Calendar.DAY_OF_WEEK));
         calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
         eb.setEndDay(calendar.get(Calendar.DATE));
+        eb.setDate(calendar);
 
+        eb = ExpenseService.getCategory();
         if(choice.equals("touroku")) {
             try {
                 int kingaku = Integer.parseInt(kingakuStr);
@@ -61,10 +70,12 @@ public class ExpenseServlet extends HttpServlet {
                     throw new NoTextException();
                 }
                 ExpenseService.addExpense(kingaku, categoryId, expenseName, userId);
+                //ExpenseService.addExpense(100, 1, "ninjin", userId);
             }
             catch(NumberFormatException | NoTextException e) {
                 eb.setMessage("入力が不正です");
             }
+
         }
 
         if(choice.equals("henkou")) {
