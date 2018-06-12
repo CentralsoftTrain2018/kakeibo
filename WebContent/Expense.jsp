@@ -5,9 +5,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="css/menu.css">
 <title>家計簿</title>
 </head>
 <body>
+  <div class="menu">
+    <form method="POST" action="BungyServlet">
+      <input type="hidden" name="nengetu" value="2018/05"> <input
+        type="submit" value="バンジー">
+    </form>
+    <form method="POST" action="ExpenseServlet">
+      <input type="submit" value="家計簿" disabled="disabled">
+    </form>
+    <form method="POST" action="Bunseki.jsp">
+      <input type="submit" value="分析">
+    </form>
+  </div>
 <%if(bean.getMessage() != null){%>
 <%= bean.getMessage() %><br>
 <%} %>
@@ -38,6 +51,7 @@
 <%for(int i = 0; i < 7; i++){ %>
 <td>
   <%if(shouldWrite){%>
+    <%=bean.getExpenses()[day - 1] %>
     <form method="POST" action="ExpenseServlet">
     <input type="hidden" name="selectDay" value=<%=day %>>
     <input type="submit" value=<%=day %>>
@@ -45,10 +59,11 @@
     <%day++; %>
   <%}%>
   <%if(i == bean.getStartDayOfTheWeek()){ %>
-  <form method="POST" action="ExpenseServlet">
-  <input type="hidden" name="selectDay" value=<%=day %>>
-  <input type="submit" value=<%=day %>>
-  </form>
+    <%=bean.getExpenses()[day - 1] %>
+    <form method="POST" action="ExpenseServlet">
+    <input type="hidden" name="selectDay" value=<%=day %>>
+    <input type="submit" value=<%=day %>>
+    </form>
     <%day++; %>
     <%shouldWrite = true; %>
   <%} %>
@@ -61,6 +76,7 @@
   <%for(int i = 0; i < 7; i++){ %>
 <td>
     <%if(shouldWrite){ %>
+      <%=bean.getExpenses()[day - 1] %>
       <form method="POST" action="ExpenseServlet">
       <input type="hidden" name="selectDay" value=<%=day %>>
       <input type="submit" value=<%=day %>>

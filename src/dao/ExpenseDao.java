@@ -38,22 +38,38 @@ public class ExpenseDao extends Dao
             + " where "
             + " expenseid = ?";
 
-    private static final String SELECT_ALL =
+    private static final String SELECT_SUM =
             "select " +
-            "	* " +
+            "	expensedate, " +
+            "	sum(kingaku) " +
             "from " +
             "	expenses " +
             "where " +
             "	user_userid = ? " +
-            "	expensedate between '?' AND '?'";
+            "AND	expensedate between ? AND ? " +
+            "group by " +
+            "	expensedate " +
+            "order by " +
+            "	expensedate asc";
+
+    private static final String SELECT_CATEGORY =
+            "SELECT " +
+            "categoryId, categoryName " +
+            "FROM " +
+            "kakeibo.category " +
+            "WHERE " +
+            "useflag = 1;";
 
     public ExpenseDao( Connection con )
     {
         super( con );
     }
 
-    //-------------------------------------------------------
-    // 会員登録
+    /**
+     * 支出登録
+     * @param ev
+     * @throws SQLException
+     */
     public void addExpense( ExpenseVo ev ) throws SQLException
     {
         PreparedStatement stmt = null;
@@ -76,8 +92,11 @@ public class ExpenseDao extends Dao
         }
     }
 
-    //-------------------------------------------------------
-    // 会員取得
+    /**
+     * 支出編集
+     * @param ev
+     * @throws SQLException
+     */
     public void updateExpense( ExpenseVo ev ) throws SQLException
     {
         PreparedStatement stmt = null;
@@ -103,6 +122,11 @@ public class ExpenseDao extends Dao
         }
     }
 
+/**
+ * 支出削除
+ * @param ev
+ * @throws SQLException
+ */
     public void deleteExpense( ExpenseVo ev ) throws SQLException
     {
         PreparedStatement stmt = null;
@@ -124,6 +148,13 @@ public class ExpenseDao extends Dao
         }
     }
 
+    /**
+     * 日ごとの支出合計をリストで取得
+     * @param calendar
+     * @param userId
+     * @return
+     * @throws SQLException
+     */
     public ArrayList<ExpenseVo> getAllSumOfDay(Calendar calendar, String userId) throws SQLException{
         PreparedStatement stmt = null;
         ResultSet rset = null;
@@ -140,23 +171,47 @@ public class ExpenseDao extends Dao
                 lastDay.get(Calendar.DATE);
 
         try {
-            stmt = con.prepareStatement(SELECT_ALL);
+            stmt = con.prepareStatement(SELECT_SUM);
             stmt.setString(1, userId);
             stmt.setString(2, startDayStr);
             stmt.setString(3, endDayStr);
 
             rset = stmt.executeQuery();
 
-            ArrayList<ExpenseVo> expenseList = new ArrayList();
+            ArrayList<ExpenseVo> expenseList = new ArrayList<ExpenseVo>();
             while(rset.next()) {
-            	ExpenseVo ev = new ExpenseVo();
-            	ev.setExpenseId(rset.getInt(1));
-            	
+                ExpenseVo ev = new ExpenseVo();
+                ev.setExpenseDate(rset.getDate(1));
+                ev.setExpenseKingaku(rset.getInt(2));
+                expenseList.add(ev);
             }
             return expenseList;
         }
         catch(SQLException ex) {
             throw ex;
+        }
+    }
+    /**
+     * カテゴリ取得
+     */
+    public void getCategory()
+    {
+        PreparedStatement stmt = null;
+
+        try
+        {
+
+            /* Statementの作成 */
+            stmt = con.prepareStatement( SELECT_CATEGORY );
+//            stmt.setInt( 1, ev.getExpenseId() );
+
+            stmt.executeUpdate();
+
+        }
+
+        catch ( SQLException e )
+        {
+            throw null;
         }
     }
 }
