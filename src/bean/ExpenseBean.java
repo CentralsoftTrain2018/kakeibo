@@ -1,5 +1,6 @@
 package bean;
 
+import java.util.Arrays;
 import java.util.Calendar;
 
 public class ExpenseBean {
@@ -9,6 +10,8 @@ public class ExpenseBean {
     private int startDayOfTheWeek;
     //その月が何日まであるか
     private int endDay;
+    //一日の合計が30日分入っている配列
+    private int[] expenses;
 
     public ExpenseBean() {
         super();
@@ -46,9 +49,19 @@ public class ExpenseBean {
         this.endDay = endDay;
     }
 
+
+    public int[] getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(int[] expenses) {
+        this.expenses = expenses;
+    }
+
     @Override
     public String toString() {
-        return "KakeiboBean [message=" + message + ", date=" + date + ", startDayOfTheWeek=" + startDayOfTheWeek
-                + ", endDay=" + endDay + "]";
+        return "ExpenseBean [message=" + message + ", date=" + date + ", startDayOfTheWeek=" + startDayOfTheWeek
+                + ", endDay=" + endDay + ", expenses=" + Arrays.toString(expenses) + "]";
     }
+
 }
