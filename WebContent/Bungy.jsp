@@ -50,7 +50,6 @@
   width: 100px;
   height: 100px;
   right: 30%;
-
   top:<%=bean.getJumperDispPosition()+30%>%;">
 
 <form method="POST" action="<%=bean.getAdovicePage()%>">
