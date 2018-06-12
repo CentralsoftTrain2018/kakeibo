@@ -8,7 +8,7 @@
 
 <title>Bungy</title>
 </head>
-<body>
+<body background="image/kawa.png">
 <h1>Bungy</h1>
  <div class="pattern1"
 
@@ -68,7 +68,7 @@
 =======
 
    <form method="POST" action="<%=bean.getAdovicePage()%>">
-  <%if(bean.isGameoverflg()){ %>
+  <%if(bean.isMonthfinflg()){ %>
    <input type="image" src="<%=bean.getButtonImage() %>"
    style="
    position: absolute;
