@@ -71,4 +71,9 @@ public class ExpenseService
         return eb;
     }
 
+    public static ExpenseBean getExpensesOfDay() {
+        ExpenseBean ev = new ExpenseBean();
+        return null;
+    }
+
 }

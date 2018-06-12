@@ -36,6 +36,7 @@ public class ExpenseServlet extends HttpServlet {
         System.out.println("ExpenseServletが実行されました。");
 
         String choice = request.getParameter("choice");
+        System.out.println(choice + "が実行されました");
         if(choice == null) {
             choice = "";
         }
@@ -61,10 +62,12 @@ public class ExpenseServlet extends HttpServlet {
                     throw new NoTextException();
                 }
                 ExpenseService.addExpense(kingaku, categoryId, expenseName, userId);
+                //ExpenseService.addExpense(100, 1, "ninjin", userId);
             }
             catch(NumberFormatException | NoTextException e) {
                 eb.setMessage("入力が不正です");
             }
+
         }
 
         if(choice.equals("henkou")) {
