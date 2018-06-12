@@ -16,8 +16,9 @@
   <img src="image/hannin1.png">
 </div>
 
-<form  method="POST" action="BungyServlet">
-  <input type="submit" value="Bungy"><br>
-</form>
+    <form method="POST" action="BungyServlet">
+      <input type="hidden" name="nengetu" value=<%=bean.getNengetsu() %>><br>
+      <input type="submit" value="TOPにもどる"><br>
+  </form>
 </body>
 </html>
