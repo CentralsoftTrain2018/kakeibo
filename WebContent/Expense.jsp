@@ -26,8 +26,12 @@
 <%} %>
 入力してね<br>
 
-<!--
+<%=bean.getDate().get(Calendar.YEAR) %>年
+<%=bean.getDate().get(Calendar.MONTH) %>月
+<br>
 <form  method="POST" action="ExpenseServlet">
+<<<<<<< HEAD
+=======
   支出ID<input type="text" name="expenseId"><br>
   金額<input type="text" name="kingaku"><br>
   カテゴリー<input type="text" name="categoryId"><br>
@@ -41,6 +45,7 @@
 <%=bean.getDate().get(Calendar.MONTH) %>月
 <br>
 <form  method="POST" action="ExpenseServlet">
+>>>>>>> refs/remotes/origin/master
   <select name="year">
   <option value="2018">2018</option>
   <option value="2017">2017</option>
@@ -61,7 +66,7 @@
   </select>
   <input type="submit" value="年月変更">
 </form>
--->
+
 <table border="1" align="left">
 <tr>
 <th>日曜日</th>
@@ -139,6 +144,7 @@
     <select name = "categoryId">
         <%
       for ( vo.CategoryVo cv : bean.getCategoryList() )
+
       {
     %>
     <option value = <%=cv.getCategoryid() %>> <%=cv.getCategoryname() %> </option>
