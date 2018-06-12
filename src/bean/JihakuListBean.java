@@ -7,6 +7,7 @@ public class JihakuListBean
     private List<JihakuBean> jihakulist;
     private String nengetsu;
 
+
     public String getNengetsu()
     {
         return nengetsu;
@@ -26,6 +27,7 @@ public class JihakuListBean
     {
         this.jihakulist = jihakulist;
     }
+
 
     public String toString()
     {

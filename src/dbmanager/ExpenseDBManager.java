@@ -2,22 +2,24 @@ package dbmanager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import dao.BungyDao;
-import dao.KakeiboDao;
+import dao.ExpenseDao;
 import vo.BungyVo;
-import vo.KakeiboVo;
+import vo.ExpenseVo;
 
 
 
 public class ExpenseDBManager {
-    public static void addExpense(KakeiboVo ev) {
+    public static void addExpense(ExpenseVo ev) {
         try
         (
             Connection con = PoolConnection.getConnection();
         )
         {
-            KakeiboDao edao = new KakeiboDao(con);
+            ExpenseDao edao = new ExpenseDao(con);
             edao.addExpense(ev);
         }
         catch(SQLException e)
@@ -27,13 +29,13 @@ public class ExpenseDBManager {
         }
     }
 
-    public static void updateExpense(KakeiboVo ev) {
+    public static void updateExpense(ExpenseVo ev) {
         try
         (
             Connection con = PoolConnection.getConnection();
         )
         {
-            KakeiboDao edao = new KakeiboDao(con);
+            ExpenseDao edao = new ExpenseDao(con);
             edao.updateExpense(ev);
         }
         catch(SQLException e)
@@ -43,13 +45,13 @@ public class ExpenseDBManager {
         }
     }
 
-    public static void deleteExpense(KakeiboVo ev) {
+    public static void deleteExpense(ExpenseVo ev) {
         try
         (
             Connection con = PoolConnection.getConnection();
         )
         {
-            KakeiboDao edao = new KakeiboDao(con);
+            ExpenseDao edao = new ExpenseDao(con);
             edao.deleteExpense(ev);
         }
         catch(SQLException e)
@@ -80,6 +82,23 @@ public class ExpenseDBManager {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public static ArrayList<ExpenseVo> getAllSumOfDay(Calendar calendar, String userId) {
+        try
+        (
+            Connection con = PoolConnection.getConnection();
+        )
+        {
+            ExpenseDao edao = new ExpenseDao(con);
+            ArrayList<ExpenseVo> expenseList = edao.getAllSumOfDay(calendar, userId);
+            return expenseList;
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
 }
