@@ -1,6 +1,7 @@
 package service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import bean.BungyBean;
@@ -52,8 +53,22 @@ public class ExpenseService
     }
 
     public static ExpenseBean getAllSumOfDay(Calendar calendar, String userId) {
-        ExpenseBean ev = new ExpenseBean();
-        return null;
+        ExpenseBean eb = new ExpenseBean();
+        ArrayList<ExpenseVo> expenseList = ExpenseDBManager.getAllSumOfDay(calendar, userId);
+        int[] expenses = new int[31];
+
+        for(int i = 0; i < 31; i++) {
+            expenses[i] = 0;
+        }
+
+        for(ExpenseVo ev : expenseList) {
+            String dateStr = ev.getExpenseDate().toString().split("-")[2];
+            int date = Integer.parseInt(dateStr) - 1;
+            expenses[date] = ev.getExpenseKingaku();
+        }
+
+        eb.setExpenses(expenses);
+        return eb;
     }
 
 }

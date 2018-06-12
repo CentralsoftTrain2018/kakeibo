@@ -51,6 +51,7 @@
 <%for(int i = 0; i < 7; i++){ %>
 <td>
   <%if(shouldWrite){%>
+    <%=bean.getExpenses()[day - 1] %>
     <form method="POST" action="ExpenseServlet">
     <input type="hidden" name="selectDay" value=<%=day %>>
     <input type="submit" value=<%=day %>>
@@ -58,10 +59,11 @@
     <%day++; %>
   <%}%>
   <%if(i == bean.getStartDayOfTheWeek()){ %>
-  <form method="POST" action="ExpenseServlet">
-  <input type="hidden" name="selectDay" value=<%=day %>>
-  <input type="submit" value=<%=day %>>
-  </form>
+    <%=bean.getExpenses()[day - 1] %>
+    <form method="POST" action="ExpenseServlet">
+    <input type="hidden" name="selectDay" value=<%=day %>>
+    <input type="submit" value=<%=day %>>
+    </form>
     <%day++; %>
     <%shouldWrite = true; %>
   <%} %>
@@ -74,6 +76,7 @@
   <%for(int i = 0; i < 7; i++){ %>
 <td>
     <%if(shouldWrite){ %>
+      <%=bean.getExpenses()[day - 1] %>
       <form method="POST" action="ExpenseServlet">
       <input type="hidden" name="selectDay" value=<%=day %>>
       <input type="submit" value=<%=day %>>

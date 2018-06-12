@@ -38,14 +38,19 @@ public class ExpenseDao extends Dao
             + " where "
             + " expenseid = ?";
 
-    private static final String SELECT_ALL =
+    private static final String SELECT_SUM =
             "select " +
-            "	* " +
+            "	expensedate, " +
+            "	sum(kingaku) " +
             "from " +
             "	expenses " +
             "where " +
             "	user_userid = ? " +
-            "	expensedate between '?' AND '?'";
+            "AND	expensedate between ? AND ? " +
+            "group by " +
+            "	expensedate " +
+            "order by " +
+            "	expensedate asc";
 
     private static final String SELECT_CATEGORY =
             "SELECT " +
@@ -166,17 +171,19 @@ public class ExpenseDao extends Dao
                 lastDay.get(Calendar.DATE);
 
         try {
-            stmt = con.prepareStatement(SELECT_ALL);
+            stmt = con.prepareStatement(SELECT_SUM);
             stmt.setString(1, userId);
             stmt.setString(2, startDayStr);
             stmt.setString(3, endDayStr);
 
             rset = stmt.executeQuery();
 
-            ArrayList<ExpenseVo> expenseList = new ArrayList();
+            ArrayList<ExpenseVo> expenseList = new ArrayList<ExpenseVo>();
             while(rset.next()) {
                 ExpenseVo ev = new ExpenseVo();
-                ev.setExpenseId(rset.getInt(1));
+                ev.setExpenseDate(rset.getDate(1));
+                ev.setExpenseKingaku(rset.getInt(2));
+                expenseList.add(ev);
             }
             return expenseList;
         }
