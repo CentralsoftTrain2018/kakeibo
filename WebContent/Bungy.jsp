@@ -61,7 +61,7 @@
    top:30%;
    ">
    <%} %>
- </form>
+</form>
  </div>
 
 <form  method="POST" action="BungyServlet">
