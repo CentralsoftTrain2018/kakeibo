@@ -12,6 +12,8 @@
 <%= bean.getMessage() %><br>
 <%} %>
 入力してね<br>
+
+<!--
 <form  method="POST" action="ExpenseServlet">
   支出ID<input type="text" name="expenseId"><br>
   金額<input type="text" name="kingaku"><br>
@@ -22,6 +24,7 @@
   削除<input type="radio" name="choice" value="sakujo">
   <input type="submit" value="実行">
 </form>
+-->
 <table border="1" align="left">
 <tr>
 <th>日曜日</th>
@@ -32,6 +35,8 @@
 <th>金曜日</th>
 <th>土曜日</th>
 </tr>
+
+
 <%boolean shouldWrite = false;%>
 <%int day = 1;%>
 <tr>
@@ -87,16 +92,16 @@
 <th colspan = 2 align = "center"> 操作 </th>
 </tr>
 
+<form method="POST" action="ExpenseServlet">
 <%for(int i=0; i<10; i++){ %>
-
 <tr>
 
   <td>
-    <select>
-    <option value = "category1"> カテゴリー1 </option>
-    <option value = "category2"> カテゴリー2 </option>
-    <option value = "category3"> カテゴリー3 </option>
-    <option value = "category4"> カテゴリー4 </option>
+    <select name = "categoryId">
+    <option value = "1"> カテゴリー名 </option>
+    <option value = "2"> カテゴリー名 </option>
+    <option value = "3"> カテゴリー名 </option>
+    <option value = "4"> カテゴリー名 </option>
     </select>
   </td>
 
@@ -115,15 +120,18 @@
     <td>
   <input type="submit" value="削除">
   </td>
+
   </tr>
-<%} %>
+  <%} %>
+</form>
 <tr>
+  <form method="POST" action="ExpenseServlet">
   <td>
-    <select>
-    <option value = "category1"> カテゴリー1 </option>
-    <option value = "category2"> カテゴリー2 </option>
-    <option value = "category3"> カテゴリー3 </option>
-    <option value = "category4"> カテゴリー4 </option>
+    <select name = categoryId>
+    <option value = "1"> カテゴリー名 </option>
+    <option value = "2"> カテゴリー名 </option>
+    <option value = "3"> カテゴリー名 </option>
+    <option value = "4"> カテゴリー名 </option>
     </select>
   </td>
 
@@ -135,8 +143,11 @@
   <input type="text" name="kingaku">
   </td>
 
-    <td colspan = 2 align = "center">
-  <input type="submit" value="登録">
+  <td colspan = 2 align = "center">
+
+  <input type="submit" value="登録"  >
+  <input type="hidden" name="choice" value="touroku">
+  </form>
   </td>
   </tr>
 </table>
