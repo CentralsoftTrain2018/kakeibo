@@ -74,7 +74,10 @@ public class ExpenseService
     }
 
     public static ExpenseBean getExpensesOfDay() {
+
         ExpenseBean eb = new ExpenseBean();
+        List<CategoryVo> list = new ArrayList<CategoryVo>();
+        CategoryVo cv = new CategoryVo();
 
         List<ExpenseVo> expenseOfDayList = new ArrayList<>();
 

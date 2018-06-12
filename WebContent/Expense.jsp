@@ -17,7 +17,7 @@
     <form method="POST" action="ExpenseServlet">
       <input type="submit" value="家計簿" disabled="disabled">
     </form>
-    <form method="POST" action="Bunseki.jsp">
+    <form method="POST" action="BunsekiServlet">
       <input type="submit" value="分析">
     </form>
   </div>
@@ -30,6 +30,22 @@
 <%=bean.getDate().get(Calendar.MONTH) %>月
 <br>
 <form  method="POST" action="ExpenseServlet">
+<<<<<<< HEAD
+=======
+  支出ID<input type="text" name="expenseId"><br>
+  金額<input type="text" name="kingaku"><br>
+  カテゴリー<input type="text" name="categoryId"><br>
+  支出名<input type="text" name="expenseName"><br>
+  登録<input type="radio" name="choice" value="touroku" checked>
+  変更<input type="radio" name="choice" value="henkou">
+  削除<input type="radio" name="choice" value="sakujo">
+  <input type="submit" value="実行">
+</form><br>
+<%=bean.getDate().get(Calendar.YEAR) %>年
+<%=bean.getDate().get(Calendar.MONTH) %>月
+<br>
+<form  method="POST" action="ExpenseServlet">
+>>>>>>> refs/remotes/origin/master
   <select name="year">
   <option value="2018">2018</option>
   <option value="2017">2017</option>
@@ -124,11 +140,11 @@
 <form method="POST" action="ExpenseServlet">
 <%for(int i=0; i<10; i++){ %>
 <tr>
-
   <td>
     <select name = "categoryId">
         <%
-    for ( vo.CategoryVo cv : bean.getCategoryList() )
+      for ( vo.CategoryVo cv : bean.getCategoryList() )
+
       {
     %>
     <option value = <%=cv.getCategoryid() %>> <%=cv.getCategoryname() %> </option>
@@ -165,6 +181,7 @@
     <option value = "2"> カテゴリー名 </option>
     <option value = "3"> カテゴリー名 </option>
     <option value = "4"> カテゴリー名 </option>
+
     </select>
   </td>
 
