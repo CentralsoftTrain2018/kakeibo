@@ -9,6 +9,7 @@
 <title>TOP</title>
 </head>
 <body background="image/kawa.png">
+
   <div class="menu">
     <form method="POST" action="BungyServlet">
       <input type="hidden" name="nengetu" value="2018/05">
@@ -21,6 +22,7 @@
       <input type="submit" value="分析">
     </form>
   </div>
+
   <h1>Bungy</h1>
   <div class="pattern1"
     style="width: 800px; height: 742px; overflow: hidden; background-image: url(image/kawa.png); margin-bottom: 0px; padding-bottom: 0px; position: relative;">
