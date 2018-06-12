@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,19 +35,8 @@ public class ExpenseServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("ExpenseServletが実行されました。");
 
-        ExpenseBean eb = new ExpenseBean();
-        Calendar calendar = Calendar.getInstance();
-        Calendar firstDayCalendar = Calendar.getInstance();
-        firstDayCalendar.set(Calendar.DATE, 1);
-        Date date = new Date();
-        date = calendar.getTime();
-
-        System.out.println(date);
-        eb.setDate(calendar);
-        eb.setEndDay(calendar.getActualMaximum(Calendar.DATE));
-        eb.setStartDayOfTheWeek(firstDayCalendar.get(Calendar.DAY_OF_WEEK) - 1);
-
         String choice = request.getParameter("choice");
+        System.out.println(choice + "が実行されました");
         if(choice == null) {
             choice = "";
         }
@@ -59,6 +47,13 @@ public class ExpenseServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String userId = (String)session.getAttribute("userId");
 
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DATE, 1);
+        ExpenseBean eb = ExpenseService.getAllSumOfDay(calendar, userId);
+        eb.setStartDayOfTheWeek(calendar.get(Calendar.DAY_OF_WEEK));
+        calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
+        eb.setEndDay(calendar.get(Calendar.DATE));
+
         if(choice.equals("touroku")) {
             try {
                 int kingaku = Integer.parseInt(kingakuStr);
@@ -67,10 +62,12 @@ public class ExpenseServlet extends HttpServlet {
                     throw new NoTextException();
                 }
                 ExpenseService.addExpense(kingaku, categoryId, expenseName, userId);
+                //ExpenseService.addExpense(100, 1, "ninjin", userId);
             }
             catch(NumberFormatException | NoTextException e) {
                 eb.setMessage("入力が不正です");
             }
+
         }
 
         if(choice.equals("henkou")) {

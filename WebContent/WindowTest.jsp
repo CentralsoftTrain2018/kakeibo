@@ -24,8 +24,12 @@
   </form>
   <form method="POST" action="JihakuServlet">
     <input type="submit" value="jihaku">
+<<<<<<< HEAD
   </form>
-  <form method="POST" action="Expense.jsp">
+=======
+  </form>
+>>>>>>> refs/remotes/origin/master
+  <form method="POST" action="ExpenseServlet">
     <input type="submit" value="Expense">
   </form>
 </body>

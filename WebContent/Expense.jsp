@@ -5,13 +5,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="css/menu.css">
 <title>家計簿</title>
 </head>
 <body>
+  <div class="menu">
+    <form method="POST" action="BungyServlet">
+      <input type="hidden" name="nengetu" value="2018/05"> <input
+        type="submit" value="バンジー">
+    </form>
+    <form method="POST" action="ExpenseServlet">
+      <input type="submit" value="家計簿" disabled="disabled">
+    </form>
+    <form method="POST" action="BunsekiServlet">
+      <input type="submit" value="分析">
+    </form>
+  </div>
 <%if(bean.getMessage() != null){%>
 <%= bean.getMessage() %><br>
 <%} %>
 入力してね<br>
+
+<!--
 <form  method="POST" action="ExpenseServlet">
   支出ID<input type="text" name="expenseId"><br>
   金額<input type="text" name="kingaku"><br>
@@ -22,6 +37,7 @@
   削除<input type="radio" name="choice" value="sakujo">
   <input type="submit" value="実行">
 </form>
+-->
 <table border="1" align="left">
 <tr>
 <th>日曜日</th>
@@ -32,12 +48,15 @@
 <th>金曜日</th>
 <th>土曜日</th>
 </tr>
+
+
 <%boolean shouldWrite = false;%>
 <%int day = 1;%>
 <tr>
 <%for(int i = 0; i < 7; i++){ %>
 <td>
   <%if(shouldWrite){%>
+    <%=bean.getExpenses()[day - 1] %>
     <form method="POST" action="ExpenseServlet">
     <input type="hidden" name="selectDay" value=<%=day %>>
     <input type="submit" value=<%=day %>>
@@ -45,10 +64,11 @@
     <%day++; %>
   <%}%>
   <%if(i == bean.getStartDayOfTheWeek()){ %>
-  <form method="POST" action="ExpenseServlet">
-  <input type="hidden" name="selectDay" value=<%=day %>>
-  <input type="submit" value=<%=day %>>
-  </form>
+    <%=bean.getExpenses()[day - 1] %>
+    <form method="POST" action="ExpenseServlet">
+    <input type="hidden" name="selectDay" value=<%=day %>>
+    <input type="submit" value=<%=day %>>
+    </form>
     <%day++; %>
     <%shouldWrite = true; %>
   <%} %>
@@ -61,6 +81,7 @@
   <%for(int i = 0; i < 7; i++){ %>
 <td>
     <%if(shouldWrite){ %>
+      <%=bean.getExpenses()[day - 1] %>
       <form method="POST" action="ExpenseServlet">
       <input type="hidden" name="selectDay" value=<%=day %>>
       <input type="submit" value=<%=day %>>
@@ -87,16 +108,16 @@
 <th colspan = 2 align = "center"> 操作 </th>
 </tr>
 
+<form method="POST" action="ExpenseServlet">
 <%for(int i=0; i<10; i++){ %>
-
 <tr>
 
   <td>
-    <select>
-    <option value = "category1"> カテゴリー1 </option>
-    <option value = "category2"> カテゴリー2 </option>
-    <option value = "category3"> カテゴリー3 </option>
-    <option value = "category4"> カテゴリー4 </option>
+    <select name = "categoryId">
+    <option value = "1"> カテゴリー名 </option>
+    <option value = "2"> カテゴリー名 </option>
+    <option value = "3"> カテゴリー名 </option>
+    <option value = "4"> カテゴリー名 </option>
     </select>
   </td>
 
@@ -115,15 +136,18 @@
     <td>
   <input type="submit" value="削除">
   </td>
+
   </tr>
-<%} %>
+  <%} %>
+</form>
 <tr>
+  <form method="POST" action="ExpenseServlet">
   <td>
-    <select>
-    <option value = "category1"> カテゴリー1 </option>
-    <option value = "category2"> カテゴリー2 </option>
-    <option value = "category3"> カテゴリー3 </option>
-    <option value = "category4"> カテゴリー4 </option>
+    <select name = categoryId>
+    <option value = "1"> カテゴリー名 </option>
+    <option value = "2"> カテゴリー名 </option>
+    <option value = "3"> カテゴリー名 </option>
+    <option value = "4"> カテゴリー名 </option>
     </select>
   </td>
 
@@ -135,8 +159,11 @@
   <input type="text" name="kingaku">
   </td>
 
-    <td colspan = 2 align = "center">
-  <input type="submit" value="登録">
+  <td colspan = 2 align = "center">
+
+  <input type="submit" value="登録"  >
+  <input type="hidden" name="choice" value="touroku">
+  </form>
   </td>
   </tr>
 </table>
