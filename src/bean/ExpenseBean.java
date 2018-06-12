@@ -1,6 +1,7 @@
 package bean;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class ExpenseBean {
     private String message;
@@ -9,6 +10,8 @@ public class ExpenseBean {
     private int startDayOfTheWeek;
     //その月が何日まであるか
     private int endDay;
+
+    private List<CategoryBean> categoryList;
 
     public ExpenseBean() {
         super();
@@ -44,6 +47,16 @@ public class ExpenseBean {
 
     public void setEndDay(int endDay) {
         this.endDay = endDay;
+    }
+
+    public List<CategoryBean> getCategoryList()
+    {
+        return categoryList;
+    }
+
+    public void setCategoryList( List<CategoryBean> categoryList )
+    {
+        this.categoryList = categoryList;
     }
 
     @Override
