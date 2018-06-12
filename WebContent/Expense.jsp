@@ -12,7 +12,7 @@
 <%= bean.getMessage() %><br>
 <%} %>
 入力してね<br>
-<form  method="POST" action="KakeiboServlet">
+<form  method="POST" action="ExpenseServlet">
   支出ID<input type="text" name="expenseId"><br>
   金額<input type="text" name="kingaku"><br>
   カテゴリー<input type="text" name="categoryId"><br>
@@ -24,13 +24,13 @@
 </form>
 <table border="1">
 <tr>
-<td>日</td>
-<td>月</td>
-<td>火</td>
-<td>水</td>
-<td>木</td>
-<td>金</td>
-<td>土</td>
+<td>日曜日</td>
+<td>月曜日</td>
+<td>火曜日</td>
+<td>水曜日</td>
+<td>木曜日</td>
+<td>金曜日</td>
+<td>土曜日</td>
 </tr>
 <%boolean shouldWrite = false;%>
 <%int day = 1;%>
@@ -38,11 +38,17 @@
 <%for(int i = 0; i < 7; i++){ %>
 <td>
   <%if(shouldWrite){%>
-    <%=day %>
+    <form method="POST" action="ExpenseServlet">
+    <input type="hidden" name="selectDay" value=<%=day %>>
+    <input type="submit" value=<%=day %>>
+    </form>
     <%day++; %>
   <%}%>
   <%if(i == bean.getStartDayOfTheWeek()){ %>
-    <%=day %>
+  <form method="POST" action="ExpenseServlet">
+  <input type="hidden" name="selectDay" value=<%=day %>>
+  <input type="submit" value=<%=day %>>
+  </form>
     <%day++; %>
     <%shouldWrite = true; %>
   <%} %>
@@ -55,7 +61,10 @@
   <%for(int i = 0; i < 7; i++){ %>
 <td>
     <%if(shouldWrite){ %>
-      <%=day %>
+      <form method="POST" action="ExpenseServlet">
+      <input type="hidden" name="selectDay" value=<%=day %>>
+      <input type="submit" value=<%=day %>>
+      </form>
       <%day++; %>
     <%} %>
     <%if(day > bean.getEndDay()){ %>
