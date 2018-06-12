@@ -22,6 +22,9 @@ public class AdviceService
         List<AdviceVo> resultList = AdviceDBManager.selectJihakuAdvice( date, userId );
         JihakuListBean jlb = new JihakuListBean();
 
+        //現在の月を取得（2018/05）
+        jlb.setNengetsu( getNengetsu() );
+
         //計算結果と表示するメッセージを入れ物（bean)にセットする
         for ( AdviceVo av : resultList )
         {
@@ -48,12 +51,11 @@ public class AdviceService
         List<ConanBean> list = new ArrayList<ConanBean>();
 
         //現在の月を取得（2018/05）
-        Calendar calendar = Calendar.getInstance();
-        String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
-        clb.setNengetsu( nengetsu );
+        clb.setNengetsu( getNengetsu() );
 
+        Calendar calendar = Calendar.getInstance();
         calendar.add( Calendar.MONTH, -1 );
-        nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
+        String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
 
         List<AdviceVo> resultList = AdviceDBManager.selectConanAdvice( nengetsu, userId );
 
@@ -71,5 +73,17 @@ public class AdviceService
         clb.setThisMonth( calendar.get( Calendar.MONTH ) + 1 );
 
         return clb;
+    }
+
+    /**
+     * getNengetsu
+     * 現在の年月をyyyy/MMで取得
+     * @return nengetsu
+     */
+    public static String getNengetsu()
+    {
+        Calendar calendar = Calendar.getInstance();
+        String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
+        return nengetsu;
     }
 }
