@@ -2,11 +2,14 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
 
-import vo.KakeiboVo;
+import vo.ExpenseVo;
 
-public class KakeiboDao extends Dao
+public class ExpenseDao extends Dao
 {
 
     private static final String ADD = "insert into expenses ( "
@@ -35,14 +38,23 @@ public class KakeiboDao extends Dao
             + " where "
             + " expenseid = ?";
 
-    public KakeiboDao( Connection con )
+    private static final String SELECT_ALL =
+            "select " +
+            "	* " +
+            "from " +
+            "	expenses " +
+            "where " +
+            "	user_userid = ? " +
+            "	expensedate between '?' AND '?'";
+
+    public ExpenseDao( Connection con )
     {
         super( con );
     }
 
     //-------------------------------------------------------
     // 会員登録
-    public void addExpense( KakeiboVo ev ) throws SQLException
+    public void addExpense( ExpenseVo ev ) throws SQLException
     {
         PreparedStatement stmt = null;
         try
@@ -66,7 +78,7 @@ public class KakeiboDao extends Dao
 
     //-------------------------------------------------------
     // 会員取得
-    public void updateExpense( KakeiboVo ev ) throws SQLException
+    public void updateExpense( ExpenseVo ev ) throws SQLException
     {
         PreparedStatement stmt = null;
         try
@@ -91,7 +103,7 @@ public class KakeiboDao extends Dao
         }
     }
 
-    public void deleteExpense( KakeiboVo ev ) throws SQLException
+    public void deleteExpense( ExpenseVo ev ) throws SQLException
     {
         PreparedStatement stmt = null;
 
@@ -109,6 +121,42 @@ public class KakeiboDao extends Dao
         catch ( SQLException e )
         {
             throw e;
+        }
+    }
+
+    public ArrayList<ExpenseVo> getAllSumOfDay(Calendar calendar, String userId) throws SQLException{
+        PreparedStatement stmt = null;
+        ResultSet rset = null;
+
+        Calendar lastDay = (Calendar)calendar.clone();
+        lastDay.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
+        String startDayStr =
+                calendar.get(Calendar.YEAR) + "-" +
+                (calendar.get(Calendar.MONTH) + 1) + "-" +
+                calendar.get(Calendar.DATE);
+        String endDayStr =
+                lastDay.get(Calendar.YEAR) + "-" +
+                (lastDay.get(Calendar.MONTH) + 1) + "-" +
+                lastDay.get(Calendar.DATE);
+
+        try {
+            stmt = con.prepareStatement(SELECT_ALL);
+            stmt.setString(1, userId);
+            stmt.setString(2, startDayStr);
+            stmt.setString(3, endDayStr);
+
+            rset = stmt.executeQuery();
+
+            ArrayList<ExpenseVo> expenseList = new ArrayList();
+            while(rset.next()) {
+            	ExpenseVo ev = new ExpenseVo();
+            	ev.setExpenseId(rset.getInt(1));
+            	
+            }
+            return expenseList;
+        }
+        catch(SQLException ex) {
+            throw ex;
         }
     }
 }

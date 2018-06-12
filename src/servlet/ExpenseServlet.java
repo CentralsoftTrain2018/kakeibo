@@ -38,9 +38,7 @@ public class ExpenseServlet extends HttpServlet {
 
         ExpenseBean eb = new ExpenseBean();
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.MONTH, 7);
         Calendar firstDayCalendar = Calendar.getInstance();
-        firstDayCalendar.set(Calendar.MONTH, 7);
         firstDayCalendar.set(Calendar.DATE, 1);
         Date date = new Date();
         date = calendar.getTime();

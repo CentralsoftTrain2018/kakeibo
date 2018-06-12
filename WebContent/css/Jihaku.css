@@ -1,23 +1,23 @@
 .Jihaku {
-   position:  absolute;
-   top:250;
+  position: absolute;
+  top: 250;
   display: inline-block;
-   margin: 1.5em 15px 1.5em 0;
+  margin: 1.5em 15px 1.5em 0;
   padding: 7px 10px;
   min-width: 120px;
-   max-width: 100%;
-   color: #ffffff;
+  max-width: 100%;
+  color: #ffffff;
   font-size: 16px;
   background: #000000;
   border-radius: 10px;
 }
 
-.Jihaku:before{
+.Jihaku:before {
   content: "";
   position: absolute;
   top: 50%;
   left: 100%;
-   margin-top: -15px;
+  margin-top: -15px;
   border: 15px solid transparent;
   border-left: 15px solid #000000;
 }
@@ -25,15 +25,10 @@
 .Jihaku p {
   margin: 0;
   padding: 0;
-  font-size:20px
+  font-size: 20px;
 }
 
-.hannin1 {
+.hannin {
   position: relative;
-  text-align:right;
-  max-width: 100%;
-  height: auto;
-
+  left: 460px;
 }
-
-
