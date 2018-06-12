@@ -52,17 +52,8 @@
   right: 30%;
   top:<%=bean.getJumperDispPosition()+30%>%;">
 
+
    <form method="POST" action="<%=bean.getAdovicePage()%>">
-
-  <%if(bean.isGameoverflg()){ %>
-   <input type="image" src="<%=bean.getButtonImage() %>"
-   style="
-   position: absolute;
-   right:30%;
-   top:30%;
-   ">
-   <%} %>
-
   <%if(bean.isMonthfinflg()){ %>
    <input type="image" src="<%=bean.getButtonImage() %>"
    style="
