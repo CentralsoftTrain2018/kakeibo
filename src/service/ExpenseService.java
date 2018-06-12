@@ -3,6 +3,7 @@ package service;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import bean.BungyBean;
 import bean.ExpenseBean;
@@ -72,8 +73,22 @@ public class ExpenseService
     }
 
     public static ExpenseBean getExpensesOfDay() {
-        ExpenseBean ev = new ExpenseBean();
-        return null;
+        ExpenseBean eb = new ExpenseBean();
+
+        List<ExpenseVo> expenseOfDayList = new ArrayList<>();
+
+        for(int i = 0; i < 10; i++) {
+            ExpenseVo ev = new ExpenseVo();
+            ev.setExpenseKingaku(100);
+            ev.setExpenseName("banana");
+            ev.setCategoryId(1);
+
+            //ExpenseVo ev = ExpenseDBManager.getExpenseOfDay(date, userId);
+
+            eb.getExpenseOfDay().add(ev);
+        }
+
+        return eb;
     }
 
 }
