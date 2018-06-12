@@ -1,7 +1,6 @@
 package dbmanager;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -16,11 +15,11 @@ public class AdviceDBManager {
      /**
        * selectConanAdvice
        * アドバイス（コナン）に必要なやつを取ってくる
-       * @param month 年月
+       * @param nengetsu 年月
        * @param userId ユーザーID
        * @return カテゴリごとの名前、目標-支出合計が格納されたAdviceVo型のリスト
        */
-    public static List<AdviceVo> selectConanAdvice(String month, String userId) {
+    public static List<AdviceVo> selectConanAdvice(String nengetsu, String userId) {
 
         try
         (
@@ -29,7 +28,7 @@ public class AdviceDBManager {
         {
 
             ConanDao cdao = new ConanDao(con);
-            List<AdviceVo> list = cdao.getAdvice(month, userId);
+            List<AdviceVo> list = cdao.getAdvice(nengetsu, userId);
            return list;
         }
         catch(SQLException e)
@@ -40,7 +39,7 @@ public class AdviceDBManager {
     }
 
     //アドバイス(自白)に必要なデータを取得する
-    public static List<AdviceVo> selectJihakuAdvice(Date date, String userId) {
+    public static List<AdviceVo> selectJihakuAdvice(String date, String userId) {
         try
         (
             Connection con = PoolConnection.getConnection();

@@ -1,6 +1,5 @@
 package service;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,10 +16,11 @@ public class AdviceService
 {
 
     //AdviceVo型のListをConanBean型のListに変換
-    public JihakuListBean jihaku( Date date, String userId )
+    public JihakuListBean jihaku( String date, String userId )
     {
         List<AdviceVo> resultList = AdviceDBManager.selectJihakuAdvice( date, userId );
         JihakuListBean jlb = new JihakuListBean();
+        List<JihakuBean> list = new ArrayList<JihakuBean>();
 
         //現在の月を取得（2018/05）
         jlb.setNengetsu( getNengetsu() );
@@ -32,9 +32,9 @@ public class AdviceService
             jb.setCategoryname( av.getCategoryName() );
             jb.setExcess( av.getDifference() );
 
-            jlb.getJihakulist().add( jb );
+            list.add( jb );
         }
-
+        jlb.setJihakulist( list );
         return jlb;
     }
 
@@ -44,7 +44,6 @@ public class AdviceService
      * @param userId ユーザーID
      * @return ConanListBean
      */
-
     public static ConanListBean selectConanAdvice( String userId )
     {
         ConanListBean clb = new ConanListBean();

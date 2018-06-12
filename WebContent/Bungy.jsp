@@ -50,9 +50,11 @@
   width: 100px;
   height: 100px;
   right: 30%;
+
   top:<%=bean.getJumperDispPosition()+30%>%;">
 
 <form method="POST" action="<%=bean.getAdovicePage()%>">
+
   <%if(bean.isMonthfinflg()){ %>
    <input type="image" src="<%=bean.getButtonImage() %>"
    style="
@@ -61,7 +63,9 @@
    top:30%;
    ">
    <%} %>
+
 </form>
+
  </div>
 
 <form  method="POST" action="BungyServlet">

@@ -1,17 +1,19 @@
 package service;
 
 import java.sql.Date;
+import java.util.Calendar;
 
 import bean.BungyBean;
+import bean.ExpenseBean;
 import dbmanager.ExpenseDBManager;
 import vo.BungyVo;
-import vo.KakeiboVo;
+import vo.ExpenseVo;
 
 public class ExpenseService
 {
     public static void addExpense( int kingaku, int categoryId, String expenseName, String userId )
     {
-        KakeiboVo ev = new KakeiboVo();
+        ExpenseVo ev = new ExpenseVo();
         ev.setExpenseKingaku( kingaku );
         ev.setCategoryId( categoryId );
         ev.setExpenseName( expenseName );
@@ -23,7 +25,7 @@ public class ExpenseService
 
     public static void updateExpense( int expenseId, int kingaku, int categoryId, String expenseName )
     {
-        KakeiboVo ev = new KakeiboVo();
+        ExpenseVo ev = new ExpenseVo();
         ev.setExpenseId( expenseId );
         ev.setExpenseKingaku( kingaku );
         ev.setCategoryId( categoryId );
@@ -33,7 +35,7 @@ public class ExpenseService
 
     public static void deleteExpense( int expenseId )
     {
-        KakeiboVo ev = new KakeiboVo();
+        ExpenseVo ev = new ExpenseVo();
         ev.setExpenseId( expenseId );
         ExpenseDBManager.deleteExpense( ev );
     }
@@ -47,6 +49,11 @@ public class ExpenseService
         bb.setMonth( month );
 
         return bb;
+    }
+
+    public static ExpenseBean getAllSumOfDay(Calendar calendar, String userId) {
+        ExpenseBean ev = new ExpenseBean();
+        return null;
     }
 
 }
