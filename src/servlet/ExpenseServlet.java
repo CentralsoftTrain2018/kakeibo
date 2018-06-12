@@ -1,7 +1,8 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,12 +34,21 @@ public class ExpenseServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("KakeiboServletが実行されました。");
+        System.out.println("ExpenseServletが実行されました。");
 
         ExpenseBean eb = new ExpenseBean();
-        eb.setDate(new Date(new java.util.Date().getTime()));
-        eb.setEndDay(31);
-        eb.setStartDayOfTheWeek(3);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.MONTH, 7);
+        Calendar firstDayCalendar = Calendar.getInstance();
+        firstDayCalendar.set(Calendar.MONTH, 7);
+        firstDayCalendar.set(Calendar.DATE, 1);
+        Date date = new Date();
+        date = calendar.getTime();
+
+        System.out.println(date);
+        eb.setDate(calendar);
+        eb.setEndDay(calendar.getActualMaximum(Calendar.DATE));
+        eb.setStartDayOfTheWeek(firstDayCalendar.get(Calendar.DAY_OF_WEEK) - 1);
 
         String choice = request.getParameter("choice");
         if(choice == null) {
