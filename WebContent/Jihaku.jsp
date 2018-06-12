@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="Jihaku">
-  <p><%=bean.toString() +"目標を超えたから殺したんだ!!!"%></p>
+  <p><%=bean.toString()%>目標を超えたから殺したんだ!!!</p>
 </div>
 <div class="hannin1">
   <img src="image/hannin1.png">

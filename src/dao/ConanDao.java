@@ -51,7 +51,8 @@ public class ConanDao extends Dao
         ResultSet rset = null;
 
         try (
-                PreparedStatement stmt = con.prepareStatement( SELECT ); )
+                PreparedStatement stmt = con.prepareStatement( SELECT );
+                )
         {
             List<AdviceVo> list = new ArrayList<AdviceVo>();
 

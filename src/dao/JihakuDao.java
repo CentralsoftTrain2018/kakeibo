@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,13 +20,13 @@ public class JihakuDao extends Dao
             "            ,category as c " +
             "            ,mokuhyou as m " +
             "            WHERE " +
-            "            e.expenseDate BETWEEN '2018-5-01' AND '2018-5-31'" +
+            "            DATE_FORMAT(e.expenseDate, '%Y%m') = ?" +
             "            AND e.category_categoryId = c.categoryId" +
             "            AND e.user_userid = m.user_userid " +
             "            AND c.categoryId = m.category_categoryId" +
             "			 AND e.user_userid = ?" +
             "            GROUP BY e.category_categoryId" +
-            "			HAVING SUM(m.Kingaku) - SUM(e.Kingaku) < 0" +
+            "			 HAVING SUM(m.Kingaku) - SUM(e.Kingaku) < 0" +
             "            ORDER BY SUM(m.Kingaku) / Count(m.Kingaku) - SUM(e.Kingaku) ASC;";
 
     public JihakuDao( Connection con )
@@ -37,22 +36,19 @@ public class JihakuDao extends Dao
 
     //-------------------------------------------------------
     // カテゴリ名、支出合計、目標
-    public List<AdviceVo> JihakuAdvice( Date date, String userId ) throws SQLException
+    public List<AdviceVo> JihakuAdvice( String date, String userId ) throws SQLException
     {
 
         System.out.println( date.toString() );
-        PreparedStatement stmt = null;
         ResultSet rset = null;
 
-        try
+        try (
+                PreparedStatement stmt = con.prepareStatement( SELECT ); )
         {
             List<AdviceVo> list = new ArrayList<AdviceVo>();
 
-            /* Statementの作成 */
-            stmt = con.prepareStatement( SELECT );
-            //stmt.setString(1, date.toString().substring(7));
-            //stmt.setString(2, date.toString().substring(7));
-            stmt.setString( 1, userId );
+            stmt.setString( 1, date );
+            stmt.setString( 2, userId );
             /* SQL実行 */
             rset = stmt.executeQuery();
 
@@ -72,20 +68,6 @@ public class JihakuDao extends Dao
         catch ( SQLException e )
         {
             throw e;
-        } finally
-        {
-
-            if ( stmt != null )
-            {
-                stmt.close();
-                stmt = null;
-            }
-            if ( rset != null )
-            {
-                rset.close();
-                rset = null;
-            }
         }
-
     }
 }

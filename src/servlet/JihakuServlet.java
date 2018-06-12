@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,12 +32,9 @@ public class JihakuServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-        System.out.println("JihakuServlet実行");
-
         HttpSession session = request.getSession();
         String userId = (String)session.getAttribute("userId");
-        Date date = new Date(2018, 5, 21);
+        String date = "2018/05";
         AdviceService conan = new AdviceService();
         JihakuListBean bean = conan.jihaku(date, userId);
       //beanをリクエストにセット キー名は「bean」とする
