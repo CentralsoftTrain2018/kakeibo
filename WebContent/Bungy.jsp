@@ -50,10 +50,16 @@
   width: 100px;
   height: 100px;
   right: 30%;
+<<<<<<< HEAD
   top:<%=bean.getJumperDispPosition()+30%>%;"
   >
    <form method="POST" action="<%=bean.getAdovicePage()%>">
-  <%if(bean.isMonthfinflg()){ %>
+=======
+  top:<%=bean.getJumperDispPosition()+30%>%;">
+
+   <form method="POST" action="<%=bean.getAdovicePage()%>">
+
+  <%if(bean.isGameoverflg()){ %>
    <input type="image" src="<%=bean.getButtonImage() %>"
    style="
    position: absolute;
@@ -63,6 +69,23 @@
    <%} %>
  </form>
 
+
+
+
+>>>>>>> refs/remotes/origin/master
+  <%if(bean.isMonthfinflg()){ %>
+   <input type="image" src="<%=bean.getButtonImage() %>"
+   style="
+   position: absolute;
+   right:30%;
+   top:30%;
+   ">
+   <%} %>
+ </form>
+<<<<<<< HEAD
+
+=======
+>>>>>>> refs/remotes/origin/master
  </div>
 
 <form  method="POST" action="BungyServlet">
