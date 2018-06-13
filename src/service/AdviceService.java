@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import bean.BunsekiListBean;
 import bean.ConanBean;
 import bean.ConanListBean;
 import bean.JihakuBean;
@@ -88,5 +89,16 @@ public class AdviceService
         Calendar calendar = Calendar.getInstance();
         String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
         return nengetsu;
+    }
+    public static BunsekiListBean selectBunseki(String userId)
+    {
+        BunsekiListBean blb=new BunsekiListBean();
+
+        //現在の年月を取得
+        Calendar calendar = Calendar.getInstance();
+        calendar.add( Calendar.MONTH, -1 );
+        String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
+
+        return blb;
     }
 }

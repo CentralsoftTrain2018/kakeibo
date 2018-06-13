@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import bean.BunsekiBean;
 import dao.ConanDao;
 import dao.JihakuDao;
 import vo.AdviceVo;
@@ -96,5 +97,9 @@ public class AdviceDBManager {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+    public static List<BunsekiBean> selectBunseki()
+    {
+        return null;
     }
 }

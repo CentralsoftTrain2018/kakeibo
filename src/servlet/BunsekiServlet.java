@@ -22,9 +22,11 @@ public class BunsekiServlet extends HttpServlet
         super();
     }
 
+
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException
     {
+
         RequestDispatcher disp = request.getRequestDispatcher( "/Bunseki.jsp" );
         disp.forward( request, response );
     }

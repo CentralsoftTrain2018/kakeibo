@@ -22,9 +22,11 @@
   <form method="POST" action="ConanServlet">
     <input type="submit" value="Conan">
   </form>
+
   <form method="POST" action="JihakuServlet">
     <input type="submit" value="jihaku">
   </form>
+
   <form method="POST" action="ExpenseServlet">
     <input type="submit" value="Expense">
   </form>
