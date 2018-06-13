@@ -22,19 +22,9 @@
   <form method="POST" action="ConanServlet">
     <input type="submit" value="Conan">
   </form>
-<<<<<<< HEAD
   <form method="POST" action="JihakuServlet">
     <input type="submit" value="jihaku">
-=======
-  <form method="POST" action="JihakuServlet">
-    <input type="submit" value="jihaku">
->>>>>>> refs/remotes/origin/master
   </form>
-<<<<<<< HEAD
-
-=======
-
->>>>>>> refs/remotes/origin/master
   <form method="POST" action="ExpenseServlet">
     <input type="submit" value="Expense">
   </form>
