@@ -1,19 +1,27 @@
 package dbmanager;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
+import bean.BunsekiBean;
 import dao.ConanDao;
 import dao.JihakuDao;
 import vo.AdviceVo;
-
+/**
+* アドバイス機能のマネージャー
+* コナン・自白の２機能の処理を行う
+*/
 public class AdviceDBManager {
-
-    //アドバイス（コナン）に必要なやつを取ってくる
-    public static List<AdviceVo> selectConanAdvice(int month) {
-
+     /**
+       * selectConanAdvice
+       * アドバイス（コナン）に必要なやつを取ってくる
+       * @param nengetsu 年月
+       * @param userId ユーザーID
+       * @return カテゴリごとの名前、目標-支出合計が格納されたAdviceVo型のリスト
+       */
+    public static List<AdviceVo> selectConanAdvice(String nengetsu, String userId)
+    {
 
         try
         (
@@ -22,7 +30,7 @@ public class AdviceDBManager {
         {
 
             ConanDao cdao = new ConanDao(con);
-            List<AdviceVo> list = cdao.getAdvice(month);
+            List<AdviceVo> list = cdao.getAdvice(nengetsu, userId);
            return list;
         }
         catch(SQLException e)
@@ -33,7 +41,8 @@ public class AdviceDBManager {
     }
 
     //アドバイス(自白)に必要なデータを取得する
-    public static List<AdviceVo> selectJihakuAdvice(Date date, String userId) {
+    public static List<AdviceVo> selectJihakuAdvice(String date, String userId)
+    {
         try
         (
             Connection con = PoolConnection.getConnection();
@@ -50,5 +59,47 @@ public class AdviceDBManager {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+    public static int sumGoukei(String date, String userId)
+    {
+        try
+        (
+            Connection con = PoolConnection.getConnection();
+        )
+        {
+
+            JihakuDao jdao = new JihakuDao(con);
+            int goukei = jdao.JihakuGoukei(date, userId) /**jdao.jihakuAdvice()**/;
+            return goukei;
+
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+    public static int sumMokuhyou(String date, String userId)
+    {
+        try
+        (
+            Connection con = PoolConnection.getConnection();
+        )
+        {
+
+            JihakuDao jdao = new JihakuDao(con);
+            int mokuhyou = jdao.JihakuMokuhyou(date, userId) /**jdao.jihakuAdvice()**/;
+            return mokuhyou;
+
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+    public static List<BunsekiBean> selectBunseki()
+    {
+        return null;
     }
 }

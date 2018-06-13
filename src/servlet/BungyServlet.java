@@ -9,11 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.BungyBean;
 import exception.IllegalNumberException;
 import service.ExpenseService;
-import vo.BungyVo;
 
 
 
@@ -40,14 +40,17 @@ public class BungyServlet extends HttpServlet
             int shisyutu = Integer.parseInt(shisyutuStr);
             int date = Integer.parseInt(dateStr);
             **/
+            HttpSession session = request.getSession();
+            String userId = (String)session.getAttribute("userId");
+            String nengetu=new String(request.getParameter("nengetu").getBytes("iso-8859-1"),"UTF-8");
+            //String nengetu=request.getParameter("nengetu");
+            bb = ExpenseService.getMokuhyouAndExpenses(userId,nengetu);
 
-            BungyVo bv = ExpenseService.getMokuhyouAndExpenses("aaa", "201810");
 
-
-            if(bv.getMokuhyou() < 0) {
+            if(bb.getMokuhyou() < 0) {
                 throw new IllegalNumberException();
             }
-            if(bv.getTotalexpenses() < 0) {
+            if(bb.getSisyutu() < 0) {
                 throw new IllegalNumberException();
             }
             /**
@@ -55,11 +58,6 @@ public class BungyServlet extends HttpServlet
                 throw new IllegalNumberException();
             }
             **/
-
-            bb.setMokuhyou(bv.getMokuhyou());
-            bb.setSisyutu(bv.getTotalexpenses());
-            bb.setMonth("201810");
-
             request.setAttribute("bean", bb);
             RequestDispatcher disp = request.getRequestDispatcher("/Bungy.jsp");
             disp.forward(request, response);

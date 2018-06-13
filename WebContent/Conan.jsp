@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="css/balloon.css">
+<link rel="stylesheet" type="text/css" href="css/Conan.css">
 <title>コナンくんからのアドバイス</title>
 </head>
 <body>
@@ -15,24 +15,31 @@
     君のおかげで犯人を逮捕することができたよ！<br>
 
     <%
-      for (bean.ConanBean cb : bean.getList()) {
+      for ( bean.ConanBean cb : bean.getList() )
+      {
     %>
     <%
-        if (cb.getDifference() > 0) {
+      if ( cb.getDifference() > 0 )
+        {
     %>
-    <%=cb.getCategoryName()%>は目標より<%=cb.getDifference() %>円節約できたよ。やったね！<br>
+    <%=cb.getCategoryName()%>は目標より<%=cb.getDifference()%>円節約できたよ。やったね！<br>
     <%
-      } else {
+      } else
+        {
     %>
-    <%=cb.getCategoryName()%>は目標より<%=cb.getDifference()* -1 %>円オーバーだよ。気をつけよう！<br>
+    <%=cb.getCategoryName()%>は目標より<%=cb.getDifference() * -1%>円オーバーだよ。気をつけよう！<br>
     <%
       }
     %>
     <%
       }
     %>
-    来月もがんばろう！<br><br>
-    <a href="BungyServlet">TOPに戻る</a>
+    来月もがんばろう！<br>
+    <br>
+    <form method="POST" action="BungyServlet">
+      <input type="hidden" name="nengetu" value=<%=bean.getNengetsu() %>><br>
+      <input type="submit" value="TOPにもどる"><br>
+  </form>
   </div>
 </body>
 </html>

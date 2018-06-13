@@ -1,15 +1,17 @@
 @charset "UTF-8";
 /* 吹き出し本体 */
-.balloon{
+.balloon {
   position: relative;
   padding: 20px;
   background-color: #fff5cc;
   border: 2px solid #ffdb4f;
   display: inline-block;
+  top: 20px;
+  font-size: 20px
 }
 
 /* アイコンを左に表示 */
-.balloon::before{
+.balloon::before {
   content: '';
   position: absolute;
   display: block;
@@ -21,7 +23,8 @@
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
 }
-.balloon::after{
+
+.balloon::after {
   content: '';
   position: absolute;
   display: block;

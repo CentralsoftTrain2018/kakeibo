@@ -4,7 +4,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
 <title>WindowTest</title>
 </head>
 <body>
@@ -12,7 +11,7 @@
 <%= bean.getMessage() %><br>
 <%} %>
 <form  method="POST" action="LoginServlet">
-  ユーザーID<input type="text" name="userId"><br>
+  ユーザーID<input type="text" name="userId" value="test"><br>
   <input type="submit" value="ログイン"><br>
 </form>
 </body>

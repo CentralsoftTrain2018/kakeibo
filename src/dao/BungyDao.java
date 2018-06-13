@@ -7,12 +7,12 @@ import java.sql.SQLException;
 
 import vo.BungyVo;
 
-public class BungyDao {
-    Connection con;
+public class BungyDao extends Dao
+{
 
     private static final String GETDATA = "SELECT "
+            + " totalexpenses ,"
             + " mokuhyou "
-            + " totalexpenses "
             + " FROM "
             + " history "
             + " WHERE "
@@ -20,39 +20,46 @@ public class BungyDao {
             + " = ? "
             + " and "
             + " month "
-            + " = ? "
-;
+            + " = ? ";
 
-    public BungyDao(Connection con) {
-        this.con = con;
+    public BungyDao( Connection con )
+    {
+        super( con );
     }
 
     //-------------------------------------------------------
     // カテゴリ名、支出合計、目標
 
-    public BungyVo getMokuhyouAndExpenses (String userid, String month) throws SQLException {
+    public BungyVo getMokuhyouAndExpenses( String userid, String month ) throws SQLException
+    {
 
-        try
-        (
-            PreparedStatement stmt = con.prepareStatement(GETDATA);
-        )
+        try (
+                PreparedStatement stmt = con.prepareStatement( GETDATA ); )
         {
             ResultSet rset = null;
             BungyVo bv = new BungyVo();
 
             /* Statementの作成 */
 
-            stmt.setString(1, userid);
-            stmt.setString(2, month);
+            stmt.setString( 1, userid );
+            stmt.setString( 2, month );
 
             /* SQL実行 */
+
             rset = stmt.executeQuery();
-            bv.setMokuhyou(rset.getInt(1));
-            bv.setTotalexpenses(rset.getInt(2));
+
+            while ( rset.next() )
+
+            {
+                bv.setTotalexpenses( rset.getInt( 1 ) );
+                bv.setMokuhyou( rset.getInt( 2 ) );
+            }
+
+
+
+            //github.com/CentralsoftTrain2018/kakeibo
 
             /* 取得したデータを表示します。 */
-
-
             return bv;
         }
 

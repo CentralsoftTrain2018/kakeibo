@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,21 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.KakeiboBean;
+import bean.ExpenseBean;
 import exception.NoTextException;
 import service.ExpenseService;
 
 /**
  * Servlet implementation class IndexStartServlet
  */
-@WebServlet("/KakeiboServlet")
-public class KakeiboServlet extends HttpServlet {
+@WebServlet("/ExpenseServlet")
+public class ExpenseServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public KakeiboServlet() {
+    public ExpenseServlet() {
         super();
     }
 
@@ -32,18 +33,37 @@ public class KakeiboServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("KakeiboServletが実行されました。");
+        System.out.println("ExpenseServletが実行されました。");
 
-        KakeiboBean kb = new KakeiboBean();
         String choice = request.getParameter("choice");
-
+        System.out.println(choice + "が実行されました");
+        if(choice == null) {
+            choice = "";
+        }
         String expenseIdStr = request.getParameter("expenseId");
         String kingakuStr = request.getParameter("kingaku");
         String categoryIdStr = request.getParameter("categoryId");
         String expenseName = request.getParameter("expenseName");
         HttpSession session = request.getSession();
         String userId = (String)session.getAttribute("userId");
+        String year = request.getParameter("year");
+        String month = request.getParameter("month");
 
+        Calendar calendar = Calendar.getInstance();
+        if(year != null && month != null) {
+            calendar.set(Calendar.YEAR, Integer.parseInt(year));
+            calendar.set(Calendar.MONTH, Integer.parseInt(month));
+        }
+        calendar.set(Calendar.DATE, 1);
+        ExpenseBean eb = ExpenseService.getAllSumOfDay(calendar, userId);
+        eb.setStartDayOfTheWeek(calendar.get(Calendar.DAY_OF_WEEK));
+        calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
+        eb.setEndDay(calendar.get(Calendar.DATE));
+        eb.setDate(calendar);
+
+        System.out.println( eb.getDate().get( Calendar.YEAR ));
+        System.out.println( eb.getDate().get( Calendar.MONTH ));
+        eb = ExpenseService.getCategory();
         if(choice.equals("touroku")) {
             try {
                 int kingaku = Integer.parseInt(kingakuStr);
@@ -52,10 +72,12 @@ public class KakeiboServlet extends HttpServlet {
                     throw new NoTextException();
                 }
                 ExpenseService.addExpense(kingaku, categoryId, expenseName, userId);
+                //ExpenseService.addExpense(100, 1, "ninjin", userId);
             }
             catch(NumberFormatException | NoTextException e) {
-                kb.setMessage("入力が不正です");
+                eb.setMessage("入力が不正です");
             }
+
         }
 
         if(choice.equals("henkou")) {
@@ -69,7 +91,7 @@ public class KakeiboServlet extends HttpServlet {
                 ExpenseService.updateExpense(expenseId, kingaku, categoryId, expenseName);
             }
             catch(NumberFormatException | NoTextException e) {
-                kb.setMessage("入力が不正です");
+                eb.setMessage("入力が不正です");
             }
         }
 
@@ -79,12 +101,12 @@ public class KakeiboServlet extends HttpServlet {
                 ExpenseService.deleteExpense(expenseId);
             }
             catch(NumberFormatException e) {
-                kb.setMessage("入力が不正です");
+                eb.setMessage("入力が不正です");
             }
         }
         //JSPに遷移する
-        request.setAttribute("bean", kb);
-        RequestDispatcher disp = request.getRequestDispatcher("Kakeibo.jsp");
+        request.setAttribute("bean", eb);
+        RequestDispatcher disp = request.getRequestDispatcher("Expense.jsp");
         disp.forward(request, response);
     }
 
