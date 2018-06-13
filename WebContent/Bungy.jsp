@@ -83,6 +83,5 @@
       }
     %>
   </form>
->>>>>>> branch 'master' of https://github.com/CentralsoftTrain2018/kakeibo
 </body>
 </html>
