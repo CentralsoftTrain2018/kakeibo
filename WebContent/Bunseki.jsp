@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-
     pageEncoding="UTF-8" %>
 <jsp:useBean id="bean" class="bean.BunsekiListBean" scope="request" />
 
@@ -24,9 +23,25 @@
     </form>
   </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<div style="width: 400px; height: 371px; margin-bottom: 0px; padding-bottom: 0px; position: relative;">
 <canvas id="newcanvas"
-  style="width: 800px;
-  height: 742px;"></canvas>
+  style="width: 100%; height: 100%;"
+  ></canvas>
+  <p
+   style=" position: absolute;
+   top: 0;
+   left: 0;
+   margin: auto;
+   right: 0;
+   margin: auto;
+   text-align: center;
+   top: 50%;
+   -webkit-transform: translateY(-50%);
+   transform: translateY(-50%);
+   ">
+   合計金額<br>
+   <%=bean.getSumSpending() %></p>
+</div>
 <script >
 var data = [
   <%

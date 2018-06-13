@@ -6,10 +6,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.qrcode.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/menu.css">
 <title>家計簿</title>
 </head>
 <body>
+  <div id="qrcode"></div>
+    <script>
+      jQuery('#qrcode').qrcode("I am Ochi Yosuke!!");
+    </script>
   <div class="menu">
     <form method="POST" action="BungyServlet">
       <input type="hidden" name="nengetu" value="2018/05"> <input
@@ -25,6 +31,7 @@
 <%if(bean.getMessage() != null){%>
 <%= bean.getMessage() %><br>
 <%} %>
+<div id="qrcode"></div>
 入力してね<br>
 <form  method="POST" action="ExpenseServlet">
   支出ID<input type="text" name="expenseId"><br>

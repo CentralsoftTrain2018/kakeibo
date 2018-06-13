@@ -73,12 +73,12 @@ public class ExpenseService
         return eb;
     }
 
-    public static ExpenseBean getExpensesOfDay() {
+    public static ExpenseBean getExpensesOfDay(Date date, String userId) {
 
         ExpenseBean eb = new ExpenseBean();
-        List<CategoryVo> list = new ArrayList<CategoryVo>();
+        List<ExpenseVo> expenseOfDayList = new ArrayList<ExpenseVo>();
 
-        List<ExpenseVo> expenseOfDayList = new ArrayList<>();
+        //List<ExpenseVo> expenseOfDayList = ExpenseDBManager.getExpenseOfDay(date, userId);
 
         for(int i = 0; i < 10; i++) {
             ExpenseVo ev = new ExpenseVo();
@@ -86,10 +86,10 @@ public class ExpenseService
             ev.setExpenseName("banana");
             ev.setCategoryId(1);
 
-            //ExpenseVo ev = ExpenseDBManager.getExpenseOfDay(date, userId);
-
-            eb.getExpenseOfDay().add(ev);
+            expenseOfDayList.add(ev);
         }
+
+        eb.setExpenseOfDay(expenseOfDayList);
 
         return eb;
     }
