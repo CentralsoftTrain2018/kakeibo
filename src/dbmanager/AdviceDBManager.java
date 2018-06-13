@@ -99,7 +99,7 @@ public class AdviceDBManager {
             throw new RuntimeException(e);
         }
     }
-    public static List<BunsekiVo> selectBunseki( String nengetsu, String userId )
+    public static List<BunsekiVo> selectBunseki( String nengetsu,String userId )
     {
         try
         (
@@ -108,8 +108,8 @@ public class AdviceDBManager {
         {
 
             BunsekiDao bdao = new BunsekiDao(con);
-            List<BunsekiVo> list = bdao.getBunseki(nengetsu, userId);
-           return list;
+            List<BunsekiVo> list = bdao.getBunseki( nengetsu, userId );
+            return list;
         }
         catch(SQLException e)
         {

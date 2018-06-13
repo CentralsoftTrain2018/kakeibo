@@ -24,6 +24,27 @@
     </form>
   </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<form method="POST" action="BunsekiServlet">
+<select name="year">
+<option value="2017">2017</option>
+<option value="2018" selected>2018</option>
+</select>
+<select name="month">
+<option value="0">1</option>
+<option value="1">2</option>
+<option value="2">3</option>
+<option value="3">4</option>
+<option value="4">5</option>
+<option value="5">6</option>
+<option value="6">7</option>
+<option value="7">8</option>
+<option value="8">9</option>
+<option value="9">10</option>
+<option value="10">11</option>
+<option value="11">12</option>
+</select>
+<input type="submit" value="年月変更">
+</form>
 <div style="width: 400px; height: 371px; margin-bottom: 0px; padding-bottom: 0px; position: relative;">
 <canvas id="newcanvas"
   style="width: 100%; height: 100%;"

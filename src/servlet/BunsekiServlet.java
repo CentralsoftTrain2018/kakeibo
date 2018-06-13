@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,13 +33,28 @@ public class BunsekiServlet extends HttpServlet
     {
         HttpSession session = request.getSession();
         String userId = ( String ) session.getAttribute( "userId" );
+        String year = request.getParameter("year");
+        String month = request.getParameter("month");
 
-        BunsekiListBean bean=AdviceService.selectBunseki( userId );
+        BunsekiListBean bean=chengeServiceMesod(year,month,userId);
 
         request.setAttribute( "bean", bean );
 
         RequestDispatcher disp = request.getRequestDispatcher( "/Bunseki.jsp" );
         disp.forward( request, response );
+    }
+
+    private BunsekiListBean chengeServiceMesod(String year,String month,String userId)
+    {
+        Calendar calendar = Calendar.getInstance();
+        if(year != null && month != null) {
+            calendar.set(Calendar.YEAR, Integer.parseInt(year));
+            calendar.set(Calendar.MONTH, Integer.parseInt(month));
+            return AdviceService.selectBunseki( userId,calendar );
+        }
+
+        return AdviceService.selectBunseki( userId );
+
     }
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )

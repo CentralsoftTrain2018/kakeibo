@@ -35,7 +35,7 @@ public class BunsekiDao extends Dao{
         super( con );
     }
 
-    public List<BunsekiVo> getBunseki( String month, String userId ) throws SQLException
+    public List<BunsekiVo> getBunseki( String month,String userId ) throws SQLException
     {
 
         ResultSet rset = null;
@@ -46,9 +46,12 @@ public class BunsekiDao extends Dao{
         {
             List<BunsekiVo> list = new ArrayList<BunsekiVo>();
 
-            String testMonth = "201805";
+            String[] YearAndMonth = month.split("/");
+            String expensesMonth=YearAndMonth[0]+YearAndMonth[1];
+
+            //String testMonth = "201805";
             /* Statementの作成 */
-            stmt.setString( 1, testMonth );
+            stmt.setString( 1, expensesMonth );
             stmt.setString( 2, month );
             stmt.setString( 3, userId );
 
