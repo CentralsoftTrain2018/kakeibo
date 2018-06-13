@@ -48,16 +48,16 @@ public class BungyBean {
         int hanninIchi=getHanninIchi();
 
         //表示されている画像に合わせて表示位置を調整する
-        double yoko=getHanninIchi()%19.0/19.0*15.0;
+        double yoko=getHanninIchi()%19.0/19.0*12.0;
         if((hanninIchi>=0&&hanninIchi<19)||(hanninIchi>=38&&hanninIchi<57))
         {
-            return 15-(int)yoko;
+            return 12-(int)yoko;
         }
 
         //犯人の表示位置（高さ）が７５％を超えた場合、特定位置までの横移動に切り替える
         if(hanninIchi>=75)
         {
-            int specialYoko=(int)((((double)sisyutu/(double)mokuhyou*100.0-75.0)/25.0)*35.0)+15;
+            int specialYoko=(int)((((double)sisyutu/(double)mokuhyou*100.0-75.0)/25.0)*38.0)+12;
             if(specialYoko>=50)
             {
                 specialYoko=50;
@@ -97,15 +97,17 @@ public class BungyBean {
         //今日の日付を取得
         Calendar calendar = Calendar.getInstance();
         int today=calendar.get(Calendar.DATE);
-        int month=calendar.get(Calendar.MONTH);
+        int month=calendar.get(Calendar.MONTH)+1;
 
         //指定年月の日数を取得
         Calendar c = new GregorianCalendar(Integer.parseInt(YearAndMonth[0]),Integer.parseInt(YearAndMonth[1]),1);
         int days=c.getActualMaximum(Calendar.DAY_OF_MONTH);
 
+        int month2=Integer.parseInt(YearAndMonth[1]);
         //DBに記録されている月が現在の月と異なる場合フラグの切り替え
-        if(month!=Integer.parseInt(YearAndMonth[0]))
+        if(month!=month2)
         {
+
             monthfinflg=true;
         }
         return  (int)((double)today/(double)days*50.0);
