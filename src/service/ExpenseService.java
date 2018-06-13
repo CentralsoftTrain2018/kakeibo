@@ -74,8 +74,24 @@ public class ExpenseService
     }
 
     public static ExpenseBean getExpensesOfDay() {
-        ExpenseBean ev = new ExpenseBean();
-        return null;
+
+        ExpenseBean eb = new ExpenseBean();
+        List<CategoryVo> list = new ArrayList<CategoryVo>();
+
+        List<ExpenseVo> expenseOfDayList = new ArrayList<>();
+
+        for(int i = 0; i < 10; i++) {
+            ExpenseVo ev = new ExpenseVo();
+            ev.setExpenseKingaku(100);
+            ev.setExpenseName("banana");
+            ev.setCategoryId(1);
+
+            //ExpenseVo ev = ExpenseDBManager.getExpenseOfDay(date, userId);
+
+            eb.getExpenseOfDay().add(ev);
+        }
+
+        return eb;
     }
     /**
      * カテゴリの取得
@@ -85,7 +101,7 @@ public class ExpenseService
     {
         ExpenseBean eb = new ExpenseBean();
         List<CategoryVo> list = new ArrayList<CategoryVo>();
-        CategoryVo cv = new CategoryVo();
+        CategoryVo cv = new CategoryVo(1);
 
         cv.setCategoryid( 0 );
         cv.setCategoryname( "食費" );
