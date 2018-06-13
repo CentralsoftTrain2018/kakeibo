@@ -99,9 +99,7 @@ public class ExpenseService
      */
     public static List<CategoryVo> getCategory()
     {
-
         List<CategoryVo> list = new ArrayList<CategoryVo>();
-
         list = ExpenseDBManager.getCategory();
         return list;
     }
