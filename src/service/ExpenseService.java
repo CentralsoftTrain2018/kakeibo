@@ -94,22 +94,14 @@ public class ExpenseService
         return eb;
     }
     /**
-     * カテゴリの取得
+     * 取得したListをExpenseBeanにセット
      * @return
      */
     public static ExpenseBean getCategory()
     {
         ExpenseBean eb = new ExpenseBean();
         List<CategoryVo> list = new ArrayList<CategoryVo>();
-        CategoryVo cv = new CategoryVo(1);
-
-        cv.setCategoryid( 0 );
-        cv.setCategoryname( "食費" );
-        list.add( cv );
-        cv.setCategoryid( 1 );
-        cv.setCategoryname( "光熱費" );
-        list.add( cv );
-
+        list = ExpenseDBManager.getCategory();
         eb.setCategoryList( list );
         return eb;
     }
