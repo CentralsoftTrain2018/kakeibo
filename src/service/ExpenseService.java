@@ -99,11 +99,7 @@ public class ExpenseService
      */
     public static List<CategoryVo> getCategory()
     {
-<<<<<<< HEAD
-    	List<CategoryVo> list = new ArrayList<CategoryVo>();
-=======
         List<CategoryVo> list = new ArrayList<CategoryVo>();
->>>>>>> refs/remotes/origin/master
         list = ExpenseDBManager.getCategory();
         return list;
     }

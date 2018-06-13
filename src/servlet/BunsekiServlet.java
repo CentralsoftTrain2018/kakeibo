@@ -36,11 +36,7 @@ public class BunsekiServlet extends HttpServlet
         BunsekiListBean bean=AdviceService.selectBunseki( userId );
 
         request.setAttribute( "bean", bean );
-<<<<<<< HEAD
 
-=======
-
->>>>>>> refs/remotes/origin/master
         RequestDispatcher disp = request.getRequestDispatcher( "/Bunseki.jsp" );
         disp.forward( request, response );
     }
