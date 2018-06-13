@@ -99,7 +99,7 @@ public class ExpenseServlet extends HttpServlet {
         }
         calendar.set(Calendar.DATE, 1);
         eb = ExpenseService.getAllSumOfDay(calendar, userId);
-        eb.setStartDayOfTheWeek(calendar.get(Calendar.DAY_OF_WEEK));
+        eb.setStartDayOfTheWeek(calendar.get(Calendar.DAY_OF_WEEK) - 1);
         eb.setDate(calendar);
         calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
         eb.setEndDay(calendar.get(Calendar.DATE));

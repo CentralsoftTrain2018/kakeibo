@@ -35,7 +35,7 @@ public class BunsekiDao extends Dao{
         super( con );
     }
 
-    public List<BunsekiVo> getBunseki( String month, String userId ) throws SQLException
+    public List<BunsekiVo> getBunseki( String month,String userId ) throws SQLException
     {
 
         ResultSet rset = null;
