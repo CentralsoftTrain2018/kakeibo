@@ -97,12 +97,10 @@ public class ExpenseService
      * 取得したListをExpenseBeanにセット
      * @return
      */
-    public static ExpenseBean getCategory()
+    public static List<CategoryVo> getCategory()
     {
-        ExpenseBean eb = new ExpenseBean();
-        List<CategoryVo> list = new ArrayList<CategoryVo>();
+    	List<CategoryVo> list = new ArrayList<CategoryVo>();
         list = ExpenseDBManager.getCategory();
-        eb.setCategoryList( list );
-        return eb;
+        return list;
     }
 }

@@ -30,5 +30,9 @@
   <form method="POST" action="ExpenseServlet">
     <input type="submit" value="Expense">
   </form>
+
+  <form method="POST" action="BunsekiServlet">
+    <input type="submit" value="Bunseki">
+  </form>
 </body>
 </html>
