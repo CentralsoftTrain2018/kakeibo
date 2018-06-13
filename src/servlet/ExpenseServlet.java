@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.ExpenseBean;
-import dbmanager.ExpenseDBManager;
 import exception.NoTextException;
 import service.ExpenseService;
 import vo.CategoryVo;
@@ -105,7 +104,7 @@ public class ExpenseServlet extends HttpServlet {
         eb.setEndDay(calendar.get(Calendar.DATE));
 
         List<CategoryVo> list = new ArrayList<CategoryVo>();
-        list = ExpenseDBManager.getCategory();
+        list = ExpenseService.getCategory();
         eb.setCategoryList( list );
 
         //JSPに遷移する
