@@ -165,11 +165,7 @@
 <% }%>
     </select>
   </td>
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> refs/remotes/origin/master
   <td>
   <input type="text" name="expenseName">
   </td>

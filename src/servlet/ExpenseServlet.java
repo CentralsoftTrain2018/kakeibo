@@ -46,16 +46,16 @@ public class ExpenseServlet extends HttpServlet {
         String expenseIdStr = request.getParameter("expenseId");
         String kingakuStr = request.getParameter("kingaku");
         String categoryIdStr = request.getParameter("categoryId");
-        String expenseName = request.getParameter("expenseName");
+//        String expenseName = request.getParameter("expenseName");
         HttpSession session = request.getSession();
         String userId = (String)session.getAttribute("userId");
         String year = request.getParameter("year");
         String month = request.getParameter("month");
-
         if(choice.equals("touroku")) {
             try {
                 int kingaku = Integer.parseInt(kingakuStr);
                 int categoryId = Integer.parseInt(categoryIdStr);
+                String expenseName = new String(request.getParameter("expenseName").getBytes("iso-8859-1"), "UTF-8");
                 if(expenseName.equals("")) {
                     throw new NoTextException();
                 }
@@ -71,6 +71,7 @@ public class ExpenseServlet extends HttpServlet {
                 int expenseId = Integer.parseInt(expenseIdStr);
                 int kingaku = Integer.parseInt(kingakuStr);
                 int categoryId = Integer.parseInt(categoryIdStr);
+                String expenseName = new String(request.getParameter("expenseName").getBytes("iso-8859-1"), "UTF-8");
                 if(expenseName.equals("")) {
                     throw new NoTextException();
                 }
