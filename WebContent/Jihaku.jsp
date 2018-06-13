@@ -11,7 +11,7 @@
 <body>
   <div class="Jihaku">
     <p>
-       目標が<%=bean.getGoukei()%>円で<br>
+       目標が<%=bean.getMokuhyou()%>円で<br>
       <%int go = bean.getGoukei();
         int mo = bean.getMokuhyou();
         int sagaku = go - mo;%>
