@@ -35,8 +35,8 @@ public class ExpenseServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("ExpenseServletが実行されました。");
 
+        ExpenseBean eb = new ExpenseBean();
         String choice = request.getParameter("choice");
-        System.out.println(choice + "が実行されました");
         if(choice == null) {
             choice = "";
         }
@@ -49,21 +49,6 @@ public class ExpenseServlet extends HttpServlet {
         String year = request.getParameter("year");
         String month = request.getParameter("month");
 
-        Calendar calendar = Calendar.getInstance();
-        if(year != null && month != null) {
-            calendar.set(Calendar.YEAR, Integer.parseInt(year));
-            calendar.set(Calendar.MONTH, Integer.parseInt(month));
-        }
-        calendar.set(Calendar.DATE, 1);
-        ExpenseBean eb = ExpenseService.getAllSumOfDay(calendar, userId);
-        eb.setStartDayOfTheWeek(calendar.get(Calendar.DAY_OF_WEEK));
-        calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
-        eb.setEndDay(calendar.get(Calendar.DATE));
-        eb.setDate(calendar);
-
-        System.out.println( eb.getDate().get( Calendar.YEAR ));
-        System.out.println( eb.getDate().get( Calendar.MONTH ));
-        eb = ExpenseService.getCategory();
         if(choice.equals("touroku")) {
             try {
                 int kingaku = Integer.parseInt(kingakuStr);
@@ -72,12 +57,10 @@ public class ExpenseServlet extends HttpServlet {
                     throw new NoTextException();
                 }
                 ExpenseService.addExpense(kingaku, categoryId, expenseName, userId);
-                //ExpenseService.addExpense(100, 1, "ninjin", userId);
             }
             catch(NumberFormatException | NoTextException e) {
                 eb.setMessage("入力が不正です");
             }
-
         }
 
         if(choice.equals("henkou")) {
@@ -104,6 +87,19 @@ public class ExpenseServlet extends HttpServlet {
                 eb.setMessage("入力が不正です");
             }
         }
+
+        Calendar calendar = Calendar.getInstance();
+        if(year != null && month != null) {
+            calendar.set(Calendar.YEAR, Integer.parseInt(year));
+            calendar.set(Calendar.MONTH, Integer.parseInt(month));
+        }
+        calendar.set(Calendar.DATE, 1);
+        eb = ExpenseService.getAllSumOfDay(calendar, userId);
+        eb.setStartDayOfTheWeek(calendar.get(Calendar.DAY_OF_WEEK));
+        eb.setDate(calendar);
+        calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
+        eb.setEndDay(calendar.get(Calendar.DATE));
+
         //JSPに遷移する
         request.setAttribute("bean", eb);
         RequestDispatcher disp = request.getRequestDispatcher("Expense.jsp");
