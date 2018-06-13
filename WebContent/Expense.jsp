@@ -14,7 +14,7 @@
 <body>
   <div id="qrcode"></div>
     <script>
-      jQuery('#qrcode').qrcode("I am Ochi Yosuke!!");
+      jQuery('#qrcode').qrcode({text:"I am Ochi Yosuke!!", width:600, height:600,});
     </script>
   <div class="menu">
     <form method="POST" action="BungyServlet">
