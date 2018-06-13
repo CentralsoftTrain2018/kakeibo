@@ -35,6 +35,7 @@ public class ExpenseServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("ExpenseServletが実行されました。");
 
+        ExpenseBean eb = new ExpenseBean();
         String choice = request.getParameter("choice");
         if(choice == null) {
             choice = "";
@@ -45,13 +46,8 @@ public class ExpenseServlet extends HttpServlet {
         String expenseName = request.getParameter("expenseName");
         HttpSession session = request.getSession();
         String userId = (String)session.getAttribute("userId");
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DATE, 1);
-        ExpenseBean eb = ExpenseService.getAllSumOfDay(calendar, userId);
-        eb.setStartDayOfTheWeek(calendar.get(Calendar.DAY_OF_WEEK));
-        calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
-        eb.setEndDay(calendar.get(Calendar.DATE));
+        String year = request.getParameter("year");
+        String month = request.getParameter("month");
 
         if(choice.equals("touroku")) {
             try {
@@ -91,6 +87,19 @@ public class ExpenseServlet extends HttpServlet {
                 eb.setMessage("入力が不正です");
             }
         }
+
+        Calendar calendar = Calendar.getInstance();
+        if(year != null && month != null) {
+            calendar.set(Calendar.YEAR, Integer.parseInt(year));
+            calendar.set(Calendar.MONTH, Integer.parseInt(month));
+        }
+        calendar.set(Calendar.DATE, 1);
+        eb = ExpenseService.getAllSumOfDay(calendar, userId);
+        eb.setStartDayOfTheWeek(calendar.get(Calendar.DAY_OF_WEEK));
+        eb.setDate(calendar);
+        calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
+        eb.setEndDay(calendar.get(Calendar.DATE));
+
         //JSPに遷移する
         request.setAttribute("bean", eb);
         RequestDispatcher disp = request.getRequestDispatcher("Expense.jsp");
