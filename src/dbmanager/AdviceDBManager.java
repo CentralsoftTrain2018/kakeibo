@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import bean.BunsekiBean;
+import dao.BunsekiDao;
 import dao.ConanDao;
 import dao.JihakuDao;
 import vo.AdviceVo;
+import vo.BunsekiVo;
 /**
 * アドバイス機能のマネージャー
 * コナン・自白の２機能の処理を行う
@@ -98,8 +99,22 @@ public class AdviceDBManager {
             throw new RuntimeException(e);
         }
     }
-    public static List<BunsekiBean> selectBunseki()
+    public static List<BunsekiVo> selectBunseki( String nengetsu, String userId )
     {
-        return null;
+        try
+        (
+            Connection con = PoolConnection.getConnection();
+        )
+        {
+
+            BunsekiDao bdao = new BunsekiDao(con);
+            List<BunsekiVo> list = bdao.getBunseki(nengetsu, userId);
+           return list;
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 }

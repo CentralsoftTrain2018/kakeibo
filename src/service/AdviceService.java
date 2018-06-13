@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import bean.BunsekiBean;
 import bean.BunsekiListBean;
 import bean.ConanBean;
 import bean.ConanListBean;
@@ -12,6 +13,7 @@ import bean.JihakuBean;
 import bean.JihakuListBean;
 import dbmanager.AdviceDBManager;
 import vo.AdviceVo;
+import vo.BunsekiVo;
 
 public class AdviceService
 {
@@ -98,6 +100,20 @@ public class AdviceService
         Calendar calendar = Calendar.getInstance();
         calendar.add( Calendar.MONTH, -1 );
         String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
+
+        List<BunsekiVo> bunsekiList=AdviceDBManager.selectBunseki(nengetsu, userId);
+
+        for ( BunsekiVo bv : bunsekiList )
+        {
+            BunsekiBean bb = new BunsekiBean();
+            bb.setCategoryName( bv.getCategoryName() );
+            bb.setDifference( bv.getDifference() );
+            bb.setMokuhyouKingaku( bv.getMokuhyouKingaku() );
+            bb.setSumSpending( bv.getSumSpending() );
+            bb.setColor("RED");
+
+            blb.addList(bb);
+        }
 
         return blb;
     }
