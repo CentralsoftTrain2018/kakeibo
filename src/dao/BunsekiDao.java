@@ -7,23 +7,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import vo.AdviceVo;
+import vo.BunsekiVo;
 
-/**
-* コナン機能のDao
-*/
-public class ConanDao extends Dao
-{
+public class BunsekiDao extends Dao{
 
     private static final String SELECT = "SELECT " +
             "categoryName " +
-            ",m.Kingaku - SUM(e.Kingaku) " +
+            ",m.Kingaku - SUM(e.Kingaku) "+
+            ",SUM(e.Kingaku) " +
+            ",m.Kingaku "+
             "FROM " +
             "kakeibo.expenses e " +
             ",kakeibo.category c " +
             ",kakeibo.mokuhyou m " +
             "WHERE " +
-            "DATE_FORMAT(e.expenseDate, '%Y/%m') = ? " +
+            "DATE_FORMAT(e.expenseDate, '%Y%m') = ? " +
             "AND m.Month = ? " +
             "AND e.category_categoryId = c.categoryId " +
             "AND e.user_userid = m.user_userid " +
@@ -32,20 +30,12 @@ public class ConanDao extends Dao
             "GROUP BY e.category_categoryId " +
             "ORDER BY m.Kingaku - SUM(e.Kingaku) DESC;";
 
-    public ConanDao( Connection con )
+    public BunsekiDao( Connection con )
     {
         super( con );
     }
 
-    /**
-     * getAdvice
-     * カテゴリ名、目標-支出合計
-     * @param month 年月
-     * @param userId ユーザーID
-     * @return カテゴリごとの名前、目標-支出合計が格納されたAdviceVo型のリスト
-     */
-
-    public List<AdviceVo> getAdvice( String month, String userId ) throws SQLException
+    public List<BunsekiVo> getBunseki( String month, String userId ) throws SQLException
     {
 
         ResultSet rset = null;
@@ -54,10 +44,11 @@ public class ConanDao extends Dao
                 PreparedStatement stmt = con.prepareStatement( SELECT );
                 )
         {
-            List<AdviceVo> list = new ArrayList<AdviceVo>();
+            List<BunsekiVo> list = new ArrayList<BunsekiVo>();
 
+            String testMonth = "201805";
             /* Statementの作成 */
-            stmt.setString( 1, month );
+            stmt.setString( 1, testMonth );
             stmt.setString( 2, month );
             stmt.setString( 3, userId );
 
@@ -67,11 +58,13 @@ public class ConanDao extends Dao
             /* 取得したデータを表示します。 */
             while ( rset.next() )
             {
-                AdviceVo cv = new AdviceVo();
+                BunsekiVo bv = new BunsekiVo();
 
-                cv.setCategoryName( rset.getString( 1 ) );
-                cv.setDifference( rset.getInt( 2 ) );
-                list.add( cv );
+                bv.setCategoryName( rset.getString( 1 ) );
+                bv.setDifference( rset.getInt( 2 ) );
+                bv.setSumSpending( rset.getInt( 3 ) );
+                bv.setMokuhyouKingaku( rset.getInt( 4 ) );
+                list.add( bv );
             }
 
             return list;
@@ -83,5 +76,4 @@ public class ConanDao extends Dao
         }
 
     }
-
 }

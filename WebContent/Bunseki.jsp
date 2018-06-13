@@ -34,9 +34,9 @@ var data = [
     {
     %>
    {
-    value: <%=bb.getSisyutu()%>,
-    color:<%=bb.getColor()%>,
-    label:<%=bb.getCategoryName()%>
+    value:"<%=bb.getSumSpending()%>",
+    color:"<%=bb.getColor()%>",
+    label:"<%=bb.getCategoryName()%>"
    },
    <%}%>
   ];

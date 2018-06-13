@@ -24,7 +24,7 @@
       <%
         }
       %>
-      が特に多いんだよ!!!<br>
+      特に多いんだよ!!!<br>
     </p>
     <br> <br>
     <form method="POST" action="BungyServlet">
