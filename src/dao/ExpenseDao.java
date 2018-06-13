@@ -38,8 +38,7 @@ public class ExpenseDao extends Dao
             + " where "
             + " expenseid = ?";
 
-    private static final String SELECT_SUM =
-            "select " +
+    private static final String SELECT_SUM = "select " +
             "	expensedate, " +
             "	sum(kingaku) " +
             "from " +
@@ -52,8 +51,7 @@ public class ExpenseDao extends Dao
             "order by " +
             "	expensedate asc";
 
-    private static final String SELECT_CATEGORY =
-            "SELECT " +
+    private static final String SELECT_CATEGORY = "SELECT " +
             "categoryId, categoryName " +
             "FROM " +
             "kakeibo.category " +
@@ -72,11 +70,8 @@ public class ExpenseDao extends Dao
      */
     public void addExpense( ExpenseVo ev ) throws SQLException
     {
-        PreparedStatement stmt = null;
-        try
+        try ( PreparedStatement stmt = con.prepareStatement( ADD ); )
         {
-
-            stmt = con.prepareStatement( ADD );
 
             stmt.setInt( 1, ev.getExpenseKingaku() );
             stmt.setInt( 2, ev.getCategoryId() );
@@ -99,12 +94,8 @@ public class ExpenseDao extends Dao
      */
     public void updateExpense( ExpenseVo ev ) throws SQLException
     {
-        PreparedStatement stmt = null;
-        try
+        try ( PreparedStatement stmt = con.prepareStatement( UPDATE ); )
         {
-
-            /* Statementの作成 */
-            stmt = con.prepareStatement( UPDATE );
 
             stmt.setInt( 1, ev.getExpenseKingaku() );
             stmt.setInt( 2, ev.getCategoryId() );
@@ -122,20 +113,18 @@ public class ExpenseDao extends Dao
         }
     }
 
-/**
- * 支出削除
- * @param ev
- * @throws SQLException
- */
+    /**
+     * 支出削除
+     * @param ev
+     * @throws SQLException
+     */
     public void deleteExpense( ExpenseVo ev ) throws SQLException
     {
-        PreparedStatement stmt = null;
 
-        try
+        try ( PreparedStatement stmt = con.prepareStatement( DELETE ); )
         {
 
             /* Statementの作成 */
-            stmt = con.prepareStatement( DELETE );
             stmt.setInt( 1, ev.getExpenseId() );
 
             stmt.executeUpdate();
@@ -155,55 +144,54 @@ public class ExpenseDao extends Dao
      * @return
      * @throws SQLException
      */
-    public ArrayList<ExpenseVo> getAllSumOfDay(Calendar calendar, String userId) throws SQLException{
-        PreparedStatement stmt = null;
+    public ArrayList<ExpenseVo> getAllSumOfDay( Calendar calendar, String userId ) throws SQLException
+    {
         ResultSet rset = null;
 
-        Calendar lastDay = (Calendar)calendar.clone();
-        lastDay.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
-        String startDayStr =
-                calendar.get(Calendar.YEAR) + "-" +
-                (calendar.get(Calendar.MONTH) + 1) + "-" +
-                calendar.get(Calendar.DATE);
-        String endDayStr =
-                lastDay.get(Calendar.YEAR) + "-" +
-                (lastDay.get(Calendar.MONTH) + 1) + "-" +
-                lastDay.get(Calendar.DATE);
+        Calendar lastDay = ( Calendar ) calendar.clone();
+        lastDay.set( Calendar.DATE, calendar.getActualMaximum( Calendar.DATE ) );
+        String startDayStr = calendar.get( Calendar.YEAR ) + "-" +
+                (calendar.get( Calendar.MONTH ) + 1) + "-" +
+                calendar.get( Calendar.DATE );
+        String endDayStr = lastDay.get( Calendar.YEAR ) + "-" +
+                (lastDay.get( Calendar.MONTH ) + 1) + "-" +
+                lastDay.get( Calendar.DATE );
 
-        try {
-            stmt = con.prepareStatement(SELECT_SUM);
-            stmt.setString(1, userId);
-            stmt.setString(2, startDayStr);
-            stmt.setString(3, endDayStr);
+        try ( PreparedStatement stmt = con.prepareStatement( SELECT_SUM ); )
+        {
+            stmt.setString( 1, userId );
+            stmt.setString( 2, startDayStr );
+            stmt.setString( 3, endDayStr );
 
             rset = stmt.executeQuery();
 
             ArrayList<ExpenseVo> expenseList = new ArrayList<ExpenseVo>();
-            while(rset.next()) {
+            while ( rset.next() )
+            {
                 ExpenseVo ev = new ExpenseVo();
-                ev.setExpenseDate(rset.getDate(1));
-                ev.setExpenseKingaku(rset.getInt(2));
-                expenseList.add(ev);
+                ev.setExpenseDate( rset.getDate( 1 ) );
+                ev.setExpenseKingaku( rset.getInt( 2 ) );
+                expenseList.add( ev );
             }
             return expenseList;
-        }
-        catch(SQLException ex) {
+        } catch ( SQLException ex )
+        {
             throw ex;
         }
     }
+
     /**
      * カテゴリ取得
      */
     public void getCategory()
     {
-        PreparedStatement stmt = null;
 
-        try
+        try ( PreparedStatement stmt = con.prepareStatement( SELECT_CATEGORY ); )
         {
 
             /* Statementの作成 */
-            stmt = con.prepareStatement( SELECT_CATEGORY );
-//            stmt.setInt( 1, ev.getExpenseId() );
+
+            // stmt.setInt( 1, ev.getExpenseId() );
 
             stmt.executeUpdate();
 
