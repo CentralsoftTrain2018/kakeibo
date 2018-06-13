@@ -21,7 +21,7 @@ public class BunsekiDao extends Dao{
             ",kakeibo.category c " +
             ",kakeibo.mokuhyou m " +
             "WHERE " +
-            "DATE_FORMAT(e.expenseDate, '%Y%m') = ? " +
+            "DATE_FORMAT(e.expenseDate, '%Y/%m') = ? " +
             "AND m.Month = ? " +
             "AND e.category_categoryId = c.categoryId " +
             "AND e.user_userid = m.user_userid " +
@@ -46,9 +46,8 @@ public class BunsekiDao extends Dao{
         {
             List<BunsekiVo> list = new ArrayList<BunsekiVo>();
 
-            String testMonth = "201805";
             /* Statementの作成 */
-            stmt.setString( 1, testMonth );
+            stmt.setString( 1, month );
             stmt.setString( 2, month );
             stmt.setString( 3, userId );
 

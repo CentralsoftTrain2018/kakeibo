@@ -99,6 +99,12 @@ public class AdviceDBManager {
             throw new RuntimeException(e);
         }
     }
+    /**
+     * 分析情報の取得
+     * @param nengetsu
+     * @param userId
+     * @return List<BunsekiVo>
+     */
     public static List<BunsekiVo> selectBunseki( String nengetsu, String userId )
     {
         try

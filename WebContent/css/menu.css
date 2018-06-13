@@ -1,6 +1,21 @@
 @charset "UTF-8";
 
 .menu form {
-    display: inline-block;
-    margin: 0 10px;
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.bunseki {
+  display: inline-block;
+  border: solid 1px;
+  border-collapse: separate;
+  top:0px;
+}
+
+.bunseki td {
+  border: solid 1px #808080
+}
+
+div.en {
+  display: inline-block;
 }
