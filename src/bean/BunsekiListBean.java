@@ -5,7 +5,7 @@ import java.util.List;
 
 public class BunsekiListBean {
     private List<BunsekiBean> list;
-
+    private int sumSpending=0;
     public BunsekiListBean()
     {
         list=new ArrayList<BunsekiBean>();
@@ -24,4 +24,11 @@ public class BunsekiListBean {
     {
         list.add(bb);
     }
+    public int getSumSpending() {
+        return sumSpending;
+    }
+    public void setSumSpending(int sumSpending) {
+        this.sumSpending += sumSpending;
+    }
+
 }
