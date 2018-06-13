@@ -1,6 +1,7 @@
 package dbmanager;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -125,6 +126,24 @@ public class ExpenseDBManager
             ExpenseDao edao = new ExpenseDao( con );
             List<CategoryVo> categoryList = edao.getCategory();
             return categoryList;
+        } catch ( SQLException e )
+        {
+            e.printStackTrace();
+            throw new RuntimeException( e );
+        }
+    }
+
+    public static List<ExpenseVo> getExpenseOfDay(Date date, String userId) {
+
+        try (
+                Connection con = PoolConnection.getConnection();
+                )
+        {
+            ExpenseDao edao = new ExpenseDao( con );
+
+            List<ExpenseVo> eList = edao.getExpenseOfDay(date, userId);
+
+            return eList;
         } catch ( SQLException e )
         {
             e.printStackTrace();
