@@ -12,8 +12,8 @@
 
   <div class="menu">
     <form method="POST" action="BungyServlet">
-      <input type="hidden" name="nengetu" value="2018/05">
-      <input type="submit" value="バンジー" disabled="disabled">
+      <input type="hidden" name="nengetu" value="2018/05"> <input
+        type="submit" value="バンジー" disabled="disabled">
     </form>
     <form method="POST" action="ExpenseServlet">
       <input type="submit" value="家計簿">
@@ -55,19 +55,34 @@
       right: 30%;
       top:<%=bean.getJumperDispPosition() + 30%>%;">
 
-<form method="POST" action="<%=bean.getAdovicePage()%>">
 
-  <%if(bean.isMonthfinflg()){ %>
-   <input type="image" src="<%=bean.getButtonImage() %>"
-   style="
-   position: absolute;
-   right:30%;
-   top:30%;
-   ">
-   <%} %>
+    <form method="POST" action="<%=bean.getAdovicePage()%>">
 
-</form>
+      <%
+        if ( bean.isMonthfinflg() )
+        {
+      %>
+      <input type="image" src="<%=bean.getButtonImage()%>"
+        style="position: absolute; right: 30%; top: 30%;">
+      <%
+        }
+      %>
 
-</div>
+    </form>
+
+  </div>
+
+  <form method="POST" action="<%=bean.getAdovicePage()%>">
+    <%
+      if ( bean.isMonthfinflg() )
+      {
+    %>
+    <input type="image" src="<%=bean.getButtonImage()%>"
+      style="position: absolute; right: 30%; top: 30%;">
+    <%
+      }
+    %>
+  </form>
+>>>>>>> branch 'master' of https://github.com/CentralsoftTrain2018/kakeibo
 </body>
 </html>
