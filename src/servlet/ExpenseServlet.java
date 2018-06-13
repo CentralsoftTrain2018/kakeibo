@@ -1,7 +1,9 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import bean.ExpenseBean;
 import exception.NoTextException;
 import service.ExpenseService;
+import vo.CategoryVo;
 
 /**
  * Servlet implementation class IndexStartServlet
@@ -99,6 +102,10 @@ public class ExpenseServlet extends HttpServlet {
         eb.setDate(calendar);
         calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
         eb.setEndDay(calendar.get(Calendar.DATE));
+
+        List<CategoryVo> list = new ArrayList<CategoryVo>();
+        list = ExpenseService.getCategory();
+        eb.setCategoryList( list );
 
         //JSPに遷移する
         request.setAttribute("bean", eb);

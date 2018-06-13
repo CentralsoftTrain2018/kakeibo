@@ -1,3 +1,4 @@
+<%@page import="vo.CategoryVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.Calendar"%>
 <jsp:useBean id="bean" class="bean.ExpenseBean" scope="request" />
@@ -35,7 +36,6 @@
   削除<input type="radio" name="choice" value="sakujo">
   <input type="submit" value="実行">
 </form>
-
 <%=bean.getDate().get(Calendar.YEAR) %>年
 <%=bean.getDate().get(Calendar.MONTH)+1 %>月
 
@@ -134,10 +134,9 @@
 
   <td>
     <select>
-    <option value = "category1"> カテゴリー1 </option>
-    <option value = "category2"> カテゴリー2 </option>
-    <option value = "category3"> カテゴリー3 </option>
-    <option value = "category4"> カテゴリー4 </option>
+<% for( CategoryVo cv: bean.getCategoryList()){%>
+      <option value="1"><%=cv.getCategoryname() %></option>
+<% }%>
     </select>
   </td>
 
@@ -161,10 +160,9 @@
 <tr>
   <td>
     <select>
-    <option value = "category1"> カテゴリー1 </option>
-    <option value = "category2"> カテゴリー2 </option>
-    <option value = "category3"> カテゴリー3 </option>
-    <option value = "category4"> カテゴリー4 </option>
+<% for( CategoryVo cv: bean.getCategoryList()){%>
+      <option value="1"><%=cv.getCategoryname() %></option>
+<% }%>
     </select>
   </td>
 

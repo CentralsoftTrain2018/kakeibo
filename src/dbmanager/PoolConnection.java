@@ -24,6 +24,7 @@ public class PoolConnection {
                    + servername
                    + "/"
                    + dbname,
+//                   + "?useUnicode=true&characterEncoding=utf8"
                    user,
                    pass);
 
