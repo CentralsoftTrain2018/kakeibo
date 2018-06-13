@@ -1,3 +1,4 @@
+<%@page import="vo.CategoryVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.Calendar"%>
 <jsp:useBean id="bean" class="bean.ExpenseBean" scope="request" />
@@ -5,10 +6,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.qrcode.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/menu.css">
 <title>家計簿</title>
 </head>
 <body>
+  <div id="qrcode"></div>
+    <script>
+      jQuery('#qrcode').qrcode({text:"I am Ochi Yosuke!!", width:600, height:600,});
+    </script>
   <div class="menu">
     <form method="POST" action="BungyServlet">
       <input type="hidden" name="nengetu" value="2018/05"> <input
@@ -24,6 +31,7 @@
 <%if(bean.getMessage() != null){%>
 <%= bean.getMessage() %><br>
 <%} %>
+<div id="qrcode"></div>
 入力してね<br>
 <form  method="POST" action="ExpenseServlet">
   支出ID<input type="text" name="expenseId"><br>
@@ -35,7 +43,6 @@
   削除<input type="radio" name="choice" value="sakujo">
   <input type="submit" value="実行">
 </form>
-
 <%=bean.getDate().get(Calendar.YEAR) %>年
 <%=bean.getDate().get(Calendar.MONTH)+1 %>月
 
@@ -134,10 +141,9 @@
 
   <td>
     <select>
-    <option value = "category1"> カテゴリー1 </option>
-    <option value = "category2"> カテゴリー2 </option>
-    <option value = "category3"> カテゴリー3 </option>
-    <option value = "category4"> カテゴリー4 </option>
+<% for( CategoryVo cv: bean.getCategoryList()){%>
+      <option value="1"><%=cv.getCategoryname() %></option>
+<% }%>
     </select>
   </td>
 
@@ -161,10 +167,9 @@
 <tr>
   <td>
     <select>
-    <option value = "category1"> カテゴリー1 </option>
-    <option value = "category2"> カテゴリー2 </option>
-    <option value = "category3"> カテゴリー3 </option>
-    <option value = "category4"> カテゴリー4 </option>
+<% for( CategoryVo cv: bean.getCategoryList()){%>
+      <option value="1"><%=cv.getCategoryname() %></option>
+<% }%>
     </select>
   </td>
 

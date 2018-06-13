@@ -111,7 +111,7 @@ public class AdviceService
             bb.setMokuhyouKingaku( bv.getMokuhyouKingaku() );
             bb.setSumSpending( bv.getSumSpending() );
             bb.setColor("RED");
-
+            blb.setSumSpending( bv.getSumSpending() );
             blb.addList(bb);
         }
 

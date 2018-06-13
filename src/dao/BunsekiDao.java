@@ -28,7 +28,7 @@ public class BunsekiDao extends Dao{
             "AND e.user_userid = ? " +
             "AND c.categoryId = m.category_categoryId " +
             "GROUP BY e.category_categoryId " +
-            "ORDER BY m.Kingaku - SUM(e.Kingaku) DESC;";
+            "ORDER BY e.category_categoryId ;";
 
     public BunsekiDao( Connection con )
     {
