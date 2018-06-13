@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
+import vo.CategoryVo;
 import vo.ExpenseVo;
 
 public class ExpenseDao extends Dao
@@ -52,7 +54,8 @@ public class ExpenseDao extends Dao
             "	expensedate asc";
 
     private static final String SELECT_CATEGORY = "SELECT " +
-            "categoryId, categoryName " +
+            "categoryId " +
+            ",categoryName " +
             "FROM " +
             "kakeibo.category " +
             "WHERE " +
@@ -181,25 +184,31 @@ public class ExpenseDao extends Dao
     }
 
     /**
-     * カテゴリ取得
+     * カテゴリID, カテゴリ名を取得
+     * @throws SQLException
+     * @return CategoryVo型のList
      */
-    public void getCategory()
+    public List<CategoryVo> getCategory() throws SQLException
     {
+        ResultSet rset = null;
 
         try ( PreparedStatement stmt = con.prepareStatement( SELECT_CATEGORY ); )
         {
+            rset = stmt.executeQuery();
 
-            /* Statementの作成 */
-
-            // stmt.setInt( 1, ev.getExpenseId() );
-
-            stmt.executeUpdate();
-
+            List<CategoryVo> categoryList = new ArrayList<CategoryVo>();
+            while ( rset.next() )
+            {
+                CategoryVo cv = new CategoryVo();
+                cv.setCategoryid( rset.getInt( 1 ) );
+                cv.setCategoryname( rset.getString( 2 ) );
+                categoryList.add( cv );
+            }
+            return categoryList;
         }
-
         catch ( SQLException e )
         {
-            throw null;
+            throw e;
         }
     }
 }
