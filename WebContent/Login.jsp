@@ -11,7 +11,7 @@
 <%= bean.getMessage() %><br>
 <%} %>
 <form  method="POST" action="LoginServlet">
-  ユーザーID<input type="text" name="userId"><br>
+  ユーザーID<input type="text" name="userId" value="test"><br>
   <input type="submit" value="ログイン"><br>
 </form>
 </body>

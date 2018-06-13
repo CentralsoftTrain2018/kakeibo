@@ -61,6 +61,8 @@ public class ExpenseServlet extends HttpServlet {
         eb.setEndDay(calendar.get(Calendar.DATE));
         eb.setDate(calendar);
 
+        System.out.println( eb.getDate().get( Calendar.YEAR ));
+        System.out.println( eb.getDate().get( Calendar.MONTH ));
         eb = ExpenseService.getCategory();
         if(choice.equals("touroku")) {
             try {
