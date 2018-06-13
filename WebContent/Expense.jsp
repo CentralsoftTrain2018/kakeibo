@@ -142,13 +142,7 @@
 <tr>
   <td>
     <select name = "categoryId">
-        <%
-      for ( vo.CategoryVo cv : bean.getCategoryList() )
-
-      {
-    %>
-    <option value = <%=cv.getCategoryid() %>> <%=cv.getCategoryname() %> </option>
-        <%} %>
+    <!-- ここをいじる -->
     <option value = "1"> カテゴリー名 </option>
     <option value = "2"> カテゴリー名 </option>
     </select>
