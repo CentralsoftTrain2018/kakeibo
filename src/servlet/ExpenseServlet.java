@@ -106,11 +106,7 @@ public class ExpenseServlet extends HttpServlet {
         List<CategoryVo> list = new ArrayList<CategoryVo>();
         list = ExpenseService.getCategory();
         eb.setCategoryList( list );
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> refs/remotes/origin/master
         //JSPに遷移する
         request.setAttribute("bean", eb);
         RequestDispatcher disp = request.getRequestDispatcher("Expense.jsp");
