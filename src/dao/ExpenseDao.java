@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -60,6 +61,17 @@ public class ExpenseDao extends Dao
             "kakeibo.category " +
             "WHERE " +
             "useflag = 1;";
+
+    private static final String GET_EXPENSES = "SELECT"
+            + " categoryId "
+            + " ,expenseName "
+            + " ,kingaku "
+            + " FROM "
+            + " expenses "
+            + " WHERE "
+            + " userId = ? "
+            + " AND "
+            + " date = ? ";
 
     public ExpenseDao( Connection con )
     {
@@ -205,6 +217,37 @@ public class ExpenseDao extends Dao
                 categoryList.add( cv );
             }
             return categoryList;
+        }
+        catch ( SQLException e )
+        {
+            throw e;
+        }
+    }
+
+    public List<ExpenseVo> getExpenseOfDay( Date date, String userId ) throws SQLException
+    {
+        ResultSet rset = null;
+
+        try ( PreparedStatement stmt = con.prepareStatement( GET_EXPENSES ); )
+        {
+            stmt.setString( 1, userId );
+            stmt.setDate( 2, date );
+
+            rset = stmt.executeQuery();
+
+            List<ExpenseVo> eList = new ArrayList<>();
+
+            while(rset.next()) {
+                ExpenseVo ev = new ExpenseVo();
+
+                ev.setCategoryId(rset.getInt(1));
+                ev.setExpenseName(rset.getString(2));
+                ev.setExpenseKingaku(rset.getInt(3));
+
+                eList.add(ev);
+            }
+
+            return eList;
         }
         catch ( SQLException e )
         {
