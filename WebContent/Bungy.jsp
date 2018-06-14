@@ -87,6 +87,9 @@
 
     </form>
   </div>
-
+  <form method="POST" action="JihakuServlet">
+    <input type="submit" value="自白">
+    <input type="hidden" name="month" value="<%=bean.getMonth() %>">
+  </form>
 </body>
 </html>
