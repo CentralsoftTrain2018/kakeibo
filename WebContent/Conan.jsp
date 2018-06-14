@@ -45,7 +45,7 @@
     来月もがんばろう！<br>
     <br>
     <form method="POST" action="BungyServlet">
-      <input type="hidden" name="nengetsu" value=<%=bean.getNengetsu() %>><br>
+      <input type="hidden" name="nengetsu" value=""><br>
       <input type="submit" value="TOPにもどる"><br>
   </form>
   </div>

@@ -10,7 +10,8 @@
   vertical-align: top;
   border: solid 1px;
   border-collapse: separate;
-  top:0px;
+  top:20%;
+  position: absolute;
 }
 
 .bunseki td {

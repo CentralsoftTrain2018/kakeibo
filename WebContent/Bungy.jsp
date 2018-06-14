@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="css/menu.css">
 <title>TOP</title>
 </head>
-<body background="image/kawa.png">
+<body>
 
   <div class="menu">
     <form method="POST" action="BungyServlet">
@@ -22,23 +22,25 @@
       <input type="submit" value="分析">
     </form>
 
-      <form method="POST" action="ConanServlet">
-    <input type="hidden" name="nengetsu" value=<%=bean.getNengetsu()%>>
-    <input type="submit" value="コナン">
-  </form>
-  <form method="POST" action="JihakuServlet">
-    <input type="hidden" name="nengetsu" value=<%=bean.getNengetsu()%>>
-    <input type="submit" value="犯人">
-  </form>
+    <form method="POST" action="ConanServlet">
+      <input type="hidden" name="nengetsu" value=<%=bean.getNengetsu()%>>
+      <input type="submit" value="コナン">
+    </form>
+    <form method="POST" action="JihakuServlet">
+      <input type="hidden" name="nengetsu" value=<%=bean.getNengetsu()%>>
+      <input type="submit" value="自白">
+    </form>
   </div>
 
   <h1>
     Bungy
     <%=bean.getNengetsu()%></h1>
-
   <div class="pattern1"
-    style="width: 800px; height: 742px; overflow: hidden; background-image: url(image/kawa.png); margin-bottom: 0px; padding-bottom: 0px; position: relative;">
+    style="width: 800px; height: 742px; overflow: hidden;
+    margin-bottom: 0px; padding-bottom: 0px; position: relative;">
 
+    <img src="image/kawa.png" alt="" class="base"
+      style="position: absolute; width: 800px; height: 742px; margin-all: 0px; padding-all: 0px;">
     <img src="image/kaidan.png" alt="" class="base"
       style="position: absolute; left: 10px; bottom: 0px; margin-bottom: 0px; padding-bottom: 0px;">
     <img src="image/hanninkaidan.png" alt="" class="hannin"
@@ -54,13 +56,26 @@
       height:<%=bean.getJumperDispPosition() + 7%>%;
       right: 35%;
       top:25%;">
+    <%
+      if ( bean.isMonthfinflg() && bean.isGameoverflg() )
+      {
+    %>
+    <img src="image/obore.png" alt="" class="jumper"
+      style="position: absolute; width: 100px; height: 100px; right: 30%; top: 80%;">
+    <%
+      } else
+      {
+    %>
+
     <img src="image/jump.png" alt="" class="jumper"
       style="position: absolute;
       width: 100px;
       height: 100px;
       right: 30%;
       top:<%=bean.getJumperDispPosition() + 30%>%;">
-
+    <%
+      }
+    %>
 
     <form method="POST" action="<%=bean.getAdovicePage()%>">
 
@@ -76,9 +91,12 @@
     </form>
   </div>
   <form method="POST" action="BungyServlet">
-     年月<input type="text" name="nengetsu"><br>
-      <input type="submit" value="Bungy"><br>
+    年月<input type="text" name="nengetsu"><br> <input
+      type="submit" value="Bungy"><br>
   </form>
+
+  </form>
+  </div>
 
 </body>
 </html>

@@ -19,11 +19,15 @@ public class AdviceService
 {
 
     //AdviceVo型のListをConanBean型のListに変換
+
     public JihakuListBean jihaku( String userId, String nengetsu )
+
     {
+
         List<AdviceVo> resultList = AdviceDBManager.selectJihakuAdvice( nengetsu, userId );
         int goukei = AdviceDBManager.sumGoukei( nengetsu, userId );
         int mokuhyou = AdviceDBManager.sumMokuhyou( nengetsu, userId );
+
         JihakuListBean jlb = new JihakuListBean();
         List<JihakuBean> list = new ArrayList<JihakuBean>();
 
@@ -36,9 +40,7 @@ public class AdviceService
                 jb.setCategoryname( av.getCategoryName() );
                 jb.setExcess( av.getDifference() );
                 list.add( jb );
-
             }
-
         }
         jlb.setJihakulist( list );
         jlb.setGoukei( goukei );
