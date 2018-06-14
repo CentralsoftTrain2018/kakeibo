@@ -49,7 +49,7 @@ public class ExpenseService
         BungyBean bb = new BungyBean();
         bb.setMokuhyou( bv.getMokuhyou() );
         bb.setSisyutu( bv.getTotalexpenses() );
-        bb.setMonth( month );
+        bb.setNengetsu( month );
 
         return bb;
     }

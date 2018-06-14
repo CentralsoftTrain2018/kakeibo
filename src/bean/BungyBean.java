@@ -7,7 +7,7 @@ public class BungyBean {
     private int mokuhyou;
     private int sisyutu;
     private int hanninIchi;
-    private String month;
+    private String nengetsu;
     private String message;
     private boolean monthfinflg=false;
     private boolean gameoverflg=false;
@@ -92,7 +92,7 @@ public class BungyBean {
     }
 
     public int getJumperDispPosition() {
-        String[] YearAndMonth = month.split("/");
+        String[] YearAndMonth = nengetsu.split("/");
 
         //今日の日付を取得
         Calendar calendar = Calendar.getInstance();
@@ -118,9 +118,12 @@ public class BungyBean {
 
     }
     **/
+    public String getNengetsu() {
+        return nengetsu;
+    }
 
-    public void setMonth(String month) {
-        this.month = month;
+    public void setNengetsu(String nengetsu) {
+        this.nengetsu = nengetsu;
     }
 
     public String getMessage() {
@@ -150,7 +153,7 @@ public class BungyBean {
     @Override
     public String toString() {
         return "BungyBean [mokuhyou=" + mokuhyou + ", sisyutu=" + sisyutu + ", hanninIchi=" + hanninIchi + ", date="
-                + month + ", message=" + message + "]";
+                + nengetsu + ", message=" + message + "]";
     }
 
 }

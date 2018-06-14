@@ -1,5 +1,5 @@
-<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*"
+  contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:useBean id="bean" class="bean.BungyBean" scope="request" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,8 +12,8 @@
 
   <div class="menu">
     <form method="POST" action="BungyServlet">
-      <input type="hidden" name="nengetu" value="2018/05"> <input
-        type="submit" value="バンジー" disabled="disabled">
+      <input type="hidden" name="nengetu"> <input type="submit"
+        value="バンジー" disabled="disabled">
     </form>
     <form method="POST" action="ExpenseServlet">
       <input type="submit" value="家計簿">
@@ -21,20 +21,26 @@
     <form method="POST" action="BunsekiServlet">
       <input type="submit" value="分析">
     </form>
+
+      <form method="POST" action="ConanServlet">
+    <input type="hidden" name="nengetsu" value=<%=bean.getNengetsu()%>>
+    <input type="submit" value="コナン">
+  </form>
+  <form method="POST" action="JihakuServlet">
+    <input type="hidden" name="nengetsu" value=<%=bean.getNengetsu()%>>
+    <input type="submit" value="犯人">
+  </form>
   </div>
 
-  <h1>Bungy</h1>
-    <div class="pattern1"
-    style="width: 800px; height: 742px;
-    overflow: hidden;
-    background-image: url(image/kawa.png);
-    margin-bottom: 0px; padding-bottom: 0px; position: relative;">
+  <h1>
+    Bungy
+    <%=bean.getNengetsu()%></h1>
+
+  <div class="pattern1"
+    style="width: 800px; height: 742px; overflow: hidden; background-image: url(image/kawa.png); margin-bottom: 0px; padding-bottom: 0px; position: relative;">
 
     <img src="image/kaidan.png" alt="" class="base"
-      style="position: absolute;
-      left: 10px; bottom: 0px;
-      margin-bottom: 0px;
-      padding-bottom: 0px;">
+      style="position: absolute; left: 10px; bottom: 0px; margin-bottom: 0px; padding-bottom: 0px;">
     <img src="image/hanninkaidan.png" alt="" class="hannin"
       style="position: absolute;
       width: 100px;
@@ -67,10 +73,12 @@
       <%
         }
       %>
-
-
     </form>
   </div>
+  <form method="POST" action="BungyServlet">
+     年月<input type="text" name="nengetsu"><br>
+      <input type="submit" value="Bungy"><br>
+  </form>
 
 </body>
 </html>

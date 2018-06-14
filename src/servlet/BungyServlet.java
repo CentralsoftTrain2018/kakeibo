@@ -42,7 +42,7 @@ public class BungyServlet extends HttpServlet
             **/
             HttpSession session = request.getSession();
             String userId = (String)session.getAttribute("userId");
-            String nengetu=new String(request.getParameter("nengetu").getBytes("iso-8859-1"),"UTF-8");
+            String nengetu=new String(request.getParameter("nengetsu").getBytes("iso-8859-1"),"UTF-8");
             //String nengetu=request.getParameter("nengetu");
             bb = ExpenseService.getMokuhyouAndExpenses(userId,nengetu);
 

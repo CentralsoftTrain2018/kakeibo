@@ -37,8 +37,9 @@ public class JihakuServlet extends HttpServlet
     {
         HttpSession session = request.getSession();
         String userId = ( String ) session.getAttribute( "userId" );
+        String nengetsu = request.getParameter("nengetsu");
         AdviceService conan = new AdviceService();
-        JihakuListBean bean = conan.jihaku( userId );
+        JihakuListBean bean = conan.jihaku( userId , nengetsu);
         //beanをリクエストにセット キー名は「bean」とする
         request.setAttribute( "bean", bean );
 
