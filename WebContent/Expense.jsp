@@ -141,8 +141,12 @@
   <td>
     <select name = "categoryId">
 <% for( CategoryVo cv: bean.getCategoryList()){%>
-      <option value=<%=cv.getCategoryid() %>><%=cv.getCategoryname() %></option>
-      <%if(cv.getCategoryid() == ev.getCategoryId()) %>
+      <option value=<%=cv.getCategoryid() %>
+      <%if(ev.getCategoryId() == cv.getCategoryid()) {%>
+      selected
+      <%} %>
+      ><%=cv.getCategoryname() %></option>
+
 <% }%>
     </select>
   </td>
@@ -156,12 +160,12 @@
   </td>
 
   <td>
-  <input type="submit" name = "choice" value="henkou">
+  <input type="submit" name = "choice" value="変更">
   <input type="hidden" name="expenseId" value=<%=ev.getExpenseId() %>>
   </td>
 
     <td>
-  <input type="submit" name = "choice" value="sakujo">
+  <input type="submit" name = "choice" value="削除">
   </td>
 
   </form>
@@ -177,11 +181,7 @@
 <% }%>
     </select>
   </td>
-<<<<<<< HEAD
 
-=======
-
->>>>>>> refs/remotes/origin/master
   <td>
   <input type="text" name="expenseName">
   </td>
@@ -191,7 +191,11 @@
   </td>
 
     <td colspan = 2 align = "center">
-  <input type="submit" name="choice" value="touroku">
+  <input type="submit" name="choice" value="登録">
+  <input type="hidden" name="year" value=<%=bean.getDate().get(Calendar.YEAR) %>>
+  <input type="hidden" name="month" value=<%=bean.getDate().get(Calendar.MONTH) %>>
+  <input type="hidden" name="selectDay" value=<%=bean.getSelectDay() %>>
+
   </td>
     </form>
   </tr>

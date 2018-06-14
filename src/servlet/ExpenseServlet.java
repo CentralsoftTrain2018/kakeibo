@@ -38,9 +38,12 @@ public class ExpenseServlet extends HttpServlet {
         System.out.println("ExpenseServletが実行されました。");
 
         ExpenseBean eb = new ExpenseBean();
-        String choice = request.getParameter("choice");
-        if(choice == null) {
+        String choice = null;
+        if( request.getParameter("choice") == null ) {
             choice = "";
+        }
+        if( request.getParameter("choice") != null ) {
+            choice = new String(request.getParameter("choice").getBytes("iso-8859-1"), "UTF-8");
         }
         String expenseIdStr = request.getParameter("expenseId");
         String kingakuStr = request.getParameter("kingaku");
@@ -52,7 +55,36 @@ public class ExpenseServlet extends HttpServlet {
         String month = request.getParameter("month");
         String day = request.getParameter("selectDay");
 
-        if(choice.equals("touroku")) {
+        if(month != null && month.length() == 1)
+        {
+            int tuki = Integer.parseInt(month)+1;
+            month = "0" + String.valueOf(tuki);
+        }
+
+        if(day != null && day.length() == 1)
+        {
+            day = "0" + day;
+        }
+
+        if(year == null && month == null && day == null)
+        {
+            LocalDate ld = LocalDate.now();
+            String now[] = String.valueOf(ld).split("-",0);
+
+            year = now[0];
+            month = now[1];
+            day = now[2];
+        }
+
+        if(year != null && month != null && day == null)
+        {
+            day = String.valueOf(1);
+        }
+
+        String date = year + "-" + month + "-" + day;
+        System.out.println(date);
+
+        if(choice.equals("登録")) {
             try {
                 int kingaku = Integer.parseInt(kingakuStr);
                 int categoryId = Integer.parseInt(categoryIdStr);
@@ -60,14 +92,15 @@ public class ExpenseServlet extends HttpServlet {
                 if(expenseName.equals("")) {
                     throw new NoTextException();
                 }
-                ExpenseService.addExpense(kingaku, categoryId, expenseName, userId);
+                ExpenseService.addExpense(kingaku, categoryId, expenseName, userId, Date.valueOf(date));
+                System.out.println(date);
             }
             catch(NumberFormatException | NoTextException e) {
                 eb.setMessage("入力が不正です");
             }
         }
 
-        if(choice.equals("henkou")) {
+        if(choice.equals("変更")) {
             try {
                 int expenseId = Integer.parseInt(expenseIdStr);
                 int kingaku = Integer.parseInt(kingakuStr);
@@ -83,7 +116,7 @@ public class ExpenseServlet extends HttpServlet {
             }
         }
 
-        if(choice.equals("sakujo")) {
+        if(choice.equals("削除")) {
             try {
                 int expenseId = Integer.parseInt(expenseIdStr);
                 ExpenseService.deleteExpense(expenseId);
@@ -96,33 +129,11 @@ public class ExpenseServlet extends HttpServlet {
         Calendar calendar = Calendar.getInstance();
         if(year != null && month != null) {
             calendar.set(Calendar.YEAR, Integer.parseInt(year));
-            calendar.set(Calendar.MONTH, Integer.parseInt(month));
+            calendar.set(Calendar.MONTH, Integer.parseInt(month)-1);
         }
         calendar.set(Calendar.DATE, 1);
 
-        if(month != null && month.length() == 1)
-        {
-            int tuki = Integer.parseInt(month)+1;
-            month = "0" + String.valueOf(tuki);
-        }
 
-        if(day != null && day.length() == 1)
-        {
-            day = "0" + day;
-        }
-
-        if(year == null | month == null | day == null)
-        {
-            LocalDate ld = LocalDate.now();
-            String now[] = String.valueOf(ld).split("-",0);
-
-            year = now[0];
-            month = now[1];
-            day = now[2];
-        }
-
-        String date = year + "-" + month + "-" + day;
-        System.out.println(date);
 
         eb = ExpenseService.makeExpenseBean(calendar, Date.valueOf(date), userId);
 
@@ -130,8 +141,7 @@ public class ExpenseServlet extends HttpServlet {
         eb.setDate(calendar);
         calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
         eb.setEndDay(calendar.get(Calendar.DATE));
-
-
+        eb.setSelectDay(Integer.parseInt(day));
 
         //JSPに遷移する
         request.setAttribute("bean", eb);
