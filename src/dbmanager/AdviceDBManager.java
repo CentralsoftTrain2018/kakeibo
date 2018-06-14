@@ -40,16 +40,19 @@ public class AdviceDBManager
         }
     }
 
-    //アドバイス(自白)に必要なデータを取得する
-    public static List<AdviceVo> selectJihakuAdvice( String mokuhyou, String date, String userId )
+    /**
+     * 自白に必要なデータを取得
+     * @param nengetsu
+     * @param userId
+     * @return
+     */
+    public static List<AdviceVo> selectJihakuAdvice( String nengetsu, String userId )
     {
         try (
                 Connection con = PoolConnection.getConnection(); )
         {
-
             JihakuDao jdao = new JihakuDao( con );
-            List<AdviceVo> list = jdao.JihakuAdvice( mokuhyou, date, userId ) /**jdao.jihakuAdvice()**/
-            ;
+            List<AdviceVo> list = jdao.JihakuAdvice( nengetsu, userId );
             return list;
 
         } catch ( SQLException e )
@@ -59,17 +62,20 @@ public class AdviceDBManager
         }
     }
 
-    public static int sumGoukei( String date, String userId )
+    /**
+     * 月全体の支出合計を取得
+     * @param nengetsu
+     * @param userId
+     * @return
+     */
+    public static int sumGoukei( String nengetsu, String userId )
     {
         try (
                 Connection con = PoolConnection.getConnection(); )
         {
-
             JihakuDao jdao = new JihakuDao( con );
-            int goukei = jdao.JihakuGoukei( date, userId ) /**jdao.jihakuAdvice()**/
-            ;
+            int goukei = jdao.getSisyutuGoukei( nengetsu, userId );
             return goukei;
-
         } catch ( SQLException e )
         {
             e.printStackTrace();
@@ -77,15 +83,19 @@ public class AdviceDBManager
         }
     }
 
-    public static int sumMokuhyou( String date, String userId )
+    /**
+     * 月全体の目標金額を取得
+     * @param nengetsu
+     * @param userId
+     * @return
+     */
+    public static int sumMokuhyou( String nengetsu, String userId )
     {
         try (
                 Connection con = PoolConnection.getConnection(); )
         {
-
             JihakuDao jdao = new JihakuDao( con );
-            int mokuhyou = jdao.JihakuMokuhyou( date, userId ) /**jdao.jihakuAdvice()**/
-            ;
+            int mokuhyou = jdao.getTsukiMokuhyou( nengetsu, userId );
             return mokuhyou;
 
         } catch ( SQLException e )

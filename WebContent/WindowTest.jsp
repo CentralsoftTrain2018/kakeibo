@@ -16,7 +16,7 @@
     }
   %>
   <form method="POST" action="BungyServlet">
-      経過日数<input type="text" name="nengetu"><br>
+     年月<input type="text" name="nengetsu"><br>
       <input type="submit" value="Bungy"><br>
   </form>
   <form method="POST" action="ConanServlet">
