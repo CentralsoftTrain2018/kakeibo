@@ -14,13 +14,13 @@ import vo.ExpenseVo;
 
 public class ExpenseService
 {
-    public static void addExpense( int kingaku, int categoryId, String expenseName, String userId )
+    public static void addExpense( int kingaku, int categoryId, String expenseName, String userId, Date expenseDate )
     {
         ExpenseVo ev = new ExpenseVo();
         ev.setExpenseKingaku( kingaku );
         ev.setCategoryId( categoryId );
         ev.setExpenseName( expenseName );
-        Date expenseDate = new Date( new java.util.Date().getTime() );
+        //Date expenseDate = new Date( new java.util.Date().getTime() );
         ev.setExpenseDate( expenseDate );
         ev.setUserId( userId );
         ExpenseDBManager.addExpense( ev );
@@ -76,8 +76,7 @@ public class ExpenseService
         eb.setExpenseOfDay(expenseOfDayList);
 
         // カテゴリー一覧の取得
-        List<CategoryVo> categoryList = new ArrayList<CategoryVo>();
-        categoryList = ExpenseDBManager.getCategory();
+        List<CategoryVo> categoryList = ExpenseDBManager.getCategory();
 
         eb.setCategoryList(categoryList);
 

@@ -12,8 +12,7 @@ import vo.AdviceVo;
 public class JihakuDao extends Dao
 {
 
-    private static final String SELECT =
-            "select " +
+    private static final String SELECT = "select " +
             "	k.cname " +
             "	,k.sum1 - m.kingaku " +
             "from " +
@@ -41,8 +40,7 @@ public class JihakuDao extends Dao
             "order by " +
             "	k.sum1 - m.kingaku desc limit 3;";
 
-    private static final String GOUKEI =
-            "			SELECT" +
+    private static final String GOUKEI = "			SELECT" +
             "			SUM(e.Kingaku)" +
             "			FROM" +
             "			expenses as e" +
@@ -50,8 +48,7 @@ public class JihakuDao extends Dao
             "			e.expenseDate BETWEEN ? AND ?" +
             "			AND e.user_userid = ?;";
 
-    private static final String MOKUHYOU =
-            "			SELECT" +
+    private static final String MOKUHYOU = "			SELECT" +
             "			SUM(m.Kingaku)" +
             "			FROM" +
             "			mokuhyou as m" +
@@ -70,20 +67,17 @@ public class JihakuDao extends Dao
     {
 
         System.out.println( date.toString() );
-        PreparedStatement stmt = null;
         ResultSet rset = null;
 
-        try
+        try ( PreparedStatement stmt = con.prepareStatement( SELECT ) )
         {
             List<AdviceVo> list = new ArrayList<AdviceVo>();
 
-            /* Statementの作成 */
-            stmt = con.prepareStatement( SELECT );
             //stmt.setString(1, date.toString().substring(7));
             //stmt.setString(2, date.toString().substring(7));
             stmt.setString( 1, userId );
-            stmt.setString( 2, date+"-1" );
-            stmt.setString( 3, date+"-31" );
+            stmt.setString( 2, date + "-1" );
+            stmt.setString( 3, date + "-31" );
             stmt.setString( 4, mokuhyou );
             /* SQL実行 */
             rset = stmt.executeQuery();
@@ -94,7 +88,7 @@ public class JihakuDao extends Dao
                 AdviceVo cv = new AdviceVo();
 
                 cv.setCategoryName( rset.getString( 1 ) );
-                cv.setDifference( rset.getInt( 2 )  );
+                cv.setDifference( rset.getInt( 2 ) );
                 list.add( cv );
             }
             return list;
@@ -103,106 +97,63 @@ public class JihakuDao extends Dao
         catch ( SQLException e )
         {
             throw e;
-        } finally
-        {
-            if ( stmt != null )
-            {
-                stmt.close();
-                stmt = null;
-            }
-            if ( rset != null )
-            {
-                rset.close();
-                rset = null;
-            }
         }
     }
+
     public int JihakuGoukei( String month, String userId ) throws SQLException
     {
 
         //System.out.println( month.toString() );
-        PreparedStatement stmt = null;
         ResultSet rset = null;
 
-        try
+        try ( PreparedStatement stmt = con.prepareStatement( GOUKEI ); )
         {
             int goukei;
 
-            /* Statementの作成 */
-            stmt = con.prepareStatement( GOUKEI );
             //stmt.setString(1, date.toString().substring(7));
             //stmt.setString(2, date.toString().substring(7));
-            stmt.setString( 1, month+"-1" );
-            stmt.setString( 2, month+"-31" );
+            stmt.setString( 1, month + "-1" );
+            stmt.setString( 2, month + "-31" );
             stmt.setString( 3, userId );
             /* SQL実行 */
             rset = stmt.executeQuery();
 
             /* 取得したデータを表示します。 */
 
-                rset.next();
-                goukei=( rset.getInt( 1 ) );
+            rset.next();
+            goukei = (rset.getInt( 1 ));
             return goukei;
         }
 
         catch ( SQLException e )
         {
             throw e;
-        } finally
-        {
-            if ( stmt != null )
-            {
-                stmt.close();
-                stmt = null;
-            }
-            if ( rset != null )
-            {
-                rset.close();
-                rset = null;
-            }
         }
     }
-    public int  JihakuMokuhyou( String month, String userId ) throws SQLException
+
+    public int JihakuMokuhyou( String month, String userId ) throws SQLException
     {
 
-        //System.out.println( month.toString() );
-        PreparedStatement stmt = null;
         ResultSet rset = null;
 
-        try
+        try ( PreparedStatement stmt = con.prepareStatement( MOKUHYOU ) )
         {
             int mokuhyou;
 
-            /* Statementの作成 */
-            stmt = con.prepareStatement( MOKUHYOU );
-            //stmt.setString(1, date.toString().substring(7));
-            //stmt.setString(2, date.toString().substring(7));
             stmt.setString( 1, month );
             stmt.setString( 2, userId );
             /* SQL実行 */
             rset = stmt.executeQuery();
 
             /* 取得したデータを表示します。 */
-                rset.next();
-                mokuhyou=(rset.getInt( 1 ) );
+            rset.next();
+            mokuhyou = (rset.getInt( 1 ));
             return mokuhyou;
         }
 
         catch ( SQLException e )
         {
             throw e;
-        } finally
-        {
-            if ( stmt != null )
-            {
-                stmt.close();
-                stmt = null;
-            }
-            if ( rset != null )
-            {
-                rset.close();
-                rset = null;
-            }
         }
     }
 }
