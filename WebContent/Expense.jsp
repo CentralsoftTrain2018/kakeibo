@@ -3,21 +3,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.Calendar"%>
 <jsp:useBean id="bean" class="bean.ExpenseBean" scope="request" />
-<jsp:useBean id="bean2" class="bean.ExpenseBean" scope="request" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-<script type="text/javascript" src="jquery.qrcode.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/menu.css">
 <title>家計簿</title>
 </head>
 <body>
-  <div id="qrcode"></div>
-    <script>
-      jQuery('#qrcode').qrcode({text:"I am Ochi Yosuke!!", width:600, height:600,});
-    </script>
   <div class="menu">
     <form method="POST" action="BungyServlet">
       <input type="hidden" name="nengetu" value="2018/05"> <input
@@ -30,10 +23,9 @@
       <input type="submit" value="分析">
     </form>
   </div>
-<%if(bean.getMessage() != null){%>
+<%if(! bean.getMessage().equals("")){%>
 <%= bean.getMessage() %><br>
 <%} %>
-<div id="qrcode"></div>
 入力してね<br>
 
 <%=bean.getDate().get(Calendar.YEAR) %>年
@@ -142,7 +134,6 @@
     <select name = "categoryId">
 <% for( CategoryVo cv: bean.getCategoryList()){%>
       <option value=<%=cv.getCategoryid() %>><%=cv.getCategoryname() %></option>
-      <%if(cv.getCategoryid() == ev.getCategoryId()) %>
 <% }%>
     </select>
   </td>
@@ -176,6 +167,7 @@
       <option value=<%=cv.getCategoryid() %>> <%=cv.getCategoryname() %> </option>
 <% }%>
     </select>
+
   </td>
 
   <td>

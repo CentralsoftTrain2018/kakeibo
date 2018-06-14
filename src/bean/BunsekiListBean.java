@@ -1,12 +1,14 @@
 package bean;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class BunsekiListBean
 {
     private List<BunsekiBean> list;
     private int sumSpending = 0;
+    private Calendar date;
 
     public BunsekiListBean()
     {
@@ -36,6 +38,16 @@ public class BunsekiListBean
     public void setSumSpending( int sumSpending )
     {
         this.sumSpending = sumSpending;
+    }
+
+    public Calendar getDate()
+    {
+        return date;
+    }
+
+    public void setDate( Calendar date )
+    {
+        this.date = date;
     }
 
 }

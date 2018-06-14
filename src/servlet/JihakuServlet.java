@@ -35,12 +35,10 @@ public class JihakuServlet extends HttpServlet
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException
     {
-
         HttpSession session = request.getSession();
         String userId = ( String ) session.getAttribute( "userId" );
-        String date = "201805";
         AdviceService conan = new AdviceService();
-        JihakuListBean bean = conan.jihaku( date, userId );
+        JihakuListBean bean = conan.jihaku( userId );
         //beanをリクエストにセット キー名は「bean」とする
         request.setAttribute( "bean", bean );
 
