@@ -16,6 +16,7 @@ public class BunsekiDao extends Dao{
             ",m.Kingaku - SUM(e.Kingaku) "+
             ",SUM(e.Kingaku) " +
             ",m.Kingaku "+
+            ",c.color "+
             "FROM " +
             "kakeibo.expenses e " +
             ",kakeibo.category c " +
@@ -63,6 +64,7 @@ public class BunsekiDao extends Dao{
                 bv.setDifference( rset.getInt( 2 ) );
                 bv.setSumSpending( rset.getInt( 3 ) );
                 bv.setMokuhyouKingaku( rset.getInt( 4 ) );
+                bv.setColor( rset.getString( 5 ) );
                 list.add( bv );
             }
 

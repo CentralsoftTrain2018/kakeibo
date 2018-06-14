@@ -29,14 +29,14 @@ public class JihakuDao extends Dao
             "	where " +
             "		e.category_categoryid = c.categoryid " +
             "        AND e.user_userid = ? " +
-            "		AND e.expensedate between '2018-5-1' AND '2018-5-31' " +
+            "		AND e.expensedate between ? AND ? " +
             "	group by " +
             "		c.categoryid " +
             "	) as k " +
             "where " +
             "	m.category_categoryid = k.cid " +
             "    AND k.euserid = m.user_userid " +
-            "	AND m.month like '2018/05' " +
+            "	AND m.month like ? " +
             "	AND k.sum1 - m.kingaku > 0 " +
             "order by " +
             "	k.sum1 - m.kingaku desc limit 3;";
@@ -47,7 +47,7 @@ public class JihakuDao extends Dao
             "			FROM" +
             "			expenses as e" +
             "			WHERE" +
-            "			e.expenseDate BETWEEN '2018-5-01' AND '2018-5-31'" +
+            "			e.expenseDate BETWEEN ? AND ?" +
             "			AND e.user_userid = ?;";
 
     private static final String MOKUHYOU =
@@ -56,7 +56,7 @@ public class JihakuDao extends Dao
             "			FROM" +
             "			mokuhyou as m" +
             "			WHERE" +
-            "			m.Month = '2018/05'" +
+            "			m.Month = ?" +
             "			AND m.user_userid = ?;";
 
     public JihakuDao( Connection con )
@@ -66,7 +66,7 @@ public class JihakuDao extends Dao
 
     //-------------------------------------------------------
     // カテゴリ名、支出合計、目標
-    public List<AdviceVo> JihakuAdvice( String date, String userId ) throws SQLException
+    public List<AdviceVo> JihakuAdvice( String mokuhyou, String date, String userId ) throws SQLException
     {
 
         System.out.println( date.toString() );
@@ -82,6 +82,9 @@ public class JihakuDao extends Dao
             //stmt.setString(1, date.toString().substring(7));
             //stmt.setString(2, date.toString().substring(7));
             stmt.setString( 1, userId );
+            stmt.setString( 2, date+"-1" );
+            stmt.setString( 3, date+"-31" );
+            stmt.setString( 4, mokuhyou );
             /* SQL実行 */
             rset = stmt.executeQuery();
 
@@ -129,7 +132,9 @@ public class JihakuDao extends Dao
             stmt = con.prepareStatement( GOUKEI );
             //stmt.setString(1, date.toString().substring(7));
             //stmt.setString(2, date.toString().substring(7));
-            stmt.setString( 1, userId );
+            stmt.setString( 1, month+"-1" );
+            stmt.setString( 2, month+"-31" );
+            stmt.setString( 3, userId );
             /* SQL実行 */
             rset = stmt.executeQuery();
 
@@ -172,7 +177,8 @@ public class JihakuDao extends Dao
             stmt = con.prepareStatement( MOKUHYOU );
             //stmt.setString(1, date.toString().substring(7));
             //stmt.setString(2, date.toString().substring(7));
-            stmt.setString( 1, userId );
+            stmt.setString( 1, month );
+            stmt.setString( 2, userId );
             /* SQL実行 */
             rset = stmt.executeQuery();
 

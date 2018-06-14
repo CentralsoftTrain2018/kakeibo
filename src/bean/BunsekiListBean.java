@@ -3,32 +3,39 @@ package bean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BunsekiListBean {
+public class BunsekiListBean
+{
     private List<BunsekiBean> list;
-    private int sumSpending=0;
+    private int sumSpending = 0;
+
     public BunsekiListBean()
     {
-        list=new ArrayList<BunsekiBean>();
+        list = new ArrayList<BunsekiBean>();
     }
+
     public List<BunsekiBean> getList()
     {
         return list;
     }
 
-    public void setList(List<BunsekiBean> list)
+    public void setList( List<BunsekiBean> list )
     {
         this.list = list;
     }
 
-    public void addList(BunsekiBean bb)
+    public void addList( BunsekiBean bb )
     {
-        list.add(bb);
+        list.add( bb );
     }
-    public int getSumSpending() {
+
+    public int getSumSpending()
+    {
         return sumSpending;
     }
-    public void setSumSpending(int sumSpending) {
-        this.sumSpending += sumSpending;
+
+    public void setSumSpending( int sumSpending )
+    {
+        this.sumSpending = sumSpending;
     }
 
 }
