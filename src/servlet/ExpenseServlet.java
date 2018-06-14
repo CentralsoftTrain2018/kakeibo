@@ -51,6 +51,7 @@ public class ExpenseServlet extends HttpServlet {
         String year = request.getParameter("year");
         String month = request.getParameter("month");
         String day = request.getParameter("selectDay");
+        String message = "";
 
         if(choice.equals("touroku")) {
             try {
@@ -63,7 +64,7 @@ public class ExpenseServlet extends HttpServlet {
                 ExpenseService.addExpense(kingaku, categoryId, expenseName, userId);
             }
             catch(NumberFormatException | NoTextException e) {
-                eb.setMessage("入力が不正です");
+                message = "入力が不正です";
             }
         }
 
@@ -79,7 +80,7 @@ public class ExpenseServlet extends HttpServlet {
                 ExpenseService.updateExpense(expenseId, kingaku, categoryId, expenseName);
             }
             catch(NumberFormatException | NoTextException e) {
-                eb.setMessage("入力が不正です");
+                message = "入力が不正です";
             }
         }
 
@@ -89,7 +90,7 @@ public class ExpenseServlet extends HttpServlet {
                 ExpenseService.deleteExpense(expenseId);
             }
             catch(NumberFormatException e) {
-                eb.setMessage("入力が不正です");
+                message = "入力が不正です";
             }
         }
 
@@ -132,7 +133,7 @@ public class ExpenseServlet extends HttpServlet {
         eb.setEndDay(calendar.get(Calendar.DATE));
 
 
-
+        eb.setMessage(message);
         //JSPに遷移する
         request.setAttribute("bean", eb);
         RequestDispatcher disp = request.getRequestDispatcher("Expense.jsp");
