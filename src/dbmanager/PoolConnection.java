@@ -23,8 +23,8 @@ public class PoolConnection {
                    "jdbc:mysql://"
                    + servername
                    + "/"
-                   + dbname,
-//                   + "?useUnicode=true&characterEncoding=utf8"
+                   + dbname
+                   + "?useUnicode=true&characterEncoding=utf8",
                    user,
                    pass);
 

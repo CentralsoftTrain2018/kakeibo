@@ -54,7 +54,7 @@ public class ExpenseService
         return bb;
     }
 
-    public static ExpenseBean getAllSumOfDay(Calendar calendar, String userId) {
+    public static ExpenseBean makeExpenseBean(Calendar calendar, Date expenseDate, String userId) {
         ExpenseBean eb = new ExpenseBean();
         ArrayList<ExpenseVo> expenseList = ExpenseDBManager.getAllSumOfDay(calendar, userId);
         int[] expenses = new int[31];
@@ -70,38 +70,18 @@ public class ExpenseService
         }
 
         eb.setExpenses(expenses);
-        return eb;
-    }
 
-    public static ExpenseBean getExpensesOfDay(Date date, String userId) {
-
-        ExpenseBean eb = new ExpenseBean();
-        List<ExpenseVo> expenseOfDayList = new ArrayList<ExpenseVo>();
-
-        //List<ExpenseVo> expenseOfDayList = ExpenseDBManager.getExpenseOfDay(date, userId);
-
-        for(int i = 0; i < 10; i++) {
-            ExpenseVo ev = new ExpenseVo();
-            ev.setExpenseKingaku(100);
-            ev.setExpenseName("banana");
-            ev.setCategoryId(1);
-
-            expenseOfDayList.add(ev);
-        }
-
+        // 1日の支出一覧の取得
+        List<ExpenseVo> expenseOfDayList = ExpenseDBManager.getExpenseOfDay(expenseDate, userId);
         eb.setExpenseOfDay(expenseOfDayList);
 
+        // カテゴリー一覧の取得
+        List<CategoryVo> categoryList = new ArrayList<CategoryVo>();
+        categoryList = ExpenseDBManager.getCategory();
+
+        eb.setCategoryList(categoryList);
+
         return eb;
     }
-    /**
-     *
-     * @return
-     */
-    public static List<CategoryVo> getCategory()
-    {
-
-        List<CategoryVo> list = new ArrayList<CategoryVo>();
-        list = ExpenseDBManager.getCategory();
-        return list;
-    }
 }
+
