@@ -8,10 +8,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.qrcode.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/menu.css">
 <title>家計簿</title>
 </head>
 <body>
+  <div id="qrcode"></div>
+    <script>
+      jQuery('#qrcode').qrcode({text:"I am Ochi Yosuke!!", width:600, height:600,});
+    </script>
   <div class="menu">
     <form method="POST" action="BungyServlet">
       <input type="hidden" name="nengetu" value="2018/05"> <input
@@ -20,13 +26,14 @@
     <form method="POST" action="ExpenseServlet">
       <input type="submit" value="家計簿" disabled="disabled">
     </form>
-    <form method="POST" action="Bunseki.jsp">
+    <form method="POST" action="BunsekiServlet">
       <input type="submit" value="分析">
     </form>
   </div>
 <%if(bean.getMessage() != null){%>
 <%= bean.getMessage() %><br>
 <%} %>
+<div id="qrcode"></div>
 入力してね<br>
 
 <%=bean.getDate().get(Calendar.YEAR) %>年

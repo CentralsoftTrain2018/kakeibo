@@ -16,26 +16,27 @@ public class BunsekiDao extends Dao{
             ",m.Kingaku - SUM(e.Kingaku) "+
             ",SUM(e.Kingaku) " +
             ",m.Kingaku "+
+            ",c.color "+
             "FROM " +
             "kakeibo.expenses e " +
             ",kakeibo.category c " +
             ",kakeibo.mokuhyou m " +
             "WHERE " +
-            "DATE_FORMAT(e.expenseDate, '%Y%m') = ? " +
+            "DATE_FORMAT(e.expenseDate, '%Y/%m') = ? " +
             "AND m.Month = ? " +
             "AND e.category_categoryId = c.categoryId " +
             "AND e.user_userid = m.user_userid " +
             "AND e.user_userid = ? " +
             "AND c.categoryId = m.category_categoryId " +
             "GROUP BY e.category_categoryId " +
-            "ORDER BY m.Kingaku - SUM(e.Kingaku) DESC;";
+            "ORDER BY e.category_categoryId ;";
 
     public BunsekiDao( Connection con )
     {
         super( con );
     }
 
-    public List<BunsekiVo> getBunseki( String month, String userId ) throws SQLException
+    public List<BunsekiVo> getBunseki( String month,String userId ) throws SQLException
     {
 
         ResultSet rset = null;
@@ -46,9 +47,8 @@ public class BunsekiDao extends Dao{
         {
             List<BunsekiVo> list = new ArrayList<BunsekiVo>();
 
-            String testMonth = "201805";
             /* Statementの作成 */
-            stmt.setString( 1, testMonth );
+            stmt.setString( 1, month );
             stmt.setString( 2, month );
             stmt.setString( 3, userId );
 
@@ -64,6 +64,7 @@ public class BunsekiDao extends Dao{
                 bv.setDifference( rset.getInt( 2 ) );
                 bv.setSumSpending( rset.getInt( 3 ) );
                 bv.setMokuhyouKingaku( rset.getInt( 4 ) );
+                bv.setColor( rset.getString( 5 ) );
                 list.add( bv );
             }
 
