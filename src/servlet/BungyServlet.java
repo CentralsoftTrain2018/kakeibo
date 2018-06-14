@@ -2,6 +2,8 @@ package servlet;
 
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,7 +44,22 @@ public class BungyServlet extends HttpServlet
             **/
             HttpSession session = request.getSession();
             String userId = (String)session.getAttribute("userId");
-            String nengetu=new String(request.getParameter("nengetu").getBytes("iso-8859-1"),"UTF-8");
+            String nengetu=request.getParameter("nengetu");
+            /**
+             * nengetuに文字が入っていない場合（他の画面からバンジーボタンが押された）
+             * 文字が入っている場合（バンジー画面から数値が送られる）
+             * の場合わけが行われる。
+             */
+            if(nengetu!="")
+            {
+                nengetu=new String(nengetu.getBytes("iso-8859-1"),"UTF-8");
+            }
+            else
+            {
+                //入っていない場合。今日が何年何月かをnengetuに入れる
+                Calendar calendar = Calendar.getInstance();
+                nengetu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
+            }
             //String nengetu=request.getParameter("nengetu");
             bb = ExpenseService.getMokuhyouAndExpenses(userId,nengetu);
 
