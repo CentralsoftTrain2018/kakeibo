@@ -46,9 +46,9 @@
 </select>
 <input type="submit" value="年月変更">
 </form>
-<div class="en" style="width: 400px; height: 371px; margin-bottom: 0px; padding-bottom: 0px; position: relative;">
+<div class="en" style="width: 800px; height: 600px; margin-bottom: 0px; padding-bottom: 0px;  position: relative;">
 <canvas id="newcanvas"
-  style="width: 100%; height: 100%;"
+  style="width: 50%; height: 100%;"
   ></canvas>
   <p
    style=" position: absolute;
@@ -58,9 +58,9 @@
    right: 0;
    margin: auto;
    text-align: center;
-   top: 50%;
+   top: 45%;
    -webkit-transform: translateY(-50%);
-   transform: translateY(-50%);
+   transform: translateX(-25%);
    ">
    <%=bean.getDate().get(Calendar.YEAR) %>年
    <%=bean.getDate().get(Calendar.MONTH) %>月<br>
@@ -71,20 +71,7 @@
    合計金額<br>
    <%=bean.getSumSpending() %>円
    <%}%></p>
-</div>
-<script >
-var data = [
-  <%for (bean.BunsekiBean bb : bean.getList()) {%>
-   {
-    value:"<%=bb.getSumSpending()%>",
-    color:"<%=bb.getColor()%>",
-    label:"<%=bb.getCategoryName()%>"
-   },
-   <%}%>
-  ];
-var myChart = new Chart(document.getElementById("newcanvas").getContext("2d")).Doughnut(data);
-</script>
-<table class="bunseki">
+   <table class="bunseki">
   <tr>
     <th>色</th>
     <th>項目</th>
@@ -105,5 +92,19 @@ var myChart = new Chart(document.getElementById("newcanvas").getContext("2d")).D
    <%}%>
 
 </table>
+</div>
+<script >
+var data = [
+  <%for (bean.BunsekiBean bb : bean.getList()) {%>
+   {
+    value:"<%=bb.getSumSpending()%>",
+    color:"<%=bb.getColor()%>",
+    label:"<%=bb.getCategoryName()%>"
+   },
+   <%}%>
+  ];
+var myChart = new Chart(document.getElementById("newcanvas").getContext("2d")).Doughnut(data);
+</script>
+
 </body>
 </html>
