@@ -22,6 +22,8 @@ public class ExpenseBean
 
     private List<CategoryVo> categoryList;
 
+    private int selectDay;
+
     public ExpenseBean()
     {
         super();
@@ -93,6 +95,14 @@ public class ExpenseBean
     public void setExpenses( int[] expenses )
     {
         this.expenses = expenses;
+    }
+
+    public int getSelectDay() {
+        return selectDay;
+    }
+
+    public void setSelectDay(int selectDay) {
+        this.selectDay = selectDay;
     }
 
     @Override

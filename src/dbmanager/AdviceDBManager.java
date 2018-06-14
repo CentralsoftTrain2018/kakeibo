@@ -96,10 +96,10 @@ public class AdviceDBManager
     }
 
     /**
-     * 分析情報の取得
+     * ユーザーIDと該当の年月二対応する分析情報の取得
      * @param nengetsu
      * @param userId
-     * @return List<BunsekiVo>
+     * @return 分析情報
      */
     public static List<BunsekiVo> selectBunseki( String nengetsu, String userId )
     {
