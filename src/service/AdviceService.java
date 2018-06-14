@@ -19,11 +19,17 @@ public class AdviceService
 {
 
     //AdviceVo型のListをConanBean型のListに変換
-    public JihakuListBean jihaku( String date, String userId )
+    public JihakuListBean jihaku( String userId )
     {
-        List<AdviceVo> resultList = AdviceDBManager.selectJihakuAdvice( date, userId );
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -1);
+        String date = new SimpleDateFormat( "yyyy-MM" ).format( calendar.getTime() );
+        String mokuhyouNengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
+        List<AdviceVo> resultList = AdviceDBManager.selectJihakuAdvice( mokuhyouNengetsu, date, userId );
         int goukei = AdviceDBManager.sumGoukei( date, userId );
-        int mokuhyou = AdviceDBManager.sumMokuhyou( date, userId );
+        System.out.println(goukei);
+        int mokuhyou = AdviceDBManager.sumMokuhyou( mokuhyouNengetsu, userId );
+        System.out.println(mokuhyou);
         JihakuListBean jlb = new JihakuListBean();
         List<JihakuBean> list = new ArrayList<JihakuBean>();
 
@@ -47,9 +53,9 @@ public class AdviceService
 
     /**
      * selectConanAdvice
-     * AdviceVo型のListをConanBean型のListに変換
+     * ID指定したユーザーの当月のコナン君アドバイスを取得する
      * @param userId ユーザーID
-     * @return ConanListBean
+     * @return 現在の月のコナン君のアドバイス
      */
     public static ConanListBean selectConanAdvice( String userId )
     {
@@ -73,7 +79,6 @@ public class AdviceService
 
             list.add( cb );
         }
-        //ConanListBeanに入れる
         clb.setList( list );
         //月の値を入れる
         clb.setThisMonth( calendar.get( Calendar.MONTH ) + 1 );
@@ -84,7 +89,7 @@ public class AdviceService
     /**
      * getNengetsu
      * 現在の年月をyyyy/MMで取得
-     * @return nengetsu
+     * @return 現在の年月
      */
     protected static String getNengetsu()
     {
@@ -97,6 +102,11 @@ public class AdviceService
     {
         String nengetsu = getNengetsu();
         BunsekiListBean blb = setBunsekiList( userId, nengetsu );
+        Calendar calendar = Calendar.getInstance();
+        calendar.add( Calendar.MONTH, +1 );
+        calendar.get( Calendar.YEAR );
+        calendar.get( Calendar.MONTH );
+        blb.setDate( calendar );
 
         return blb;
     }
@@ -107,17 +117,18 @@ public class AdviceService
         //Calendar ｄesignationCalendar = calendar;
         //calendar.add( Calendar.MONTH, -1 );
         String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
-
         BunsekiListBean blb = setBunsekiList( userId, nengetsu );
+        calendar.add( Calendar.MONTH, +1 );
+        blb.setDate( calendar );
 
         return blb;
     }
 
     /**
-     * リストに入れる
+     * 取得した分析情報をBeanにセットする
      * @param userId
      * @param nengetsu
-     * @return　BunsekiListBean
+     * @return　
      */
     protected static BunsekiListBean setBunsekiList( String userId, String nengetsu )
     {
@@ -145,4 +156,5 @@ public class AdviceService
         return blb;
 
     }
+
 }

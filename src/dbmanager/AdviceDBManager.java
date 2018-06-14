@@ -41,14 +41,14 @@ public class AdviceDBManager
     }
 
     //アドバイス(自白)に必要なデータを取得する
-    public static List<AdviceVo> selectJihakuAdvice( String date, String userId )
+    public static List<AdviceVo> selectJihakuAdvice( String mokuhyou, String date, String userId )
     {
         try (
                 Connection con = PoolConnection.getConnection(); )
         {
 
             JihakuDao jdao = new JihakuDao( con );
-            List<AdviceVo> list = jdao.JihakuAdvice( date, userId ) /**jdao.jihakuAdvice()**/
+            List<AdviceVo> list = jdao.JihakuAdvice( mokuhyou, date, userId ) /**jdao.jihakuAdvice()**/
             ;
             return list;
 
@@ -96,10 +96,10 @@ public class AdviceDBManager
     }
 
     /**
-     * 分析情報の取得
+     * ユーザーIDと該当の年月二対応する分析情報の取得
      * @param nengetsu
      * @param userId
-     * @return List<BunsekiVo>
+     * @return 分析情報
      */
     public static List<BunsekiVo> selectBunseki( String nengetsu, String userId )
     {
