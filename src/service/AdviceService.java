@@ -114,6 +114,30 @@ public class AdviceService
             blb.setSumSpending( bv.getSumSpending() );
             blb.addList(bb);
         }
+        return blb;
+    }
+    public static BunsekiListBean selectBunseki(String userId,Calendar calendar)
+    {
+        BunsekiListBean blb=new BunsekiListBean();
+
+        //指定された年月を取得
+        //Calendar ｄesignationCalendar = calendar;
+        //calendar.add( Calendar.MONTH, -1 );
+        String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
+
+        List<BunsekiVo> bunsekiList=AdviceDBManager.selectBunseki(nengetsu, userId);
+
+        for ( BunsekiVo bv : bunsekiList )
+        {
+            BunsekiBean bb = new BunsekiBean();
+            bb.setCategoryName( bv.getCategoryName() );
+            bb.setDifference( bv.getDifference() );
+            bb.setMokuhyouKingaku( bv.getMokuhyouKingaku() );
+            bb.setSumSpending( bv.getSumSpending() );
+            bb.setColor("RED");
+            blb.setSumSpending( bv.getSumSpending() );
+            blb.addList(bb);
+        }
 
         return blb;
     }

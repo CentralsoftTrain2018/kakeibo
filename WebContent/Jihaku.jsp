@@ -20,11 +20,11 @@
         for ( bean.JihakuBean jb : bean.getJihakulist() )
         {
       %>
-      <%=jb.getCategoryname()%>が<%=jb.getExcess()%>円 <br>
+      <%=jb.getCategoryname()%>が<%=jb.getExcess()%>円超えて <br>
       <%
         }
       %>
-      特に多いんだよ!!!<br>
+      だから殺したんだよ!!!<br>
     </p>
     <br> <br>
     <form method="POST" action="BungyServlet">

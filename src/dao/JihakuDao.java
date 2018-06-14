@@ -13,31 +13,33 @@ public class JihakuDao extends Dao
 {
 
     private static final String SELECT =
-            "		select" +
-            "			k.cname" +
-            "			,k.sum1 - m.kingaku" +
-            "		from" +
-            "			mokuhyou m" +
-            "			,(select" +
-            "				c.categoryid as cid" +
-            "				,c.categoryname as cname" +
-            "				,sum(e.kingaku) as sum1" +
-            "			from" +
-            "				expenses e" +
-            "				,category c" +
-            "			where" +
-            "				e.category_categoryid = c.categoryid" +
-            "				AND e.expensedate between '2018-5-1' AND '2018-5-31'" +
-            "				AND e.user_userid = ?"+
-            "			group by" +
-            "				c.categoryid" +
-            "			) as k" +
-            "		where" +
-            "			m.category_categoryid = k.cid" +
-            "			AND m.month like '2018/05'" +
-            "			AND k.sum1 - m.kingaku > 0" +
-            "		order by" +
-            "			k.sum1 - m.kingaku desc limit 3;";
+            "select " +
+            "	k.cname " +
+            "	,k.sum1 - m.kingaku " +
+            "from " +
+            "	mokuhyou m " +
+            "	,(select " +
+            "		c.categoryid as cid " +
+            "		,c.categoryname as cname " +
+            "		,sum(e.kingaku) as sum1 " +
+            "        ,e.user_userid as euserid " +
+            "	from " +
+            "		expenses e " +
+            "		,category c " +
+            "	where " +
+            "		e.category_categoryid = c.categoryid " +
+            "        AND e.user_userid = ? " +
+            "		AND e.expensedate between '2018-5-1' AND '2018-5-31' " +
+            "	group by " +
+            "		c.categoryid " +
+            "	) as k " +
+            "where " +
+            "	m.category_categoryid = k.cid " +
+            "    AND k.euserid = m.user_userid " +
+            "	AND m.month like '2018/05' " +
+            "	AND k.sum1 - m.kingaku > 0 " +
+            "order by " +
+            "	k.sum1 - m.kingaku desc limit 3;";
 
     private static final String GOUKEI =
             "			SELECT" +
