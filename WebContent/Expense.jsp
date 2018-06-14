@@ -133,16 +133,13 @@
   <td>
     <select name = "categoryId">
 <% for( CategoryVo cv: bean.getCategoryList()){%>
-<<<<<<< HEAD
+
       <option value=<%=cv.getCategoryid() %>
       <%if(ev.getCategoryId() == cv.getCategoryid()) {%>
       selected
       <%} %>
       ><%=cv.getCategoryname() %></option>
 
-=======
-      <option value=<%=cv.getCategoryid() %>><%=cv.getCategoryname() %></option>
->>>>>>> refs/remotes/origin/master
 <% }%>
     </select>
   </td>
