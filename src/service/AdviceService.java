@@ -53,9 +53,9 @@ public class AdviceService
 
     /**
      * selectConanAdvice
-     * AdviceVo型のListをConanBean型のListに変換
+     * ID指定したユーザーの当月のコナン君アドバイスを取得する
      * @param userId ユーザーID
-     * @return ConanListBean
+     * @return 現在の月のコナン君のアドバイス
      */
     public static ConanListBean selectConanAdvice( String userId )
     {
@@ -79,7 +79,6 @@ public class AdviceService
 
             list.add( cb );
         }
-        //ConanListBeanに入れる
         clb.setList( list );
         //月の値を入れる
         clb.setThisMonth( calendar.get( Calendar.MONTH ) + 1 );
@@ -90,7 +89,7 @@ public class AdviceService
     /**
      * getNengetsu
      * 現在の年月をyyyy/MMで取得
-     * @return nengetsu
+     * @return 現在の年月
      */
     protected static String getNengetsu()
     {
@@ -126,10 +125,10 @@ public class AdviceService
     }
 
     /**
-     * リストに入れる
+     * 取得した分析情報をBeanにセットする
      * @param userId
      * @param nengetsu
-     * @return　BunsekiListBean
+     * @return　
      */
     protected static BunsekiListBean setBunsekiList( String userId, String nengetsu )
     {
