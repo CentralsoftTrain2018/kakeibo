@@ -5,10 +5,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.qrcode.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/Conan.css">
 <title>コナンくんからのアドバイス</title>
 </head>
 <body>
+  <div id="qrcode"></div>
+    <script>
+      jQuery('#qrcode').qrcode({text:"I am Ochi Yosuke!!", width:50, height:50,});
+    </script>
   <img src="image/conan.png" style="float: left;">
   <div class="balloon">
     <%=bean.getThisMonth()%>月は目標達成だね！おめでとう(^_^)/♪<br>

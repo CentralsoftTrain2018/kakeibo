@@ -8,16 +8,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-<script type="text/javascript" src="jquery.qrcode.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/menu.css">
 <title>家計簿</title>
 </head>
 <body>
-  <div id="qrcode"></div>
-    <script>
-      jQuery('#qrcode').qrcode({text:"I am Ochi Yosuke!!", width:600, height:600,});
-    </script>
   <div class="menu">
     <form method="POST" action="BungyServlet">
       <input type="hidden" name="nengetu" value="2018/05"> <input
@@ -142,7 +136,6 @@
     <select name = "categoryId">
 <% for( CategoryVo cv: bean.getCategoryList()){%>
       <option value=<%=cv.getCategoryid() %>><%=cv.getCategoryname() %></option>
-      <%if(cv.getCategoryid() == ev.getCategoryId()) %>
 <% }%>
     </select>
   </td>
@@ -177,11 +170,6 @@
 <% }%>
     </select>
   </td>
-<<<<<<< HEAD
-
-=======
-
->>>>>>> refs/remotes/origin/master
   <td>
   <input type="text" name="expenseName">
   </td>
