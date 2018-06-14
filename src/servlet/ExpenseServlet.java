@@ -52,7 +52,6 @@ public class ExpenseServlet extends HttpServlet {
         String month = request.getParameter("month");
         String day = request.getParameter("selectDay");
 
-
         if(choice.equals("touroku")) {
             try {
                 int kingaku = Integer.parseInt(kingakuStr);
@@ -126,6 +125,7 @@ public class ExpenseServlet extends HttpServlet {
         System.out.println(date);
 
         eb = ExpenseService.makeExpenseBean(calendar, Date.valueOf(date), userId);
+
         eb.setStartDayOfTheWeek(calendar.get(Calendar.DAY_OF_WEEK) - 1);
         eb.setDate(calendar);
         calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
