@@ -119,6 +119,10 @@ public class BungyBean {
     }
     **/
 
+    public String getMonth() {
+        return month;
+    }
+
     public void setMonth(String month) {
         this.month = month;
     }

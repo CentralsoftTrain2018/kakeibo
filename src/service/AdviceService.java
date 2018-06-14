@@ -19,10 +19,14 @@ public class AdviceService
 {
 
     //AdviceVo型のListをConanBean型のListに変換
-    public JihakuListBean jihaku( String userId )
+    public JihakuListBean jihaku(String month, String userId )
     {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MONTH, -1);
+        String[] yearAndMonth = month.split("/");
+        calendar.set(Calendar.YEAR, Integer.parseInt(yearAndMonth[0]));
+        calendar.set(Calendar.MONTH, Integer.parseInt(yearAndMonth[1]) - 1);
+        System.out.println(yearAndMonth[1]);
+        System.out.println("asdadasdas");
         String date = new SimpleDateFormat( "yyyy-MM" ).format( calendar.getTime() );
         String mokuhyouNengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
         List<AdviceVo> resultList = AdviceDBManager.selectJihakuAdvice( mokuhyouNengetsu, date, userId );
