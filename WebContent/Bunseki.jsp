@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.Calendar"%>
 
 <jsp:useBean id="bean" class="bean.BunsekiListBean" scope="request" />
 
@@ -61,6 +62,9 @@
    -webkit-transform: translateY(-50%);
    transform: translateY(-50%);
    ">
+   <%=bean.getDate().get(Calendar.YEAR) %>年
+   <%=bean.getDate().get(Calendar.MONTH) %>月<br>
+
    <%if(bean.getList().size() == 0){%>
    データがありません
    <%}else{%>

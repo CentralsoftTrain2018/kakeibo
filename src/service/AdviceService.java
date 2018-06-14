@@ -98,6 +98,12 @@ public class AdviceService
         String nengetsu = getNengetsu();
         BunsekiListBean blb = setBunsekiList( userId, nengetsu );
 
+        Calendar calendar = Calendar.getInstance();
+        calendar.add( Calendar.MONTH, +1 );
+        calendar.get( Calendar.YEAR );
+        calendar.get( Calendar.MONTH );
+        blb.setDate( calendar );
+
         return blb;
     }
 
@@ -107,8 +113,9 @@ public class AdviceService
         //Calendar ｄesignationCalendar = calendar;
         //calendar.add( Calendar.MONTH, -1 );
         String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
-
         BunsekiListBean blb = setBunsekiList( userId, nengetsu );
+        calendar.add( Calendar.MONTH, +1 );
+        blb.setDate( calendar );
 
         return blb;
     }
