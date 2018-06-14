@@ -63,15 +63,16 @@ public class ExpenseDao extends Dao
             "useflag = 1;";
 
     private static final String GET_EXPENSES = "SELECT"
-            + " categoryId "
+            + " expenseId "
+            + " ,category_categoryId "
             + " ,expenseName "
             + " ,kingaku "
             + " FROM "
             + " expenses "
             + " WHERE "
-            + " userId = ? "
+            + " user_userId = ? "
             + " AND "
-            + " date = ? ";
+            + " expenseDate = ? ";
 
     public ExpenseDao( Connection con )
     {
@@ -240,9 +241,10 @@ public class ExpenseDao extends Dao
             while(rset.next()) {
                 ExpenseVo ev = new ExpenseVo();
 
-                ev.setCategoryId(rset.getInt(1));
-                ev.setExpenseName(rset.getString(2));
-                ev.setExpenseKingaku(rset.getInt(3));
+                ev.setExpenseId(rset.getInt(1));
+                ev.setCategoryId(rset.getInt(2));
+                ev.setExpenseName(rset.getString(3));
+                ev.setExpenseKingaku(rset.getInt(4));
 
                 eList.add(ev);
             }

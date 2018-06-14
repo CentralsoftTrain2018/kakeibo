@@ -19,11 +19,17 @@ public class AdviceService
 {
 
     //AdviceVo型のListをConanBean型のListに変換
-    public JihakuListBean jihaku( String date, String userId )
+    public JihakuListBean jihaku( String userId )
     {
-        List<AdviceVo> resultList = AdviceDBManager.selectJihakuAdvice( date, userId );
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -1);
+        String date = new SimpleDateFormat( "yyyy-MM" ).format( calendar.getTime() );
+        String mokuhyouNengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
+        List<AdviceVo> resultList = AdviceDBManager.selectJihakuAdvice( mokuhyouNengetsu, date, userId );
         int goukei = AdviceDBManager.sumGoukei( date, userId );
-        int mokuhyou = AdviceDBManager.sumMokuhyou( date, userId );
+        System.out.println(goukei);
+        int mokuhyou = AdviceDBManager.sumMokuhyou( mokuhyouNengetsu, userId );
+        System.out.println(mokuhyou);
         JihakuListBean jlb = new JihakuListBean();
         List<JihakuBean> list = new ArrayList<JihakuBean>();
 
@@ -97,7 +103,6 @@ public class AdviceService
     {
         String nengetsu = getNengetsu();
         BunsekiListBean blb = setBunsekiList( userId, nengetsu );
-
         Calendar calendar = Calendar.getInstance();
         calendar.add( Calendar.MONTH, +1 );
         calendar.get( Calendar.YEAR );
@@ -152,4 +157,5 @@ public class AdviceService
         return blb;
 
     }
+
 }

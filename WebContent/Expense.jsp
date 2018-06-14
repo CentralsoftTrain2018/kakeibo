@@ -1,4 +1,5 @@
 <%@page import="vo.CategoryVo"%>
+<%@page import="vo.ExpenseVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.Calendar"%>
 <jsp:useBean id="bean" class="bean.ExpenseBean" scope="request" />
@@ -6,16 +7,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-<script type="text/javascript" src="jquery.qrcode.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/menu.css">
 <title>家計簿</title>
 </head>
 <body>
-  <div id="qrcode"></div>
-    <script>
-      jQuery('#qrcode').qrcode({text:"I am Ochi Yosuke!!", width:600, height:600,});
-    </script>
   <div class="menu">
     <form method="POST" action="BungyServlet">
       <input type="hidden" name="nengetu" value="2018/05"> <input
@@ -28,21 +23,11 @@
       <input type="submit" value="分析">
     </form>
   </div>
-<%if(bean.getMessage() != null){%>
+<%if(! bean.getMessage().equals("")){%>
 <%= bean.getMessage() %><br>
 <%} %>
-<div id="qrcode"></div>
 入力してね<br>
-<form  method="POST" action="ExpenseServlet">
-  支出ID<input type="text" name="expenseId"><br>
-  金額<input type="text" name="kingaku"><br>
-  カテゴリー<input type="text" name="categoryId"><br>
-  支出名<input type="text" name="expenseName"><br>
-  登録<input type="radio" name="choice" value="touroku" checked>
-  変更<input type="radio" name="choice" value="henkou">
-  削除<input type="radio" name="choice" value="sakujo">
-  <input type="submit" value="実行">
-</form>
+
 <%=bean.getDate().get(Calendar.YEAR) %>年
 <%=bean.getDate().get(Calendar.MONTH)+1 %>月
 
@@ -85,6 +70,8 @@
   <%if(shouldWrite){%>
     <%=bean.getExpenses()[day - 1] %>
     <form method="POST" action="ExpenseServlet">
+    <input type="hidden" name="year" value=<%=bean.getDate().get(Calendar.YEAR) %>>
+    <input type="hidden" name="month" value=<%=bean.getDate().get(Calendar.MONTH) %>>
     <input type="hidden" name="selectDay" value=<%=day %>>
     <input type="submit" value=<%=day %>>
     </form>
@@ -93,6 +80,8 @@
   <%if(i == bean.getStartDayOfTheWeek()){ %>
     <%=bean.getExpenses()[day - 1] %>
     <form method="POST" action="ExpenseServlet">
+    <input type="hidden" name="year" value=<%=bean.getDate().get(Calendar.YEAR) %>>
+    <input type="hidden" name="month" value=<%=bean.getDate().get(Calendar.MONTH) %>>
     <input type="hidden" name="selectDay" value=<%=day %>>
     <input type="submit" value=<%=day %>>
     </form>
@@ -110,6 +99,8 @@
     <%if(shouldWrite){ %>
       <%=bean.getExpenses()[day - 1] %>
       <form method="POST" action="ExpenseServlet">
+      <input type="hidden" name="year" value=<%=bean.getDate().get(Calendar.YEAR) %>>
+      <input type="hidden" name="month" value=<%=bean.getDate().get(Calendar.MONTH) %>>
       <input type="hidden" name="selectDay" value=<%=day %>>
       <input type="submit" value=<%=day %>>
       </form>
@@ -135,44 +126,48 @@
 <th colspan = 2 align = "center"> 操作 </th>
 </tr>
 
-<%for(int i=0; i<10; i++){ %>
+<% for( ExpenseVo ev: bean.getExpenseOfDay()){ %>
 
 <tr>
-
+  <form method="POST" action="ExpenseServlet">
   <td>
-    <select>
+    <select name = "categoryId">
 <% for( CategoryVo cv: bean.getCategoryList()){%>
-      <option value="1"><%=cv.getCategoryname() %></option>
+      <option value=<%=cv.getCategoryid() %>><%=cv.getCategoryname() %></option>
 <% }%>
     </select>
   </td>
 
   <td>
-    <input type="text" name="expenseName">
+  <input type="text" name="expenseName" value = <%=ev.getExpenseName() %>>
   </td>
 
   <td>
-  <input type="text" name="kingaku">
+  <input type="text" name="kingaku" value = <%=ev.getExpenseKingaku() %>>
   </td>
 
   <td>
-  <input type="submit" value="変更">
+  <input type="submit" name = "choice" value="henkou">
+  <input type="hidden" name="expenseId" value=<%=ev.getExpenseId() %>>
   </td>
 
     <td>
-  <input type="submit" value="削除">
+  <input type="submit" name = "choice" value="sakujo">
   </td>
+
+  </form>
   </tr>
 <%} %>
+
 <tr>
+<form method="POST" action="ExpenseServlet">
   <td>
-    <select>
+    <select name = "categoryId">
 <% for( CategoryVo cv: bean.getCategoryList()){%>
-      <option value="1"><%=cv.getCategoryname() %></option>
+      <option value=<%=cv.getCategoryid() %>> <%=cv.getCategoryname() %> </option>
 <% }%>
     </select>
   </td>
-
   <td>
   <input type="text" name="expenseName">
   </td>
@@ -182,8 +177,9 @@
   </td>
 
     <td colspan = 2 align = "center">
-  <input type="submit" value="登録">
+  <input type="submit" name="choice" value="touroku">
   </td>
+    </form>
   </tr>
 </table>
 </body>

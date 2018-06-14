@@ -1,9 +1,9 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import bean.ExpenseBean;
 import exception.NoTextException;
 import service.ExpenseService;
-import vo.CategoryVo;
 
 /**
  * Servlet implementation class IndexStartServlet
@@ -46,11 +45,14 @@ public class ExpenseServlet extends HttpServlet {
         String expenseIdStr = request.getParameter("expenseId");
         String kingakuStr = request.getParameter("kingaku");
         String categoryIdStr = request.getParameter("categoryId");
-//        String expenseName = request.getParameter("expenseName");
+        // String expenseName = request.getParameter("expenseName");
         HttpSession session = request.getSession();
         String userId = (String)session.getAttribute("userId");
         String year = request.getParameter("year");
         String month = request.getParameter("month");
+        String day = request.getParameter("selectDay");
+        String message = "";
+
         if(choice.equals("touroku")) {
             try {
                 int kingaku = Integer.parseInt(kingakuStr);
@@ -62,7 +64,7 @@ public class ExpenseServlet extends HttpServlet {
                 ExpenseService.addExpense(kingaku, categoryId, expenseName, userId);
             }
             catch(NumberFormatException | NoTextException e) {
-                eb.setMessage("入力が不正です");
+                message = "入力が不正です";
             }
         }
 
@@ -78,7 +80,7 @@ public class ExpenseServlet extends HttpServlet {
                 ExpenseService.updateExpense(expenseId, kingaku, categoryId, expenseName);
             }
             catch(NumberFormatException | NoTextException e) {
-                eb.setMessage("入力が不正です");
+                message = "入力が不正です";
             }
         }
 
@@ -88,7 +90,7 @@ public class ExpenseServlet extends HttpServlet {
                 ExpenseService.deleteExpense(expenseId);
             }
             catch(NumberFormatException e) {
-                eb.setMessage("入力が不正です");
+                message = "入力が不正です";
             }
         }
 
@@ -98,16 +100,40 @@ public class ExpenseServlet extends HttpServlet {
             calendar.set(Calendar.MONTH, Integer.parseInt(month));
         }
         calendar.set(Calendar.DATE, 1);
-        eb = ExpenseService.getAllSumOfDay(calendar, userId);
+
+        if(month != null && month.length() == 1)
+        {
+            int tuki = Integer.parseInt(month)+1;
+            month = "0" + String.valueOf(tuki);
+        }
+
+        if(day != null && day.length() == 1)
+        {
+            day = "0" + day;
+        }
+
+        if(year == null | month == null | day == null)
+        {
+            LocalDate ld = LocalDate.now();
+            String now[] = String.valueOf(ld).split("-",0);
+
+            year = now[0];
+            month = now[1];
+            day = now[2];
+        }
+
+        String date = year + "-" + month + "-" + day;
+        System.out.println(date);
+
+        eb = ExpenseService.makeExpenseBean(calendar, Date.valueOf(date), userId);
+
         eb.setStartDayOfTheWeek(calendar.get(Calendar.DAY_OF_WEEK) - 1);
         eb.setDate(calendar);
         calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
         eb.setEndDay(calendar.get(Calendar.DATE));
 
-        List<CategoryVo> list = new ArrayList<CategoryVo>();
-        list = ExpenseService.getCategory();
-        eb.setCategoryList( list );
 
+        eb.setMessage(message);
         //JSPに遷移する
         request.setAttribute("bean", eb);
         RequestDispatcher disp = request.getRequestDispatcher("Expense.jsp");

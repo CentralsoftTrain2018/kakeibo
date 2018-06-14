@@ -69,20 +69,7 @@
       %>
 
     </form>
-
   </div>
-
-  <form method="POST" action="<%=bean.getAdovicePage()%>">
-    <%
-      if ( bean.isMonthfinflg() )
-      {
-    %>
-    <input type="image" src="<%=bean.getButtonImage()%>"
-      style="position: absolute; right: 30%; top: 30%;">
-    <%
-      }
-    %>
-  </form>
 
 </body>
 </html>
