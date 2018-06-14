@@ -46,8 +46,8 @@ public class AdviceService
             list.add( jb );
         }
         jlb.setJihakulist( list );
-        jlb.setGoukei(goukei);
-        jlb.setMokuhyou(mokuhyou);
+        jlb.setGoukei( goukei );
+        jlb.setMokuhyou( mokuhyou );
         return jlb;
     }
 
@@ -92,13 +92,14 @@ public class AdviceService
      * 現在の年月をyyyy/MMで取得
      * @return nengetsu
      */
-    public static String getNengetsu()
+    protected static String getNengetsu()
     {
         Calendar calendar = Calendar.getInstance();
         String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
         return nengetsu;
     }
-    public static BunsekiListBean selectBunseki(String userId)
+
+    public static BunsekiListBean selectBunseki( String userId )
     {
         BunsekiListBean blb=new BunsekiListBean();
 
@@ -122,16 +123,35 @@ public class AdviceService
         }
         return blb;
     }
-    public static BunsekiListBean selectBunseki(String userId,Calendar calendar)
-    {
-        BunsekiListBean blb=new BunsekiListBean();
 
+    public static BunsekiListBean selectBunseki( String userId, Calendar calendar )
+    {
         //指定された年月を取得
         //Calendar ｄesignationCalendar = calendar;
         //calendar.add( Calendar.MONTH, -1 );
         String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
 
-        List<BunsekiVo> bunsekiList=AdviceDBManager.selectBunseki(nengetsu, userId);
+        BunsekiListBean blb = setBunsekiList( userId, nengetsu );
+
+        return blb;
+    }
+
+    /**
+     * リストに入れる
+     * @param userId
+     * @param nengetsu
+     * @return　BunsekiListBean
+     */
+    protected static BunsekiListBean setBunsekiList( String userId, String nengetsu )
+    {
+        BunsekiListBean blb = new BunsekiListBean();
+
+        List<BunsekiVo> bunsekiList = AdviceDBManager.selectBunseki( nengetsu, userId );
+        int allSumSpending = 0;
+        for ( BunsekiVo bv : bunsekiList )
+        {
+            allSumSpending += bv.getSumSpending();
+        }
 
         for ( BunsekiVo bv : bunsekiList )
         {
@@ -140,12 +160,13 @@ public class AdviceService
             bb.setDifference( bv.getDifference() );
             bb.setMokuhyouKingaku( bv.getMokuhyouKingaku() );
             bb.setSumSpending( bv.getSumSpending() );
-            bb.setColor("RED");
-            blb.setSumSpending( bv.getSumSpending() );
-            blb.addList(bb);
+            bb.setColor( bv.getColor() );
+            bb.setWariai( (100 * bb.getSumSpending() / allSumSpending) );
+            blb.setSumSpending( allSumSpending );
+            blb.addList( bb );
         }
-
         return blb;
+
     }
 
 }

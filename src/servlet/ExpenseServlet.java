@@ -131,8 +131,6 @@ public class ExpenseServlet extends HttpServlet {
         calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
         eb.setEndDay(calendar.get(Calendar.DATE));
 
-
-
         //JSPに遷移する
         request.setAttribute("bean", eb);
         RequestDispatcher disp = request.getRequestDispatcher("Expense.jsp");
