@@ -6,6 +6,7 @@ public class BunsekiBean {
     private int sumSpending;
     private int mokuhyouKingaku;
     private int difference;
+    private int wariai;
     public String getColor() {
         return color;
     }
@@ -35,6 +36,14 @@ public class BunsekiBean {
     }
     public void setDifference(int difference) {
         this.difference = difference;
+    }
+    public int getWariai()
+    {
+        return wariai;
+    }
+    public void setWariai( int wariai )
+    {
+        this.wariai = wariai;
     }
 
 }

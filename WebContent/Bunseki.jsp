@@ -61,8 +61,12 @@
    -webkit-transform: translateY(-50%);
    transform: translateY(-50%);
    ">
+   <%if(bean.getList().size() == 0){%>
+   データがありません
+   <%}else{%>
    合計金額<br>
-   <%=bean.getSumSpending() %>円</p>
+   <%=bean.getSumSpending() %>円
+   <%}%></p>
 </div>
 <script >
 var data = [
@@ -87,12 +91,12 @@ var myChart = new Chart(document.getElementById("newcanvas").getContext("2d")).D
   </tr>
     <%for (bean.BunsekiBean bb : bean.getList()) {%>
   <tr>
-    <td><%=bb.getColor() %></td>
+    <td bgcolor=<%=bb.getColor() %>></td>
     <td><%=bb.getCategoryName() %></td>
     <td><%=bb.getSumSpending() %></td>
     <td><%=bb.getMokuhyouKingaku() %></td>
     <td><%=bb.getDifference() %></td>
-    <td>10%</td>
+    <td><%=bb.getWariai() %>%</td>
   </tr>
    <%}%>
 

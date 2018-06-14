@@ -6,6 +6,7 @@ public class BunsekiVo {
     private int sumSpending;
     private int mokuhyouKingaku;
     private int difference;
+    private String color;
 
     public BunsekiVo() {
         super();
@@ -54,6 +55,16 @@ public class BunsekiVo {
     public String toString() {
         return "ConanVo [categoryName="
                 + categoryName + ", sumSpending=" + sumSpending + ", mokuhyouKingaku=" + mokuhyouKingaku + "]";
+    }
+
+    public String getColor()
+    {
+        return color;
+    }
+
+    public void setColor( String color )
+    {
+        this.color = color;
     }
 
 }
