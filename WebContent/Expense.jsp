@@ -13,7 +13,7 @@
 <body>
   <div class="menu">
     <form method="POST" action="BungyServlet">
-      <input type="hidden" name="nengetu" value="2018/05"> <input
+      <input type="hidden" name="nengetu" value=""> <input
         type="submit" value="バンジー">
     </form>
     <form method="POST" action="ExpenseServlet">
@@ -133,11 +133,14 @@
   <td>
     <select name = "categoryId">
 <% for( CategoryVo cv: bean.getCategoryList()){%>
+
       <option value=<%=cv.getCategoryid() %>
       <%if(ev.getCategoryId() == cv.getCategoryid()) {%>
       selected
       <%} %>
+
       ><%=cv.getCategoryname() %></option>
+
 <% }%>
     </select>
   </td>
