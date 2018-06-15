@@ -56,17 +56,6 @@ public class ExpenseServlet extends HttpServlet {
         String day = request.getParameter("selectDay");
         String message = "";
 
-        if(month != null && month.length() == 1)
-        {
-            int tuki = Integer.parseInt(month)+1;
-            month = "0" + String.valueOf(tuki);
-        }
-
-        if(day != null && day.length() == 1)
-        {
-            day = "0" + day;
-        }
-
         if(year == null && month == null && day == null)
         {
             LocalDate ld = LocalDate.now();
@@ -79,7 +68,8 @@ public class ExpenseServlet extends HttpServlet {
 
         if(year != null && month != null && day == null)
         {
-            day = String.valueOf(1);
+            month = String.valueOf(Integer.parseInt(month));
+            day = "01";
         }
 
         String date = year + "-" + month + "-" + day;

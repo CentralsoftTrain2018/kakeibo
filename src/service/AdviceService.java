@@ -22,6 +22,7 @@ public class AdviceService
 
     public JihakuListBean jihaku( String userId, String nengetsu )
 
+
     {
 
         List<AdviceVo> resultList = AdviceDBManager.selectJihakuAdvice( nengetsu, userId );
