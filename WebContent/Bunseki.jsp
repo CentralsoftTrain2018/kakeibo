@@ -48,7 +48,7 @@
 </form>
 
 <div style="width: 800px; height: 500px; text-align:center; margin-left:auto; margin-right:auto; position: relative; ">
-<div class="en" style="width: 400px; height: 371px; margin-bottom: 0px; padding-bottom: 0px;  position: absolute;">
+<div class="en" style="width: 400px; height: 371px; margin-bottom: 0px; padding-bottom: 0px;  position: absolute; left:0px;">
 <canvas id="newcanvas"
   style="width: 100%; height: 100%;"
   ></canvas>
@@ -58,7 +58,7 @@
    top: 0;
    left: 0;
    margin: auto;
-   right: 0;
+   right: 0px;
    margin: auto;
    text-align: center;
    top: 50%;
