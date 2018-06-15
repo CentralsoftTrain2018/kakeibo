@@ -37,10 +37,10 @@
     <%=bean.getNengetsu()%></h1>
   <div class="pattern1"
     style="width: 800px; height: 742px; overflow: hidden;
-    margin-bottom: 0px; padding-bottom: 0px; position: relative; text-align:center;">
+    margin-bottom: 0px; padding-bottom: 0px; position: relative; text-align:center; margin-left:auto; margin-right:auto; ">
 
     <img src="image/kawa.png" alt="" class="base"
-      style="position: absolute; width: 800px; height: 742px; margin-all: 0px; padding-all: 0px;">
+      style="position: absolute; width: 800px; height: 742px; margin-all: 0px; padding-all: 0px; left: 10px;">
     <img src="image/kaidan.png" alt="" class="base"
       style="position: absolute; left: 10px; bottom: 0px; margin-bottom: 0px; padding-bottom: 0px;">
     <img src="image/hanninkaidan.png" alt="" class="hannin"
