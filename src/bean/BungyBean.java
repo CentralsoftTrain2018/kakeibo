@@ -9,11 +9,23 @@ public class BungyBean {
     private int hanninIchi;
     private String nengetsu;
     private String message;
+
+    //今日の日付
+    private int today;
+    private int thisMonth;
+    //指定した年月の日数
+    private int days;
+
     private boolean monthfinflg=false;
     private boolean gameoverflg=false;
+
+    public void checkFlgs()
+    {
+        monthFinCheck();
+        gameOverFinCheck();
+    }
     public BungyBean() {
         super();
-
     }
 
     public int getMokuhyou() {
@@ -61,7 +73,6 @@ public class BungyBean {
             if(specialYoko>=50)
             {
                 specialYoko=50;
-                gameoverflg=true;
             }
             return specialYoko;
         }
@@ -92,32 +103,9 @@ public class BungyBean {
     }
 
     public int getJumperDispPosition() {
-        String[] YearAndMonth = nengetsu.split("/");
 
-        //今日の日付を取得
-        Calendar calendar = Calendar.getInstance();
-        int today=calendar.get(Calendar.DATE);
-        int month=calendar.get(Calendar.MONTH)+1;
-
-        //指定年月の日数を取得
-        Calendar c = new GregorianCalendar(Integer.parseInt(YearAndMonth[0]),Integer.parseInt(YearAndMonth[1]),1);
-        int days=c.getActualMaximum(Calendar.DAY_OF_MONTH);
-
-        int month2=Integer.parseInt(YearAndMonth[1]);
-        //DBに記録されている月が現在の月と異なる場合フラグの切り替え
-        if(month!=month2)
-        {
-
-            monthfinflg=true;
-        }
         return  (int)((double)today/(double)days*50.0);
     }
-        /**
-    public int getDate() {
-        //バンジージャンパの表示位置と紐の長さの調整を行う
-
-    }
-    **/
     public String getNengetsu() {
         return nengetsu;
     }
@@ -149,6 +137,35 @@ public class BungyBean {
             return "JihakuServlet";
         }
         return "ConanServlet";
+    }
+
+    private void gameOverFinCheck()
+    {
+        if(mokuhyou-sisyutu<0)
+        {
+            gameoverflg=true;
+        }
+    }
+    private void monthFinCheck()
+    {
+        String[] YearAndMonth = nengetsu.split("/");
+
+        //今日の日付を取得
+        Calendar calendar = Calendar.getInstance();
+        today=calendar.get(Calendar.DATE);
+        thisMonth=calendar.get(Calendar.MONTH)+1;
+
+        //指定年月の日数を取得
+        Calendar c = new GregorianCalendar(Integer.parseInt(YearAndMonth[0]),Integer.parseInt(YearAndMonth[1]),1);
+        days=c.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        int month=Integer.parseInt(YearAndMonth[1]);
+        //DBに記録されている月が現在の月と異なる場合フラグの切り替え
+        if(thisMonth!=month)
+        {
+
+            monthfinflg=true;
+        }
     }
     @Override
     public String toString() {

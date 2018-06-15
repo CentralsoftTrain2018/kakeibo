@@ -11,25 +11,43 @@ import vo.BunsekiVo;
 
 public class BunsekiDao extends Dao{
 
-    private static final String SELECT = "SELECT " +
-            "categoryName " +
-            ",m.Kingaku - SUM(e.Kingaku) "+
-            ",SUM(e.Kingaku) " +
-            ",m.Kingaku "+
-            ",c.color "+
-            "FROM " +
-            "kakeibo.expenses e " +
-            ",kakeibo.category c " +
-            ",kakeibo.mokuhyou m " +
-            "WHERE " +
-            "DATE_FORMAT(e.expenseDate, '%Y/%m') = ? " +
-            "AND m.Month = ? " +
-            "AND e.category_categoryId = c.categoryId " +
-            "AND e.user_userid = m.user_userid " +
-            "AND e.user_userid = ? " +
-            "AND c.categoryId = m.category_categoryId " +
-            "GROUP BY e.category_categoryId " +
-            "ORDER BY e.category_categoryId ;";
+    private static final String SELECT = "select" +
+            " k.kcname" +
+            "    ,k.kmkingaku" +
+            " ,case " +
+            "  when k.kmkingaku - sum(e.kingaku) is null then k.kmkingaku" +
+            "        else k.kmkingaku - sum(e.kingaku)" +
+            "  end" +
+            " ,case" +
+            "  when sum(e.kingaku) is null then 0" +
+            "        else sum(e.kingaku)" +
+            "        end " +
+            " ,k.kccolor " +
+            " from" +
+            "  (select" +
+            "   c.categoryid kccategoryid" +
+            "   ,c.categoryname kcname" +
+            "   ,c.color kccolor" +
+            "   ,m.month kmmonth" +
+            "   ,m.user_userid kmuserid" +
+            "   ,m.kingaku kmkingaku" +
+            "  from" +
+            "   kakeibo.mokuhyou m" +
+            "   ,kakeibo.category c" +
+            "  where" +
+            "   m.category_categoryid = c.categoryid" +
+            "   AND m.user_userid = ? " +
+            "   AND m.month = ? ) as k" +
+            " left join" +
+            "  kakeibo.expenses e " +
+            " on" +
+            "  k.kccategoryid = e.category_categoryid " +
+            "  AND e.user_userid = k.kmuserid " +
+            "  AND DATE_FORMAT(e.expensedate, '%Y/%m') = ? " +
+            " group by " +
+            "  k.kccategoryid " +
+            " order by " +
+            "  k.kccategoryid;";
 
     public BunsekiDao( Connection con )
     {
@@ -48,9 +66,9 @@ public class BunsekiDao extends Dao{
             List<BunsekiVo> list = new ArrayList<BunsekiVo>();
 
             /* Statementの作成 */
-            stmt.setString( 1, month );
+            stmt.setString( 1, userId );
             stmt.setString( 2, month );
-            stmt.setString( 3, userId );
+            stmt.setString( 3, month );
 
             /* SQL実行 */
             rset = stmt.executeQuery();
@@ -61,9 +79,9 @@ public class BunsekiDao extends Dao{
                 BunsekiVo bv = new BunsekiVo();
 
                 bv.setCategoryName( rset.getString( 1 ) );
-                bv.setDifference( rset.getInt( 2 ) );
-                bv.setSumSpending( rset.getInt( 3 ) );
-                bv.setMokuhyouKingaku( rset.getInt( 4 ) );
+                bv.setMokuhyouKingaku( rset.getInt( 2 ) );
+                bv.setDifference( rset.getInt( 3 ) );
+                bv.setSumSpending( rset.getInt( 4 ) );
                 bv.setColor( rset.getString( 5 ) );
                 list.add( bv );
             }
