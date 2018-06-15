@@ -12,7 +12,7 @@
 <%bean.checkFlgs(); %>
   <div class="menu">
     <form method="POST" action="BungyServlet">
-      <input type="hidden" name="nengetsu"> <input type="submit"
+      <input type="hidden" name="nengetu"> <input type="submit"
         value="バンジー" disabled="disabled">
     </form>
     <form method="POST" action="ExpenseServlet">
