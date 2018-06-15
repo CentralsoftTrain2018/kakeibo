@@ -13,7 +13,7 @@
 <body>
   <div class="menu">
     <form method="POST" action="BungyServlet">
-      <input type="hidden" name="nengetu" value=""> <input
+      <input type="hidden" name="nengetsu" value=""> <input
         type="submit" value="バンジー">
     </form>
     <form method="POST" action="ExpenseServlet">

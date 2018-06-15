@@ -2,6 +2,8 @@ package servlet;
 
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.BungyBean;
 import exception.NoTextException;
+import service.ExpenseService;
 
 
 
@@ -37,10 +40,18 @@ public class LoginServlet extends HttpServlet
                 throw new NoTextException();
             }
 
+
+            //入っていない場合。今日が何年何月かをnengetsuに入れる
+            Calendar calendar = Calendar.getInstance();
+            String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
+
+            //String nengetu=request.getParameter("nengetsu");
+            bb = ExpenseService.getMokuhyouAndExpenses(userId,nengetsu);
+
             HttpSession session = request.getSession();
             session.setAttribute("userId", userId);
             request.setAttribute("bean", bb);
-            RequestDispatcher disp = request.getRequestDispatcher("/WindowTest.jsp");
+            RequestDispatcher disp = request.getRequestDispatcher("/Bungy.jsp");
             disp.forward(request, response);
         }
         catch(NoTextException e) {
