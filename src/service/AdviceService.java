@@ -158,7 +158,13 @@ public class AdviceService
             bb.setMokuhyouKingaku( bv.getMokuhyouKingaku() );
             bb.setSumSpending( bv.getSumSpending() );
             bb.setColor( bv.getColor() );
-            bb.setWariai( (100 * bb.getSumSpending() / allSumSpending) );
+            if ( allSumSpending == 0 )
+            {
+                bb.setWariai( 0 );
+            }else {
+                int wariai = (100 * bb.getSumSpending() / allSumSpending);
+                bb.setWariai( wariai );
+            }
             blb.setSumSpending( allSumSpending );
             blb.addList( bb );
         }
