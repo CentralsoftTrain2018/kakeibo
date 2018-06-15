@@ -115,9 +115,15 @@
 </tr>
   <%if(endCalender) break;%>
 <%} %>
-</table>
 
+
+
+</table>
 <table border = "1" >
+<tr>
+<th colspan = 4 align = "left"> <%=bean.getDate().get(Calendar.MONTH)+1 %>月
+<%=bean.getSelectDay() %>日 </th>
+</tr>
 
 <tr>
 <th> 項目 </th>
