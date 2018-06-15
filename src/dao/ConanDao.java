@@ -15,22 +15,36 @@ import vo.AdviceVo;
 public class ConanDao extends Dao
 {
 
-    private static final String SELECT = "SELECT " +
-            "categoryName " +
-            ",m.Kingaku - SUM(e.Kingaku) " +
-            "FROM " +
-            "kakeibo.expenses e " +
-            ",kakeibo.category c " +
-            ",kakeibo.mokuhyou m " +
-            "WHERE " +
-            "DATE_FORMAT(e.expenseDate, '%Y/%m') = ? " +
-            "AND m.Month = ? " +
-            "AND e.category_categoryId = c.categoryId " +
-            "AND e.user_userid = m.user_userid " +
-            "AND e.user_userid = ? " +
-            "AND c.categoryId = m.category_categoryId " +
-            "GROUP BY e.category_categoryId " +
-            "ORDER BY m.Kingaku - SUM(e.Kingaku) DESC;";
+    private static final String SELECT = "select " +
+            " k.kcname " +
+            " ,case " +
+            "  when k.kmkingaku - sum(e.kingaku) is null then k.kmkingaku " +
+            "        else k.kmkingaku - sum(e.kingaku) " +
+            "  end as sagaku " +
+            " from " +
+            "  (select " +
+            "   c.categoryid kccategoryid " +
+            "   ,c.categoryname kcname " +
+            "   ,m.month kmmonth " +
+            "   ,m.user_userid kmuserid " +
+            "   ,m.kingaku kmkingaku " +
+            "  from " +
+            "   kakeibo.mokuhyou m " +
+            "   ,kakeibo.category c " +
+            "  where " +
+            "   m.category_categoryid = c.categoryid " +
+            "   AND m.user_userid = ? " +
+            "   AND m.month = ? ) as k " +
+            " left join " +
+            "  kakeibo.expenses e " +
+            " on " +
+            "  k.kccategoryid = e.category_categoryid " +
+            "  AND e.user_userid = k.kmuserid " +
+            "  AND DATE_FORMAT(e.expensedate, '%Y/%m') = ? " +
+            " group by " +
+            "  k.kccategoryid " +
+            " order by " +
+            "  sagaku desc;";
 
     public ConanDao( Connection con )
     {
@@ -57,9 +71,9 @@ public class ConanDao extends Dao
             List<AdviceVo> list = new ArrayList<AdviceVo>();
 
             /* Statementの作成 */
-            stmt.setString( 1, month );
+            stmt.setString( 1, userId );
             stmt.setString( 2, month );
-            stmt.setString( 3, userId );
+            stmt.setString( 3, month );
 
             /* SQL実行 */
             rset = stmt.executeQuery();
