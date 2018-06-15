@@ -37,18 +37,18 @@
 <option value="2018" selected>2018</option>
 </select>
 <select name="month">
-<option value="0">1</option>
-<option value="1">2</option>
-<option value="2">3</option>
-<option value="3">4</option>
-<option value="4">5</option>
-<option value="5">6</option>
-<option value="6">7</option>
-<option value="7">8</option>
-<option value="8">9</option>
-<option value="9">10</option>
-<option value="10">11</option>
-<option value="11">12</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
 </select>
 <input type="submit" value="年月変更">
 </form>
@@ -71,7 +71,7 @@
     <%=bean.getExpenses()[day - 1] %>
     <form method="POST" action="ExpenseServlet">
     <input type="hidden" name="year" value=<%=bean.getDate().get(Calendar.YEAR) %>>
-    <input type="hidden" name="month" value=<%=bean.getDate().get(Calendar.MONTH) %>>
+    <input type="hidden" name="month" value=<%=bean.getDate().get(Calendar.MONTH)+1 %>>
     <input type="hidden" name="selectDay" value=<%=day %>>
     <input type="submit" value=<%=day %>>
     </form>
@@ -81,7 +81,7 @@
     <%=bean.getExpenses()[day - 1] %>
     <form method="POST" action="ExpenseServlet">
     <input type="hidden" name="year" value=<%=bean.getDate().get(Calendar.YEAR) %>>
-    <input type="hidden" name="month" value=<%=bean.getDate().get(Calendar.MONTH) %>>
+    <input type="hidden" name="month" value=<%=bean.getDate().get(Calendar.MONTH)+1 %>>
     <input type="hidden" name="selectDay" value=<%=day %>>
     <input type="submit" value=<%=day %>>
     </form>
@@ -100,7 +100,7 @@
       <%=bean.getExpenses()[day - 1] %>
       <form method="POST" action="ExpenseServlet">
       <input type="hidden" name="year" value=<%=bean.getDate().get(Calendar.YEAR) %>>
-      <input type="hidden" name="month" value=<%=bean.getDate().get(Calendar.MONTH) %>>
+      <input type="hidden" name="month" value=<%=bean.getDate().get(Calendar.MONTH)+1 %>>
       <input type="hidden" name="selectDay" value=<%=day %>>
       <input type="submit" value=<%=day %>>
       </form>
@@ -133,16 +133,11 @@
   <td>
     <select name = "categoryId">
 <% for( CategoryVo cv: bean.getCategoryList()){%>
-<<<<<<< HEAD
       <option value=<%=cv.getCategoryid() %>
       <%if(ev.getCategoryId() == cv.getCategoryid()) {%>
       selected
       <%} %>
       ><%=cv.getCategoryname() %></option>
-
-=======
-      <option value=<%=cv.getCategoryid() %>><%=cv.getCategoryname() %></option>
->>>>>>> refs/remotes/origin/master
 <% }%>
     </select>
   </td>
@@ -158,10 +153,16 @@
   <td>
   <input type="submit" name = "choice" value="変更">
   <input type="hidden" name="expenseId" value=<%=ev.getExpenseId() %>>
+  <input type="hidden" name="year" value=<%=bean.getDate().get(Calendar.YEAR) %>>
+  <input type="hidden" name="month" value=<%=bean.getDate().get(Calendar.MONTH)+1 %>>
+  <input type="hidden" name="selectDay" value=<%=bean.getSelectDay() %>>
   </td>
 
     <td>
   <input type="submit" name = "choice" value="削除">
+  <input type="hidden" name="year" value=<%=bean.getDate().get(Calendar.YEAR) %>>
+  <input type="hidden" name="month" value=<%=bean.getDate().get(Calendar.MONTH)+1 %>>
+  <input type="hidden" name="selectDay" value=<%=bean.getSelectDay() %>>
   </td>
 
   </form>
@@ -190,7 +191,7 @@
     <td colspan = 2 align = "center">
   <input type="submit" name="choice" value="登録">
   <input type="hidden" name="year" value=<%=bean.getDate().get(Calendar.YEAR) %>>
-  <input type="hidden" name="month" value=<%=bean.getDate().get(Calendar.MONTH) %>>
+  <input type="hidden" name="month" value=<%=bean.getDate().get(Calendar.MONTH)+1 %>>
   <input type="hidden" name="selectDay" value=<%=bean.getSelectDay() %>>
 
   </td>
