@@ -47,9 +47,7 @@
 <input type="submit" value="年月変更">
 </form>
 <div class="en" style="width: 800px; height: 600px; margin-bottom: 0px; padding-bottom: 0px;  position: relative;">
-<canvas id="newcanvas"
-  style="width: 50%; height: 100%;"
-  ></canvas>
+<canvas id="newcanvas" style="width: 50%; height: 100%;" ></canvas>
   <p
    style=" position: absolute;
    top: 0;
@@ -84,9 +82,13 @@
   <tr>
     <td bgcolor=<%=bb.getColor() %>></td>
     <td><%=bb.getCategoryName() %></td>
-    <td><%=bb.getSumSpending() %></td>
-    <td><%=bb.getMokuhyouKingaku() %></td>
-    <td><%=bb.getDifference() %></td>
+    <td><%=bb.getSumSpending() %>円</td>
+    <td><%=bb.getMokuhyouKingaku() %>円</td>
+    <%if(bb.getDifference() < 0){%>
+      <td><font color="red"><%=bb.getDifference() %>円</font></td>
+    <%}else{%>
+    <td><%=bb.getDifference() %>円</td>
+     <%}%>
     <td><%=bb.getWariai() %>%</td>
   </tr>
    <%}%>
