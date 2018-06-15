@@ -62,7 +62,11 @@ public class AdviceService
         ConanListBean clb = new ConanListBean();
         List<ConanBean> list = new ArrayList<ConanBean>();
         List<AdviceVo> resultList = AdviceDBManager.selectConanAdvice( nengetsu, userId );
-        Calendar date = splitNengetsu( nengetsu );
+        String[] YearAndMonth = nengetsu.split( "/" );
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set( Calendar.YEAR, Integer.parseInt( YearAndMonth[0] ) );
+        calendar.set( Calendar.MONTH, Integer.parseInt( YearAndMonth[1] ) );
 
         for ( AdviceVo av : resultList )
         {
@@ -74,25 +78,9 @@ public class AdviceService
         }
         clb.setList( list );
         clb.setNengetsu( nengetsu );
-        clb.setDate( date );
+        clb.setDate( calendar );
 
         return clb;
-    }
-
-    /**
-     * 年月をカレンダーに分割
-     * @param nengetsu
-     * @return 該当の年と月
-     */
-    protected static Calendar splitNengetsu( String nengetsu )
-    {
-        String[] YearAndMonth = nengetsu.split( "/" );
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set( Calendar.YEAR, Integer.parseInt( YearAndMonth[0] ) );
-        calendar.set( Calendar.MONTH, Integer.parseInt( YearAndMonth[1] ) );
-
-        return calendar;
     }
 
     /**
@@ -158,7 +146,13 @@ public class AdviceService
             bb.setMokuhyouKingaku( bv.getMokuhyouKingaku() );
             bb.setSumSpending( bv.getSumSpending() );
             bb.setColor( bv.getColor() );
-            bb.setWariai( (100 * bb.getSumSpending() / allSumSpending) );
+            if ( allSumSpending == 0 )
+            {
+                bb.setWariai( 0 );
+            }else {
+                int wariai = (100 * bb.getSumSpending() / allSumSpending);
+                bb.setWariai( wariai );
+            }
             blb.setSumSpending( allSumSpending );
             blb.addList( bb );
         }

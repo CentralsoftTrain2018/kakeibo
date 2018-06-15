@@ -15,7 +15,7 @@
       <%int go = bean.getGoukei();
         int mo = bean.getMokuhyou();
         int sagaku = go - mo;%>
-      <%=sagaku %>円も超えていた!!<br>さらに
+      <%=sagaku %>円も超えていた!!<br>特に
       <%
         for ( bean.JihakuBean jb : bean.getJihakulist() )
         {
@@ -24,7 +24,7 @@
       <%
         }
       %>
-      超えていた。だから殺したんだよ!!!<br>
+      超えていて節約できていないから<br>殺したんだよ!!!<br>
     </p>
     <br> <br>
     <form method="POST" action="BungyServlet">

@@ -12,7 +12,7 @@
 <%bean.checkFlgs(); %>
   <div class="menu">
     <form method="POST" action="BungyServlet">
-      <input type="hidden" name="nengetu"> <input type="submit"
+      <input type="hidden" name="nengetsu"> <input type="submit"
         value="バンジー" disabled="disabled">
     </form>
     <form method="POST" action="ExpenseServlet">
@@ -37,10 +37,12 @@
     <%=bean.getNengetsu()%></h1>
   <div class="pattern1"
     style="width: 800px; height: 742px; overflow: hidden;
+
     margin-bottom: 0px; padding-bottom: 0px; position: relative; text-align:center; margin-left:auto; margin-right:auto;">
 
+
     <img src="image/kawa.png" alt="" class="base"
-      style="position: absolute; left: 10px; width: 800px; height: 742px; margin-all: 0px; padding-all: 0px;">
+      style="position: absolute; width: 800px; height: 742px; margin-all: 0px; padding-all: 0px; left: 10px;">
     <img src="image/kaidan.png" alt="" class="base"
       style="position: absolute; left: 10px; bottom: 0px; margin-bottom: 0px; padding-bottom: 0px;">
     <img src="image/hanninkaidan.png" alt="" class="hannin"
@@ -97,8 +99,19 @@
     </form>
   </div>
   <form method="POST" action="BungyServlet">
-    年月<input type="text" name="nengetsu"><br> <input
-      type="submit" value="Bungy"><br>
+    年月<select name="nengetsu">
+      <option value="2018/01"> 2018/01 </option>
+      <option value="2018/02"> 2018/02 </option>
+      <option value="2018/03"> 2018/03 </option>
+      <option value="2018/04"> 2018/04 </option>
+      <option value="2018/05"> 2018/05 </option>
+      <option value="2018/06"> 2018/06 </option>
+      <option value="2018/07"> 2018/07 </option>
+      <option value="2018/08"> 2018/08 </option>
+      <option value="2018/09"> 2018/09 </option>
+      <option value="2018/10"> 2018/10 </option>
+    </select>
+    <input type="submit" value="Bungy"><br>
   </form>
 
 
