@@ -4,13 +4,16 @@
   display: inline-block;
   margin: 0 10px;
 }
+.menu{
 
+}
 .bunseki {
   display: inline-block;
   vertical-align: top;
   border: solid 1px;
   border-collapse: separate;
-  top:20%;
+  top:0%;
+  left:50%;
   position: absolute;
 }
 

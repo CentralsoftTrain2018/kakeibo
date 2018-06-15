@@ -46,9 +46,10 @@
 </select>
 <input type="submit" value="年月変更">
 </form>
-<div class="en" style="width: 800px; height: 600px; margin-bottom: 0px; padding-bottom: 0px;  position: relative;">
+<div style="width: 800px; height: 500px; text-align:center; position: relative;">
+<div class="en" style="width: 400px; height: 371px; margin-bottom: 0px; padding-bottom: 0px;  position: absolute;">
 <canvas id="newcanvas"
-  style="width: 50%; height: 100%;"
+  style="width: 100%; height: 100%;"
   ></canvas>
   <p
    style=" position: absolute;
@@ -58,9 +59,9 @@
    right: 0;
    margin: auto;
    text-align: center;
-   top: 45%;
+   top: 50%;
    -webkit-transform: translateY(-50%);
-   transform: translateX(-25%);
+   transform: translateY(-50%);
    ">
    <%=bean.getDate().get(Calendar.YEAR) %>年
    <%=bean.getDate().get(Calendar.MONTH) %>月<br>
@@ -71,6 +72,7 @@
    合計金額<br>
    <%=bean.getSumSpending() %>円
    <%}%></p>
+   </div>
    <table class="bunseki">
   <tr>
     <th>色</th>
@@ -92,6 +94,7 @@
    <%}%>
 
 </table>
+
 </div>
 <script >
 var data = [

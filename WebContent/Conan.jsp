@@ -20,8 +20,9 @@
       height : 50,
     });
   </script>
-  <img src="image/conan.png" style="float: left;">
-  <div class="balloon">
+  <div style="width: 1000px; height: 500px; text-align:center; position: relative; text-align:center; margin-left:auto; margin-right:auto;">
+  <img src="image/conan.png" style="left:0%; position: absolute;">
+  <div class="balloon" style="left:40%; top:auto; position: absolute;">
     <%=bean.getDate().get( Calendar.YEAR )%>年
     <%=bean.getDate().get( Calendar.MONTH )%>月 は目標達成だね！おめでとう(^_^)/♪<br>
     君のおかげで犯人を逮捕することができたよ！<br>
@@ -56,6 +57,7 @@
       <input type="hidden" name="nengetsu" value=""><br> <input
         type="submit" value="TOPにもどる"><br>
     </form>
+  </div>
   </div>
 </body>
 </html>
