@@ -9,7 +9,7 @@
 <title>TOP</title>
 </head>
 <body>
-
+<%bean.checkFlgs(); %>
   <div class="menu">
     <form method="POST" action="BungyServlet">
       <input type="hidden" name="nengetu"> <input type="submit"
@@ -23,11 +23,11 @@
     </form>
 
     <form method="POST" action="ConanServlet">
-      <input type="hidden" name="nengetsu" value=<%=bean.getNengetsu()%>>
+      <input type="hidden" name="nengetsu" value="<%=bean.getNengetsu()%>">
       <input type="submit" value="コナン">
     </form>
     <form method="POST" action="JihakuServlet">
-      <input type="hidden" name="nengetsu" value=<%=bean.getNengetsu()%>>
+      <input type="hidden" name="nengetsu" value="<%=bean.getNengetsu()%>">
       <input type="submit" value="自白">
     </form>
   </div>
@@ -37,7 +37,7 @@
     <%=bean.getNengetsu()%></h1>
   <div class="pattern1"
     style="width: 800px; height: 742px; overflow: hidden;
-    margin-bottom: 0px; padding-bottom: 0px; position: relative;">
+    margin-bottom: 0px; padding-bottom: 0px; position: relative; text-align:center;">
 
     <img src="image/kawa.png" alt="" class="base"
       style="position: absolute; width: 800px; height: 742px; margin-all: 0px; padding-all: 0px;">
@@ -50,29 +50,34 @@
       transform: scale(<%=bean.getHanninMuki()%>,1);
       left: <%=bean.getHanninYoko()%>%;
       bottom:<%=bean.getHanninIchi()%>%;">
-    <img src="image/himo.png" alt="" class="himo"
-      style="position: absolute;
-      width: 50px;
-      height:<%=bean.getJumperDispPosition() + 7%>%;
-      right: 35%;
-      top:25%;">
+
     <%
       if ( bean.isMonthfinflg() && bean.isGameoverflg() )
       {
     %>
-    <img src="image/obore.png" alt="" class="jumper"
+      <img src="image/obore.png" alt="" class="jumper"
       style="position: absolute; width: 100px; height: 100px; right: 30%; top: 80%;">
+       <img src="image/kireta_himo.png" alt="" class="himo"
+      style="position: absolute;
+      width: 50px;
+      right: 35%;
+      top:25%;">
     <%
       } else
       {
     %>
-
-    <img src="image/jump.png" alt="" class="jumper"
+      <img src="image/jump.png" alt="" class="jumper"
       style="position: absolute;
       width: 100px;
       height: 100px;
       right: 30%;
       top:<%=bean.getJumperDispPosition() + 30%>%;">
+      <img src="image/himo.png" alt="" class="himo"
+      style="position: absolute;
+      width: 50px;
+      height:<%=bean.getJumperDispPosition() + 7%>%;
+      right: 35%;
+      top:25%;">
     <%
       }
     %>
@@ -83,6 +88,7 @@
         if ( bean.isMonthfinflg() )
         {
       %>
+      <input type="hidden" name="nengetsu" value="<%=bean.getNengetsu()%>">
       <input type="image" src="<%=bean.getButtonImage()%>"
         style="position: absolute; right: 30%; top: 30%;">
       <%
@@ -95,8 +101,7 @@
       type="submit" value="Bungy"><br>
   </form>
 
-  </form>
-  </div>
+
 
 </body>
 </html>
