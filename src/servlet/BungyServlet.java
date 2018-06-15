@@ -30,14 +30,6 @@ public class BungyServlet extends HttpServlet
         BungyBean bb = new BungyBean();
 
         try {
-            /**
-            String mokuhyouStr = request.getParameter("mokuhyou");
-            String shisyutuStr = request.getParameter("shisyutu");
-            String dateStr = request.getParameter("date");
-            int mokuhyou = Integer.parseInt(mokuhyouStr);
-            int shisyutu = Integer.parseInt(shisyutuStr);
-            int date = Integer.parseInt(dateStr);
-            **/
             HttpSession session = request.getSession();
             String userId = (String)session.getAttribute("userId");
             String nengetsu=request.getParameter("nengetsu");
