@@ -16,23 +16,16 @@
     }
   %>
   <form method="POST" action="BungyServlet">
-      経過日数<input type="text" name="nengetu"><br>
-      <input type="submit" value="Bungy"><br>
-  </form>
-  <form method="POST" action="ConanServlet">
-    <input type="submit" value="Conan">
-  </form>
-
-  <form method="POST" action="JihakuServlet">
-    <input type="submit" value="jihaku">
+     年月<input type="text" name="nengetsu"><br>
+      <input type="submit" value="バンジー"><br>
   </form>
 
   <form method="POST" action="ExpenseServlet">
-    <input type="submit" value="Expense">
+    <input type="submit" value="家計簿">
   </form>
 
   <form method="POST" action="BunsekiServlet">
-    <input type="submit" value="Bunseki">
+    <input type="submit" value="分析">
   </form>
 </body>
 </html>

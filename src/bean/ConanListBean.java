@@ -1,23 +1,23 @@
 package bean;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class ConanListBean
 {
-
     private int totalDifference;
-    private int thisMonth;
+    private Calendar date;
     private String nengetsu;
     private List<ConanBean> list;
 
-    public int getThisMonth()
+    public Calendar getDate()
     {
-        return thisMonth;
+        return date;
     }
 
-    public void setThisMonth( int thisMonth )
+    public void setDate( Calendar date )
     {
-        this.thisMonth = thisMonth;
+        this.date = date;
     }
 
     public int getTotalDifference()

@@ -19,35 +19,34 @@ public class AdviceService
 {
 
     //AdviceVo型のListをConanBean型のListに変換
-    public JihakuListBean jihaku( String userId )
+
+    public JihakuListBean jihaku( String userId, String nengetsu )
+
     {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MONTH, -1);
-        String date = new SimpleDateFormat( "yyyy-MM" ).format( calendar.getTime() );
-        String mokuhyouNengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
-        List<AdviceVo> resultList = AdviceDBManager.selectJihakuAdvice( mokuhyouNengetsu, date, userId );
-        int goukei = AdviceDBManager.sumGoukei( date, userId );
-        System.out.println(goukei);
-        int mokuhyou = AdviceDBManager.sumMokuhyou( mokuhyouNengetsu, userId );
-        System.out.println(mokuhyou);
+
+        List<AdviceVo> resultList = AdviceDBManager.selectJihakuAdvice( nengetsu, userId );
+        int goukei = AdviceDBManager.sumGoukei( nengetsu, userId );
+        int mokuhyou = AdviceDBManager.sumMokuhyou( nengetsu, userId );
+
         JihakuListBean jlb = new JihakuListBean();
         List<JihakuBean> list = new ArrayList<JihakuBean>();
-
-        //現在の月を取得（2018/05）
-        jlb.setNengetsu( getNengetsu() );
 
         //計算結果と表示するメッセージを入れ物（bean)にセットする
         for ( AdviceVo av : resultList )
         {
             JihakuBean jb = new JihakuBean();
-            jb.setCategoryname( av.getCategoryName() );
-            jb.setExcess( av.getDifference() );
-
-            list.add( jb );
+            if ( av.getDifference() > 0 )
+            {
+                jb.setCategoryname( av.getCategoryName() );
+                jb.setExcess( av.getDifference() );
+                list.add( jb );
+            }
         }
         jlb.setJihakulist( list );
         jlb.setGoukei( goukei );
         jlb.setMokuhyou( mokuhyou );
+        jlb.setNengetsu( nengetsu );
+
         return jlb;
     }
 
@@ -57,19 +56,12 @@ public class AdviceService
      * @param userId ユーザーID
      * @return 現在の月のコナン君のアドバイス
      */
-    public static ConanListBean selectConanAdvice( String userId )
+    public static ConanListBean selectConanAdvice( String userId, String nengetsu )
     {
         ConanListBean clb = new ConanListBean();
         List<ConanBean> list = new ArrayList<ConanBean>();
-
-        //現在の月を取得（2018/05）
-        clb.setNengetsu( getNengetsu() );
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.add( Calendar.MONTH, -1 );
-        String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
-
         List<AdviceVo> resultList = AdviceDBManager.selectConanAdvice( nengetsu, userId );
+        Calendar date = splitNengetsu( nengetsu );
 
         for ( AdviceVo av : resultList )
         {
@@ -80,10 +72,26 @@ public class AdviceService
             list.add( cb );
         }
         clb.setList( list );
-        //月の値を入れる
-        clb.setThisMonth( calendar.get( Calendar.MONTH ) + 1 );
+        clb.setNengetsu( nengetsu );
+        clb.setDate( date );
 
         return clb;
+    }
+
+    /**
+     * 年月をカレンダーに分割
+     * @param nengetsu
+     * @return 該当の年と月
+     */
+    protected static Calendar splitNengetsu( String nengetsu )
+    {
+        String[] YearAndMonth = nengetsu.split( "/" );
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set( Calendar.YEAR, Integer.parseInt( YearAndMonth[0] ) );
+        calendar.set( Calendar.MONTH, Integer.parseInt( YearAndMonth[1] ) );
+
+        return calendar;
     }
 
     /**

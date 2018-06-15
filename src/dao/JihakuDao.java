@@ -13,42 +13,31 @@ public class JihakuDao extends Dao
 {
 
     private static final String SELECT = "select " +
-            "	k.cname " +
-            "	,k.sum1 - m.kingaku " +
-            "from " +
-            "	mokuhyou m " +
-            "	,(select " +
-            "		c.categoryid as cid " +
-            "		,c.categoryname as cname " +
-            "		,sum(e.kingaku) as sum1 " +
-            "        ,e.user_userid as euserid " +
-            "	from " +
-            "		expenses e " +
-            "		,category c " +
-            "	where " +
-            "		e.category_categoryid = c.categoryid " +
-            "        AND e.user_userid = ? " +
-            "		AND e.expensedate between ? AND ? " +
-            "	group by " +
-            "		c.categoryid " +
-            "	) as k " +
-            "where " +
-            "	m.category_categoryid = k.cid " +
-            "    AND k.euserid = m.user_userid " +
-            "	AND m.month like ? " +
-            "	AND k.sum1 - m.kingaku > 0 " +
-            "order by " +
-            "	k.sum1 - m.kingaku desc limit 3;";
+            "categoryName " +
+            ",SUM(e.Kingaku)  - m.Kingaku " +
+            "FROM " +
+            "kakeibo.expenses e " +
+            ",kakeibo.category c " +
+            ",kakeibo.mokuhyou m " +
+            "WHERE " +
+            "DATE_FORMAT(e.expenseDate, '%Y/%m') = ? " +
+            "AND m.Month = ? " +
+            "AND e.category_categoryId = c.categoryId " +
+            "AND e.user_userid = m.user_userid " +
+            "AND e.user_userid = ? " +
+            "AND c.categoryId = m.category_categoryId " +
+            "GROUP BY e.category_categoryId " +
+            "ORDER BY SUM(e.Kingaku)  - m.Kingaku DESC limit 3;";
 
-    private static final String GOUKEI = "			SELECT" +
+    private static final String GOUKEI = "SELECT" +
             "			SUM(e.Kingaku)" +
             "			FROM" +
             "			expenses as e" +
             "			WHERE" +
-            "			e.expenseDate BETWEEN ? AND ?" +
+            "           DATE_FORMAT(e.expenseDate, '%Y/%m') = ? " +
             "			AND e.user_userid = ?;";
 
-    private static final String MOKUHYOU = "			SELECT" +
+    private static final String MOKUHYOU = "SELECT" +
             "			SUM(m.Kingaku)" +
             "			FROM" +
             "			mokuhyou as m" +
@@ -61,35 +50,37 @@ public class JihakuDao extends Dao
         super( con );
     }
 
-    //-------------------------------------------------------
-    // カテゴリ名、支出合計、目標
-    public List<AdviceVo> JihakuAdvice( String mokuhyou, String date, String userId ) throws SQLException
+    /**
+     * ユーザーIDと年月に該当する
+     * カテゴリ名・カテゴリごとの差額を取得(上位三件まで）
+     * @param nengetsu
+     * @param userId
+     * @return
+     * @throws SQLException
+     */
+    public List<AdviceVo> JihakuAdvice( String nengetsu, String userId ) throws SQLException
     {
 
-        System.out.println( date.toString() );
         ResultSet rset = null;
 
         try ( PreparedStatement stmt = con.prepareStatement( SELECT ) )
         {
             List<AdviceVo> list = new ArrayList<AdviceVo>();
 
-            //stmt.setString(1, date.toString().substring(7));
-            //stmt.setString(2, date.toString().substring(7));
-            stmt.setString( 1, userId );
-            stmt.setString( 2, date + "-1" );
-            stmt.setString( 3, date + "-31" );
-            stmt.setString( 4, mokuhyou );
+            stmt.setString( 1, nengetsu );
+            stmt.setString( 2, nengetsu );
+            stmt.setString( 3, userId );
             /* SQL実行 */
             rset = stmt.executeQuery();
 
             /* 取得したデータを表示します。 */
             while ( rset.next() )
             {
-                AdviceVo cv = new AdviceVo();
+                AdviceVo av = new AdviceVo();
 
-                cv.setCategoryName( rset.getString( 1 ) );
-                cv.setDifference( rset.getInt( 2 ) );
-                list.add( cv );
+                av.setCategoryName( rset.getString( 1 ) );
+                av.setDifference( rset.getInt( 2 ) );
+                list.add( av );
             }
             return list;
         }
@@ -99,8 +90,14 @@ public class JihakuDao extends Dao
             throw e;
         }
     }
-
-    public int JihakuGoukei( String month, String userId ) throws SQLException
+/**
+ * 月全体の支出合計を取得
+ * @param nengetsu
+ * @param userId
+ * @return　月全体の支出合計
+ * @throws SQLException
+ */
+    public int getSisyutuGoukei( String nengetsu, String userId ) throws SQLException
     {
 
         //System.out.println( month.toString() );
@@ -110,11 +107,8 @@ public class JihakuDao extends Dao
         {
             int goukei;
 
-            //stmt.setString(1, date.toString().substring(7));
-            //stmt.setString(2, date.toString().substring(7));
-            stmt.setString( 1, month + "-1" );
-            stmt.setString( 2, month + "-31" );
-            stmt.setString( 3, userId );
+            stmt.setString( 1, nengetsu );
+            stmt.setString( 2, userId );
             /* SQL実行 */
             rset = stmt.executeQuery();
 
@@ -130,8 +124,14 @@ public class JihakuDao extends Dao
             throw e;
         }
     }
-
-    public int JihakuMokuhyou( String month, String userId ) throws SQLException
+/**
+ * その月全体の目標額を取得
+ * @param nengetsu
+ * @param userId
+ * @return　月全体の目標額
+ * @throws SQLException
+ */
+    public int getTsukiMokuhyou( String nengetsu, String userId ) throws SQLException
     {
 
         ResultSet rset = null;
@@ -140,7 +140,7 @@ public class JihakuDao extends Dao
         {
             int mokuhyou;
 
-            stmt.setString( 1, month );
+            stmt.setString( 1, nengetsu );
             stmt.setString( 2, userId );
             /* SQL実行 */
             rset = stmt.executeQuery();
