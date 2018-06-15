@@ -54,13 +54,13 @@
 </form>
 <table border="1" align="left">
 <tr>
-<th>日曜日</th>
+<th style = "color:red">日曜日</th>
 <th>月曜日</th>
 <th>火曜日</th>
 <th>水曜日</th>
 <th>木曜日</th>
 <th>金曜日</th>
-<th>土曜日</th>
+<th style = "color:blue">土曜日</th>
 </tr>
 <%boolean shouldWrite = false;%>
 <%int day = 1;%>
@@ -121,8 +121,10 @@
 </table>
 <table border = "1" >
 <tr>
-<th colspan = 4 align = "left"> <%=bean.getDate().get(Calendar.MONTH)+1 %>月
-<%=bean.getSelectDay() %>日 </th>
+<th bgcolor = lime colspan = 5 align = "left">
+<%=bean.getDate().get(Calendar.MONTH)+1 %>月
+<%=bean.getSelectDay() %>日
+</th>
 </tr>
 
 <tr>
