@@ -91,8 +91,19 @@
     </form>
   </div>
   <form method="POST" action="BungyServlet">
-    年月<input type="text" name="nengetsu"><br> <input
-      type="submit" value="Bungy"><br>
+    年月<select name="nengetsu">
+      <option value="2018/01"> 2018/01 </option>
+      <option value="2018/02"> 2018/02 </option>
+      <option value="2018/03"> 2018/03 </option>
+      <option value="2018/04"> 2018/04 </option>
+      <option value="2018/05"> 2018/05 </option>
+      <option value="2018/06"> 2018/06 </option>
+      <option value="2018/07"> 2018/07 </option>
+      <option value="2018/08"> 2018/08 </option>
+      <option value="2018/09"> 2018/09 </option>
+      <option value="2018/10"> 2018/10 </option>
+    </select>
+    <input type="submit" value="Bungy"><br>
   </form>
 
   </form>
