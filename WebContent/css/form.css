@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+ul li {
+  list-style: none;
+  margin-top: 10px;
+}
+
+ul li.income {
+  margin-bottom: 40px;
+}
+
+label {
+  margin-right: 10px;
+  width: 100px;
+  float: left;
+}
+
+ul {
+  width: 500px;
+  margin: 0 auto;
+}
+h2{
+  background-color: #ddc69f;
+}
+input#button {
+  display: block;
+  margin: 0 auto;
+}
