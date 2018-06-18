@@ -21,5 +21,23 @@
       <input type="submit" value="分析" >
     </form>
   </div>
-</body>
+
+  <br>
+
+  <div class="settei">
+   <form method="POST" action="">
+    <button class="button1" type="submit">ID</button><br>
+   </form>
+     <form method="POST" action="">
+    <button class="button1" type="submit">設定</button><br>
+   </form>
+   <form method="POST" action="">
+    <button class="button1" type="submit">ヘルプ</button>
+   </form>
+   </div>
+
+  <div class="hanni">
+aaaaaaaaaa
+  </div>
+  </body>
 </html>
