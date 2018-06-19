@@ -11,6 +11,11 @@ import vo.SetteiVo;
 
 public class UserDBManeger
 {
+    //ユーザーの登録
+    //呼び出し元
+    //UserDataService
+    //呼び出し先
+    //RegistDao
     public static void passRegistDara( RegistBean rb )
     {
         try (
@@ -32,6 +37,10 @@ public class UserDBManeger
      * @param userId
      * @return
      */
+    //呼び出し元
+    //UserDataService
+    //呼び出し先
+    //RegistDao
     public static boolean isUnique( String userId )
     {
         try (
@@ -50,6 +59,11 @@ public class UserDBManeger
 
     }
 
+    //カテゴリーの追加
+    //呼び出し元
+    //UserDataService
+    //呼び出し先
+    //SetteiDao
     public static void addCategory( String categoryName )
     {
         try (
@@ -64,6 +78,11 @@ public class UserDBManeger
         }
     }
 
+    //カテゴリーの変更
+     //呼び出し元
+    //UserDataService
+    //呼び出し先
+    //SetteiDao
     public static void updateCategory( int categoryId, String categoryName )
     {
         try (
@@ -78,6 +97,11 @@ public class UserDBManeger
         }
     }
 
+    //カテゴリーの削除
+    //呼び出し元
+    //UserDataService
+    //呼び出し先
+    //SetteiDao
     public static void deleteCategory( int categoryId )
     {
         try (
@@ -92,6 +116,11 @@ public class UserDBManeger
         }
     }
 
+    //収入の取得
+    //呼び出し元
+    //UserDataService
+    //呼び出し先
+    //SetteiDao
     public static int getSyunyuu( String userId )
     {
         try (
@@ -106,6 +135,12 @@ public class UserDBManeger
             throw new RuntimeException( e );
         }
     }
+
+    //目標の取得
+    //呼び出し元
+    //UserDataService
+    //呼び出し先
+    //SetteiDao
     public static List<SetteiVo> getMokuhyou( String userId ,String nengetsu)
     {
         try (

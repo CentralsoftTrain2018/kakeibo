@@ -50,6 +50,25 @@ public class SetteiDao extends Dao {
             "AND user_userId = ?" +
             "AND Month = ?;";
 
+    private static final String  UPDATE_MOKUHYOU =
+            "update mokuhyou " +
+            " " +
+            "set Kingaku = 30000 " +
+            " " +
+            "where " +
+            "month = '2018/05' " +
+            "AND user_userid = 1 " +
+            "AND category_categoryId = 1;";
+
+    private static final String UPDATE_SYUNYUU =
+            "update " +
+            "user" +
+            "set" +
+            "Income = 100000" +
+            "where" +
+            "userId = 1;";
+
+
     public SetteiDao(Connection con) {
         super(con);
     }
