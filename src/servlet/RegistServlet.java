@@ -32,6 +32,11 @@ public class RegistServlet extends HttpServlet
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
+    //登録画面のサーブレット
+    //呼び出し元
+    //Regist.jsp
+    //呼び出し先
+    //UserDataService
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException
     {
