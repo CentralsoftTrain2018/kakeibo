@@ -11,7 +11,11 @@ import vo.SetteiVo;
 
 public class UserDataSevice
 {
-    public static void passRegistDara(RegistBean rb)
+    /**
+     * 会員登録に必要なデータを渡す
+     * @param rb
+     */
+    public static void passRegistDara( RegistBean rb )
     {
         UserDBManeger.passRegistDara( rb );
     }
@@ -42,6 +46,7 @@ public class UserDataSevice
         UserDBManeger.deleteCategory( categoryId );
     }
 
+
     public static  SetteiBean settei( String userId)
     {
 
@@ -51,6 +56,8 @@ public class UserDataSevice
         int syunyuu = UserDBManeger.getSyunyuu( userId );
         List<SetteiVo> mokuhyou = UserDBManeger.getMokuhyou(userId,nengetsu);
 
+
+        System.out.println( syunyuu );
 
         SetteiBean sb = new SetteiBean();
 
