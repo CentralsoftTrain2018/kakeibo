@@ -106,4 +106,23 @@ public class UserDataService
         return sb;
     }
 
+    //パスワードの取得
+    //呼び出し元
+    //SetteiServlet
+    //呼び出し先
+    //UserDBManager
+    public static void getPassword(String userId)
+    {
+        UserDBManeger.getPassword(userId);
+    }
+
+    //パスワードの変更
+    //呼び出し元
+    //SetteiServlet
+    //呼び出し先
+    //UserDBManager
+    public static void updatePassword(String userId, String password)
+    {
+        UserDBManeger.updatePassword(userId, password);
+    }
 }
