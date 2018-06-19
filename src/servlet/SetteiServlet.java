@@ -31,6 +31,7 @@ public class SetteiServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
+    //設定画面のサーブレット
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String userId = ( String ) session.getAttribute( "userId" );
