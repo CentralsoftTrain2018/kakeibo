@@ -47,8 +47,10 @@
 <input type="submit" value="年月変更">
 </form>
 
-<div style="width: 800px; height: 500px; text-align:center; margin-left:auto; margin-right:auto; position: relative; ">
-<div class="en" style="width: 400px; height: 371px; margin-bottom: 0px; padding-bottom: 0px;  position: absolute; left:0px;">
+
+<div style="width: 1100px; height: 700px; text-align:center; margin-left:auto; margin-right:auto; position: relative; ">
+<div class="en" style="width: 600px; height: 700px; margin-bottom: 0px; padding-bottom: 0px;  position: absolute; left:0px;">
+
 <canvas id="newcanvas"
   style="width: 100%; height: 100%;"
   ></canvas>
@@ -75,8 +77,15 @@
    <%=bean.getSumSpending() %>円
    <%}%></p>
    </div>
-   <table class="bunseki">
-  <tr>
+   <div style="display: inline-block;
+  vertical-align: top;
+  border: solid 1px;
+  border-collapse: separate;
+  top:0%;
+  right:0%;
+  position: absolute;">
+   <table class="bunseki" >
+  <tr >
     <th>色</th>
     <th>項目</th>
     <th>金額</th>
@@ -86,21 +95,21 @@
   </tr>
     <%for (bean.BunsekiBean bb : bean.getList()) {%>
   <tr>
-    <td bgcolor=<%=bb.getColor() %>></td>
-    <td><%=bb.getCategoryName() %></td>
-    <td><%=bb.getSumSpending() %>円</td>
-    <td><%=bb.getMokuhyouKingaku() %>円</td>
+    <td bgcolor=<%=bb.getColor() %> style="padding:5px 15px;"></td>
+    <td style="padding:5px 20px;"><%=bb.getCategoryName() %></td>
+    <td style="padding:5px 20px;"><%=bb.getSumSpending() %>円</td>
+    <td style="padding:5px 20px;"><%=bb.getMokuhyouKingaku() %>円</td>
     <%if(bb.getDifference() < 0){%>
-      <td><font color="red"><%=bb.getDifference() %>円</font></td>
+      <td style="padding:5px 20px;"><font color="red"><%=bb.getDifference() %>円</font></td>
     <%}else{%>
-    <td><%=bb.getDifference() %>円</td>
+    <td style="padding:5px 20px;"><%=bb.getDifference() %>円</td>
      <%}%>
-    <td><%=bb.getWariai() %>%</td>
+    <td style="padding:5px 20px;"><%=bb.getWariai() %>%</td>
   </tr>
    <%}%>
 
 </table>
-
+</div>
 </div>
 <script >
 var data = [

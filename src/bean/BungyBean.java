@@ -70,9 +70,9 @@ public class BungyBean {
         if(hanninIchi>=75)
         {
             int specialYoko=(int)((((double)sisyutu/(double)mokuhyou*100.0-75.0)/25.0)*38.0)+12;
-            if(specialYoko>=50)
+            if(specialYoko>=45)
             {
-                specialYoko=50;
+                specialYoko=45;
             }
             return specialYoko;
         }
@@ -126,9 +126,9 @@ public class BungyBean {
     {
         if(gameoverflg)
         {
-            return "image/fin2.png";
+            return "image/gameover.png";
         }
-        return "image/fin.png";
+        return "image/gameclear.png";
     }
     public String getAdovicePage()
     {

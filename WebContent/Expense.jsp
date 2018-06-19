@@ -23,6 +23,7 @@
       <input type="submit" value="分析">
     </form>
   </div>
+  <div style="width: 800px; height: 500px; text-align:center; margin-left:auto; margin-right:auto; position: relative; ">
 <%if(! bean.getMessage().equals("")){%>
 <%= bean.getMessage() %><br>
 <%} %>
@@ -204,5 +205,6 @@
     </form>
   </tr>
 </table>
+</div>
 </body>
 </html>
