@@ -111,9 +111,10 @@ public class UserDataService
     //SetteiServlet
     //呼び出し先
     //UserDBManager
-    public static void getPassword(String userId)
+    public static String getPassword(String userId)
     {
-        UserDBManeger.getPassword(userId);
+        String password = UserDBManeger.getPassword(userId);
+        return password;
     }
 
     //パスワードの変更
