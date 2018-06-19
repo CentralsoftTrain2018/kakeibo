@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-<jsp:useBean id="bean" class="bean.BungyBean" scope="request" />
+<jsp:useBean id="bean" class="bean.RegistBean" scope="request" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +12,13 @@
   <form method="POST" action="RegistServlet">
     <ul>
       <li><h2>会員登録</h2></li>
+      <li><div id="errorMessage">
+      <%if(bean.getMessage() != null){%>
+      <%= bean.getMessage() %>
+      <%} %>
+      </div></li>
       <li><label>ユーザーID</label> <input type="text" name="userId"
-        required></li>
+        pattern="^[0-9A-Za-z]+$" required>（半角英数）</li>
       <li><label>PASS</label> <input type="password" name="password"
         id="password" required></li>
       <li><label>PASS(確認)</label> <input type="password"
@@ -21,7 +26,7 @@
       <li><label>メールアドレス</label> <input type="email" name="mail"
         required></li>
       <li class="under"><label>収入</label> <input type="number"
-        name="income" required></li>
+        name="income" required>円</li>
       <li><input type="submit" value="登録"> <input type="reset"
         value="リセット"></li>
     </ul>

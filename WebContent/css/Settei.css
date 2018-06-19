@@ -21,12 +21,26 @@ button.button1 {
     display:block;
 
 }
-
-.settei{
-  text-align:left;
+/*画面レイアウト調整用　幅：1000px,高さ：800px*/
+.contena
+{
+  width:1000px;
+  hight:800px;
+  overflow: hidden;
+  margin: 0 auto;
 }
-
+/*画面表示変更ボタン用のレイアウト*/
+.settei{
+  background-color: #99cc00;
+  text-align:left;
+  float:left;
+}
+/*表示内容を変更する場所のレイアウト*/
 .hanni{
   float:right;
   background-color: #99cc00;
+  top:0px;
+  left:0px;
+  width:925px;
+  hight:800px;
 }

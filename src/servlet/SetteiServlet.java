@@ -35,11 +35,32 @@ public class SetteiServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         String userId = ( String ) session.getAttribute( "userId" );
-        String nengetsu = request.getParameter("nengetsu");
+        String choice = request.getParameter("choice");
+        String categoryIdStr = request.getParameter("categoryId");
+        String categoryName = request.getParameter("categoryName");
 
-        UserDataSevice mokuhyou = new UserDataSevice();
+        int categoryId = -1;
+        try {
+            categoryId = Integer.parseInt(categoryIdStr);
+        }
+        catch(NumberFormatException e) {
+            e.printStackTrace();
+        }
 
-        SetteiBean bean = mokuhyou.settei( userId);
+        if(choice.equals("addCategory"))
+        {
+            UserDataSevice.addCategory(categoryName);
+        }
+        if(choice.equals("updateCategory"))
+        {
+            UserDataSevice.updateCategory(categoryId, categoryName);
+        }
+        if(choice.equals("deleteCategory"))
+        {
+            UserDataSevice.deleteCategory(categoryId);
+        }
+
+        SetteiBean bean = UserDataSevice.settei( userId);
         request.setAttribute( "bean", bean );
 
         //JSPに遷移する
