@@ -27,8 +27,8 @@
         required></li>
       <li class="under"><label>収入</label> <input type="number"
         name="income" required>円</li>
-      <li><input type="submit" value="登録"> <input type="reset"
-        value="リセット"></li>
+      <li><input type="submit" value="登録">
+      <input type="reset" value="リセット"></li>
     </ul>
   </form>
   <script>
