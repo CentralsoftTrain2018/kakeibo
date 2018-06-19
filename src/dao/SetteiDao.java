@@ -24,11 +24,11 @@ public class SetteiDao extends Dao {
 
     private static final String DELETE_CATEGORY =
             "update " +
-                    "	category " +
-                    "set " +
-                    "	useflag = 0 " +
-                    "where " +
-                    "	categoryid = ?";
+            "	category " +
+            "set " +
+            "	useflag = 0 " +
+            "where " +
+            "	categoryid = ?";
 
     private static final String SELECT_SYUNYUU =
            "SELECT Income " +
