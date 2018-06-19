@@ -6,6 +6,7 @@ public class RegistBean
     private String password;
     private String mail;
     private int income;
+    private String message;
 
     public String getUserId()
     {
@@ -47,9 +48,20 @@ public class RegistBean
         this.income = income;
     }
 
+    public String getMessage()
+    {
+        return message;
+    }
+
+    public void setMessage( String message )
+    {
+        this.message = message;
+    }
+
     @Override
     public String toString()
     {
         return "userId: " + userId + ", password: " + password + ", mail: " + mail + ", income: " + income;
     }
+
 }
