@@ -5,10 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="css/Settei.css">
+<script src='Settei.js'></script>
 <title>設定</title>
 </head>
 <body>
-<body>
+
   <div class="menu">
     <form method="POST" action="BungyServlet">
       <input type="hidden" name="nengetsu" value="">
@@ -23,21 +24,21 @@
   </div>
 
   <br>
-
+ <div class="contena">
   <div class="settei">
-   <form method="POST" action="">
-    <button class="button1" type="submit">ID</button><br>
-   </form>
-     <form method="POST" action="">
-    <button class="button1" type="submit">設定</button><br>
-   </form>
-   <form method="POST" action="">
-    <button class="button1" type="submit">ヘルプ</button>
-   </form>
+
+    <button class="button1" type="submit" name="processType" value="update" onClick="YuzaHenkouGamen()">ID</button><br>
+
+    <button class="button1" type="submit" name="processType" value="update" onClick="SetteiHenkouGamen()">設定</button><br>
+
+    <button class="button1" type="submit" name="processType" value="update" onClick="HelpGamen()">ヘルプ</button>
+
    </div>
 
-  <div class="hanni">
+  <div class="hanni" id="hanni">
 aaaaaaaaaa
   </div>
+  </div>
+
   </body>
 </html>
