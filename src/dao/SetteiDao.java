@@ -38,7 +38,7 @@ public class SetteiDao extends Dao {
            "SELECT Income " +
            "FROM kakeibo.user" +
            "WHERE userId = ?;";
-    
+
     private static final String SELECT_MOKUHYOU =
             "SELECT" +
             "categoryName" +
@@ -49,6 +49,7 @@ public class SetteiDao extends Dao {
             "m.category_categoryId = c.categoryId" +
             "AND user_userId = ?" +
             "AND Month = ?;";
+
 
     private static final String UPDATE_PASSWORD =
             "update " +
@@ -65,8 +66,7 @@ public class SetteiDao extends Dao {
             "	user " +
             "where " +
             "	userid = ?";
-    
-    
+
 
     public SetteiDao(Connection con) {
         super(con);
@@ -174,7 +174,7 @@ public class SetteiDao extends Dao {
             throw e;
         }
     }
-    
+
     public void updatePassword(String userId, String password) throws SQLException {
         try ( PreparedStatement stmt = con.prepareStatement( UPDATE_PASSWORD ); )
         {
