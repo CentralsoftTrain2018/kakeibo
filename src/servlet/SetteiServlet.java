@@ -32,6 +32,10 @@ public class SetteiServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     //設定画面のサーブレット
+    //呼び出し元
+    //Settei.jsp
+    //呼び出し先
+    //UserDBService
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String userId = ( String ) session.getAttribute( "userId" );
