@@ -156,4 +156,42 @@ public class UserDBManeger
         }
     }
 
+    //パスワードの取得
+    //呼び出し元
+    //UserDataService
+    //呼び出し先
+    //SetteiDao
+    public static String getPassword( String userId )
+    {
+        try (
+                Connection con = PoolConnection.getConnection(); )
+        {
+            SetteiDao sdao = new SetteiDao( con );
+            String password = sdao.getPassword( userId );
+            return password;
+        } catch ( SQLException e )
+        {
+            e.printStackTrace();
+            throw new RuntimeException( e );
+        }
+    }
+
+    //パスワードの変更
+    //呼び出し元
+    //UserDataService
+    //呼び出し先
+    //SetteiDao
+    public static void updatePassword(String userId, String password)
+    {
+        try (
+                Connection con = PoolConnection.getConnection(); )
+        {
+            SetteiDao sdao = new SetteiDao( con );
+            sdao.updatePassword( userId, password );
+        } catch ( SQLException e )
+        {
+            e.printStackTrace();
+            throw new RuntimeException( e );
+        }
+    }
 }
