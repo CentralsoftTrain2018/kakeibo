@@ -62,7 +62,7 @@ public class UserDBManeger
             throw new RuntimeException( e );
         }
     }
-    
+
     public static int getSyunyuu( String userId )
     {
         try (
