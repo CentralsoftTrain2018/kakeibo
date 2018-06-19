@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import bean.LoginBean;
 import bean.RegistBean;
 import bean.SetteiBean;
 import dbmanager.UserDBManeger;
@@ -36,6 +37,16 @@ public class UserDataService
     public static boolean isUnique( String userId )
     {
         boolean result = UserDBManeger.isUnique( userId );
+        return result;
+    }
+    /**
+     * ID・パスワードチェック
+     * @param lb
+     * @return
+     */
+    public static boolean isLogin( LoginBean lb )
+    {
+        boolean result = UserDBManeger.isLogin( lb );
         return result;
     }
 
@@ -95,4 +106,23 @@ public class UserDataService
         return sb;
     }
 
+    //パスワードの取得
+    //呼び出し元
+    //SetteiServlet
+    //呼び出し先
+    //UserDBManager
+    public static void getPassword(String userId)
+    {
+        UserDBManeger.getPassword(userId);
+    }
+
+    //パスワードの変更
+    //呼び出し元
+    //SetteiServlet
+    //呼び出し先
+    //UserDBManager
+    public static void updatePassword(String userId, String password)
+    {
+        UserDBManeger.updatePassword(userId, password);
+    }
 }

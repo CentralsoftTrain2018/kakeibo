@@ -38,12 +38,14 @@ public class RegistServlet extends HttpServlet
         RegistBean rb = new RegistBean();
         LoginBean lb = new LoginBean();
 
+        //フォームの値を取得
         String userId = request.getParameter( "userId" );
         String password = request.getParameter( "password" );
         String mail = request.getParameter( "mail" );
         String incomeStr = request.getParameter( "income" );
         int income = Integer.parseInt( incomeStr );
 
+        //ユーザーIDが重複していない
         if ( UserDataService.isUnique( userId ) )
         {
             rb.setUserId( userId );
@@ -57,7 +59,7 @@ public class RegistServlet extends HttpServlet
             RequestDispatcher disp = request.getRequestDispatcher( "/Login.jsp" );
             disp.forward( request, response );
 
-        } else
+        } else //ユーザーIDが重複している
         {
             rb.setMessage( "そのユーザーIDは既に使用されています。" );
             request.setAttribute( "bean", rb );
