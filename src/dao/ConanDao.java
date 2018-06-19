@@ -46,6 +46,14 @@ public class ConanDao extends Dao
             " order by " +
             "  sagaku desc;";
 
+    private static final String GET_MAILADDRESS =
+            "select " +
+            "	email " +
+            "from " +
+            "	user " +
+            "where " +
+            "	userid = ?";
+
     public ConanDao( Connection con )
     {
         super( con );
@@ -96,6 +104,35 @@ public class ConanDao extends Dao
             throw e;
         }
 
+    }
+
+    public String getMailAddress(String userId) throws SQLException {
+        ResultSet rset = null;
+
+        try (
+                PreparedStatement stmt = con.prepareStatement( GET_MAILADDRESS );
+                )
+        {
+            /* Statementの作成 */
+            stmt.setString( 1, userId );
+
+            /* SQL実行 */
+            rset = stmt.executeQuery();
+
+            String mailAddress = "";
+            /* 取得したデータを表示します。 */
+            while ( rset.next() )
+            {
+                mailAddress = rset.getString(1);
+            }
+
+            return mailAddress;
+        }
+
+        catch ( SQLException e )
+        {
+            throw e;
+        }
     }
 
 }
