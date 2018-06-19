@@ -8,13 +8,7 @@
 
 }
 .bunseki {
-  display: inline-block;
-  vertical-align: top;
-  border: solid 1px;
-  border-collapse: separate;
-  top:0%;
-  left:50%;
-  position: absolute;
+
 }
 
 .bunseki td {
