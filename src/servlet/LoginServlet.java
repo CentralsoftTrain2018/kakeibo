@@ -13,8 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.BungyBean;
-import exception.NoTextException;
+import bean.LoginBean;
 import service.ExpenseService;
+import service.UserDataService;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet
@@ -29,16 +30,17 @@ public class LoginServlet extends HttpServlet
             throws ServletException, IOException
     {
         BungyBean bb = new BungyBean();
+        LoginBean lb = new LoginBean();
 
-        try
+        String userId = request.getParameter( "userId" );
+        String password = request.getParameter( "password" );
+
+        lb.setUserId( userId );
+        lb.setPassword( password );
+
+        //ログイン可能
+        if ( UserDataService.isLogin( lb ) )
         {
-            String userId = request.getParameter( "userId" );
-
-            if ( userId.equals( "" ) )
-            {
-                throw new NoTextException();
-            }
-
             //入っていない場合。今日が何年何月かをnengetsuに入れる
             Calendar calendar = Calendar.getInstance();
             String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
@@ -51,12 +53,15 @@ public class LoginServlet extends HttpServlet
             request.setAttribute( "bean", bb );
             RequestDispatcher disp = request.getRequestDispatcher( "/Bungy.jsp" );
             disp.forward( request, response );
-        } catch ( NoTextException e )
+
+        } else
+            //ユーザーID・パスワードが間違っている
         {
-            bb.setMessage( "入力が不正です" );
-            request.setAttribute( "bean", bb );
+            lb.setMessage( "ユーザーIDまたはパスワードが間違っています。" );
+            request.setAttribute( "bean", lb );
             RequestDispatcher disp = request.getRequestDispatcher( "/Login.jsp" );
             disp.forward( request, response );
+
         }
     }
 

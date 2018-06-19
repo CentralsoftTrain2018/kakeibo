@@ -35,13 +35,15 @@ public class SetteiServlet extends HttpServlet {
     //呼び出し元
     //Settei.jsp
     //呼び出し先
-    //UserDBService
+    //UserDataService
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String userId = ( String ) session.getAttribute( "userId" );
         String choice = request.getParameter("choice");
         String categoryIdStr = request.getParameter("categoryId");
         String categoryName = request.getParameter("categoryName");
+        String oldPassword = request.getParameter("oldPassword");
+        String newPassword = request.getParameter("newPassword");
 
         int categoryId = -1;
         try {
@@ -64,8 +66,12 @@ public class SetteiServlet extends HttpServlet {
         {
             UserDataService.deleteCategory(categoryId);
         }
+        if(choice.equals("updatePassword"))
+        {
+            updatePassword(userId, oldPassword, newPassword);
+        }
 
-        SetteiBean bean = UserDataService.settei( userId);
+        SetteiBean bean = UserDataService.settei( userId );
         request.setAttribute( "bean", bean );
 
         //JSPに遷移する
@@ -79,6 +85,18 @@ public class SetteiServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         doGet(request, response);
+    }
+
+    //パスワードの変更
+    //呼び出し元
+    //SetteiServlet
+    //呼び出し先
+    //UserDataService
+    private void updatePassword(String userId,String oldPassword, String newPassword) {
+        String nowPassword = UserDataService.getPassword(userId);
+        if(nowPassword.equals(oldPassword)) {
+            UserDataService.updatePassword(userId, newPassword);
+        }
     }
 
 }

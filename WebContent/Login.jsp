@@ -5,7 +5,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/form.css">
-<title>Login</title>
+<title>ログイン</title>
 </head>
 <body>
   <div id="logo">
@@ -15,14 +15,9 @@
   <form method="POST" action="LoginServlet">
     <ul>
       <li><div id="errorMessage">
-          <%
-            if ( bean.getMessage() != null )
-            {
-          %>
+          <% if ( bean.getMessage() != null ){ %>
           <%= bean.getMessage() %>
-          <%
-            }
-          %>
+          <% } %>
         </div></li>
       <li><label>ユーザーID</label>
       <input type="text" name="userId" pattern="^[0-9A-Za-z]+$" required>（半角英数）</li>
@@ -32,7 +27,7 @@
     </ul>
   </form>
   <form method="POST" action="Regist.jsp">
-    <button type="submit" name="action" value="regist" style="margin:0px 230px; float:left;">新規</button>
+    <button type="submit" name="action" value="regist" style="margin:0px 230px; float:left;">新規登録</button>
   </form>
 </body>
 </html>
