@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.BungyBean;
+import bean.RegistBean;
+import service.UserDataSevice;
 
 /**
  * Servlet implementation class RegistServlet
@@ -33,14 +34,19 @@ public class RegistServlet extends HttpServlet
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException
     {
-
+        RegistBean rb = new RegistBean();
         String userId = request.getParameter( "userId" );
         String password = request.getParameter( "password" );
-        String passwordConfirm = request.getParameter( "passwordConfirm" );
         String mail = request.getParameter( "mail" );
-        String income = request.getParameter( "income" );
+        String incomeStr = request.getParameter( "income" );
+        int income = Integer.parseInt(incomeStr);
 
-        BungyBean bb = new BungyBean();
+        rb.setUserId( userId );
+        rb.setPassword( password );
+        rb.setMail( mail );
+        rb.setIncome( income );
+        System.out.println( rb.toString() );
+        UserDataSevice.passRegistDara(rb);
 
         RequestDispatcher disp = request.getRequestDispatcher( "/Login.jsp" );
         disp.forward( request, response );
