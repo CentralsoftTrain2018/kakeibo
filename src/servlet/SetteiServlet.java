@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import service.UserDataSevice;
+
 /**
  * Servlet implementation class Settei
  */
@@ -32,6 +34,10 @@ public class SetteiServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         String userId = ( String ) session.getAttribute( "userId" );
+        String nengetsu = request.getParameter("nengetsu");
+
+        UserDataSevice mokuhyou = new UserDataSevice();
+        
         //JSPに遷移する
         RequestDispatcher disp = request.getRequestDispatcher( "Settei.jsp" );
         disp.forward( request, response );

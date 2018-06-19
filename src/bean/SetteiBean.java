@@ -3,7 +3,9 @@ package bean;
 public class SetteiBean {
     private String categoryname;
     private int mokuhyoukingaku;
+    private int syunyuu;
     private String userId;
+
     public String getCategoryname() {
         return categoryname;
     }
@@ -21,6 +23,12 @@ public class SetteiBean {
     }
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+    public int getSyunyuu() {
+        return syunyuu;
+    }
+    public void setSyunyuu(int syunyuu) {
+        this.syunyuu = syunyuu;
     }
 
 
