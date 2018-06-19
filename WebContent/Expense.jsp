@@ -22,6 +22,9 @@
     <form method="POST" action="BunsekiServlet">
       <input type="submit" value="分析">
     </form>
+        <form method="POST" action="SetteiiServlet">
+      <input type="submit" value="設定">
+    </form>
   </div>
   <div style="width: 800px; height: 500px; text-align:center; margin-left:auto; margin-right:auto; position: relative; ">
 <%if(! bean.getMessage().equals("")){%>
