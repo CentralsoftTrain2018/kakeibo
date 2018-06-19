@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
+<jsp:useBean id="bean" class="bean.BungyBean" scope="request" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,26 +11,30 @@
 <body>
   <form method="POST" action="RegistServlet">
     <ul>
-    <li><h2>会員登録</h2></li>
-      <li class="userId">
-        <label for="userId">ユーザーID</label>
-        <input type="text" name="userId"></li>
-      <li class="pass">
-        <label for="pass">PASS</label>
-        <input type="password" name="pass"></li>
-      <li class="pass2">
-        <label for="pass2">PASS(確認)</label>
-        <input type="password" name="pass2"></li>
-      <li class="mail">
-        <label for="mail">メールアドレス</label>
-        <input type="email" name="mail"></li>
-      <li class="income">
-        <label for="income">収入</label>
-        <input type="text" name="income"></li>
-      <li><input type="submit" value="登録">
-      <input type="reset" value="リセット"></li>
-      </ul>
+      <li><h2>会員登録</h2></li>
+      <li><label>ユーザーID</label> <input type="text" name="userId"
+        required></li>
+      <li><label>PASS</label> <input type="password" name="password"
+        id="password" required></li>
+      <li><label>PASS(確認)</label> <input type="password"
+        name="passwordConfirm" id="passwordConfirm" required oninput="check(this)"></li>
+      <li><label>メールアドレス</label> <input type="email" name="mail"
+        required></li>
+      <li class="under"><label>収入</label> <input type="number"
+        name="income" required></li>
+      <li><input type="submit" value="登録"> <input type="reset"
+        value="リセット"></li>
+    </ul>
   </form>
-
+  <script>
+function check(input) {
+  if (input.value != document.getElementById('password').value) {
+    input.setCustomValidity('パスワードが一致しません');
+  } else {
+    // input is valid -- reset the error message
+    input.setCustomValidity('');
+  }
+}
+</script>
 </body>
 </html>
