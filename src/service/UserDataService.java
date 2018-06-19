@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import bean.LoginBean;
 import bean.RegistBean;
 import bean.SetteiBean;
 import dbmanager.UserDBManeger;
@@ -28,6 +29,16 @@ public class UserDataService
     public static boolean isUnique( String userId )
     {
         boolean result = UserDBManeger.isUnique( userId );
+        return result;
+    }
+    /**
+     * ID・パスワードチェック
+     * @param lb
+     * @return
+     */
+    public static boolean isLogin( LoginBean lb )
+    {
+        boolean result = UserDBManeger.isLogin( lb );
         return result;
     }
 
