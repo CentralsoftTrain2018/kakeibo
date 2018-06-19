@@ -22,6 +22,9 @@
     <form method="POST" action="BunsekiServlet">
       <input type="submit" value="分析" disabled="disabled">
     </form>
+        <form method="POST" action="SetteiiServlet">
+      <input type="submit" value="設定">
+    </form>
   </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
