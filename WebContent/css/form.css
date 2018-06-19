@@ -24,11 +24,14 @@ h2 {
   background-color: #ddc69f;
 }
 
+#logo {
+  text-align: center;
+}
+
 #errorMessage {
   color: red;
 }
 
 input#button {
-  display: block;
-  margin: 0 auto;
-}
+  display: inline-block;
+  margin: 0 10px;}
