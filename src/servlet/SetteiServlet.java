@@ -16,7 +16,7 @@ import service.UserDataService;
 /**
  * Servlet implementation class Settei
  */
-@WebServlet("/Settei")
+@WebServlet("/SetteiServlet")
 public class SetteiServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

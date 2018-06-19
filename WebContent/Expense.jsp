@@ -22,7 +22,7 @@
     <form method="POST" action="BunsekiServlet">
       <input type="submit" value="分析">
     </form>
-        <form method="POST" action="SetteiiServlet">
+        <form method="POST" action="SetteiServlet">
       <input type="submit" value="設定">
     </form>
   </div>
