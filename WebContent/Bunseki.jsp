@@ -3,7 +3,7 @@
 
 <jsp:useBean id="bean" class="bean.BunsekiListBean" scope="request" />
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -54,9 +54,7 @@
 <div style="width: 1100px; height: 700px; text-align:center; margin-left:auto; margin-right:auto; position: relative; ">
 <div class="en" style="width: 600px; height: 700px; margin-bottom: 0px; padding-bottom: 0px;  position: absolute; left:0px;">
 
-<canvas id="newcanvas"
-  style="width: 100%; height: 100%;"
-  ></canvas>
+<canvas id="newcanvas"style="width: 100%; height: 100%;"></canvas>
 
   <p
    style=" position: absolute;
