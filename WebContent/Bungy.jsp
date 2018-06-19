@@ -37,7 +37,6 @@
     <%=bean.getNengetsu()%></h1>
   <div class="pattern1"
     style="width: 800px; height: 742px; overflow: hidden;
-
     margin-bottom: 0px; padding-bottom: 0px; position: relative; text-align:center; margin-left:auto; margin-right:auto;">
 
 
