@@ -126,4 +126,29 @@ public class UserDataService
     {
         UserDBManeger.updatePassword(userId, password);
     }
+
+    //収入の変更
+    //呼び出し元
+    //SetteiServlet
+    //呼び出し先
+    //UserDBManager
+    public static void updateSyunyuu(String userId, int newIncome)
+    {
+        UserDBManeger.updateSyunyuu(userId, newIncome);
+    }
+
+    //目標の変更
+    //呼び出し元
+    //SetteiServlet
+    //呼び出し先
+    //UserDBManager
+    public static void updateMokuhyou(String userId, int newMokuhyoukingaku, int categoryId)
+    {
+        //現在時刻の取得
+        Calendar calendar = Calendar.getInstance();
+        String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
+
+        UserDBManeger.updateMokuhyou(userId,newMokuhyoukingaku,categoryId, nengetsu);
+    }
+
 }

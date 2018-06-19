@@ -53,20 +53,20 @@ public class SetteiDao extends Dao {
     private static final String  UPDATE_MOKUHYOU =
             "update mokuhyou " +
             " " +
-            "set Kingaku = 30000 " +
+            "set Kingaku = ? " +
             " " +
             "where " +
-            "month = '2018/05' " +
-            "AND user_userid = 1 " +
-            "AND category_categoryId = 1;";
+            "month = ? " +
+            "AND user_userid = ? " +
+            "AND category_categoryId = ?;";
 
     private static final String UPDATE_SYUNYUU =
             "update " +
             "user" +
             "set" +
-            "Income = 100000" +
+            "Income = ?" +
             "where" +
-            "userId = 1;";
+            "userId = ?;";
 
 
     private static final String UPDATE_PASSWORD =
@@ -228,6 +228,40 @@ public class SetteiDao extends Dao {
         catch ( SQLException e )
         {
             throw e;
+        }
+    }
+
+    public void updateSyunyuu(String userId, int newIncome) throws SQLException
+    {
+        try ( PreparedStatement stmt = con.prepareStatement( UPDATE_SYUNYUU ); )
+        {
+
+            stmt.setInt(1, newIncome);
+            stmt.setString(2, userId);
+
+            /* ｓｑｌ実行 */
+            stmt.executeUpdate();
+        } catch ( SQLException ex )
+        {
+            throw ex;
+        }
+    }
+
+    public void updateMokuhyou(String userId, int newMokuhyoukingaku, int categoryId, String nengetsu) throws SQLException
+    {
+        try ( PreparedStatement stmt = con.prepareStatement( UPDATE_MOKUHYOU ); )
+        {
+
+            stmt.setInt(1, newMokuhyoukingaku);
+            stmt.setString(2, nengetsu);
+            stmt.setString(3, userId);
+            stmt.setInt(4, categoryId);
+
+            /* ｓｑｌ実行 */
+            stmt.executeUpdate();
+        } catch ( SQLException ex )
+        {
+            throw ex;
         }
     }
 }

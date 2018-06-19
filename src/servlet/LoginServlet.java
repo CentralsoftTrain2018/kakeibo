@@ -26,6 +26,11 @@ public class LoginServlet extends HttpServlet
     {
     }
 
+    //ログイン画面のサーブレット
+    //呼び出し元
+    //Login.jsp
+    //呼び出し先
+    //UserDataService
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException
     {

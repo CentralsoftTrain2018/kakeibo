@@ -44,10 +44,28 @@ public class SetteiServlet extends HttpServlet {
         String categoryName = request.getParameter("categoryName");
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
+        String newIncomeStr = request.getParameter("newIncome");
+        String newMokuhyoukingakuStr = request.getParameter("newMokuhyoukingaku");
 
         int categoryId = -1;
         try {
             categoryId = Integer.parseInt(categoryIdStr);
+        }
+        catch(NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        int newIncome= -1;
+        try {
+            newIncome = Integer.parseInt(newIncomeStr);
+        }
+        catch(NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        int newMokuhyoukingaku= -1;
+        try {
+            newMokuhyoukingaku = Integer.parseInt(newMokuhyoukingakuStr);
         }
         catch(NumberFormatException e) {
             e.printStackTrace();
@@ -69,6 +87,14 @@ public class SetteiServlet extends HttpServlet {
         if(choice.equals("updatePassword"))
         {
             updatePassword(userId, oldPassword, newPassword);
+        }
+        if(choice.equals("updateSyunyuu"))
+        {
+            UserDataService.updateSyunyuu(userId, newIncome);
+        }
+        if(choice.equals("updateMokuhyou"))
+        {
+            UserDataService.updateMokuhyou(userId, newMokuhyoukingaku, categoryId);
         }
 
         SetteiBean bean = UserDataService.settei( userId );

@@ -60,7 +60,6 @@ public class UserDBManeger
         }
 
     }
-
     /**
      * ID・パスワードチェック
      * @param lb
@@ -162,7 +161,6 @@ public class UserDBManeger
         }
     }
 
-
     //目標の取得
     //呼び出し元
     //UserDataService
@@ -221,4 +219,43 @@ public class UserDBManeger
             throw new RuntimeException( e );
         }
     }
+
+    //収入の変更
+    //呼び出し元
+    //UserDataService
+    //呼び出し先
+    //SetteiDao
+    public static void updateSyunyuu(String userId, int newIncome)
+    {
+        try (
+                Connection con = PoolConnection.getConnection(); )
+        {
+            SetteiDao sdao = new SetteiDao( con );
+            sdao.updateSyunyuu( userId, newIncome );
+        } catch ( SQLException e )
+        {
+            e.printStackTrace();
+            throw new RuntimeException( e );
+        }
+    }
+
+    //目標の変更
+    //呼び出し元
+    //UserDataService
+    //呼び出し先
+    //SetteiDao
+    public static void updateMokuhyou(String userId, int newMokuhyoukingaku, int categoryId, String nengetsu)
+    {
+        try (
+                Connection con = PoolConnection.getConnection(); )
+        {
+            SetteiDao sdao = new SetteiDao( con );
+            sdao.updateMokuhyou( userId, newMokuhyoukingaku, categoryId, nengetsu );
+        } catch ( SQLException e )
+        {
+            e.printStackTrace();
+            throw new RuntimeException( e );
+        }
+    }
+
 }
