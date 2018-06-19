@@ -41,7 +41,7 @@ public class UserDataSevice
         UserDBManeger.deleteCategory( categoryId );
     }
 
-    public SetteiBean settei( String userId )
+    public static SetteiBean settei( String userId )
     {
         int syunyuu = UserDBManeger.getSyunyuu( userId );
         System.out.println( syunyuu );
