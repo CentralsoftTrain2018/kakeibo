@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.SetteiBean;
-import service.UserDataSevice;
+import service.UserDataService;
 
 /**
  * Servlet implementation class Settei
@@ -32,7 +32,6 @@ public class SetteiServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         HttpSession session = request.getSession();
         String userId = ( String ) session.getAttribute( "userId" );
         String choice = request.getParameter("choice");
@@ -47,20 +46,21 @@ public class SetteiServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        //choiceでメソッドを切り替え
         if(choice.equals("addCategory"))
         {
-            UserDataSevice.addCategory(categoryName);
+            UserDataService.addCategory(categoryName);
         }
         if(choice.equals("updateCategory"))
         {
-            UserDataSevice.updateCategory(categoryId, categoryName);
+            UserDataService.updateCategory(categoryId, categoryName);
         }
         if(choice.equals("deleteCategory"))
         {
-            UserDataSevice.deleteCategory(categoryId);
+            UserDataService.deleteCategory(categoryId);
         }
 
-        SetteiBean bean = UserDataSevice.settei( userId);
+        SetteiBean bean = UserDataService.settei( userId);
         request.setAttribute( "bean", bean );
 
         //JSPに遷移する

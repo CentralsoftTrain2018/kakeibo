@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.LoginBean;
 import bean.RegistBean;
-import service.UserDataSevice;
+import service.UserDataService;
 
 /**
  * Servlet implementation class RegistServlet
@@ -44,13 +44,13 @@ public class RegistServlet extends HttpServlet
         String incomeStr = request.getParameter( "income" );
         int income = Integer.parseInt( incomeStr );
 
-        if ( UserDataSevice.isUnique( userId ) )
+        if ( UserDataService.isUnique( userId ) )
         {
             rb.setUserId( userId );
             rb.setPassword( password );
             rb.setMail( mail );
             rb.setIncome( income );
-            UserDataSevice.passRegistDara( rb );
+            UserDataService.passRegistDara( rb );
 
             lb.setMessage( "登録が完了しました。ログインしてください。" );
             request.setAttribute( "bean", lb );

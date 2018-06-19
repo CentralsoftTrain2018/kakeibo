@@ -4,7 +4,7 @@ import bean.RegistBean;
 import bean.SetteiBean;
 import dbmanager.UserDBManeger;
 
-public class UserDataSevice
+public class UserDataService
 {
     /**
      * 会員登録に必要なデータを渡す

@@ -1,8 +1,12 @@
 package bean;
 
+import java.util.List;
+
+import vo.SetteiVo;
+
 public class SetteiBean {
     private String categoryname;
-    private int mokuhyoukingaku;
+    private List<SetteiVo> categoryMokuhyouList;
     private int syunyuu;
     private String userId;
 
@@ -12,12 +16,13 @@ public class SetteiBean {
     public void setCategoryname(String categoryname) {
         this.categoryname = categoryname;
     }
-    public int getMokuhyoukingaku() {
-        return mokuhyoukingaku;
+    public List<SetteiVo> getCategoryMokuhyouList() {
+        return categoryMokuhyouList;
     }
-    public void setMokuhyoukingaku(int mokuhyoukingaku) {
-        this.mokuhyoukingaku = mokuhyoukingaku;
+    public void setCategoryMokuhyouList(List<SetteiVo> categoryMokuhyouList) {
+        this.categoryMokuhyouList = categoryMokuhyouList;
     }
+
     public String getUserId() {
         return userId;
     }

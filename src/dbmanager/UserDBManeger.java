@@ -2,10 +2,12 @@ package dbmanager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import bean.RegistBean;
 import dao.RegistDao;
 import dao.SetteiDao;
+import vo.SetteiVo;
 
 public class UserDBManeger
 {
@@ -104,4 +106,19 @@ public class UserDBManeger
             throw new RuntimeException( e );
         }
     }
+    public static List<SetteiVo> getMokuhyou( String userId ,String nengetsu)
+    {
+        try (
+                Connection con = PoolConnection.getConnection(); )
+        {
+            SetteiDao sdao = new SetteiDao( con );
+            List<SetteiVo> mokuhyou = sdao.getMokuhyou( userId ,nengetsu );
+            return mokuhyou;
+        } catch ( SQLException e )
+        {
+            e.printStackTrace();
+            throw new RuntimeException( e );
+        }
+    }
+
 }
