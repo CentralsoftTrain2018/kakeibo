@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.LoginBean;
 import bean.RegistBean;
 import service.UserDataSevice;
 
@@ -35,19 +36,22 @@ public class RegistServlet extends HttpServlet
             throws ServletException, IOException
     {
         RegistBean rb = new RegistBean();
+        LoginBean lb = new LoginBean();
+
         String userId = request.getParameter( "userId" );
         String password = request.getParameter( "password" );
         String mail = request.getParameter( "mail" );
         String incomeStr = request.getParameter( "income" );
-        int income = Integer.parseInt(incomeStr);
+        int income = Integer.parseInt( incomeStr );
 
         rb.setUserId( userId );
         rb.setPassword( password );
         rb.setMail( mail );
         rb.setIncome( income );
-        System.out.println( rb.toString() );
-        UserDataSevice.passRegistDara(rb);
+        UserDataSevice.passRegistDara( rb );
 
+        lb.setMessage("登録が完了しました。ログインしてください。");
+        request.setAttribute("bean", lb);
         RequestDispatcher disp = request.getRequestDispatcher( "/Login.jsp" );
         disp.forward( request, response );
     }

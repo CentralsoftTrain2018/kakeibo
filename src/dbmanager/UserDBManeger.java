@@ -14,7 +14,12 @@ public class UserDBManeger
                 Connection con = PoolConnection.getConnection(); )
         {
             RegistDao rdao = new RegistDao( con );
-            rdao.kaiinInsert(rb);
+
+            //IDが重複していない場合、会員登録
+            while ( rdao.idCheck( rb ) )
+            {
+                rdao.kaiinInsert( rb );
+            }
         } catch ( SQLException e )
         {
             e.printStackTrace();
