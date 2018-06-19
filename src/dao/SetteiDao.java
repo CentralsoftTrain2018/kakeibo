@@ -90,6 +90,9 @@ public class SetteiDao extends Dao {
         super(con);
     }
 
+    //カテゴリーの追加
+    //呼び出し元
+    //UserDBManager
     public void addCategory(String categoryName) throws SQLException {
         try ( PreparedStatement stmt = con.prepareStatement( INSERT_CATEGORY ); )
         {
@@ -104,6 +107,9 @@ public class SetteiDao extends Dao {
         }
     }
 
+    //カテゴリーの変更
+    //呼び出し元
+    //UserDBManager
     public void updateCategory(int categoryId, String categoryName) throws SQLException {
         try ( PreparedStatement stmt = con.prepareStatement( UPDATE_CATEGORY ); )
         {
@@ -119,6 +125,9 @@ public class SetteiDao extends Dao {
         }
     }
 
+    //カテゴリーの削除
+    //呼び出し元
+    //UserDBManager
     public void deleteCategory(int categoryId) throws SQLException {
         try ( PreparedStatement stmt = con.prepareStatement( DELETE_CATEGORY ); )
         {
@@ -132,6 +141,9 @@ public class SetteiDao extends Dao {
         }
     }
 
+    //収入の取得
+    //呼び出し元
+    //UserDBManager
     public int getSyunyuu(String userId) throws SQLException
     {
 
@@ -159,6 +171,9 @@ public class SetteiDao extends Dao {
         }
     }
 
+    //目標の取得
+    //呼び出し元
+    //UserDBManager
     public List<SetteiVo> getMokuhyou(String userId,String nengetsu) throws SQLException
     {
 
@@ -193,6 +208,9 @@ public class SetteiDao extends Dao {
         }
     }
 
+    //パスワードの変更
+    //呼び出し元
+    //UserDBManager
     public void updatePassword(String userId, String password) throws SQLException {
         try ( PreparedStatement stmt = con.prepareStatement( UPDATE_PASSWORD ); )
         {
@@ -208,6 +226,9 @@ public class SetteiDao extends Dao {
         }
     }
 
+    //パスワードの取得
+    //呼び出し元
+    //UserDBManager
     public String getPassword(String userId) throws SQLException {
         ResultSet rset = null;
 
