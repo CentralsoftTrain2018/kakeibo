@@ -28,11 +28,11 @@ public class SetteiDao extends Dao {
 
     private static final String DELETE_CATEGORY =
             "update " +
-                    "	category " +
-                    "set " +
-                    "	useflag = 0 " +
-                    "where " +
-                    "	categoryid = ?";
+            "	category " +
+            "set " +
+            "	useflag = 0 " +
+            "where " +
+            "	categoryid = ?";
 
     private static final String SELECT_SYUNYUU =
            "SELECT Income " +
@@ -69,15 +69,37 @@ public class SetteiDao extends Dao {
             "userId = 1;";
 
 
+    private static final String UPDATE_PASSWORD =
+            "update " +
+            "	user " +
+            "set " +
+            "	password = ? " +
+            "where " +
+            "	userid = ?";
+
+    private static final String SELECT_PASSWORD =
+            "select " +
+            "	password " +
+            "from " +
+            "	user " +
+            "where " +
+            "	userid = ?";
+
+
     public SetteiDao(Connection con) {
         super(con);
     }
 
+    //カテゴリーの追加
+    //呼び出し元
+    //UserDBManager
+    //呼び出し先
+    //なし
     public void addCategory(String categoryName) throws SQLException {
         try ( PreparedStatement stmt = con.prepareStatement( INSERT_CATEGORY ); )
         {
 
-            stmt.setString( 1, (categoryName) );
+            stmt.setString( 1, categoryName );
 
             /* ｓｑｌ実行 */
             stmt.executeUpdate();
@@ -87,11 +109,16 @@ public class SetteiDao extends Dao {
         }
     }
 
+    //カテゴリーの変更
+    //呼び出し元
+    //UserDBManager
+    //呼び出し先
+    //なし
     public void updateCategory(int categoryId, String categoryName) throws SQLException {
         try ( PreparedStatement stmt = con.prepareStatement( UPDATE_CATEGORY ); )
         {
 
-            stmt.setString( 1, (categoryName) );
+            stmt.setString( 1, categoryName );
             stmt.setInt(2, categoryId);
 
             /* ｓｑｌ実行 */
@@ -102,6 +129,11 @@ public class SetteiDao extends Dao {
         }
     }
 
+    //カテゴリーの削除
+    //呼び出し元
+    //UserDBManager
+    //呼び出し先
+    //なし
     public void deleteCategory(int categoryId) throws SQLException {
         try ( PreparedStatement stmt = con.prepareStatement( DELETE_CATEGORY ); )
         {
@@ -115,6 +147,11 @@ public class SetteiDao extends Dao {
         }
     }
 
+    //収入の取得
+    //呼び出し元
+    //UserDBManager
+    //呼び出し先
+    //なし
     public int getSyunyuu(String userId) throws SQLException
     {
 
@@ -142,6 +179,11 @@ public class SetteiDao extends Dao {
         }
     }
 
+    //目標の取得
+    //呼び出し元
+    //UserDBManager
+    //呼び出し先
+    //なし
     public List<SetteiVo> getMokuhyou(String userId,String nengetsu) throws SQLException
     {
 
@@ -168,6 +210,54 @@ public class SetteiDao extends Dao {
                 list.add(sv);
             }
             return list;
+        }
+
+        catch ( SQLException e )
+        {
+            throw e;
+        }
+    }
+
+    //パスワードの変更
+    //呼び出し元
+    //UserDBManager
+    //呼び出し先
+    //なし
+    public void updatePassword(String userId, String password) throws SQLException {
+        try ( PreparedStatement stmt = con.prepareStatement( UPDATE_PASSWORD ); )
+        {
+
+            stmt.setString(1, password);
+            stmt.setString(2, userId);
+
+            /* ｓｑｌ実行 */
+            stmt.executeUpdate();
+        } catch ( SQLException ex )
+        {
+            throw ex;
+        }
+    }
+
+    //パスワードの取得
+    //呼び出し元
+    //UserDBManager
+    //呼び出し先
+    //なし
+    public String getPassword(String userId) throws SQLException {
+        ResultSet rset = null;
+
+        try ( PreparedStatement stmt = con.prepareStatement( SELECT_PASSWORD ); )
+        {
+            stmt.setString( 1, userId );
+
+            rset = stmt.executeQuery();
+
+            String password = "";
+            while(rset.next()) {
+                password = rset.getString(1);
+            }
+
+            return password;
         }
 
         catch ( SQLException e )
