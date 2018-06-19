@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SetteiDao extends Dao {
@@ -27,6 +28,11 @@ public class SetteiDao extends Dao {
             "	category " +
             "where " +
             "	categoryid = ?";
+
+    private static final String SELECT_SYUNYUU =
+           "SELECT Income " +
+           "FROM kakeibo.user" +
+           "WHERE userId = ?;";
 
 
     public SetteiDao(Connection con) {
@@ -72,6 +78,33 @@ public class SetteiDao extends Dao {
         } catch ( SQLException ex )
         {
             throw ex;
+        }
+    }
+
+    public int getSyunyuu(String userId) throws SQLException
+    {
+
+        //System.out.println( month.toString() );
+        ResultSet rset = null;
+
+        try ( PreparedStatement stmt = con.prepareStatement( SELECT_SYUNYUU ); )
+        {
+            int syunyuu;
+
+            stmt.setString( 1, userId );
+            /* SQL実行 */
+            rset = stmt.executeQuery();
+
+            /* 取得したデータを表示します。 */
+
+            rset.next();
+            syunyuu = (rset.getInt( 1 ));
+            return syunyuu;
+        }
+
+        catch ( SQLException e )
+        {
+            throw e;
         }
     }
 }

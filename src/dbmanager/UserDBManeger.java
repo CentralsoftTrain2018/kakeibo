@@ -62,4 +62,19 @@ public class UserDBManeger
             throw new RuntimeException( e );
         }
     }
+    
+    public static int getSyunyuu( String userId )
+    {
+        try (
+                Connection con = PoolConnection.getConnection(); )
+        {
+            SetteiDao sdao = new SetteiDao( con );
+            int syunyuu = sdao.getSyunyuu( userId );
+            return syunyuu;
+        } catch ( SQLException e )
+        {
+            e.printStackTrace();
+            throw new RuntimeException( e );
+        }
+    }
 }
