@@ -20,6 +20,10 @@
       height : 50,
     });
   </script>
+  <form method="POST" action="ConanServlet">
+  <input type="hidden" name="nengetsu" value="<%=bean.getNengetsu() %>">
+  <input type="submit" name="sendMail" value="SendMail">
+  </form>
   <div style="width: 1000px; height: 500px; text-align:center; position: relative; text-align:center; margin-left:auto; margin-right:auto;">
   <img src="image/conan.png" style="left:0%; position: absolute;">
   <div class="balloon" style="left:40%; top:auto; position: absolute;">

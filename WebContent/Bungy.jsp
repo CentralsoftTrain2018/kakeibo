@@ -41,10 +41,8 @@
     margin-bottom: 0px; padding-bottom: 0px; position: relative; text-align:center; margin-left:auto; margin-right:auto;">
 
 
-    <img src="image/kawa.png" alt="" class="base"
+    <img src="image/bg_taki.jpg" alt="" class="base"
       style="position: absolute; width: 800px; height: 742px; margin-all: 0px; padding-all: 0px; left: 10px;">
-    <img src="image/kaidan.png" alt="" class="base"
-      style="position: absolute; left: 10px; bottom: 0px; margin-bottom: 0px; padding-bottom: 0px;">
     <img src="image/hanninkaidan.png" alt="" class="hannin"
       style="position: absolute;
       width: 100px;
@@ -63,7 +61,7 @@
       style="position: absolute;
       width: 50px;
       right: 35%;
-      top:25%;">
+      top:19%;">
     <%
       } else
       {
@@ -73,13 +71,13 @@
       width: 100px;
       height: 100px;
       right: 30%;
-      top:<%=bean.getJumperDispPosition() + 30%>%;">
+      top:<%=bean.getJumperDispPosition() + 24%>%;">
       <img src="image/himo.png" alt="" class="himo"
       style="position: absolute;
       width: 50px;
       height:<%=bean.getJumperDispPosition() + 7%>%;
       right: 35%;
-      top:25%;">
+      top:19%;">
     <%
       }
     %>
@@ -92,7 +90,7 @@
       %>
       <input type="hidden" name="nengetsu" value="<%=bean.getNengetsu()%>">
       <input type="image" src="<%=bean.getButtonImage()%>"
-        style="position: absolute; right: 30%; top: 30%;">
+        style="position: absolute; right: 25%; top: 30%;">
       <%
         }
       %>

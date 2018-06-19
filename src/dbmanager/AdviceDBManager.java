@@ -46,6 +46,23 @@ public class AdviceDBManager
      * @param userId
      * @return
      */
+
+    public static String getMailAddress(String userId)
+    {
+        try (
+                Connection con = PoolConnection.getConnection(); )
+        {
+
+            ConanDao cdao = new ConanDao( con );
+            String mailAddress = cdao.getMailAddress(userId);
+            return mailAddress;
+        } catch ( SQLException e )
+        {
+            e.printStackTrace();
+            throw new RuntimeException( e );
+        }
+    }
+
     public static List<AdviceVo> selectJihakuAdvice( String nengetsu, String userId )
     {
         try (

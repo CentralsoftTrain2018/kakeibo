@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import bean.RegistBean;
 import dao.RegistDao;
+import dao.SetteiDao;
 
 public class UserDBManeger
 {
@@ -22,5 +23,21 @@ public class UserDBManeger
         }
 
     }
+
+    public static int getSyunyuu( String userId )
+    {
+        try (
+                Connection con = PoolConnection.getConnection(); )
+        {
+            SetteiDao sdao = new SetteiDao( con );
+            int syunyuu = sdao.getSyunyuu( userId );
+            return syunyuu;
+        } catch ( SQLException e )
+        {
+            e.printStackTrace();
+            throw new RuntimeException( e );
+        }
+    }
+
 
 }

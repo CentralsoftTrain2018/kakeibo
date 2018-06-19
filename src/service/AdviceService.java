@@ -95,6 +95,12 @@ public class AdviceService
         return nengetsu;
     }
 
+    public static String getMailAddress(String userId)
+    {
+        String mailAddress = AdviceDBManager.getMailAddress(userId);
+        return mailAddress;
+    }
+
     public static BunsekiListBean selectBunseki( String userId )
     {
         String nengetsu = getNengetsu();
