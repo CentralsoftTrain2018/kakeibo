@@ -16,11 +16,30 @@ public class UserDBManeger
         {
             RegistDao rdao = new RegistDao( con );
 
-            //IDが重複していない場合、会員登録
-            while ( rdao.idCheck( rb ) )
-            {
-                rdao.kaiinInsert( rb );
-            }
+            rdao.kaiinInsert( rb );
+        } catch ( SQLException e )
+        {
+            e.printStackTrace();
+            throw new RuntimeException( e );
+        }
+
+    }
+
+    /**
+     * ID重複チェック
+     * @param userId
+     * @return
+     */
+    public static boolean isUnique( String userId )
+    {
+        try (
+                Connection con = PoolConnection.getConnection(); )
+        {
+            RegistDao rdao = new RegistDao( con );
+
+            boolean result = rdao.idCheck( userId );
+            return result;
+
         } catch ( SQLException e )
         {
             e.printStackTrace();
@@ -43,6 +62,5 @@ public class UserDBManeger
             throw new RuntimeException( e );
         }
     }
-
 
 }

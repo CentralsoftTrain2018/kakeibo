@@ -44,16 +44,27 @@ public class RegistServlet extends HttpServlet
         String incomeStr = request.getParameter( "income" );
         int income = Integer.parseInt( incomeStr );
 
-        rb.setUserId( userId );
-        rb.setPassword( password );
-        rb.setMail( mail );
-        rb.setIncome( income );
-        UserDataSevice.passRegistDara( rb );
+        if ( UserDataSevice.isUnique( userId ) )
+        {
+            rb.setUserId( userId );
+            rb.setPassword( password );
+            rb.setMail( mail );
+            rb.setIncome( income );
+            UserDataSevice.passRegistDara( rb );
 
-        lb.setMessage("登録が完了しました。ログインしてください。");
-        request.setAttribute("bean", lb);
-        RequestDispatcher disp = request.getRequestDispatcher( "/Login.jsp" );
-        disp.forward( request, response );
+            lb.setMessage( "登録が完了しました。ログインしてください。" );
+            request.setAttribute( "bean", lb );
+            RequestDispatcher disp = request.getRequestDispatcher( "/Login.jsp" );
+            disp.forward( request, response );
+
+        } else
+        {
+            rb.setMessage( "そのユーザーIDは既に使用されています。" );
+            request.setAttribute( "bean", rb );
+            RequestDispatcher disp = request.getRequestDispatcher( "/Regist.jsp" );
+            disp.forward( request, response );
+        }
+
     }
 
     /**

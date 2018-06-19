@@ -40,7 +40,6 @@ public class RegistDao extends Dao
 
             /* ｓｑｌ実行 */
             stmt.executeUpdate();
-            System.out.println( rb.toString() );
         } catch ( SQLException ex )
         {
             throw ex;
@@ -53,7 +52,7 @@ public class RegistDao extends Dao
      * @return 重複していない true、重複している false
      * @throws SQLException
      */
-    public boolean idCheck( RegistBean rb ) throws SQLException
+    public boolean idCheck( String userId ) throws SQLException
     {
         ResultSet rset = null;
 
@@ -61,7 +60,7 @@ public class RegistDao extends Dao
         {
             String result = null;
 
-            stmt.setString( 1, rb.getUserId() );
+            stmt.setString( 1, userId );
 
             /* ｓｑｌ実行 */
             rset = stmt.executeQuery();
