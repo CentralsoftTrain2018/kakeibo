@@ -267,7 +267,6 @@
 
 <%} %>
 
-<<<<<<< HEAD
 <td rowspan = <%=bean.getExpenseOfDay().size()%>>
   <input type="submit" name = "choice" id = "henkou" value="変更" >
   <div id = "data">
