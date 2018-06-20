@@ -17,11 +17,14 @@ public class LoginDao extends Dao
 
     final static String ID_PASS_CHECK = "select "
             + "userId "
-            + "from "
-            + "user "
-            + "where "
-            + "userId = ? "
+            + "from user "
+            + "where userId = ? "
             + "and Passward = ?;";
+
+    final static String MOKUHYOU_CHECK = "select mokuhyouId " +
+            "from mokuhyou " +
+            "where user_userid = ? " +
+            "limit 1 ;";
 
     /**
      *ID・パスワードの正しいユーザーが存在するか
@@ -49,6 +52,43 @@ public class LoginDao extends Dao
             }
 
             //ユーザーが存在しない場合false
+            if ( result == null )
+            {
+                return false;
+            } else
+            {
+                return true;
+            }
+        } catch ( SQLException ex )
+        {
+            throw ex;
+        }
+    }
+
+    /**
+     * ユーザーに目標が設定されているか
+     * @param userId
+     * @return 設定されている：true 設定されていない：false
+     */
+    public boolean hasMokuhyou( String userId ) throws SQLException
+    {
+        ResultSet rset = null;
+
+        try ( PreparedStatement stmt = con.prepareStatement( MOKUHYOU_CHECK ); )
+        {
+            Integer result = null;
+
+            stmt.setString( 1, userId );
+
+            /* ｓｑｌ実行 */
+            rset = stmt.executeQuery();
+
+            while ( rset.next() )
+            {
+                result = (rset.getInt( 1 ));
+            }
+
+            //目標が存在しない場合false
             if ( result == null )
             {
                 return false;

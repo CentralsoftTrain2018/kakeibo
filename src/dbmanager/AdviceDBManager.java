@@ -41,12 +41,10 @@ public class AdviceDBManager
     }
 
     /**
-     * 自白に必要なデータを取得
-     * @param nengetsu
+     * メールアドレスを取得
      * @param userId
      * @return
      */
-
     public static String getMailAddress(String userId)
     {
         try (
@@ -63,6 +61,12 @@ public class AdviceDBManager
         }
     }
 
+    /**
+     * 自白に必要なデータを取得
+     * @param nengetsu
+     * @param userId
+     * @return
+     */
     public static List<AdviceVo> selectJihakuAdvice( String nengetsu, String userId )
     {
         try (

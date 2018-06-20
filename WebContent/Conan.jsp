@@ -22,9 +22,10 @@
       height : 50,
     });
   </script>
-  バンジー代10％オフ末<%=new SimpleDateFormat( "yyyy/MM" ).format( date.getTime() )%>まで
+  バンジー代10％オフ<%=new SimpleDateFormat( "yyyy/MM" ).format( date.getTime() )%>末まで
   <form method="POST" action="ConanServlet">
   <input type="hidden" name="nengetsu" value="<%=bean.getNengetsu() %>">
+  <input type="hidden" name="matsubi" value="<%=new SimpleDateFormat( "yyyy/MM" ).format( date.getTime() )%>">
   <input type="submit" name="sendMail" value="SendMail">
   </form>
   <div style="width: 1000px; height: 500px; text-align:center; position: relative; text-align:center; margin-left:auto; margin-right:auto;">
@@ -61,8 +62,8 @@
     %>
     来月もがんばろう！<br> <br>
     <form method="POST" action="BungyServlet">
-      <input type="hidden" name="nengetsu" value=""><br> <input
-        type="submit" value="TOPにもどる"><br>
+      <input type="hidden" name="nengetsu" value=""><br>
+      <input type="submit" value="TOPにもどる"><br>
     </form>
   </div>
   </div>

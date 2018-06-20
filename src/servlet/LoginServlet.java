@@ -50,17 +50,30 @@ public class LoginServlet extends HttpServlet
             Calendar calendar = Calendar.getInstance();
             String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
 
-            //String nengetu=request.getParameter("nengetsu");
-            bb = ExpenseService.getMokuhyouAndExpenses( userId, nengetsu );
-
             HttpSession session = request.getSession();
             session.setAttribute( "userId", userId );
-            request.setAttribute( "bean", bb );
-            RequestDispatcher disp = request.getRequestDispatcher( "/Bungy.jsp" );
-            disp.forward( request, response );
+
+            //目標が設定されている
+            if ( UserDataService.hasMokuhyou( userId ) )
+            {
+                //String nengetu=request.getParameter("nengetsu");
+                bb = ExpenseService.getMokuhyouAndExpenses( userId, nengetsu );
+
+                request.setAttribute( "bean", bb );
+                RequestDispatcher disp = request.getRequestDispatcher( "/Bungy.jsp" );
+                disp.forward( request, response );
+
+            } else
+                //目標が設定されていない
+            {
+                request.setAttribute( "mokuhyouFlg", false );
+                RequestDispatcher disp = request.getRequestDispatcher( "/Settei.jsp" );
+                disp.forward( request, response );
+
+            }
 
         } else
-            //ユーザーID・パスワードが間違っている
+        //ユーザーID・パスワードが間違っている
         {
             lb.setMessage( "ユーザーIDまたはパスワードが間違っています。" );
             request.setAttribute( "bean", lb );
