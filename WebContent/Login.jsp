@@ -1,18 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<jsp:useBean id="bean" class="bean.BungyBean" scope="request" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+  pageEncoding="UTF-8"%>
+<jsp:useBean id="bean" class="bean.LoginBean" scope="request" />
+<!DOCTYPE html>
 <html>
 <head>
-<title>WindowTest</title>
+<link rel="stylesheet" type="text/css" href="css/form.css">
+<title>ログイン</title>
 </head>
 <body>
-<%if(bean.getMessage() != null){%>
-<%= bean.getMessage() %><br>
-<%} %>
-<form  method="POST" action="LoginServlet">
-  ユーザーID<input type="text" name="userId" value="1"><br>
-  <input type="submit" value="ログイン"><br>
-</form>
+  <div id="logo">
+    <img src="image/logo.png" alt="顛落の家計簿">
+  </div>
+
+  <form method="POST" action="LoginServlet">
+    <ul>
+      <li><div id="errorMessage">
+          <% if ( bean.getMessage() != null ){ %>
+          <%= bean.getMessage() %>
+          <% } %>
+        </div></li>
+      <li><label>ユーザーID</label>
+      <input type="text" name="userId" pattern="^[0-9A-Za-z]+$" required>（半角英数）</li>
+      <li class="under"><label>PASS</label>
+      <input type="password" name="password" id="password" required></li>
+      <li><button type="submit" name="action" value="login" style="margin:0px; float:left;">ログイン</button></li>
+    </ul>
+  </form>
+  <form method="POST" action="Regist.jsp">
+    <button type="submit" name="action" value="regist" style="margin:0px 230px; float:left;">新規登録</button>
+  </form>
 </body>
 </html>

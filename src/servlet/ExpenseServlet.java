@@ -114,13 +114,6 @@ public class ExpenseServlet extends HttpServlet {
 
                  String data[] = dataList.split("/",0);
 
-                 /**
-                 int expenseId[] = null;
-                 int kingaku[] = null;
-                 int categoryId[] = null;
-                 String expenseName[] = null;
-                 **/
-
                  for(int i=0; i<data.length; i++) {
                      int categoryId = Integer.parseInt(data[i]);
                      int expenseId = Integer.parseInt(data[i+(data.length/4)]);

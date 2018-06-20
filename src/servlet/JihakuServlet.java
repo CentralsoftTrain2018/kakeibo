@@ -32,6 +32,11 @@ public class JihakuServlet extends HttpServlet
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
+    //自白画面のサーブレット
+    //呼び出し元
+    //Bungy.jsp
+    //呼び出し先
+    //AdviceService
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException
     {

@@ -41,6 +41,27 @@ public class AdviceDBManager
     }
 
     /**
+     * メールアドレスを取得
+     * @param userId
+     * @return
+     */
+    public static String getMailAddress(String userId)
+    {
+        try (
+                Connection con = PoolConnection.getConnection(); )
+        {
+
+            ConanDao cdao = new ConanDao( con );
+            String mailAddress = cdao.getMailAddress(userId);
+            return mailAddress;
+        } catch ( SQLException e )
+        {
+            e.printStackTrace();
+            throw new RuntimeException( e );
+        }
+    }
+
+    /**
      * 自白に必要なデータを取得
      * @param nengetsu
      * @param userId

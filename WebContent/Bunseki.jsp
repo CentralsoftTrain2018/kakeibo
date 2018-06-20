@@ -3,7 +3,7 @@
 
 <jsp:useBean id="bean" class="bean.BunsekiListBean" scope="request" />
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -21,6 +21,9 @@
     </form>
     <form method="POST" action="BunsekiServlet">
       <input type="submit" value="分析" disabled="disabled">
+    </form>
+        <form method="POST" action="SetteiServlet">
+      <input type="submit" value="設定">
     </form>
   </div>
 
@@ -41,19 +44,24 @@
 </select>
 <input type="submit" value="年月変更">
 </form>
-<div class="en" style="width: 800px; height: 600px; margin-bottom: 0px; padding-bottom: 0px;  position: relative;">
-<canvas id="newcanvas" style="width: 50%; height: 100%;" ></canvas>
+
+
+<div style="width: 1100px; height: 700px; text-align:center; margin-left:auto; margin-right:auto; position: relative; ">
+<div class="en" style="width: 600px; height: 700px; margin-bottom: 0px; padding-bottom: 0px;  position: absolute; left:0px;">
+
+<canvas id="newcanvas"style="width: 100%; height: 100%;"></canvas>
+
   <p
    style=" position: absolute;
    top: 0;
    left: 0;
    margin: auto;
-   right: 0;
+   right: 0px;
    margin: auto;
    text-align: center;
-   top: 45%;
+   top: 50%;
    -webkit-transform: translateY(-50%);
-   transform: translateX(-25%);
+   transform: translateY(-50%);
    ">
    <%=bean.getDate().get(Calendar.YEAR) %>年
    <%=bean.getDate().get(Calendar.MONTH) %>月<br>
@@ -64,8 +72,16 @@
    合計金額<br>
    <%=bean.getSumSpending() %>円
    <%}%></p>
-   <table class="bunseki">
-  <tr>
+   </div>
+   <div style="display: inline-block;
+  vertical-align: top;
+  border: solid 1px;
+  border-collapse: separate;
+  top:0%;
+  right:0%;
+  position: absolute;">
+   <table class="bunseki" >
+  <tr >
     <th>色</th>
     <th>項目</th>
     <th>金額</th>
@@ -75,20 +91,21 @@
   </tr>
     <%for (bean.BunsekiBean bb : bean.getList()) {%>
   <tr>
-    <td bgcolor=<%=bb.getColor() %>></td>
-    <td><%=bb.getCategoryName() %></td>
-    <td><%=bb.getSumSpending() %>円</td>
-    <td><%=bb.getMokuhyouKingaku() %>円</td>
+    <td bgcolor=<%=bb.getColor() %> style="padding:5px 15px;"></td>
+    <td style="padding:5px 20px;"><%=bb.getCategoryName() %></td>
+    <td style="padding:5px 20px;"><%=bb.getSumSpending() %>円</td>
+    <td style="padding:5px 20px;"><%=bb.getMokuhyouKingaku() %>円</td>
     <%if(bb.getDifference() < 0){%>
-      <td><font color="red"><%=bb.getDifference() %>円</font></td>
+      <td style="padding:5px 20px;"><font color="red"><%=bb.getDifference() %>円</font></td>
     <%}else{%>
-    <td><%=bb.getDifference() %>円</td>
+    <td style="padding:5px 20px;"><%=bb.getDifference() %>円</td>
      <%}%>
-    <td><%=bb.getWariai() %>%</td>
+    <td style="padding:5px 20px;"><%=bb.getWariai() %>%</td>
   </tr>
    <%}%>
 
 </table>
+</div>
 </div>
 <script >
 var data = [

@@ -22,7 +22,11 @@
     <form method="POST" action="BunsekiServlet">
       <input type="submit" value="分析">
     </form>
+        <form method="POST" action="SetteiServlet">
+      <input type="submit" value="設定">
+    </form>
   </div>
+  <div style="width: 800px; height: 500px; text-align:center; margin-left:auto; margin-right:auto; position: relative; ">
 <%if(! bean.getMessage().equals("")){%>
 <%= bean.getMessage() %><br>
 <%} %>
@@ -263,11 +267,13 @@
 
 <%} %>
 
+<<<<<<< HEAD
 <td rowspan = <%=bean.getExpenseOfDay().size()%>>
   <input type="submit" name = "choice" id = "henkou" value="変更" >
   <div id = "data">
   <input type="hidden" id = "indata" name="data" value = "str" >
   </div>
+
   <input type="hidden" name="year" value=<%=bean.getDate().get(Calendar.YEAR) %>>
   <input type="hidden" name="month" value=<%=bean.getDate().get(Calendar.MONTH)+1 %>>
   <input type="hidden" name="selectDay" value=<%=bean.getSelectDay() %>>
@@ -279,7 +285,6 @@
 </td>
   </form>
   </tr>
-
 
 </table>
 
@@ -319,20 +324,7 @@ function test2(){
 
 }
 
-function add( str ){
-
-
-  }
-
-function log(){
-  alert("ああああああ");
-
-}
-
-
-
 </script>
-
 </body>
 
 </html>
