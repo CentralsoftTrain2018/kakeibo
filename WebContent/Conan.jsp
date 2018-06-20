@@ -15,11 +15,12 @@
   <div id="qrcode"></div>
   <script>
     jQuery('#qrcode').qrcode({
-      text : "I am Ochi Yosuke!!",
+      text : "Bungee10%OFF!! Until<%=bean.getNengetsu()%>",
       width : 50,
       height : 50,
     });
   </script>
+  バンジー代10％オフ末<%=bean.getNengetsu()%>まで
   <form method="POST" action="ConanServlet">
   <input type="hidden" name="nengetsu" value="<%=bean.getNengetsu() %>">
   <input type="submit" name="sendMail" value="SendMail">

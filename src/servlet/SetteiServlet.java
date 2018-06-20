@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.SetteiBean;
-import service.UserDataSevice;
+import service.UserDataService;
 
 /**
  * Servlet implementation class Settei
  */
-@WebServlet("/Settei")
+@WebServlet("/SetteiServlet")
 public class SetteiServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -31,13 +31,21 @@ public class SetteiServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
+    //設定画面のサーブレット
+    //呼び出し元
+    //Settei.jsp
+    //呼び出し先
+    //UserDataService
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         HttpSession session = request.getSession();
         String userId = ( String ) session.getAttribute( "userId" );
         String choice = request.getParameter("choice");
         String categoryIdStr = request.getParameter("categoryId");
         String categoryName = request.getParameter("categoryName");
+        String oldPassword = request.getParameter("oldPassword");
+        String newPassword = request.getParameter("newPassword");
+        String newIncomeStr = request.getParameter("newIncome");
+        String newMokuhyoukingakuStr = request.getParameter("newMokuhyoukingaku");
 
         int categoryId = -1;
         try {
@@ -47,20 +55,49 @@ public class SetteiServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        int newIncome= -1;
+        try {
+            newIncome = Integer.parseInt(newIncomeStr);
+        }
+        catch(NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        int newMokuhyoukingaku= -1;
+        try {
+            newMokuhyoukingaku = Integer.parseInt(newMokuhyoukingakuStr);
+        }
+        catch(NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        //choiceでメソッドを切り替え
         if(choice.equals("addCategory"))
         {
-            UserDataSevice.addCategory(categoryName);
+            UserDataService.addCategory(categoryName);
         }
         if(choice.equals("updateCategory"))
         {
-            UserDataSevice.updateCategory(categoryId, categoryName);
+            UserDataService.updateCategory(categoryId, categoryName);
         }
         if(choice.equals("deleteCategory"))
         {
-            UserDataSevice.deleteCategory(categoryId);
+            UserDataService.deleteCategory(categoryId);
+        }
+        if(choice.equals("updatePassword"))
+        {
+            updatePassword(userId, oldPassword, newPassword);
+        }
+        if(choice.equals("updateSyunyuu"))
+        {
+            UserDataService.updateSyunyuu(userId, newIncome);
+        }
+        if(choice.equals("updateMokuhyou"))
+        {
+            UserDataService.updateMokuhyou(userId, newMokuhyoukingaku, categoryId);
         }
 
-        SetteiBean bean = UserDataSevice.settei( userId);
+        SetteiBean bean = UserDataService.settei( userId );
         request.setAttribute( "bean", bean );
 
         //JSPに遷移する
@@ -74,6 +111,18 @@ public class SetteiServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         doGet(request, response);
+    }
+
+    //パスワードの変更
+    //呼び出し元
+    //SetteiServlet
+    //呼び出し先
+    //UserDataService
+    private void updatePassword(String userId,String oldPassword, String newPassword) {
+        String nowPassword = UserDataService.getPassword(userId);
+        if(nowPassword.equals(oldPassword)) {
+            UserDataService.updatePassword(userId, newPassword);
+        }
     }
 
 }

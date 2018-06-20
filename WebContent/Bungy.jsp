@@ -21,6 +21,9 @@
     <form method="POST" action="BunsekiServlet">
       <input type="submit" value="分析">
     </form>
+    <form method="POST" action="SetteiServlet">
+      <input type="submit" value="設定">
+    </form>
 
     <form method="POST" action="ConanServlet">
       <input type="hidden" name="nengetsu" value="<%=bean.getNengetsu()%>">

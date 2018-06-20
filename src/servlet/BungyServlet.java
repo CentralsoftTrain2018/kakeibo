@@ -33,7 +33,7 @@ public class BungyServlet extends HttpServlet
             HttpSession session = request.getSession();
             String userId = (String)session.getAttribute("userId");
             String nengetsu=request.getParameter("nengetsu");
-            /**
+            /*
              * nengetuに文字が入っていない場合（他の画面からバンジーボタンが押された）
              * 文字が入っている場合（バンジー画面から数値が送られる）
              * の場合わけが行われる。
@@ -58,11 +58,11 @@ public class BungyServlet extends HttpServlet
             if(bb.getSisyutu() < 0) {
                 throw new IllegalNumberException();
             }
-            /**
+            /*
             if(date < 0 || 100 < date) {
                 throw new IllegalNumberException();
             }
-            **/
+            */
             request.setAttribute("bean", bb);
             RequestDispatcher disp = request.getRequestDispatcher("/Bungy.jsp");
             disp.forward(request, response);
