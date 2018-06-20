@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" import="java.util.Calendar"%>
+<%@ page import="java.text.SimpleDateFormat" %>
 <jsp:useBean id="bean" class="bean.ConanListBean" scope="request" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,15 +13,16 @@
 <title>コナンくんからのアドバイス</title>
 </head>
 <body>
+<%Calendar date = bean.getDate(); %>
   <div id="qrcode"></div>
   <script>
     jQuery('#qrcode').qrcode({
-      text : "Bungee10%OFF!! Until<%=bean.getNengetsu()%>",
+      text : "Bungee10%OFF!! Until<%=new SimpleDateFormat( "yyyy/MM" ).format( date.getTime() )%>",
       width : 50,
       height : 50,
     });
   </script>
-  バンジー代10％オフ末<%=bean.getNengetsu()%>まで
+  バンジー代10％オフ末<%=new SimpleDateFormat( "yyyy/MM" ).format( date.getTime() )%>まで
   <form method="POST" action="ConanServlet">
   <input type="hidden" name="nengetsu" value="<%=bean.getNengetsu() %>">
   <input type="submit" name="sendMail" value="SendMail">
