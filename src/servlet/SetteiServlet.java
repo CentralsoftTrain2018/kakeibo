@@ -47,6 +47,11 @@ public class SetteiServlet extends HttpServlet {
         String newIncomeStr = request.getParameter("newIncome");
         String newMokuhyoukingakuStr = request.getParameter("newMokuhyoukingaku");
 
+        if (choice == null )
+        {
+            choice = "";
+        }
+
         int categoryId = -1;
         try {
             categoryId = Integer.parseInt(categoryIdStr);

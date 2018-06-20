@@ -47,8 +47,8 @@ public class SetteiDao extends Dao {
             ",category c " +
             "WHERE " +
             "m.category_categoryId = c.categoryId " +
-            "AND user_userId = ? " +
-            "AND Month = ?;";
+            "AND m.user_userId = ? " +
+            "AND m.Month = ?;";
 
     private static final String  UPDATE_MOKUHYOU =
             "update mokuhyou " +
