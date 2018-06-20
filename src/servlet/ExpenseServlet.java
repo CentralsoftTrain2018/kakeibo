@@ -36,8 +36,6 @@ public class ExpenseServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        System.out.println("ExpenseServletが実行されました。");
-
         ExpenseBean eb = new ExpenseBean();
         String choice = null;
         if( request.getParameter("choice") == null ) {
@@ -46,8 +44,6 @@ public class ExpenseServlet extends HttpServlet {
         if( request.getParameter("choice") != null ) {
             choice = new String(request.getParameter("choice").getBytes("iso-8859-1"), "UTF-8");
         }
-
-        System.out.println(choice);
 
         String expenseIdStr = request.getParameter("expenseId");
         String kingakuStr = request.getParameter("kingaku");
