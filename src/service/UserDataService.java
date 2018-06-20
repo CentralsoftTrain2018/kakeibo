@@ -49,6 +49,16 @@ public class UserDataService
         boolean result = UserDBManeger.isLogin( lb );
         return result;
     }
+    /**
+     * ユーザーに目標が設定されているか
+     * @param lb
+     * @return 設定されている：true 設定されていない：false
+     */
+    public static boolean hasMokuhyou( String userId )
+    {
+        boolean result = UserDBManeger.hasMokuhyou( userId);
+        return result;
+    }
 
     //カテゴリーの追加
     //呼び出し元
