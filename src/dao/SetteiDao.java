@@ -252,6 +252,9 @@ public class SetteiDao extends Dao {
         }
     }
 
+    //収入の更新
+    //呼び出し元
+    //UserDBManager
     public void updateSyunyuu(String userId, int newIncome) throws SQLException
     {
         try ( PreparedStatement stmt = con.prepareStatement( UPDATE_SYUNYUU ); )
@@ -268,6 +271,9 @@ public class SetteiDao extends Dao {
         }
     }
 
+    //目標の更新
+    //呼び出し元
+    //UserDBManager
     public void updateMokuhyou(String userId, int newMokuhyoukingaku, int categoryId, String nengetsu) throws SQLException
     {
         try ( PreparedStatement stmt = con.prepareStatement( UPDATE_MOKUHYOU ); )
