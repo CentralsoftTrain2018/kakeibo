@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.Calendar"%>
 <jsp:useBean id="bean" class="bean.ExpenseBean" scope="request" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -146,8 +146,8 @@
 
 <% for( int i=0; i<bean.getExpenseOfDay().size(); i++ ){ %>
 
-<tr>
   <form method="POST" action="ExpenseServlet">
+<tr>
   <td width = "67">
 
 <% for( CategoryVo cv: bean.getCategoryList()){%>
@@ -180,11 +180,13 @@
   <input type="hidden" name="isChange" value = "true">
   </td>
 <%} %>
+</tr>
   </form>
 <%} %>
 
-<tr>
+
 <form method="POST" action="ExpenseServlet">
+<tr>
   <td>
     <select name = "categoryId">
 <% for( CategoryVo cv: bean.getCategoryList()){%>
@@ -195,11 +197,11 @@
   </td>
 
   <td>
-  <input type="text" name="expenseName">
+  <input type="text" name="expenseName" required>
   </td>
 
   <td>
-  <input type="text" name="kingaku">
+  <input type="number" name="kingaku" required>
   </td>
 
     <td colspan = 2 align = "center">
@@ -209,11 +211,9 @@
   <input type="hidden" name="selectDay" value=<%=bean.getSelectDay() %>>
 
   </td>
+  </tr>
   </form>
 
-
-
-  </tr>
   </table>
 
 <%} %>
@@ -240,8 +240,8 @@
 
 <% for( ExpenseVo ev: bean.getExpenseOfDay()){ %>
 
-<tr>
   <form name = "myform" method="POST" action="ExpenseServlet" onSubmit = "test2();">
+<tr>
   <td>
     <select name = "categoryId">
 <% for( CategoryVo cv: bean.getCategoryList()){%>
@@ -258,12 +258,12 @@
   </td>
 
   <td>
-  <input type="text" name="expenseName" value = <%=ev.getExpenseName() %>>
-  <input type="hidden" name = "expenseId" value = <%=ev.getExpenseId()%>>
+  <input type="text" name="expenseName" value = <%=ev.getExpenseName() %> required>
+  <input type="hidden" name = "expenseId" value = <%=ev.getExpenseId()%> required>
   </td>
 
   <td>
-  <input type="text" name="kingaku"  value = <%=ev.getExpenseKingaku() %>>
+  <input type="number" name="kingaku"  value = <%=ev.getExpenseKingaku() %> required>
   </td>
 
 
@@ -284,8 +284,8 @@
   <input type="submit" name = "choice" value="戻る">
   <input type="hidden" name="isChange" value = "false">
 </td>
-  </form>
   </tr>
+  </form>
 
 </table>
 
