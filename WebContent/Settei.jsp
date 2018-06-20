@@ -27,9 +27,9 @@
  <div class="contena">
   <div class="settei">
 
-    <button class="button1" type="submit" name="processType" value="update" onClick="YuzaHenkouGamen()">ID</button><br>
+    <button class="button1" type="submit" name="processType" value="update" onClick="YuzaHenkouGamen()">IDパス</button><br>
 
-    <button class="button1" type="submit" name="processType" value="update" onClick="SetteiHenkouGamen()">設定</button><br>
+    <button class="button1" type="submit" name="processType" value="update" onClick="SetteiHenkouGamen(15)">設定</button><br>
 
     <button class="button1" type="submit" name="processType" value="update" onClick="HelpGamen()">ヘルプ</button>
 

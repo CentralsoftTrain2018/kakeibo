@@ -12,8 +12,8 @@
 <%bean.checkFlgs(); %>
   <div class="menu">
     <form method="POST" action="BungyServlet">
-      <input type="hidden" name="nengetsu"> <input type="submit"
-        value="バンジー" disabled="disabled">
+      <input type="hidden" name="nengetsu">
+      <input type="submit" value="バンジー" disabled="disabled">
     </form>
     <form method="POST" action="ExpenseServlet">
       <input type="submit" value="家計簿">
@@ -22,6 +22,7 @@
       <input type="submit" value="分析">
     </form>
     <form method="POST" action="SetteiServlet">
+      <input type="hidden" name="choice" value="">
       <input type="submit" value="設定">
     </form>
 

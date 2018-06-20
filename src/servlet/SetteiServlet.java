@@ -71,7 +71,6 @@ public class SetteiServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        //choiceでメソッドを切り替え
         if(choice.equals("addCategory"))
         {
             UserDataService.addCategory(categoryName);
@@ -95,6 +94,10 @@ public class SetteiServlet extends HttpServlet {
         if(choice.equals("updateMokuhyou"))
         {
             UserDataService.updateMokuhyou(userId, newMokuhyoukingaku, categoryId);
+        }
+        if(choice.equals(""))
+        {
+            UserDataService.settei( userId );
         }
 
         SetteiBean bean = UserDataService.settei( userId );
