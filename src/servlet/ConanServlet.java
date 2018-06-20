@@ -46,7 +46,8 @@ public class ConanServlet extends HttpServlet
 
         if(sendMail != null) {
             String mailAddress = AdviceService.getMailAddress(userId);
-            sendMail(mailAddress, nengetsu);
+            String matsubi = request.getParameter("matsubi");
+            sendMail(mailAddress, matsubi);
         }
 
         request.setAttribute( "bean", bean );
