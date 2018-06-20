@@ -83,6 +83,27 @@ public class UserDBManeger
 
     }
 
+    /**
+     * ユーザーに目標が設定されているか
+     * @param userId
+     * @return 設定されている：true 設定されていない：false
+     */
+    public static boolean hasMokuhyou( String userId)
+    {
+        try (
+                Connection con = PoolConnection.getConnection(); )
+        {
+            LoginDao ldao = new LoginDao( con );
+
+            boolean result = ldao.hasMokuhyou( userId );
+            return result;
+
+        } catch ( SQLException e )
+        {
+            e.printStackTrace();
+            throw new RuntimeException( e );
+        }
+    }
 
     //カテゴリーの追加
     //呼び出し元
@@ -257,5 +278,6 @@ public class UserDBManeger
             throw new RuntimeException( e );
         }
     }
+
 
 }
