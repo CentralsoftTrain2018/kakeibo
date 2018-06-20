@@ -108,14 +108,13 @@ public class ExpenseServlet extends HttpServlet {
 
                  String dataList = request.getParameter("data");
 
-                 System.out.println(dataList);
-
                  String data[] = dataList.split("/",0);
 
                  for(int i=0; i<data.length; i++) {
                      int categoryId = Integer.parseInt(data[i]);
                      int expenseId = Integer.parseInt(data[i+(data.length/4)]);
                      String expenseName = new String(data[i+(data.length/4*2)].getBytes("iso-8859-1"), "UTF-8");
+
                      if(expenseName.equals("")) {
                          throw new NoTextException();
                      }
@@ -154,7 +153,6 @@ public class ExpenseServlet extends HttpServlet {
         if(isChangeStr == null) {
             eb.setChange(Boolean.valueOf("false"));
         }
-
 
         eb.setStartDayOfTheWeek(calendar.get(Calendar.DAY_OF_WEEK) - 1);
         eb.setDate(calendar);
