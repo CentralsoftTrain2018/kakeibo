@@ -35,6 +35,7 @@ public class ExpenseServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         System.out.println("ExpenseServletが実行されました。");
 
         ExpenseBean eb = new ExpenseBean();
@@ -45,6 +46,9 @@ public class ExpenseServlet extends HttpServlet {
         if( request.getParameter("choice") != null ) {
             choice = new String(request.getParameter("choice").getBytes("iso-8859-1"), "UTF-8");
         }
+
+        System.out.println(choice);
+
         String expenseIdStr = request.getParameter("expenseId");
         String kingakuStr = request.getParameter("kingaku");
         String categoryIdStr = request.getParameter("categoryId");
@@ -55,6 +59,7 @@ public class ExpenseServlet extends HttpServlet {
         String month = request.getParameter("month");
         String day = request.getParameter("selectDay");
         String message = "";
+        String isChangeStr = request.getParameter("isChange");
 
         if(year == null && month == null && day == null)
         {
@@ -70,10 +75,19 @@ public class ExpenseServlet extends HttpServlet {
         {
             month = String.valueOf(Integer.parseInt(month));
             day = "01";
+
         }
 
         String date = year + "-" + month + "-" + day;
         System.out.println(date);
+
+        Calendar calendar = Calendar.getInstance();
+        if(year != null && month != null) {
+            calendar.set(Calendar.YEAR, Integer.parseInt(year));
+            calendar.set(Calendar.MONTH, Integer.parseInt(month)-1);
+        }
+        calendar.set(Calendar.DATE, 1);
+
 
         if(choice.equals("登録")) {
             try {
@@ -92,16 +106,34 @@ public class ExpenseServlet extends HttpServlet {
         }
 
         if(choice.equals("変更")) {
-            try {
-                int expenseId = Integer.parseInt(expenseIdStr);
-                int kingaku = Integer.parseInt(kingakuStr);
-                int categoryId = Integer.parseInt(categoryIdStr);
-                String expenseName = new String(request.getParameter("expenseName").getBytes("iso-8859-1"), "UTF-8");
-                if(expenseName.equals("")) {
-                    throw new NoTextException();
-                }
-                ExpenseService.updateExpense(expenseId, kingaku, categoryId, expenseName);
-            }
+             try {
+
+                 String dataList = request.getParameter("data");
+
+                 System.out.println(dataList);
+
+                 String data[] = dataList.split("/",0);
+
+                 /**
+                 int expenseId[] = null;
+                 int kingaku[] = null;
+                 int categoryId[] = null;
+                 String expenseName[] = null;
+                 **/
+
+                 for(int i=0; i<data.length; i++) {
+                     int categoryId = Integer.parseInt(data[i]);
+                     int expenseId = Integer.parseInt(data[i+(data.length/4)]);
+                     String expenseName = new String(data[i+(data.length/4*2)].getBytes("iso-8859-1"), "UTF-8");
+                     if(expenseName.equals("")) {
+                         throw new NoTextException();
+                     }
+                     int kingaku = Integer.parseInt(data[i+(data.length/4*3)]);
+
+                     ExpenseService.updateExpense(expenseId, kingaku, categoryId, expenseName);
+                 }
+
+             }
             catch(NumberFormatException | NoTextException e) {
                 message = "入力が不正です";
             }
@@ -117,16 +149,18 @@ public class ExpenseServlet extends HttpServlet {
             }
         }
 
-        Calendar calendar = Calendar.getInstance();
-        if(year != null && month != null) {
-            calendar.set(Calendar.YEAR, Integer.parseInt(year));
-            calendar.set(Calendar.MONTH, Integer.parseInt(month)-1);
-        }
-        calendar.set(Calendar.DATE, 1);
-
-
-
         eb = ExpenseService.makeExpenseBean(calendar, Date.valueOf(date), userId);
+
+        boolean isChange = Boolean.valueOf(isChangeStr);
+        if(isChangeStr != null) {
+            eb.setChange(isChange);
+        }
+
+
+        if(isChangeStr == null) {
+            eb.setChange(Boolean.valueOf("false"));
+        }
+
 
         eb.setStartDayOfTheWeek(calendar.get(Calendar.DAY_OF_WEEK) - 1);
         eb.setDate(calendar);

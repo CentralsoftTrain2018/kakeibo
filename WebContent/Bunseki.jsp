@@ -31,18 +31,13 @@
 <option value="2018" selected>2018</option>
 </select>
 <select name="month">
-<option value="0">1</option>
-<option value="1">2</option>
-<option value="2">3</option>
-<option value="3">4</option>
-<option value="4">5</option>
-<option value="5">6</option>
-<option value="6">7</option>
-<option value="7">8</option>
-<option value="8">9</option>
-<option value="9">10</option>
-<option value="10">11</option>
-<option value="11">12</option>
+<%for(int i = 1; i <= 12; i++ ){%>
+<option value=<%= i %>
+<%if(i == bean.getDate().get(Calendar.MONTH)) {%>
+      selected
+      <%} %>> <%= i %></option>
+<%} %>
+
 </select>
 <input type="submit" value="年月変更">
 </form>
