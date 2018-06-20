@@ -26,7 +26,8 @@
       <input type="submit" value="設定">
     </form>
   </div>
-  <div style="width: 800px; height: 500px; text-align:center; margin-left:auto; margin-right:auto; position: relative; ">
+  <div style="width: 1200px; height: 500px; margin-left:auto; margin-right:auto; position: relative; text-align:center; ">
+  <div style="width: 300px; height: 50px; left:15%;  position: absolute;">
 <%if(! bean.getMessage().equals("")){%>
 <%= bean.getMessage() %><br>
 <%} %>
@@ -51,7 +52,8 @@
 </select>
 <input type="submit" value="年月変更">
 </form>
-<table border="1" align="left" cellpadding="5">
+</div>
+<table border="1" align="left" cellpadding="5" style="position:absolute; width:400px; height:400px; left:5%; top:20%;">
 <tr>
 <th style = "color:red">日曜日</th>
 <th>月曜日</th>
@@ -125,9 +127,9 @@
 <% if(!bean.isChange()) {%>
 
 
-<table border = "1" cellpadding="3">
+<table border = "1" cellpadding="3" align = "center" style="position:absolute; width:500px; right:5%; top:20%;">
 <tr>
-<th bgcolor = lime colspan = 5 align = "left">
+<th bgcolor = lime colspan = 5>
 <%=bean.getDate().get(Calendar.MONTH)+1 %>月
 <%=bean.getSelectDay() %>日
 </th>
@@ -223,7 +225,7 @@
 
 <table border = "1" cellpadding="3">
 <tr>
-<th bgcolor = lime colspan = 5 align = "left">
+<th bgcolor = lime colspan = 5 align = "right">
 <%=bean.getDate().get(Calendar.MONTH)+1 %>月
 <%=bean.getSelectDay() %>日
 </th>
@@ -267,7 +269,6 @@
 
 <%} %>
 
-<<<<<<< HEAD
 <td rowspan = <%=bean.getExpenseOfDay().size()%>>
   <input type="submit" name = "choice" id = "henkou" value="変更" >
   <div id = "data">
@@ -287,6 +288,8 @@
   </tr>
 
 </table>
+
+</div>
 
 <% }%>
 
@@ -319,8 +322,6 @@ function test2(){
   }
 
   document.getElementById("indata").value = list;
-
- var hid = document.getElementById("indata").value;
 
 }
 
