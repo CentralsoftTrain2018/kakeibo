@@ -36,18 +36,18 @@ public class SetteiDao extends Dao {
 
     private static final String SELECT_SYUNYUU =
            "SELECT Income " +
-           "FROM kakeibo.user" +
+           "FROM user " +
            "WHERE userId = ?;";
 
     private static final String SELECT_MOKUHYOU =
-            "SELECT" +
-            "categoryName" +
-            ",Kingaku" +
-            "FROM mokuhyou m" +
-            ",category c" +
-            "WHERE" +
-            "m.category_categoryId = c.categoryId" +
-            "AND user_userId = ?" +
+            "SELECT " +
+            "categoryName " +
+            ",Kingaku " +
+            "FROM mokuhyou m " +
+            ",category c " +
+            "WHERE " +
+            "m.category_categoryId = c.categoryId " +
+            "AND user_userId = ? " +
             "AND Month = ?;";
 
     private static final String  UPDATE_MOKUHYOU =
@@ -62,10 +62,10 @@ public class SetteiDao extends Dao {
 
     private static final String UPDATE_SYUNYUU =
             "update " +
-            "user" +
-            "set" +
-            "Income = ?" +
-            "where" +
+            "user " +
+            "set " +
+            "Income = ? " +
+            "where " +
             "userId = ?;";
 
 
@@ -185,7 +185,7 @@ public class SetteiDao extends Dao {
             List<SetteiVo> list = new ArrayList<SetteiVo>();
 
             stmt.setString( 1, userId );
-            stmt.setString( 1, nengetsu );
+            stmt.setString( 2, nengetsu );
             /* SQL実行 */
             rset = stmt.executeQuery();
 

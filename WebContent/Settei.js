@@ -1,9 +1,11 @@
+//設定画面左側のIDボタンを押したとき呼ばれる。
 function YuzaHenkouGamen() {
 
   document.getElementById('hanni').innerHTML =
-  '<form method="POST" action="RegistServlet">'+
-    '<li><label>新しく設定するPASS</label><input type="password" name="password"id="password" required></li>'+
-    '<li><label>PASSの確認</label><input type="password"name="passwordConfirm" id="passwordConfirm" required onblur="check(this)"></li></ul></form>';
+  '<form method="POST" action="SetteiServlet">'+
+    '<ul><li><label>新しく設定するPASS</label><input type="password" name="newPassword"id="password" required></li>'+
+    '<li><label>PASSの確認</label><input type="password"name="passwordConfirm" id="passwordConfirm" required oninput="check(this)"></li>'+
+    '</ul><input type="submit" value="updatePassword"></form>';
 }
 function check(input) {
   if (input.value != document.getElementById('password').value) {
@@ -13,35 +15,40 @@ function check(input) {
     input.setCustomValidity('');
   }
 }
-function SetteiHenkouGamen() {
-  let SETTEIFORM ='<form method="POST" action="BungyServlet" id="henkouform"></form>';
-  let SYUUNYUINPUT='収入<input type="text" name="syuunyu" value="<%=bean.getSyunyuu();%>"><br>';
+//設定画面左側の設定ボタンを押したとき呼ばれる。引数のnumユーザが持っているカテゴリの数
+function SetteiHenkouGamen(num) {
+  let SETTEIFORM ='<form method="POST" action="SetteiServlet" id="henkouform">';
+  let SYUUNYUINPUT='収入<input type="text" name="syuunyu" placeholder="<%=bean.getSyunyuu();%>"><input type="submit" value="updateSyunyuu" name="choice"></form><br>';
   let MOKUHYOUINPUT='目標:<%=bean.getMokuhyougoukei();%><br>';
-  let KOUMOKUALL='<table border="1"  id="koumokulist"></table>';
-  let KATEGORYTOUROKU='<form method="POST" action="SetteiServlet">'+
-  '<input type="text" name="categoryName"  value="" placeholder="'+"追加する項目名を入力してください"+'">'+
-  '<input type="submit" value="追加" name="choice"></form>';
+  let KOUMOKUALL='<table border="1"  id="koumokulist"></table><tr>';
+  let KATEGORYTOUROKU='<form method="POST" action="SetteiServlet"><table>'+
+  '<td><input type="text" name="categoryName"  value="" placeholder="'+"追加する項目名を入力してください"+'"></td>'+
+  '<td><input type="text" name="newMokuhyoukingaku"  value="" placeholder="'+0+'"></td>'+
+  '<td><input type="submit" value="addCategory" name="choice"></td></tr></table></form>';
   var KOUMOKULISTMENBER='';
 
   document.getElementById('hanni').innerHTML = '';
   document.getElementById('hanni').innerHTML = SYUUNYUINPUT+MOKUHYOUINPUT+KATEGORYTOUROKU+KOUMOKUALL;
 
-  for(var i=0;i<10;i++)
+  for(var i=0;i<num;i++)
   {
-    KOUMOKULISTMENBER+='<tr  border="1" id="'+i+'"></tr>';
+    KOUMOKULISTMENBER+='<form method="POST" action="SetteiServlet"><tr  border="1" id="'+i+'"></tr></form>';
   };
   document.getElementById('koumokulist').innerHTML = KOUMOKULISTMENBER;
 
-  for(let j=0;j<10;j++)
+  for(let j=0;j<num;j++)
   {
     document.getElementById(j).innerHTML =
-      '<form method="POST" action="SetteiServlet">'+
       '<td  border="1"><input type="text" name="categoryName"  value="" placeholder="'+'<%=bean.getCategoryMokuhyouList('+i+').getCategoryName();%>"'+'></td>'+
-      '<td  border="1"><input type="text" name="kouinMokuhyou" value="" placeholder="'+'<%=bean.getCategoryMokuhyouList('+i+').getMokuhyouKingaku();%>"'+'></td>'++
-      '<td  border="1"><input type="submit" value="deleteCategory" name="choice"></td>'+'</form>';
+      '<td  border="1"><input type="text" name="kouinMokuhyou" value="" placeholder="'+'<%=bean.getCategoryMokuhyouList('+i+').getMokuhyouKingaku();%>"'+'></td>'+
+      '<td  border="1">'+
+      '<input type="submit" name="choice" value="deleteCategory">'+
+      '<input type="hidden" name="year" value="'+'<%=bean.getCategoryMokuhyouList('+i+').getCategoryName();%>">'+
+      '<input type="hidden" name="month" value="'+'<%=bean.getCategoryMokuhyouList('+i+').getMokuhyouKingaku();%>"></td>';
   };
 
 }
+//設定画面左側のヘルプボタンを押したとき呼ばれる。
 function HelpGamen() {
   document.getElementById('hanni').innerHTML =
     '<h2>画面説明</h2><p>バンジー画面</p>'+
