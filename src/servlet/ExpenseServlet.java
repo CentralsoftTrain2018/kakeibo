@@ -57,6 +57,8 @@ public class ExpenseServlet extends HttpServlet {
         String message = "";
         String isChangeStr = request.getParameter("isChange");
 
+        boolean isChange = Boolean.valueOf(isChangeStr);
+
         if(year == null && month == null && day == null)
         {
             LocalDate ld = LocalDate.now();
@@ -131,6 +133,8 @@ public class ExpenseServlet extends HttpServlet {
             try {
                 int expenseId = Integer.parseInt(expenseIdStr);
                 ExpenseService.deleteExpense(expenseId);
+
+                isChange = false;
             }
             catch(NumberFormatException e) {
                 message = "入力が不正です";
@@ -139,7 +143,8 @@ public class ExpenseServlet extends HttpServlet {
 
         eb = ExpenseService.makeExpenseBean(calendar, Date.valueOf(date), userId);
 
-        boolean isChange = Boolean.valueOf(isChangeStr);
+
+
         if(isChangeStr != null) {
             eb.setChange(isChange);
         }
