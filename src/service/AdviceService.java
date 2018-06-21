@@ -18,7 +18,6 @@ import vo.BunsekiVo;
 public class AdviceService
 {
 
-
     /**
      * jihaku
      * ID指定したユーザーの当月の自白を取得する
@@ -26,7 +25,6 @@ public class AdviceService
      * @return 現在の月の犯人の自白
      */
     public JihakuListBean jihaku( String userId, String nengetsu )
-
 
     {
 
@@ -100,20 +98,27 @@ public class AdviceService
         return nengetsu;
     }
 
-    public static String getMailAddress(String userId)
+    public static String getMailAddress( String userId )
     {
-        String mailAddress = AdviceDBManager.getMailAddress(userId);
+        String mailAddress = AdviceDBManager.getMailAddress( userId );
         return mailAddress;
     }
 
+    /**
+     * 現在の年月を取得する
+     * @param userId
+     * @return
+     */
     public static BunsekiListBean selectBunseki( String userId )
     {
-        String nengetsu = getNengetsu();
-        BunsekiListBean blb = setBunsekiList( userId, nengetsu );
         Calendar calendar = Calendar.getInstance();
-        calendar.add( Calendar.MONTH, +1 );
+//        calendar.add( Calendar.MONTH, +1 );
         calendar.get( Calendar.YEAR );
         calendar.get( Calendar.MONTH );
+        String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
+        System.out.println( "selectBunseki（ページ遷移）" + nengetsu);
+
+        BunsekiListBean blb = setBunsekiList( userId, nengetsu );
         blb.setDate( calendar );
 
         return blb;
@@ -126,7 +131,7 @@ public class AdviceService
         //calendar.add( Calendar.MONTH, -1 );
         String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
         BunsekiListBean blb = setBunsekiList( userId, nengetsu );
-        calendar.add( Calendar.MONTH, +1 );
+        System.out.println( "selectBunseki(プルダウン選択)" + nengetsu );
         blb.setDate( calendar );
 
         return blb;
@@ -160,7 +165,8 @@ public class AdviceService
             if ( allSumSpending == 0 )
             {
                 bb.setWariai( 0 );
-            }else {
+            } else
+            {
                 int wariai = (100 * bb.getSumSpending() / allSumSpending);
                 bb.setWariai( wariai );
             }

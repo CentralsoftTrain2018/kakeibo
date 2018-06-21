@@ -28,7 +28,7 @@
   </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-<form method="POST" action="BunsekiServlet">
+<form method="POST" action="BunsekiServlet" style="margin-top: 10px;">
 <select name="year">
 <option value="2017">2017</option>
 <option value="2018" selected>2018</option>
@@ -36,7 +36,7 @@
 <select name="month">
 <%for(int i = 1; i <= 12; i++ ){%>
 <option value=<%= i %>
-<%if(i == bean.getDate().get(Calendar.MONTH)) {%>
+<%if(i == bean.getDate().get(Calendar.MONTH)+1) {%>
       selected
       <%} %>> <%= i %></option>
 <%} %>
@@ -64,7 +64,7 @@
    transform: translateY(-50%);
    ">
    <%=bean.getDate().get(Calendar.YEAR) %>年
-   <%=bean.getDate().get(Calendar.MONTH) %>月<br>
+   <%=bean.getDate().get(Calendar.MONTH)+1 %>月<br>
 
    <%if(bean.getList().size() == 0){%>
    データがありません

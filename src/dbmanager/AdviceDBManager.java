@@ -127,7 +127,7 @@ public class AdviceDBManager
     }
 
     /**
-     * ユーザーIDと該当の年月二対応する分析情報の取得
+     * ユーザーIDと該当の年月に対応する分析情報の取得
      * @param nengetsu
      * @param userId
      * @return 分析情報

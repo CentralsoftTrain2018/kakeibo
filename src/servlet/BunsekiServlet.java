@@ -27,18 +27,17 @@ public class BunsekiServlet extends HttpServlet
         super();
     }
 
-
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException
     {
         HttpSession session = request.getSession();
         String userId = ( String ) session.getAttribute( "userId" );
-        String year = request.getParameter("year");
-        String month = request.getParameter("month");
+        String year = request.getParameter( "year" );
+        String month = request.getParameter( "month" );
 
-        System.out.println("Servlet" + year + "-" + month);
+        System.out.println( "Servlet" + year + "-" + month );
 
-        BunsekiListBean bean=chengeServiceMesod(year,month,userId);
+        BunsekiListBean bean = chengeServiceMesod( year, month, userId );
 
         request.setAttribute( "bean", bean );
 
@@ -46,15 +45,17 @@ public class BunsekiServlet extends HttpServlet
         disp.forward( request, response );
     }
 
-    private BunsekiListBean chengeServiceMesod(String year,String month,String userId)
+    private BunsekiListBean chengeServiceMesod( String year, String month, String userId )
     {
         Calendar calendar = Calendar.getInstance();
 
-        if(year != null && month != null) {
-            calendar.set(Calendar.YEAR, Integer.parseInt(year));
-            calendar.set(Calendar.MONTH, Integer.parseInt(month)-1);
-            return AdviceService.selectBunseki( userId,calendar );
+        if ( year != null && month != null )
+        {
+            calendar.set( Calendar.YEAR, Integer.parseInt( year ) );
+            calendar.set( Calendar.MONTH, Integer.parseInt( month ) - 1 );
+            return AdviceService.selectBunseki( userId, calendar );
         }
+        System.out.println( "Servlet" + calendar.get(Calendar.YEAR) + "-" + calendar.get(Calendar.MONTH) );
 
         return AdviceService.selectBunseki( userId );
 
