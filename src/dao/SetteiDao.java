@@ -13,10 +13,12 @@ public class SetteiDao extends Dao {
     private static final String INSERT_CATEGORY =
             "insert into " +
             "	category( " +
-            "		categoryname " +
+            "		categoryname, " +
+            "		useflag, " +
+            "		color " +
             "	) " +
             "values " +
-            "	(?)";
+            "	( ? , ? , ? )";
 
     private static final String UPDATE_CATEGORY =
             "update " +
@@ -98,7 +100,8 @@ public class SetteiDao extends Dao {
         {
 
             stmt.setString( 1, categoryName );
-
+            stmt.setInt(2, 1);
+            stmt.setString(3, "red");
             /* ｓｑｌ実行 */
             stmt.executeUpdate();
         } catch ( SQLException ex )
