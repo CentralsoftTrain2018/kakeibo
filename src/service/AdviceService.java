@@ -18,8 +18,13 @@ import vo.BunsekiVo;
 public class AdviceService
 {
 
-    //AdviceVo型のListをConanBean型のListに変換
 
+    /**
+     * jihaku
+     * ID指定したユーザーの当月の自白を取得する
+     * @param ユーザID、年月
+     * @return 現在の月の犯人の自白
+     */
     public JihakuListBean jihaku( String userId, String nengetsu )
 
 

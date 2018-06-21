@@ -36,8 +36,6 @@ public class ExpenseServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        System.out.println("ExpenseServletが実行されました。");
-
         ExpenseBean eb = new ExpenseBean();
         String choice = null;
         if( request.getParameter("choice") == null ) {
@@ -46,8 +44,6 @@ public class ExpenseServlet extends HttpServlet {
         if( request.getParameter("choice") != null ) {
             choice = new String(request.getParameter("choice").getBytes("iso-8859-1"), "UTF-8");
         }
-
-        System.out.println(choice);
 
         String expenseIdStr = request.getParameter("expenseId");
         String kingakuStr = request.getParameter("kingaku");
@@ -60,6 +56,8 @@ public class ExpenseServlet extends HttpServlet {
         String day = request.getParameter("selectDay");
         String message = "";
         String isChangeStr = request.getParameter("isChange");
+
+        boolean isChange = Boolean.valueOf(isChangeStr);
 
         if(year == null && month == null && day == null)
         {
@@ -110,14 +108,13 @@ public class ExpenseServlet extends HttpServlet {
 
                  String dataList = request.getParameter("data");
 
-                 System.out.println(dataList);
-
                  String data[] = dataList.split("/",0);
 
                  for(int i=0; i<data.length; i++) {
                      int categoryId = Integer.parseInt(data[i]);
                      int expenseId = Integer.parseInt(data[i+(data.length/4)]);
                      String expenseName = new String(data[i+(data.length/4*2)].getBytes("iso-8859-1"), "UTF-8");
+
                      if(expenseName.equals("")) {
                          throw new NoTextException();
                      }
@@ -136,6 +133,8 @@ public class ExpenseServlet extends HttpServlet {
             try {
                 int expenseId = Integer.parseInt(expenseIdStr);
                 ExpenseService.deleteExpense(expenseId);
+
+                isChange = false;
             }
             catch(NumberFormatException e) {
                 message = "入力が不正です";
@@ -144,7 +143,8 @@ public class ExpenseServlet extends HttpServlet {
 
         eb = ExpenseService.makeExpenseBean(calendar, Date.valueOf(date), userId);
 
-        boolean isChange = Boolean.valueOf(isChangeStr);
+
+
         if(isChangeStr != null) {
             eb.setChange(isChange);
         }
@@ -153,7 +153,6 @@ public class ExpenseServlet extends HttpServlet {
         if(isChangeStr == null) {
             eb.setChange(Boolean.valueOf("false"));
         }
-
 
         eb.setStartDayOfTheWeek(calendar.get(Calendar.DAY_OF_WEEK) - 1);
         eb.setDate(calendar);
