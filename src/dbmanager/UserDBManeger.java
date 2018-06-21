@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import bean.LoginBean;
 import dao.LoginDao;
 import dao.RegistDao;
 import dao.SetteiDao;
@@ -65,14 +64,14 @@ public class UserDBManeger
      * @param lb
      * @return
      */
-    public static boolean isLogin( LoginBean lb )
+    public static boolean isLogin( String userId, String password )
     {
         try (
                 Connection con = PoolConnection.getConnection(); )
         {
             LoginDao ldao = new LoginDao( con );
 
-            boolean result = ldao.idPassCheck( lb );
+            boolean result = ldao.idPassCheck( userId, password );
             return result;
 
         } catch ( SQLException e )

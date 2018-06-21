@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import bean.LoginBean;
 import bean.SetteiBean;
 import dbmanager.UserDBManeger;
 import vo.RegistVo;
@@ -48,9 +47,9 @@ public class UserDataService
      * @param lb
      * @return
      */
-    public static boolean isLogin( LoginBean lb )
+    public static boolean isLogin( String userId, String password)
     {
-        boolean result = UserDBManeger.isLogin( lb );
+        boolean result = UserDBManeger.isLogin( userId, password );
         return result;
     }
     /**
