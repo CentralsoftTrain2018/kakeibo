@@ -60,7 +60,8 @@ public class ExpenseDao extends Dao
             "FROM " +
             "kakeibo.category " +
             "WHERE " +
-            "useflag = 1;";
+            "user_userid = ? " +
+            "AND useflag = 1;";
 
     private static final String GET_EXPENSES = "SELECT"
             + " expenseId "
@@ -201,12 +202,13 @@ public class ExpenseDao extends Dao
      * @throws SQLException
      * @return CategoryVo型のList
      */
-    public List<CategoryVo> getCategory() throws SQLException
+    public List<CategoryVo> getCategory(String userId) throws SQLException
     {
         ResultSet rset = null;
 
         try ( PreparedStatement stmt = con.prepareStatement( SELECT_CATEGORY ); )
         {
+            stmt.setString( 1, userId );
             rset = stmt.executeQuery();
 
             List<CategoryVo> categoryList = new ArrayList<CategoryVo>();
