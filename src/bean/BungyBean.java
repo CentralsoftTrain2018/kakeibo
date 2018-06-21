@@ -19,6 +19,10 @@ public class BungyBean {
     private boolean monthfinflg=false;
     private boolean gameoverflg=false;
 
+    //ユーザーの登録月
+    private int registMonth;
+    private int registYear;
+
     public void checkFlgs()
     {
         monthFinCheck();
@@ -146,6 +150,22 @@ public class BungyBean {
             gameoverflg=true;
         }
     }
+
+    public int getRegistYear()
+    {
+        return registYear;
+    }
+
+    public void setRegistYear(int registYear)
+    {
+        this.registYear = registYear;
+    }
+
+    public void setRegistMonth(int registMonth)
+    {
+        this.registMonth = registMonth;
+    }
+
     private void monthFinCheck()
     {
         String[] YearAndMonth = nengetsu.split("/");

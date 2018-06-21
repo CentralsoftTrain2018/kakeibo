@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*"
   contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+  <%@ page import="java.time.LocalDate"%>
 <jsp:useBean id="bean" class="bean.BungyBean" scope="request" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -50,7 +51,6 @@
     </select>
     <input type="submit" value="Bungy"><br>
   </form>
-
 
     <img src="image/bg_taki.jpg" alt="" class="base"
       style="position: absolute; width: 800px; height: 742px; margin-all: 0px; padding-all: 0px; left: 10px;">

@@ -9,6 +9,7 @@ public class ExpenseVo {
     private String expenseName;
     private Date expenseDate;
     private String userId;
+    private String registMonth;
 
 
     public ExpenseVo() {
@@ -16,7 +17,7 @@ public class ExpenseVo {
     }
 
     public ExpenseVo(int expenseId, int expenseKingaku, int categoryId, String expenseName, Date expenseDate,
-            String userId) {
+            String userId, String registMonth) {
         super();
         this.expenseId = expenseId;
         this.expenseKingaku = expenseKingaku;
@@ -24,6 +25,7 @@ public class ExpenseVo {
         this.expenseName = expenseName;
         this.expenseDate = expenseDate;
         this.userId = userId;
+        this.registMonth = registMonth;
     }
 
     public int getExpenseId() {
@@ -72,6 +74,14 @@ public class ExpenseVo {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getRegistMonth() {
+        return registMonth;
+    }
+
+    public void setRegistMonth(String registMonth) {
+        this.registMonth = registMonth;
     }
 
     @Override
