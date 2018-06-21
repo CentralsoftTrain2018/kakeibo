@@ -26,14 +26,6 @@
       <input type="submit" value="設定">
     </form>
 
-    <form method="POST" action="ConanServlet">
-      <input type="hidden" name="nengetsu" value="<%=bean.getNengetsu()%>">
-      <input type="submit" value="コナン">
-    </form>
-    <form method="POST" action="JihakuServlet">
-      <input type="hidden" name="nengetsu" value="<%=bean.getNengetsu()%>">
-      <input type="submit" value="自白">
-    </form>
   </div>
 
   <h1>
@@ -42,6 +34,22 @@
   <div class="pattern1"
     style="width: 800px; height: 742px; overflow: hidden;
     margin-bottom: 0px; padding-bottom: 0px; position: relative; text-align:center; margin-left:auto; margin-right:auto;">
+
+      <form method="POST" action="BungyServlet">
+    年月<select name="nengetsu">
+      <option value="2018/01"> 2018/01 </option>
+      <option value="2018/02"> 2018/02 </option>
+      <option value="2018/03"> 2018/03 </option>
+      <option value="2018/04"> 2018/04 </option>
+      <option value="2018/05"> 2018/05 </option>
+      <option value="2018/06"> 2018/06 </option>
+      <option value="2018/07"> 2018/07 </option>
+      <option value="2018/08"> 2018/08 </option>
+      <option value="2018/09"> 2018/09 </option>
+      <option value="2018/10"> 2018/10 </option>
+    </select>
+    <input type="submit" value="Bungy"><br>
+  </form>
 
 
     <img src="image/bg_taki.jpg" alt="" class="base"
@@ -99,23 +107,6 @@
       %>
     </form>
   </div>
-  <form method="POST" action="BungyServlet">
-    年月<select name="nengetsu">
-      <option value="2018/01"> 2018/01 </option>
-      <option value="2018/02"> 2018/02 </option>
-      <option value="2018/03"> 2018/03 </option>
-      <option value="2018/04"> 2018/04 </option>
-      <option value="2018/05"> 2018/05 </option>
-      <option value="2018/06"> 2018/06 </option>
-      <option value="2018/07"> 2018/07 </option>
-      <option value="2018/08"> 2018/08 </option>
-      <option value="2018/09"> 2018/09 </option>
-      <option value="2018/10"> 2018/10 </option>
-    </select>
-    <input type="submit" value="Bungy"><br>
-  </form>
-
-
 
 </body>
 </html>
