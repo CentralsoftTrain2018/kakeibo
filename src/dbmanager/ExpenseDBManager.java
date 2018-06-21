@@ -76,14 +76,19 @@ public class ExpenseDBManager
         try (
                 Connection con = PoolConnection.getConnection(); )
         {
-            BungyDao bdao = new BungyDao( con );
-            BungyVo bv = bdao.getMokuhyouAndExpenses( userid, month );
 
-            //BungyVo bv = new BungyVo();
-            //bv.setMokuhyou(10000);
-            //bv.setTotalexpenses(5000);
+            BungyDao bdao = new BungyDao( con );
+            BungyVo bv = new BungyVo();
+
+            int totalexpenses = bdao.getSisyutuGoukei(month, userid);
+            int mokuhyou = bdao.getTsukiMokuhyou(month, userid);
+
+            bv.setTotalexpenses(totalexpenses);
+            bv.setMokuhyou(mokuhyou);
 
             return bv;
+
+
         } catch ( SQLException e )
         {
             e.printStackTrace();
@@ -117,14 +122,14 @@ public class ExpenseDBManager
      * カテゴリ取得
      * @return List<CategoryVo>
      */
-    public static List<CategoryVo> getCategory()
+    public static List<CategoryVo> getCategory(String userId)
     {
         try (
                 Connection con = PoolConnection.getConnection();
                 )
         {
             ExpenseDao edao = new ExpenseDao( con );
-            List<CategoryVo> categoryList = edao.getCategory();
+            List<CategoryVo> categoryList = edao.getCategory(userId);
             return categoryList;
         } catch ( SQLException e )
         {
