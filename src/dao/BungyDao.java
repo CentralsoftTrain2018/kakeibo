@@ -5,22 +5,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import vo.BungyVo;
-
 public class BungyDao extends Dao
 {
 
-    private static final String GETDATA = "SELECT "
-            + " totalexpenses ,"
-            + " mokuhyou "
-            + " FROM "
-            + " history "
-            + " WHERE "
-            + " userid "
-            + " = ? "
-            + " and "
-            + " month "
-            + " = ? ";
+     private static final String GOUKEI = "SELECT" +
+             "			SUM(e.Kingaku)" +
+             "			FROM" +
+             "			expenses as e" +
+             "			WHERE" +
+             "           DATE_FORMAT(e.expenseDate, '%Y/%m') = ? " +
+             "			AND e.user_userid = ?;";
+
+     private static final String MOKUHYOU = "SELECT" +
+             "			SUM(m.Kingaku)" +
+             "			FROM" +
+             "			mokuhyou as m" +
+             "			WHERE" +
+             "			m.Month = ?" +
+             "			AND m.user_userid = ?;";
 
     public BungyDao( Connection con )
     {
@@ -30,39 +32,71 @@ public class BungyDao extends Dao
     //-------------------------------------------------------
     // カテゴリ名、支出合計、目標
 
-    public BungyVo getMokuhyouAndExpenses( String userid, String month ) throws SQLException
-    {
-
-        try (
-                PreparedStatement stmt = con.prepareStatement( GETDATA ); )
+    /**
+     * 月全体の支出合計を取得
+     * @param nengetsu
+     * @param userId
+     * @return　月全体の支出合計
+     * @throws SQLException
+     */
+        public int getSisyutuGoukei( String nengetsu, String userId ) throws SQLException
         {
+
+            //System.out.println( month.toString() );
             ResultSet rset = null;
-            BungyVo bv = new BungyVo();
 
-            /* Statementの作成 */
-
-            stmt.setString( 1, userid );
-            stmt.setString( 2, month );
-
-            /* SQL実行 */
-
-            rset = stmt.executeQuery();
-
-            while ( rset.next() )
-
+            try ( PreparedStatement stmt = con.prepareStatement( GOUKEI ); )
             {
-                bv.setTotalexpenses( rset.getInt( 1 ) );
-                bv.setMokuhyou( rset.getInt( 2 ) );
+                int goukei;
+
+                stmt.setString( 1, nengetsu );
+                stmt.setString( 2, userId );
+                /* SQL実行 */
+                rset = stmt.executeQuery();
+
+                /* 取得したデータを表示します。 */
+
+                rset.next();
+                goukei = (rset.getInt( 1 ));
+                return goukei;
             }
 
-
-
-            //github.com/CentralsoftTrain2018/kakeibo
-
-            /* 取得したデータを表示します。 */
-            return bv;
+            catch ( SQLException e )
+            {
+                throw e;
+            }
         }
+    /**
+     * その月全体の目標額を取得
+     * @param nengetsu
+     * @param userId
+     * @return　月全体の目標額
+     * @throws SQLException
+     */
+        public int getTsukiMokuhyou( String nengetsu, String userId ) throws SQLException
+        {
 
-    }
+            ResultSet rset = null;
+
+            try ( PreparedStatement stmt = con.prepareStatement( MOKUHYOU ) )
+            {
+                int mokuhyou;
+
+                stmt.setString( 1, nengetsu );
+                stmt.setString( 2, userId );
+                /* SQL実行 */
+                rset = stmt.executeQuery();
+
+                /* 取得したデータを表示します。 */
+                rset.next();
+                mokuhyou = (rset.getInt( 1 ));
+                return mokuhyou;
+            }
+
+            catch ( SQLException e )
+            {
+                throw e;
+            }
+        }
 
 }

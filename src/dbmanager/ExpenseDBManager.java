@@ -76,14 +76,19 @@ public class ExpenseDBManager
         try (
                 Connection con = PoolConnection.getConnection(); )
         {
-            BungyDao bdao = new BungyDao( con );
-            BungyVo bv = bdao.getMokuhyouAndExpenses( userid, month );
 
-            //BungyVo bv = new BungyVo();
-            //bv.setMokuhyou(10000);
-            //bv.setTotalexpenses(5000);
+            BungyDao bdao = new BungyDao( con );
+            BungyVo bv = new BungyVo();
+
+            int totalexpenses = bdao.getSisyutuGoukei(month, userid);
+            int mokuhyou = bdao.getTsukiMokuhyou(month, userid);
+
+            bv.setTotalexpenses(totalexpenses);
+            bv.setMokuhyou(mokuhyou);
 
             return bv;
+
+
         } catch ( SQLException e )
         {
             e.printStackTrace();
