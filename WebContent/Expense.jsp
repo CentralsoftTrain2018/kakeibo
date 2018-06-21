@@ -175,7 +175,6 @@
       if (!bean.isChange()) {
     %>
 
-
     <table class="list">
       <tr>
         <th bgcolor=lime colspan=5><%=bean.getDate().get(Calendar.MONTH) + 1%>月
@@ -188,8 +187,6 @@
         <th>金額</th>
         <th colspan=2 align="center">操作</th>
       </tr>
-
-
 
       <%
         for (int i = 0; i < bean.getExpenseOfDay().size(); i++) {
