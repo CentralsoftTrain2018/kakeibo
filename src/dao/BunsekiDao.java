@@ -9,7 +9,8 @@ import java.util.List;
 
 import vo.BunsekiVo;
 
-public class BunsekiDao extends Dao{
+public class BunsekiDao extends Dao
+{
 
     private static final String SELECT = "select" +
             " k.kcname" +
@@ -54,21 +55,20 @@ public class BunsekiDao extends Dao{
         super( con );
     }
 
-    public List<BunsekiVo> getBunseki( String month,String userId ) throws SQLException
+    public List<BunsekiVo> getBunseki( String nengetsu, String userId ) throws SQLException
     {
 
         ResultSet rset = null;
 
         try (
-                PreparedStatement stmt = con.prepareStatement( SELECT );
-                )
+                PreparedStatement stmt = con.prepareStatement( SELECT ); )
         {
             List<BunsekiVo> list = new ArrayList<BunsekiVo>();
 
             /* Statementの作成 */
             stmt.setString( 1, userId );
-            stmt.setString( 2, month );
-            stmt.setString( 3, month );
+            stmt.setString( 2, nengetsu );
+            stmt.setString( 3, nengetsu );
 
             /* SQL実行 */
             rset = stmt.executeQuery();
