@@ -32,8 +32,9 @@
       <input type="submit" value="TOPにもどる"><br>
     </form>
   </div>
-  <div class="hannin">
-    <img src="image/hannin1.png">
+  <div>
+
+    <img src="image/hannin1.png" class="hannin">
   </div>
 
 </body>
