@@ -19,6 +19,10 @@ public class BungyBean {
     private boolean monthfinflg=false;
     private boolean gameoverflg=false;
 
+    //ユーザーの登録月
+    private int registMonth;
+    private int registYear;
+
     public void checkFlgs()
     {
         monthFinCheck();
@@ -48,9 +52,9 @@ public class BungyBean {
         //犯人の表示位置（高さ）の設定。パーセントで変化する
         int ichi=(int)((double)sisyutu/(double)mokuhyou*100.0);
         //犯人の表示位置が７５％に達すると、それ以上高さが変化しなくなる
-        if(ichi>=75)
+        if(ichi>=71)
         {
-            return 75;
+            return 71;
         }
         return ichi;
     }
@@ -146,6 +150,22 @@ public class BungyBean {
             gameoverflg=true;
         }
     }
+
+    public int getRegistYear()
+    {
+        return registYear;
+    }
+
+    public void setRegistYear(int registYear)
+    {
+        this.registYear = registYear;
+    }
+
+    public void setRegistMonth(int registMonth)
+    {
+        this.registMonth = registMonth;
+    }
+
     private void monthFinCheck()
     {
         String[] YearAndMonth = nengetsu.split("/");
