@@ -14,11 +14,11 @@ public class SetteiDao extends Dao {
             "insert into " +
             "	category( " +
             "		categoryname, " +
-            "		useflag, " +
-            "		color " +
+            "		useflag" +
             "	) " +
             "values " +
-            "	( ? , ? , ? )";
+
+            "	(?, 1)";
 
     private static final String UPDATE_CATEGORY =
             "update " +
@@ -26,15 +26,17 @@ public class SetteiDao extends Dao {
             "set " +
             "	categoryname = ? " +
             "where " +
-            "	categoryid = ?";
+            "	user_userid = ? " +
+            "	and categoryname = ?";
 
     private static final String DELETE_CATEGORY =
             "update " +
             "	category " +
             "set " +
-            "	useflag = 0 " +
+            "	useflag= 0 " +
             "where " +
-            "	categoryid = ?";
+            "	user_userid = ? " +
+            "	and categoryname = ?";
 
     private static final String SELECT_SYUNYUU =
            "SELECT Income " +
@@ -49,18 +51,24 @@ public class SetteiDao extends Dao {
             ",category c " +
             "WHERE " +
             "m.category_categoryId = c.categoryId " +
-            "AND user_userId = ? " +
-            "AND Month = ?;";
+            "AND m.user_userId = ? " +
+            "AND m.Month = ?;";
 
     private static final String  UPDATE_MOKUHYOU =
-            "update mokuhyou " +
-            " " +
-            "set Kingaku = ? " +
-            " " +
+            "update " +
+            "	mokuhyou " +
+            "set " +
+            "	kingaku = ? " +
             "where " +
-            "month = ? " +
-            "AND user_userid = ? " +
-            "AND category_categoryId = ?;";
+            "	month = ? " +
+            "	and category_categoryid in " +
+            "	(select " +
+            "		categoryid " +
+            "	from " +
+            "		category " +
+            "	where " +
+            "		user_userid = ? " +
+            "		categoryname = ?)";
 
     private static final String UPDATE_SYUNYUU =
             "update " +
@@ -113,12 +121,13 @@ public class SetteiDao extends Dao {
     //カテゴリーの変更
     //呼び出し元
     //UserDBManager
-    public void updateCategory(int categoryId, String categoryName) throws SQLException {
+    public void updateCategory(String newCategoryName, String userId, String oldCategoryName) throws SQLException {
         try ( PreparedStatement stmt = con.prepareStatement( UPDATE_CATEGORY ); )
         {
 
-            stmt.setString( 1, categoryName );
-            stmt.setInt(2, categoryId);
+            stmt.setString(1, newCategoryName);
+            stmt.setString(2, userId);
+            stmt.setString(3, oldCategoryName);
 
             /* ｓｑｌ実行 */
             stmt.executeUpdate();
@@ -131,10 +140,11 @@ public class SetteiDao extends Dao {
     //カテゴリーの削除
     //呼び出し元
     //UserDBManager
-    public void deleteCategory(int categoryId) throws SQLException {
+    public void deleteCategory(String userId, String categoryName) throws SQLException {
         try ( PreparedStatement stmt = con.prepareStatement( DELETE_CATEGORY ); )
         {
-            stmt.setInt(1, categoryId);
+            stmt.setString(1, userId);
+            stmt.setString(2, categoryName);
 
             /* ｓｑｌ実行 */
             stmt.executeUpdate();
@@ -277,7 +287,7 @@ public class SetteiDao extends Dao {
     //目標の更新
     //呼び出し元
     //UserDBManager
-    public void updateMokuhyou(String userId, int newMokuhyoukingaku, int categoryId, String nengetsu) throws SQLException
+    public void updateMokuhyou(String userId, int newMokuhyoukingaku, String categoryName, String nengetsu) throws SQLException
     {
         try ( PreparedStatement stmt = con.prepareStatement( UPDATE_MOKUHYOU ); )
         {
@@ -285,7 +295,7 @@ public class SetteiDao extends Dao {
             stmt.setInt(1, newMokuhyoukingaku);
             stmt.setString(2, nengetsu);
             stmt.setString(3, userId);
-            stmt.setInt(4, categoryId);
+            stmt.setString(4, categoryName);
 
             /* ｓｑｌ実行 */
             stmt.executeUpdate();

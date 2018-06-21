@@ -67,7 +67,7 @@ public class LoginServlet extends HttpServlet
                 //目標が設定されていない
             {
                 request.setAttribute( "mokuhyouFlg", false );
-                RequestDispatcher disp = request.getRequestDispatcher( "/Settei.jsp" );
+                RequestDispatcher disp = request.getRequestDispatcher( "/SetteiServlet" );
                 disp.forward( request, response );
 
             }

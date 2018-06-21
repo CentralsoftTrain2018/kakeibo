@@ -24,6 +24,8 @@ public class ExpenseBean
 
     private int selectDay;
 
+    private boolean isChange;
+
     public ExpenseBean()
     {
         super();
@@ -103,6 +105,14 @@ public class ExpenseBean
 
     public void setSelectDay(int selectDay) {
         this.selectDay = selectDay;
+    }
+
+    public boolean isChange() {
+        return isChange;
+    }
+
+    public void setChange(boolean isChange) {
+        this.isChange = isChange;
     }
 
     @Override
