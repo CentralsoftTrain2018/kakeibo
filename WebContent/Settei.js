@@ -37,3 +37,8 @@ function HelpGamen()
   document.getElementById("yuzaHenkou").style.display="none";
   document.getElementById("settei").style.display="none";
 }
+
+function ChangeMode(idName)
+{
+  document.getElementById(idName).disabled="true";
+}

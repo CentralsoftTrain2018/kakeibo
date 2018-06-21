@@ -76,31 +76,31 @@
     <td>項目名</td>
     <td>目標金額</td>
     <td></td>
-    <td rowspan=<%=bean.getCategoryMokuhyouList().size()+1 %>>
-       <input type="submit" name="" value="変更">
-       <input type="hidden" name="choice" value="deleteCategory">
-       <input type="hidden" name="categoryName">
-       <input type="hidden" name="newMokuhyoukingaku"></td>
+    <td></td>
     </tr>
     <%for(SetteiVo sv:bean.getCategoryMokuhyouList()){ %>
        <tr>
-       <td><input type="text" name="categoryName"  value="" placeholder=<%=sv.getCategoryName()%>></td>
-       <td><input type="text" name="kouinMokuhyou" value="" placeholder=<%=sv.getMokuhyouKingaku()%>></td>
+       <td><input type="text" name="newCategoryName"  value="" placeholder=<%=sv.getCategoryName()%>  ></td>
+       <td><input type="text" name="newMokuhyoukingaku" value="" placeholder=<%=sv.getMokuhyouKingaku()%>  ></td>
        <td>
        <input type="submit" name="" value="削除">
        <input type="hidden" name="choice" value="deleteCategory">
-       <input type="hidden" name="categoryName" value=<%=sv.getCategoryName()%>>
-       <input type="hidden" name="newMokuhyoukingaku" value=<%=sv.getMokuhyouKingaku()%>>
+       <input type="hidden" name="oldCategoryName" value=<%=sv.getCategoryName()%>>
+       </td>
+       <td>
+       <input type="submit" name="" value="変更">
+       <input type="hidden" name="choice" value="updateCategory">
        </td>
        </tr>
     <%} %>
     </table>
-    </form>
+  </form>
+  <input type="button" name="" value="変更" onClick="ChangeMode(被服費)">
   </div>
   <div class="hanni3" id="yuzaHenkou" >
      <form method="POST" action="SetteiServlet">
     <ul><li><label>新しく設定するPASS</label><input type="password" name="newPassword"id="password" required></li>
-    <li><label>PASSの確認</label><input type="password"name="passwordConfirm" id="passwordConfirm" required oninput="check(this)"></li>
+    <li><label>PASSの確認</label><input type="password"name="oldPassword" id="passwordConfirm" required oninput="check(this)"></li>
     </ul>
     <input type="submit" value="変更">
     <input type="hidden" value="updatePassword" name="choice">

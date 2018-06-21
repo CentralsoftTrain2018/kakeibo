@@ -83,13 +83,13 @@ public class SetteiDao extends Dao {
             "update " +
             "	user " +
             "set " +
-            "	password = ? " +
+            "	Passward = ? " +
             "where " +
-            "	userid = ?";
+            "	userId = ?";
 
     private static final String SELECT_PASSWORD =
             "select " +
-            "	password " +
+            "	passward " +
             "from " +
             "	user " +
             "where " +
