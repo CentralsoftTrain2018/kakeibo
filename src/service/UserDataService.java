@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import bean.LoginBean;
 import bean.SetteiBean;
 import dbmanager.UserDBManeger;
 import vo.RegistVo;
@@ -48,9 +47,9 @@ public class UserDataService
      * @param lb
      * @return
      */
-    public static boolean isLogin( LoginBean lb )
+    public static boolean isLogin( String userId, String password)
     {
-        boolean result = UserDBManeger.isLogin( lb );
+        boolean result = UserDBManeger.isLogin( userId, password );
         return result;
     }
     /**
@@ -99,7 +98,7 @@ public class UserDataService
     //SetteiServlet
     //呼び出し先
     //UserDBManager
-    public static  SetteiBean settei( String userId)
+    public static  SetteiBean settei( String userId )
     {
         //現在時刻の取得
         Calendar calendar = Calendar.getInstance();
@@ -116,19 +115,7 @@ public class UserDataService
         sb.setSyunyuu(syunyuu);
         sb.setCategoryMokuhyouList(mokuhyou);
 
-
         return sb;
-    }
-
-    //パスワードの取得
-    //呼び出し元
-    //SetteiServlet
-    //呼び出し先
-    //UserDBManager
-    public static String getPassword(String userId)
-    {
-        String password = UserDBManeger.getPassword(userId);
-        return password;
     }
 
     //パスワードの変更

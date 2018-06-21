@@ -17,6 +17,7 @@ public class SetteiDao extends Dao {
             "		useflag" +
             "	) " +
             "values " +
+
             "	(?, 1)";
 
     private static final String UPDATE_CATEGORY =
@@ -82,17 +83,9 @@ public class SetteiDao extends Dao {
             "update " +
             "	user " +
             "set " +
-            "	password = ? " +
+            "	Passward = ? " +
             "where " +
-            "	userid = ?";
-
-    private static final String SELECT_PASSWORD =
-            "select " +
-            "	password " +
-            "from " +
-            "	user " +
-            "where " +
-            "	userid = ?";
+            "	userId = ?";
 
 
     public SetteiDao(Connection con) {
@@ -107,7 +100,8 @@ public class SetteiDao extends Dao {
         {
 
             stmt.setString( 1, categoryName );
-
+            stmt.setInt(2, 1);
+            stmt.setString(3, "red");
             /* ｓｑｌ実行 */
             stmt.executeUpdate();
         } catch ( SQLException ex )
@@ -234,32 +228,6 @@ public class SetteiDao extends Dao {
         } catch ( SQLException ex )
         {
             throw ex;
-        }
-    }
-
-    //パスワードの取得
-    //呼び出し元
-    //UserDBManager
-    public String getPassword(String userId) throws SQLException {
-        ResultSet rset = null;
-
-        try ( PreparedStatement stmt = con.prepareStatement( SELECT_PASSWORD ); )
-        {
-            stmt.setString( 1, userId );
-
-            rset = stmt.executeQuery();
-
-            String password = "";
-            while(rset.next()) {
-                password = rset.getString(1);
-            }
-
-            return password;
-        }
-
-        catch ( SQLException e )
-        {
-            throw e;
         }
     }
 

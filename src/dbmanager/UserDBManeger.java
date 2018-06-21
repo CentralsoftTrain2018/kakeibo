@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import bean.LoginBean;
 import dao.LoginDao;
 import dao.RegistDao;
 import dao.SetteiDao;
@@ -65,14 +64,14 @@ public class UserDBManeger
      * @param lb
      * @return
      */
-    public static boolean isLogin( LoginBean lb )
+    public static boolean isLogin( String userId, String password )
     {
         try (
                 Connection con = PoolConnection.getConnection(); )
         {
             LoginDao ldao = new LoginDao( con );
 
-            boolean result = ldao.idPassCheck( lb );
+            boolean result = ldao.idPassCheck( userId, password );
             return result;
 
         } catch ( SQLException e )
@@ -195,26 +194,6 @@ public class UserDBManeger
             SetteiDao sdao = new SetteiDao( con );
             List<SetteiVo> mokuhyou = sdao.getMokuhyou( userId, nengetsu );
             return mokuhyou;
-        } catch ( SQLException e )
-        {
-            e.printStackTrace();
-            throw new RuntimeException( e );
-        }
-    }
-
-    //パスワードの取得
-    //呼び出し元
-    //UserDataService
-    //呼び出し先
-    //SetteiDao
-    public static String getPassword( String userId )
-    {
-        try (
-                Connection con = PoolConnection.getConnection(); )
-        {
-            SetteiDao sdao = new SetteiDao( con );
-            String password = sdao.getPassword( userId );
-            return password;
         } catch ( SQLException e )
         {
             e.printStackTrace();
