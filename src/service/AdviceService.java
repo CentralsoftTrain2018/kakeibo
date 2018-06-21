@@ -116,8 +116,6 @@ public class AdviceService
         calendar.get( Calendar.YEAR );
         calendar.get( Calendar.MONTH );
         String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
-        System.out.println( "selectBunseki（ページ遷移）" + nengetsu);
-
         BunsekiListBean blb = setBunsekiList( userId, nengetsu );
         blb.setDate( calendar );
 
@@ -131,7 +129,6 @@ public class AdviceService
         //calendar.add( Calendar.MONTH, -1 );
         String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
         BunsekiListBean blb = setBunsekiList( userId, nengetsu );
-        System.out.println( "selectBunseki(プルダウン選択)" + nengetsu );
         blb.setDate( calendar );
 
         return blb;
