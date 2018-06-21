@@ -77,7 +77,6 @@ public class ExpenseServlet extends HttpServlet {
         }
 
         String date = year + "-" + month + "-" + day;
-        System.out.println(date);
 
         Calendar calendar = Calendar.getInstance();
         if(year != null && month != null) {

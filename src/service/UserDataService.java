@@ -4,10 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import bean.LoginBean;
-import bean.RegistBean;
 import bean.SetteiBean;
 import dbmanager.UserDBManeger;
+import vo.RegistVo;
 import vo.SetteiVo;
 
 public class UserDataService
@@ -20,9 +19,13 @@ public class UserDataService
     //RegistServlet
     //呼び出し先
     //UserDBManager
-    public static void passRegistDara( RegistBean rb )
+
+    public static void passRegistDara(String userId, String password, String mail, int income, String registMonth)
     {
-        UserDBManeger.passRegistDara( rb );
+        RegistVo rv= new RegistVo( userId, password, mail, income, registMonth );
+
+        UserDBManeger.passRegistDara( rv );
+
     }
 
     /**
@@ -44,9 +47,9 @@ public class UserDataService
      * @param lb
      * @return
      */
-    public static boolean isLogin( LoginBean lb )
+    public static boolean isLogin( String userId, String password)
     {
-        boolean result = UserDBManeger.isLogin( lb );
+        boolean result = UserDBManeger.isLogin( userId, password );
         return result;
     }
     /**
@@ -95,7 +98,7 @@ public class UserDataService
     //SetteiServlet
     //呼び出し先
     //UserDBManager
-    public static  SetteiBean settei( String userId)
+    public static  SetteiBean settei( String userId )
     {
         //現在時刻の取得
         Calendar calendar = Calendar.getInstance();
@@ -111,7 +114,6 @@ public class UserDataService
         SetteiBean sb = new SetteiBean();
         sb.setSyunyuu(syunyuu);
         sb.setCategoryMokuhyouList(mokuhyou);
-
 
         return sb;
     }

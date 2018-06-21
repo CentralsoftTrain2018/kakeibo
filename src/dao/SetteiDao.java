@@ -17,6 +17,7 @@ public class SetteiDao extends Dao {
             "		useflag" +
             "	) " +
             "values " +
+
             "	(?, 1)";
 
     private static final String UPDATE_CATEGORY =
@@ -82,13 +83,13 @@ public class SetteiDao extends Dao {
             "update " +
             "	user " +
             "set " +
-            "	password = ? " +
+            "	Passward = ? " +
             "where " +
-            "	userid = ?";
+            "	userId = ?";
 
     private static final String SELECT_PASSWORD =
             "select " +
-            "	password " +
+            "	passward " +
             "from " +
             "	user " +
             "where " +
@@ -107,7 +108,8 @@ public class SetteiDao extends Dao {
         {
 
             stmt.setString( 1, categoryName );
-
+            stmt.setInt(2, 1);
+            stmt.setString(3, "red");
             /* ｓｑｌ実行 */
             stmt.executeUpdate();
         } catch ( SQLException ex )
