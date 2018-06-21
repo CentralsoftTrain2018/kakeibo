@@ -98,7 +98,7 @@ public class UserDataService
     //SetteiServlet
     //呼び出し先
     //UserDBManager
-    public static  SetteiBean settei( String userId)
+    public static  SetteiBean settei( String userId )
     {
         //現在時刻の取得
         Calendar calendar = Calendar.getInstance();
@@ -114,7 +114,6 @@ public class UserDataService
         SetteiBean sb = new SetteiBean();
         sb.setSyunyuu(syunyuu);
         sb.setCategoryMokuhyouList(mokuhyou);
-
 
         return sb;
     }

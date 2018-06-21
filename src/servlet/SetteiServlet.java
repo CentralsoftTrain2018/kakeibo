@@ -60,7 +60,7 @@ public class SetteiServlet extends HttpServlet {
         {
             UserDataService.addCategory(newCategoryName);
         }
-        if(choice.equals("updateCategory"))
+        if(choice=="updateCategory")
         {
             UserDataService.updateCategory(newCategoryName, userId, oldCategoryName);
         }
@@ -92,10 +92,9 @@ public class SetteiServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        if(choice.equals(""))
-        {
+
             UserDataService.settei( userId );
-        }
+
 
         SetteiBean bean = UserDataService.settei( userId );
         request.setAttribute( "bean", bean );
