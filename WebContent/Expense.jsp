@@ -284,7 +284,7 @@
     <%
       if (bean.isChange()) {
     %>
-
+    <form name="myform" method="POST" action="ExpenseServlet" onSubmit="test2();">
     <table class="list">
       <tr>
         <th bgcolor=lime colspan=5><%=bean.getDate().get(Calendar.MONTH) + 1%>月
@@ -302,8 +302,6 @@
         for (ExpenseVo ev : bean.getExpenseOfDay()) {
       %>
 
-      <form name="myform" method="POST" action="ExpenseServlet"
-        onSubmit="test2();">
         <tr>
           <td><select name="categoryId">
               <%
@@ -347,9 +345,8 @@
             type="submit" name="choice" value="戻る"> <input
             type="hidden" name="isChange" value="false"></td>
         </tr>
-      </form>
-
     </table>
+    </form>
 
   </div>
 
