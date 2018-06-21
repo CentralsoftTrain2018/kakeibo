@@ -40,14 +40,13 @@ public class SetteiServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String userId = ( String ) session.getAttribute( "userId" );
         String choice = request.getParameter("choice");
-        String categoryIdStr = request.getParameter("categoryId");
-        String categoryName = request.getParameter("categoryName");
+        String oldCategoryName = request.getParameter("oldCategoryName");
+        String newCategoryName = request.getParameter("newCategoryName");
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
         String newIncomeStr = request.getParameter("newIncome");
         String newMokuhyoukingakuStr = request.getParameter("newMokuhyoukingaku");
 
-        int categoryId = -1;
         int newIncome= -1;
         int newMokuhyoukingaku= -1;
 
@@ -59,27 +58,15 @@ public class SetteiServlet extends HttpServlet {
 
         if(choice.equals("addCategory"))
         {
-            UserDataService.addCategory(categoryName);
+            UserDataService.addCategory(newCategoryName);
         }
         if(choice.equals("updateCategory"))
         {
-            try {
-                categoryId = Integer.parseInt(categoryIdStr);
-                UserDataService.updateCategory(categoryId, categoryName);
-            }
-            catch(NumberFormatException e) {
-                e.printStackTrace();
-            }
+            UserDataService.updateCategory(newCategoryName, userId, oldCategoryName);
         }
         if(choice.equals("deleteCategory"))
         {
-            try {
-                categoryId = Integer.parseInt(categoryIdStr);
-                UserDataService.deleteCategory(categoryId);
-            }
-            catch(NumberFormatException e) {
-                e.printStackTrace();
-            }
+            UserDataService.deleteCategory(userId, oldCategoryName);
         }
         if(choice.equals("updatePassword"))
         {
@@ -99,8 +86,7 @@ public class SetteiServlet extends HttpServlet {
         {
             try {
                 newMokuhyoukingaku = Integer.parseInt(newMokuhyoukingakuStr);
-                categoryId = Integer.parseInt(categoryIdStr);
-                UserDataService.updateMokuhyou(userId, newMokuhyoukingaku, categoryId);
+                UserDataService.updateMokuhyou(userId, newMokuhyoukingaku, oldCategoryName);
             }
             catch(NumberFormatException e) {
                 e.printStackTrace();
