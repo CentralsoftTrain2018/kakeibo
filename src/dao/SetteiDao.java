@@ -13,10 +13,11 @@ public class SetteiDao extends Dao {
     private static final String INSERT_CATEGORY =
             "insert into " +
             "	category( " +
-            "		categoryname " +
+            "		categoryname, " +
+            "		useflag" +
             "	) " +
             "values " +
-            "	(?)";
+            "	(?, 1)";
 
     private static final String UPDATE_CATEGORY =
             "update " +

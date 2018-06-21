@@ -24,8 +24,10 @@ import service.AdviceService;
 @WebServlet("/ConanServlet")
 public class ConanServlet extends HttpServlet
 {
+    //メールを送信するアカウント
     final static String account = "central.train2018";
     final static String passwd = "train-2018";
+
     private static final long serialVersionUID = 1L;
 
     public ConanServlet()
@@ -79,11 +81,14 @@ public class ConanServlet extends HttpServlet
         }));
 
         String mail = account + "@gmail.com";
-        String to = mailAddress;          // カンマ区切りで複数メール
+        //送り先
+        String to = mailAddress;
         try {
             msg.setFrom(new InternetAddress(mail));
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            //件名
             msg.setSubject("バンジークーポン");
+            //本文
             String mailText =
                     "バンジー代10％オフ\n" +
                     nengetsu +
