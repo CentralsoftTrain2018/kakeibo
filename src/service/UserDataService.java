@@ -75,9 +75,9 @@ public class UserDataService
     //SetteiServlet
     //呼び出し先
     //UserDBManager
-    public static void updateCategory( int categoryId, String categoryName )
+    public static void updateCategory( String newCategoryName, String userId, String oldCategoryName )
     {
-        UserDBManeger.updateCategory( categoryId, categoryName );
+        UserDBManeger.updateCategory( newCategoryName, userId, oldCategoryName );
     }
 
     //カテゴリーの削除
@@ -85,9 +85,9 @@ public class UserDataService
     //SetteiServlet
     //呼び出し先
     //UserDBManager
-    public static void deleteCategory( int categoryId)
+    public static void deleteCategory(String userId, String categoryName)
     {
-        UserDBManeger.deleteCategory(categoryId);
+        UserDBManeger.deleteCategory(userId, categoryName);
     }
 
     //目標をつめたbeanを返す
@@ -152,13 +152,13 @@ public class UserDataService
     //SetteiServlet
     //呼び出し先
     //UserDBManager
-    public static void updateMokuhyou(String userId, int newMokuhyoukingaku, int categoryId)
+    public static void updateMokuhyou(String userId, int newMokuhyoukingaku, String categoryName)
     {
         //現在時刻の取得
         Calendar calendar = Calendar.getInstance();
         String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
 
-        UserDBManeger.updateMokuhyou(userId,newMokuhyoukingaku,categoryId, nengetsu);
+        UserDBManeger.updateMokuhyou(userId, newMokuhyoukingaku, categoryName, nengetsu);
     }
 
 }
