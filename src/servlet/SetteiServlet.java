@@ -47,34 +47,15 @@ public class SetteiServlet extends HttpServlet {
         String newIncomeStr = request.getParameter("newIncome");
         String newMokuhyoukingakuStr = request.getParameter("newMokuhyoukingaku");
 
+        int categoryId = -1;
+        int newIncome= -1;
+        int newMokuhyoukingaku= -1;
+
         if (choice == null )
         {
             choice = "";
         }
 
-        int categoryId = -1;
-        try {
-            categoryId = Integer.parseInt(categoryIdStr);
-        }
-        catch(NumberFormatException e) {
-            e.printStackTrace();
-        }
-
-        int newIncome= -1;
-        try {
-            newIncome = Integer.parseInt(newIncomeStr);
-        }
-        catch(NumberFormatException e) {
-            e.printStackTrace();
-        }
-
-        int newMokuhyoukingaku= -1;
-        try {
-            newMokuhyoukingaku = Integer.parseInt(newMokuhyoukingakuStr);
-        }
-        catch(NumberFormatException e) {
-            e.printStackTrace();
-        }
 
         if(choice.equals("addCategory"))
         {
@@ -82,11 +63,23 @@ public class SetteiServlet extends HttpServlet {
         }
         if(choice.equals("updateCategory"))
         {
-            UserDataService.updateCategory(categoryId, categoryName);
+            try {
+                categoryId = Integer.parseInt(categoryIdStr);
+                UserDataService.updateCategory(categoryId, categoryName);
+            }
+            catch(NumberFormatException e) {
+                e.printStackTrace();
+            }
         }
         if(choice.equals("deleteCategory"))
         {
-            UserDataService.deleteCategory(categoryId);
+            try {
+                categoryId = Integer.parseInt(categoryIdStr);
+                UserDataService.deleteCategory(categoryId);
+            }
+            catch(NumberFormatException e) {
+                e.printStackTrace();
+            }
         }
         if(choice.equals("updatePassword"))
         {
@@ -94,11 +87,24 @@ public class SetteiServlet extends HttpServlet {
         }
         if(choice.equals("updateSyunyuu"))
         {
-            UserDataService.updateSyunyuu(userId, newIncome);
+            try {
+                newIncome = Integer.parseInt(newIncomeStr);
+                UserDataService.updateSyunyuu(userId, newIncome);
+            }
+            catch(NumberFormatException e) {
+                e.printStackTrace();
+            }
         }
         if(choice.equals("updateMokuhyou"))
         {
-            UserDataService.updateMokuhyou(userId, newMokuhyoukingaku, categoryId);
+            try {
+                newMokuhyoukingaku = Integer.parseInt(newMokuhyoukingakuStr);
+                categoryId = Integer.parseInt(categoryIdStr);
+                UserDataService.updateMokuhyou(userId, newMokuhyoukingaku, categoryId);
+            }
+            catch(NumberFormatException e) {
+                e.printStackTrace();
+            }
         }
         if(choice.equals(""))
         {
