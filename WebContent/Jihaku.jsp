@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <jsp:useBean id="bean" class="bean.JihakuListBean" scope="request" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -29,13 +29,12 @@
     <br> <br>
     <form method="POST" action="BungyServlet">
       <input type="hidden" name="nengetsu" value=""><br>
-      <input type="submit" value="TOPにもどる"><br>
+      <input type="submit" class="square_btn" value="TOPにもどる"><br>
     </form>
   </div>
   <div>
 
     <img src="image/hannin1.png" class="hannin">
   </div>
-
 </body>
 </html>

@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import bean.RegistBean;
+import vo.RegistVo;
 
 public class RegistDao extends Dao
 {
@@ -19,8 +19,9 @@ public class RegistDao extends Dao
             "( userId " +
             ",Passward " +
             ",Email " +
-            ",Income ) " +
-            "VALUES (?, ?, ?, ?);";
+            ",Income " +
+            ",registMonth ) " +
+            "VALUES (?, ?, ?, ?, ?);";
 
     final static String ID_CHECK = "select userId from user where userId = ?;";
 
@@ -28,15 +29,16 @@ public class RegistDao extends Dao
      * 会員登録
      * @param rb 登録する会員情報
      */
-    public void kaiinInsert( RegistBean rb ) throws SQLException
+    public void kaiinInsert( RegistVo rv ) throws SQLException
     {
         try ( PreparedStatement stmt = con.prepareStatement( INSERT ); )
         {
 
-            stmt.setString( 1, rb.getUserId() );
-            stmt.setString( 2, rb.getPassword() );
-            stmt.setString( 3, rb.getMail() );
-            stmt.setInt( 4, rb.getIncome() );
+            stmt.setString( 1, rv.getUserId() );
+            stmt.setString( 2, rv.getPassword() );
+            stmt.setString( 3, rv.getMail() );
+            stmt.setInt( 4, rv.getIncome() );
+            stmt.setString(5, rv.getRegistMonth());
 
             /* ｓｑｌ実行 */
             stmt.executeUpdate();

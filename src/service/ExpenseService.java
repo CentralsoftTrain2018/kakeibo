@@ -76,7 +76,7 @@ public class ExpenseService
         eb.setExpenseOfDay(expenseOfDayList);
 
         // カテゴリー一覧の取得
-        List<CategoryVo> categoryList = ExpenseDBManager.getCategory();
+        List<CategoryVo> categoryList = ExpenseDBManager.getCategory(userId);
 
         eb.setCategoryList(categoryList);
 

@@ -8,6 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="css/menu.css">
+<link rel="stylesheet" type="text/css" href="css/Bunseki.css">
 <title>分析</title>
 </head>
 <body>
@@ -119,6 +120,15 @@ var data = [
   ];
 var myChart = new Chart(document.getElementById("newcanvas").getContext("2d")).Doughnut(data);
 </script>
+  <div>
+    <img src="image/conan.png" class="conan">
+  </div>
+  <div class="balloon">
+  <p class ="baloon1">
+  aaaaaaaaaaaaaaaaaaaaaaaaaaa<br>
+  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  </p>
+  </div>
 
 </body>
 </html>

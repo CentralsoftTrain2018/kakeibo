@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -50,14 +51,15 @@ public class RegistServlet extends HttpServlet
         String incomeStr = request.getParameter( "income" );
         int income = Integer.parseInt( incomeStr );
 
+        LocalDate ld  = LocalDate.now();
+
+        String registMonth = String.format("%tY/%tm", ld, ld);
+        System.out.println(registMonth);
+
         //ユーザーIDが重複していない
-        if ( UserDataService.isUnique( userId ) )
+        if ( UserDataService.isUnique( userId ))
         {
-            rb.setUserId( userId );
-            rb.setPassword( password );
-            rb.setMail( mail );
-            rb.setIncome( income );
-            UserDataService.passRegistDara( rb );
+            UserDataService.passRegistDara( userId, password, mail, income, registMonth);
 
             lb.setMessage( "登録が完了しました。ログインしてください。" );
             request.setAttribute( "bean", lb );

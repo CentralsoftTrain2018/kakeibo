@@ -35,8 +35,6 @@ public class BunsekiServlet extends HttpServlet
         String year = request.getParameter( "year" );
         String month = request.getParameter( "month" );
 
-        System.out.println( "Servlet" + year + "-" + month );
-
         BunsekiListBean bean = chengeServiceMesod( year, month, userId );
 
         request.setAttribute( "bean", bean );
@@ -55,7 +53,6 @@ public class BunsekiServlet extends HttpServlet
             calendar.set( Calendar.MONTH, Integer.parseInt( month ) - 1 );
             return AdviceService.selectBunseki( userId, calendar );
         }
-        System.out.println( "Servlet" + calendar.get(Calendar.YEAR) + "-" + calendar.get(Calendar.MONTH) );
 
         return AdviceService.selectBunseki( userId );
 

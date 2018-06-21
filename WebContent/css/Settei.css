@@ -25,22 +25,49 @@ button.button1 {
 .contena
 {
   width:1000px;
-  hight:800px;
+  height:800px;
   overflow: hidden;
   margin: 0 auto;
+  position: relative;
 }
 /*画面表示変更ボタン用のレイアウト*/
 .settei{
   background-color: #99cc00;
   text-align:left;
   float:left;
+  position: absolute;
+  left:0%;
+  top:0%;
+
 }
 /*表示内容を変更する場所のレイアウト*/
 .hanni{
   float:right;
   background-color: #99cc00;
   top:0px;
-  left:0px;
+  right:0px;
+  position: absolute;
   width:925px;
-  hight:800px;
+  height:800px;
+  display:none;
+}
+.hanni2{
+  float:right;
+  background-color: #99cc00;
+  top:0px;
+  right:0px;
+  position: absolute;
+  width:925px;
+  height:800px;
+  display:none;
+}
+.hanni3{
+  float:right;
+  background-color: #99cc00;
+  top:0px;
+  right:0px;
+  position: absolute;
+  width:925px;
+  height:800px;
+  display:none;
 }

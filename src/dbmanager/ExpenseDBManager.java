@@ -122,14 +122,14 @@ public class ExpenseDBManager
      * カテゴリ取得
      * @return List<CategoryVo>
      */
-    public static List<CategoryVo> getCategory()
+    public static List<CategoryVo> getCategory(String userId)
     {
         try (
                 Connection con = PoolConnection.getConnection();
                 )
         {
             ExpenseDao edao = new ExpenseDao( con );
-            List<CategoryVo> categoryList = edao.getCategory();
+            List<CategoryVo> categoryList = edao.getCategory(userId);
             return categoryList;
         } catch ( SQLException e )
         {
