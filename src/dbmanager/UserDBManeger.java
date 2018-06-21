@@ -129,13 +129,13 @@ public class UserDBManeger
     //UserDataService
     //呼び出し先
     //SetteiDao
-    public static void updateCategory( int categoryId, String categoryName )
+    public static void updateCategory(String newCategoryName, String userId, String oldCategoryName )
     {
         try (
                 Connection con = PoolConnection.getConnection(); )
         {
             SetteiDao sdao = new SetteiDao( con );
-            sdao.updateCategory( categoryId, categoryName );
+            sdao.updateCategory(newCategoryName, userId, oldCategoryName);
         } catch ( SQLException e )
         {
             e.printStackTrace();
@@ -148,13 +148,13 @@ public class UserDBManeger
     //UserDataService
     //呼び出し先
     //SetteiDao
-    public static void deleteCategory( int categoryId )
+    public static void deleteCategory(String userId, String categoryName)
     {
         try (
                 Connection con = PoolConnection.getConnection(); )
         {
             SetteiDao sdao = new SetteiDao( con );
-            sdao.deleteCategory( categoryId );
+            sdao.deleteCategory(userId, categoryName);
         } catch ( SQLException e )
         {
             e.printStackTrace();
@@ -265,13 +265,13 @@ public class UserDBManeger
     //UserDataService
     //呼び出し先
     //SetteiDao
-    public static void updateMokuhyou(String userId, int newMokuhyoukingaku, int categoryId, String nengetsu)
+    public static void updateMokuhyou(String userId, int newMokuhyoukingaku, String categoryName, String nengetsu)
     {
         try (
                 Connection con = PoolConnection.getConnection(); )
         {
             SetteiDao sdao = new SetteiDao( con );
-            sdao.updateMokuhyou( userId, newMokuhyoukingaku, categoryId, nengetsu );
+            sdao.updateMokuhyou( userId, newMokuhyoukingaku, categoryName, nengetsu );
         } catch ( SQLException e )
         {
             e.printStackTrace();

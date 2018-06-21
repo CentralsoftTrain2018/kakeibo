@@ -1,8 +1,9 @@
 .Jihaku {
   position: absolute;
-  top: 250;
-  display: inline-block;
+  top: 10%;
+  display: block;
   margin: 1.5em 15px 1.5em 0;
+  margin-left:50px;
   padding: 7px 10px;
   min-width: 120px;
   max-width: 100%;
@@ -29,6 +30,8 @@
 }
 
 .hannin {
+  display:block;
   position: relative;
   left: 460px;
+  height: 500px;
 }

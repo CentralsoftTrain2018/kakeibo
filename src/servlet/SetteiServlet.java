@@ -40,53 +40,33 @@ public class SetteiServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String userId = ( String ) session.getAttribute( "userId" );
         String choice = request.getParameter("choice");
-        String categoryIdStr = request.getParameter("categoryId");
-        String categoryName = request.getParameter("categoryName");
+        String oldCategoryName = request.getParameter("oldCategoryName");
+        String newCategoryName = request.getParameter("newCategoryName");
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
         String newIncomeStr = request.getParameter("newIncome");
         String newMokuhyoukingakuStr = request.getParameter("newMokuhyoukingaku");
+
+        int newIncome= -1;
+        int newMokuhyoukingaku= -1;
 
         if (choice == null )
         {
             choice = "";
         }
 
-        int categoryId = -1;
-        try {
-            categoryId = Integer.parseInt(categoryIdStr);
-        }
-        catch(NumberFormatException e) {
-            e.printStackTrace();
-        }
-
-        int newIncome= -1;
-        try {
-            newIncome = Integer.parseInt(newIncomeStr);
-        }
-        catch(NumberFormatException e) {
-            e.printStackTrace();
-        }
-
-        int newMokuhyoukingaku= -1;
-        try {
-            newMokuhyoukingaku = Integer.parseInt(newMokuhyoukingakuStr);
-        }
-        catch(NumberFormatException e) {
-            e.printStackTrace();
-        }
 
         if(choice.equals("addCategory"))
         {
-            UserDataService.addCategory(categoryName);
+            UserDataService.addCategory(newCategoryName);
         }
         if(choice.equals("updateCategory"))
         {
-            UserDataService.updateCategory(categoryId, categoryName);
+            UserDataService.updateCategory(newCategoryName, userId, oldCategoryName);
         }
         if(choice.equals("deleteCategory"))
         {
-            UserDataService.deleteCategory(categoryId);
+            UserDataService.deleteCategory(userId, oldCategoryName);
         }
         if(choice.equals("updatePassword"))
         {
@@ -94,11 +74,23 @@ public class SetteiServlet extends HttpServlet {
         }
         if(choice.equals("updateSyunyuu"))
         {
-            UserDataService.updateSyunyuu(userId, newIncome);
+            try {
+                newIncome = Integer.parseInt(newIncomeStr);
+                UserDataService.updateSyunyuu(userId, newIncome);
+            }
+            catch(NumberFormatException e) {
+                e.printStackTrace();
+            }
         }
         if(choice.equals("updateMokuhyou"))
         {
-            UserDataService.updateMokuhyou(userId, newMokuhyoukingaku, categoryId);
+            try {
+                newMokuhyoukingaku = Integer.parseInt(newMokuhyoukingakuStr);
+                UserDataService.updateMokuhyou(userId, newMokuhyoukingaku, oldCategoryName);
+            }
+            catch(NumberFormatException e) {
+                e.printStackTrace();
+            }
         }
         if(choice.equals(""))
         {
