@@ -67,12 +67,12 @@
       {
     %>
       <img src="image/obore.png" alt="" class="jumper"
-      style="position: absolute; width: 100px; height: 100px; right: 30%; top: 80%;">
+      style="position: absolute; width: 100px; height: 100px; right: 30%; top: 83%;">
        <img src="image/kireta_himo.png" alt="" class="himo"
       style="position: absolute;
       width: 50px;
       right: 35%;
-      top:19%;">
+      top:22%;">
     <%
       } else
       {
@@ -82,13 +82,13 @@
       width: 100px;
       height: 100px;
       right: 30%;
-      top:<%=bean.getJumperDispPosition() + 24%>%;">
+      top:<%=bean.getJumperDispPosition() + 27%>%;">
       <img src="image/himo.png" alt="" class="himo"
       style="position: absolute;
       width: 50px;
       height:<%=bean.getJumperDispPosition() + 7%>%;
       right: 35%;
-      top:19%;">
+      top: 22%;">
     <%
       }
     %>

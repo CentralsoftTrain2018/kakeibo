@@ -48,9 +48,9 @@ public class BungyBean {
         //犯人の表示位置（高さ）の設定。パーセントで変化する
         int ichi=(int)((double)sisyutu/(double)mokuhyou*100.0);
         //犯人の表示位置が７５％に達すると、それ以上高さが変化しなくなる
-        if(ichi>=75)
+        if(ichi>=71)
         {
-            return 75;
+            return 71;
         }
         return ichi;
     }
