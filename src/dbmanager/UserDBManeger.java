@@ -5,10 +5,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import bean.LoginBean;
-import bean.RegistBean;
 import dao.LoginDao;
 import dao.RegistDao;
 import dao.SetteiDao;
+import vo.RegistVo;
 import vo.SetteiVo;
 
 public class UserDBManeger
@@ -18,14 +18,14 @@ public class UserDBManeger
     //UserDataService
     //呼び出し先
     //RegistDao
-    public static void passRegistDara( RegistBean rb )
+    public static void passRegistDara( RegistVo rv )
     {
         try (
                 Connection con = PoolConnection.getConnection(); )
         {
             RegistDao rdao = new RegistDao( con );
 
-            rdao.kaiinInsert( rb );
+            rdao.kaiinInsert( rv );
         } catch ( SQLException e )
         {
             e.printStackTrace();

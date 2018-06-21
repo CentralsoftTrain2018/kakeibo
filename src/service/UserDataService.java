@@ -5,9 +5,9 @@ import java.util.Calendar;
 import java.util.List;
 
 import bean.LoginBean;
-import bean.RegistBean;
 import bean.SetteiBean;
 import dbmanager.UserDBManeger;
+import vo.RegistVo;
 import vo.SetteiVo;
 
 public class UserDataService
@@ -20,9 +20,13 @@ public class UserDataService
     //RegistServlet
     //呼び出し先
     //UserDBManager
-    public static void passRegistDara( RegistBean rb )
+
+    public static void passRegistDara(String userId, String password, String mail, int income, String registMonth)
     {
-        UserDBManeger.passRegistDara( rb );
+        RegistVo rv= new RegistVo( userId, password, mail, income, registMonth );
+
+        UserDBManeger.passRegistDara( rv );
+
     }
 
     /**
