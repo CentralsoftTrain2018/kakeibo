@@ -39,7 +39,8 @@ public class SetteiDao extends Dao {
             "		category " +
             "	where " +
             "		user_userid = ? " +
-            "	and	categoryname = ? ));";
+            "	and	categoryname = ? "+
+            "	and useflag = 1 ));";
 
     private static final String INSERT_NEWMONTH_MOKUHYOU =
             "insert into " +
