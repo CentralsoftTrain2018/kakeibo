@@ -23,7 +23,7 @@ function YuzaHenkouGamen()
 }
 
 //設定画面左側の設定ボタンを押したとき呼ばれる。
-function SetteiHenkouGamen(syuunyu,mokuhyougoukei)
+function SetteiHenkouGamen()
 {
   document.getElementById("help").style.display="none";
   document.getElementById("yuzaHenkou").style.display="none";
@@ -38,7 +38,23 @@ function HelpGamen()
   document.getElementById("settei").style.display="none";
 }
 
-function ChangeMode(idName)
+
+function subKoumokuMeiHennkou()
 {
-  document.getElementById(idName).disabled="true";
+  document.getElementById("deleteKoumoku").style.display="none";
+  document.getElementById("updateMokuhyou").style.display="none";
+  document.getElementById("updateKoumoku").style.display="block";
 }
+function subMokuhyouHenkou()
+{
+  document.getElementById("deleteKoumoku").style.display="none";
+  document.getElementById("updateMokuhyou").style.display="block";
+  document.getElementById("updateKoumoku").style.display="none";
+}
+function subKoumokusakujo()
+{
+  document.getElementById("deleteKoumoku").style.display="block";
+  document.getElementById("updateMokuhyou").style.display="none";
+  document.getElementById("updateKoumoku").style.display="none";
+}
+

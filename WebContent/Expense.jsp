@@ -248,8 +248,7 @@
         }
       %>
 
-
-      <form method="POST" action="ExpenseServlet">
+      <form method="POST" action="ExpenseServlet" onSubmit="return preventDoubleClick()">
         <tr>
           <td><select name="categoryId">
               <%
@@ -282,7 +281,6 @@
     <%
       }
     %>
-
 
     <!-- 変更ボタンを押した後  -->
 
@@ -387,8 +385,8 @@
       }
 
       document.getElementById("indata").value = list;
-
     }
+
 
     function checkRegistMonth(){
 
@@ -438,7 +436,15 @@
 
       sel.innerHTML = text;
       }
-    </script>
+
+    var set=0;
+    function preventDoubleClick() {
+    if(set==0){ set=1; } else {
+    alert("只今処理中です。\nそのままお待ちください。");
+    return false; }}
+
+  </script>
+
 </body>
 
 </html>
