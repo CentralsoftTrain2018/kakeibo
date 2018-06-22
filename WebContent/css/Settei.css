@@ -38,7 +38,6 @@ button.button1 {
 }
 /*画面表示変更ボタン用のレイアウト*/
 .settei{
-  background-color: #99cc00;
   text-align:left;
   float:left;
   position: absolute;
@@ -48,7 +47,6 @@ button.button1 {
 }
 
 .subsettei{
-  background-color: #ff0000;
   display: table;
   width: 100%;
   padding:0px;
@@ -56,7 +54,7 @@ button.button1 {
 /*表示内容を変更する場所のレイアウト*/
 .hanni{
   float:right;
-  background-color: #99cc00;
+  background-color: #ffff80;
   top:0px;
   right:0px;
   position: absolute;
@@ -66,7 +64,7 @@ button.button1 {
 }
 .hanni2{
   float:right;
-  background-color: #99cc00;
+  background-color: #ffff80;
   top:0px;
   right:0px;
   position: absolute;
@@ -76,7 +74,7 @@ button.button1 {
 }
 .hanni3{
   float:right;
-  background-color: #99cc00;
+  background-color: #ffff80;
   top:0px;
   right:0px;
   position: absolute;
@@ -85,7 +83,6 @@ button.button1 {
 }
 
 .subcontana{
-  background-color: #ff0080;
   top:20%;
   position: absolute;
   width:900px;
@@ -95,7 +92,6 @@ button.button1 {
 
 #deleteKoumoku{
   float:right;
-  background-color: #0080ff;
   top:0px;
   margin: 10px;
   position: absolute;
@@ -104,7 +100,6 @@ button.button1 {
 }
 #updateMokuhyou{
   float:right;
-  background-color: #0080ff;
   top:0px;
   margin: 10px;
   position: absolute;
@@ -112,7 +107,6 @@ button.button1 {
 }
 #updateKoumoku{
   float:right;
-  background-color: #0080ff;
   top:0px;
   margin: 10px;
   position: absolute;
@@ -121,5 +115,4 @@ button.button1 {
 .subtable{
   table-layout: fixed;
   width:100%;
-  background:rgba(255,255,255,0.1);
 }
