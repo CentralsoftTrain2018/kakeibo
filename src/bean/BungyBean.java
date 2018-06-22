@@ -19,6 +19,9 @@ public class BungyBean {
     private boolean monthfinflg=false;
     private boolean gameoverflg=false;
 
+    //現在表示しているカレンダーの年月
+    private int selectedMonth;
+    private int selectedYear;
     //ユーザーの登録月
     private int registMonth;
     private int registYear;
@@ -151,6 +154,13 @@ public class BungyBean {
         }
     }
 
+    public int getThisMonth() {
+        return thisMonth;
+    }
+    public void setThisMonth(int thisMonth) {
+        this.thisMonth = thisMonth;
+    }
+
     public int getRegistYear()
     {
         return registYear;
@@ -161,11 +171,28 @@ public class BungyBean {
         this.registYear = registYear;
     }
 
+    public int getRegistMonth()
+    {
+        return registMonth;
+    }
+
     public void setRegistMonth(int registMonth)
     {
         this.registMonth = registMonth;
     }
 
+    public int getSelectedMonth() {
+        return selectedMonth;
+    }
+    public void setSelectedMonth(int selectedMonth) {
+        this.selectedMonth = selectedMonth;
+    }
+    public int getSelectedYear() {
+        return selectedYear;
+    }
+    public void setSelectedYear(int selectedYear) {
+        this.selectedYear = selectedYear;
+    }
     private void monthFinCheck()
     {
         String[] YearAndMonth = nengetsu.split("/");
@@ -175,9 +202,14 @@ public class BungyBean {
         today=calendar.get(Calendar.DATE);
         thisMonth=calendar.get(Calendar.MONTH)+1;
 
+        System.out.println("びーん:"+YearAndMonth[0]+ "/" +YearAndMonth[1]);
+
         //指定年月の日数を取得
         Calendar c = new GregorianCalendar(Integer.parseInt(YearAndMonth[0]),Integer.parseInt(YearAndMonth[1]),1);
         days=c.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        selectedYear = Integer.parseInt(YearAndMonth[0]);
+        selectedMonth = Integer.parseInt(YearAndMonth[1]);
 
         int month=Integer.parseInt(YearAndMonth[1]);
         //DBに記録されている月が現在の月と異なる場合フラグの切り替え

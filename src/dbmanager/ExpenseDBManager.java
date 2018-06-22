@@ -71,7 +71,7 @@ public class ExpenseDBManager
      * @param month
      * @return
      */
-    public static BungyVo getMokuhyouAndExpenses( String userid, String month )
+    public static BungyVo makeBungyBean( String userid, String month )
     {
         try (
                 Connection con = PoolConnection.getConnection(); )
@@ -82,9 +82,11 @@ public class ExpenseDBManager
 
             int totalexpenses = bdao.getSisyutuGoukei(month, userid);
             int mokuhyou = bdao.getTsukiMokuhyou(month, userid);
+            String registMonth = bdao.getRegistMonth(userid);
 
             bv.setTotalexpenses(totalexpenses);
             bv.setMokuhyou(mokuhyou);
+            bv.setRegistMonth(registMonth);
 
             return bv;
 

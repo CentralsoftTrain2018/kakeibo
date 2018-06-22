@@ -32,7 +32,24 @@ public class BungyServlet extends HttpServlet
         try {
             HttpSession session = request.getSession();
             String userId = (String)session.getAttribute("userId");
-            String nengetsu=request.getParameter("nengetsu");
+            String year = request.getParameter("year");
+
+            System.out.println("サーブレッ");
+            String month = request.getParameter("month");
+            String nengetsu = "";
+
+            System.out.println(month);
+
+            if(year != null && month != null)
+            {
+                month = String.format("%02d",Integer.parseInt(month));
+                nengetsu = year + "/" + month;
+            }
+
+
+
+            System.out.println("サーブレット："+nengetsu);
+
             /*
              * nengetuに文字が入っていない場合（他の画面からバンジーボタンが押された）
              * 文字が入っている場合（バンジー画面から数値が送られる）
@@ -49,7 +66,7 @@ public class BungyServlet extends HttpServlet
                 nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
             }
             //String nengetu=request.getParameter("nengetsu");
-            bb = ExpenseService.getMokuhyouAndExpenses(userId,nengetsu);
+            bb = ExpenseService.makeBungyBean(userId,nengetsu);
 
 
             if(bb.getMokuhyou() < 0) {

@@ -3,6 +3,7 @@ package vo;
 public class BungyVo {
     public int mokuhyou;
     public int totalexpenses;
+    public String registMonth;
 
     public BungyVo() {
         super();
@@ -27,5 +28,13 @@ public class BungyVo {
 
     public void setTotalexpenses(int totalexpenses) {
         this.totalexpenses = totalexpenses;
+    }
+
+    public String getRegistMonth() {
+        return registMonth;
+    }
+
+    public void setRegistMonth(String registMonth) {
+        this.registMonth = registMonth;
     }
 }

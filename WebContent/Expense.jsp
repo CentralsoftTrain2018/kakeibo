@@ -57,11 +57,20 @@
 
      <div id = "selectMonth">
       <select name="month">
-          <% for (int i = 1; i <= 12; i++) { %>
+        <%if(bean.getDate().get(Calendar.YEAR) == LocalDate.now().getYear()) {%>
+          <% for (int i = 1; i <= LocalDate.now().getMonthValue(); i++) { %>
           <option value=<%=i%>
-            <%if (i == bean.getDate().get(Calendar.MONTH) + 1) {%> selected
+            <%if (i == bean.getDate().get(Calendar.MONTH)+1) {%> selected
             <%}%>>
             <%=i%></option>
+            <%} %>
+            <%} else{ %>
+          <% for (int i = 1; i <= 12; i++) { %>
+          <option value=<%=i%>
+            <%if (i == bean.getDate().get(Calendar.MONTH)+1) {%> selected
+            <%}%>>
+            <%=i%></option>
+            <%} %>
             <%} %>
       </select>
      </div>
