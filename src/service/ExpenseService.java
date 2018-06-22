@@ -85,10 +85,6 @@ public class ExpenseService
         int year = Integer.parseInt(registMonth[0]);
         int month = Integer.parseInt(registMonth[1]);
 
-        System.out.println(registMonth);
-        System.out.println(year);
-        System.out.println(month);
-
         eb.setRegistYear(year);
         eb.setRegistMonth(month);
 
