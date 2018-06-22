@@ -76,6 +76,7 @@ public class SetteiServlet extends HttpServlet {
         }
         if(choice.equals("updateCategory"))
         {
+            System.out.println("ikcjherfh");
             UserDataService.updateCategory(newCategoryName, userId, oldCategoryName);
         }
         if(choice.equals("deleteCategory"))
@@ -105,11 +106,6 @@ public class SetteiServlet extends HttpServlet {
             catch(NumberFormatException e) {
                 e.printStackTrace();
             }
-        }
-
-        if(choice.equals(""))
-        {
-            UserDataService.settei( userId );
         }
 
 

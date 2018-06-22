@@ -40,7 +40,7 @@
 
    </div>
 
-  <div class="hanni" id="help" >
+  <div class="hanni" id="help">
   <h2>画面説明</h2><p>バンジー画面</p>
     <ul><li>日付が進むと男の子が下に落ちていくよ！</li>
     <li>犯人は支出額が増えるごとに上へ上がっていくよ！</li>
@@ -57,15 +57,19 @@
     <ul><li>月ごとに支出の割合が見れるよ！</li>
     <li>円グラフがかっこいいね！</li></ul>
   </div>
+  <%if(bean.getDispName()=="settei"){%>
+  <div class="hanni2" id="settei" style="display:block ;">
+  <%} else {%>
+  <div class="hanni2" id="settei" style="display:none ;">
+  <%} %>
 
-  <div class="hanni2" id="settei" >
     <form method="POST" action="SetteiServlet" id="henkouform">
     <input type="hidden" name="dispName" value="settei">
     収入<input type="number" name="newIncome" min="0" value="" placeholder=<%=bean.getSyunyuu()%> required>
     <input type="submit" value="収入変更" name="">
     <input type="hidden" value="updateSyunyuu" name="choice">
     </form><br>
-    目標:<%=bean.getMokuhyougoukei() %><br>
+    目標:<%=bean.getMokuhyougoukei()%><br>
 
     <form method="POST" action="SetteiServlet">
     <table ><tr>
@@ -80,6 +84,7 @@
     </td>
     <td>
     <input type="submit" value="項目追加" name="">
+    <input type="hidden" name="dispName" value="settei">
     <input type="hidden" value="addCategory" name="choice">
     </td>
     </tr></table>
@@ -103,6 +108,7 @@
     <%for(SetteiVo sv:bean.getCategoryMokuhyouList()){ %>
        <tr>
        <form method="POST" action="SetteiServlet">
+       <input type="hidden" name="dispName" value="settei">
        <td><%=sv.getCategoryName()%></td>
        <td><%=sv.getMokuhyouKingaku()%></td>
        <td>
@@ -116,8 +122,6 @@
     </div>
 
     <div id="updateMokuhyou">
-    <form method="POST" action="SetteiServlet">
-    <input type="hidden" name="dispName" value="settei">
     <table border="1"  id="koumokulist" class="subtable">
     <tr>
     <td>項目名</td>
@@ -126,6 +130,8 @@
     </tr>
     <%for(SetteiVo sv:bean.getCategoryMokuhyouList()){ %>
        <tr>
+       <form method="POST" action="SetteiServlet">
+       <input type="hidden" name="dispName" value="settei">
        <td><%=sv.getCategoryName()%></td>
        <td><input type="number" name="newMokuhyoukingaku" min="0" value=<%=sv.getMokuhyouKingaku()%>></td>
        <td>
@@ -133,15 +139,13 @@
        <input type="hidden" name="oldCategoryName" value=<%=sv.getCategoryName()%>>
        <input type="hidden" name="newCategoryName" value=<%=sv.getCategoryName()%>>
        </td>
+       </form>
        </tr>
     <%} %>
     </table>
-    </form>
     </div>
 
     <div id="updateKoumoku">
-    <form method="POST" action="SetteiServlet">
-    <input type="hidden" name="dispName" value="settei">
     <table border="1"  id="koumokulist" class="subtable">
     <tr>
     <td>項目名</td>
@@ -150,21 +154,28 @@
     </tr>
     <%for(SetteiVo sv:bean.getCategoryMokuhyouList()){ %>
        <tr>
+       <form method="POST" action="SetteiServlet">
+       <input type="hidden" name="dispName" value="settei">
        <td><input type="text" name="newCategoryName" value=<%=sv.getCategoryName()%> required></td>
        <td><%=sv.getMokuhyouKingaku()%></td>
        <td>
-       <input type="submit" name="choice" value="updateCategory">
+       <input type="submit" name="" value="項目変更">
+       <input type="hidden" name="choice" value="updateCategory">
        <input type="hidden" name="oldCategoryName" value=<%=sv.getCategoryName()%>>
        </td>
+       </form>
        </tr>
     <%} %>
     </table>
-    </form>
     </div>
     </div>
   </div>
 
-  <div class="hanni3" id="yuzaHenkou" >
+　<%if(bean.getDispName()=="user"){%>
+  <div class="hanni3" id="yuzaHenkou" style="display:block ;">
+  <%} else {%>
+  <div class="hanni3" id="yuzaHenkou" style="display:none ;">
+  <%} %>
      <form method="POST" action="SetteiServlet">
      <input type="hidden" name="dispName" value="user">
     <ul><li><label>新しく設定するPASS</label><input type="password" name="newPassword"id="password" required></li>

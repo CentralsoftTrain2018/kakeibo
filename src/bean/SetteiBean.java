@@ -17,7 +17,7 @@ public class SetteiBean {
     private int syunyuu;
 
     //現在の項目ごとの目標金額の合計を表示するための変数
-    private int mokuhyougoukei;
+    private int mokuhyougoukei=0;
 
     private String userId;
 
@@ -57,6 +57,10 @@ public class SetteiBean {
         this.syunyuu = syunyuu;
     }
     public int getMokuhyougoukei() {
+        for( SetteiVo sv:categoryMokuhyouList)
+        {
+            mokuhyougoukei+= sv.getMokuhyouKingaku();
+        }
         return mokuhyougoukei;
     }
     public void setMokuhyougoukei(int mokuhyougoukei) {
