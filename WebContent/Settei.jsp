@@ -58,9 +58,9 @@
     <li>円グラフがかっこいいね！</li></ul>
   </div>
   <%if(bean.getDispName()=="settei"){%>
-  <div class="hanni2" id="settei" style="display:block ;">
+  <div class="hanni2" id="settei" style="display:block;">
   <%} else {%>
-  <div class="hanni2" id="settei" style="display:none ;">
+  <div class="hanni2" id="settei" style="display:none;">
   <%} %>
 
     <form method="POST" action="SetteiServlet" id="henkouform">
@@ -133,7 +133,7 @@
        <form method="POST" action="SetteiServlet">
        <input type="hidden" name="dispName" value="settei">
        <td><%=sv.getCategoryName()%></td>
-       <td><input type="number" name="newMokuhyoukingaku" min="0" value=<%=sv.getMokuhyouKingaku()%>></td>
+       <td><input type="number" required name="newMokuhyoukingaku" min="0" value=<%=sv.getMokuhyouKingaku()%>></td>
        <td>
        <input type="submit" name="choice" value="updateMokuhyou">
        <input type="hidden" name="oldCategoryName" value=<%=sv.getCategoryName()%>>
