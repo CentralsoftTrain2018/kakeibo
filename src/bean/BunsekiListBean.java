@@ -11,8 +11,17 @@ public class BunsekiListBean
     private Calendar date;
     private boolean isOverMokuhyou;
     private List<String> categoryNameList;
+    private boolean isVisibleConan;
 
 
+
+    public boolean getVisibleConan() {
+        return isVisibleConan;
+    }
+
+    public void setVisibleConan(boolean isVisibleConan) {
+        this.isVisibleConan = isVisibleConan;
+    }
 
     public List<String> getCategoryNameList() {
         return categoryNameList;
