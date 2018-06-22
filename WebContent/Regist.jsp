@@ -48,7 +48,7 @@
     function mailCheck(input) {
       var str = input.value;
       if (str.match(/[^\x00-\x7E]/)) {
-        input.setCustomValidity('全角文字は使用できません');
+        input.setCustomValidity('半角英数字と@ . 以外は使用できません');
       } else {
         // input is valid -- reset the error message
         input.setCustomValidity('');
