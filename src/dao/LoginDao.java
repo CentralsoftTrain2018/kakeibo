@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import bean.LoginBean;
-
 public class LoginDao extends Dao
 {
 
@@ -32,7 +30,7 @@ public class LoginDao extends Dao
      * @return ログインできる true、ログインできない false
      * @throws SQLException
      */
-    public boolean idPassCheck( LoginBean lb ) throws SQLException
+    public boolean idPassCheck( String userId, String password ) throws SQLException
     {
         ResultSet rset = null;
 
@@ -40,8 +38,8 @@ public class LoginDao extends Dao
         {
             String result = null;
 
-            stmt.setString( 1, lb.getUserId() );
-            stmt.setString( 2, lb.getPassword() );
+            stmt.setString( 1, userId );
+            stmt.setString( 2, password );
 
             /* ｓｑｌ実行 */
             rset = stmt.executeQuery();

@@ -107,14 +107,6 @@ public class SetteiDao extends Dao {
             "where " +
             "	userId = ?";
 
-    private static final String SELECT_PASSWORD =
-            "select " +
-            "	passward " +
-            "from " +
-            "	user " +
-            "where " +
-            "	userid = ?";
-
 
     public SetteiDao(Connection con) {
         super(con);
@@ -274,32 +266,6 @@ public class SetteiDao extends Dao {
         } catch ( SQLException ex )
         {
             throw ex;
-        }
-    }
-
-    //パスワードの取得
-    //呼び出し元
-    //UserDBManager
-    public String getPassword(String userId) throws SQLException {
-        ResultSet rset = null;
-
-        try ( PreparedStatement stmt = con.prepareStatement( SELECT_PASSWORD ); )
-        {
-            stmt.setString( 1, userId );
-
-            rset = stmt.executeQuery();
-
-            String password = "";
-            while(rset.next()) {
-                password = rset.getString(1);
-            }
-
-            return password;
-        }
-
-        catch ( SQLException e )
-        {
-            throw e;
         }
     }
 

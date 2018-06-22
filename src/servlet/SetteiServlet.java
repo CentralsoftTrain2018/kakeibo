@@ -84,7 +84,7 @@ public class SetteiServlet extends HttpServlet {
         }
         if(choice.equals("updatePassword"))
         {
-            updatePassword(userId, oldPassword, newPassword);
+            UserDataService.updatePassword(userId, newPassword);
         }
         if(choice.equals("updateSyunyuu"))
         {
@@ -106,10 +106,12 @@ public class SetteiServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+
         if(choice.equals(""))
         {
             UserDataService.settei( userId );
         }
+
 
         SetteiBean bean = UserDataService.settei( userId );
         bean.setDispName(dispName);
@@ -127,17 +129,4 @@ public class SetteiServlet extends HttpServlet {
         // TODO Auto-generated method stub
         doGet(request, response);
     }
-
-    //パスワードの変更
-    //呼び出し元
-    //SetteiServlet
-    //呼び出し先
-    //UserDataService
-    private void updatePassword(String userId,String oldPassword, String newPassword) {
-        String nowPassword = UserDataService.getPassword(userId);
-        if(nowPassword.equals(oldPassword)) {
-            UserDataService.updatePassword(userId, newPassword);
-        }
-    }
-
 }

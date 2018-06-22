@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet
         lb.setPassword( password );
 
         //ログイン可能
-        if ( UserDataService.isLogin( lb ) )
+        if ( UserDataService.isLogin( userId, password ) )
         {
             //入っていない場合。今日が何年何月かをnengetsuに入れる
             Calendar calendar = Calendar.getInstance();

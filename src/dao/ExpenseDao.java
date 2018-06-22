@@ -75,6 +75,16 @@ public class ExpenseDao extends Dao
             + " AND "
             + " expenseDate = ? ";
 
+    private static final String GET_REGISTMONTH = "SELECT"
+            + " registmonth "
+            + " FROM "
+            + " user "
+            + " WHERE "
+            + " userId = ? ";
+
+
+
+
     public ExpenseDao( Connection con )
     {
         super( con );
@@ -257,5 +267,29 @@ public class ExpenseDao extends Dao
         {
             throw e;
         }
+    }
+
+    public String getRegistMonth(String userId) throws SQLException {
+
+        ResultSet rset = null;
+
+        try ( PreparedStatement stmt = con.prepareStatement( GET_REGISTMONTH ); )
+        {
+            stmt.setString( 1, userId );
+
+            rset = stmt.executeQuery();
+
+            String registMonth = null;
+
+            rset.next();
+            registMonth = rset.getString(1);
+
+            return registMonth;
+        }
+        catch ( SQLException e )
+        {
+            throw e;
+        }
+
     }
 }

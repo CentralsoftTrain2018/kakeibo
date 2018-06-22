@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+.conan {
+  top:-500px;
+  display:block;
+  position: relative;
+  left: 900px;
+  height: 400px;
+}
+
+.balloon {
+  position: relative;
+  padding: 20px;
+  background-color: #fff5cc;
+  border: 2px solid #ffdb4f;
+  display: inline-block;
+  top: -830px;
+  font-size: 20px;
+  left:630px;
+}
+
+.balloon::before{
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  right: -15px;
+  top: 20px;
+  border-left: 15px solid #ffdb4f;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+}
+.balloon::after{
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  right: -12px;
+  top: 20px;
+  border-left: 15px solid #fff5cc;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+}
+
+p.baloon1 {
+  word-wrap: break-word;
+  width:250px;
+  font-size: 23px;
+}

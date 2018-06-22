@@ -80,6 +80,14 @@ public class ExpenseService
 
         eb.setCategoryList(categoryList);
 
+        //ユーザーの登録月の取得
+        String registMonth[] = ExpenseDBManager.getRegistMonth(userId).split("/", 0);
+        int year = Integer.parseInt(registMonth[0]);
+        int month = Integer.parseInt(registMonth[1]);
+
+        eb.setRegistYear(year);
+        eb.setRegistMonth(month);
+
         return eb;
     }
 }

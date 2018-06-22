@@ -117,7 +117,31 @@ public class AdviceService
         calendar.get( Calendar.MONTH );
         String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
         BunsekiListBean blb = setBunsekiList( userId, nengetsu );
+        boolean isOverMokuhyou = false;
+        int bottomWariai = 100;
+        List<String> categoryNameList = new ArrayList<String>();
+        for ( BunsekiBean bb : blb.getList() )
+        {
+            if(bb.getDifference() < 0)
+            {
+                isOverMokuhyou = true;
+            }
+            if(bottomWariai > bb.getWariai())
+            {
+                bottomWariai = bb.getWariai();
+            }
+        }
+        for ( BunsekiBean bb : blb.getList() )
+        {
+            if(bb.getWariai() == bottomWariai)
+            {
+                categoryNameList.add(bb.getCategoryName());
+            }
+        }
+
         blb.setDate( calendar );
+        blb.setOverMokuhyou(isOverMokuhyou);
+        blb.setCategoryNameList(categoryNameList);
 
         return blb;
     }
@@ -129,7 +153,32 @@ public class AdviceService
         //calendar.add( Calendar.MONTH, -1 );
         String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
         BunsekiListBean blb = setBunsekiList( userId, nengetsu );
+        boolean isOverMokuhyou = false;
+        int bottomWariai = 100;
+        List<String> categoryNameList = new ArrayList<String>();
+        for ( BunsekiBean bb : blb.getList() )
+        {
+            if(bb.getDifference() < 0)
+            {
+                isOverMokuhyou = true;
+
+            }
+            if(bottomWariai > bb.getWariai())
+            {
+                bottomWariai = bb.getWariai();
+            }
+        }
+        for ( BunsekiBean bb : blb.getList() )
+        {
+            if(bb.getWariai() == bottomWariai)
+            {
+                categoryNameList.add(bb.getCategoryName());
+            }
+        }
+
         blb.setDate( calendar );
+        blb.setOverMokuhyou(isOverMokuhyou);
+        blb.setCategoryNameList(categoryNameList);
 
         return blb;
     }

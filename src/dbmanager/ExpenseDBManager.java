@@ -155,4 +155,23 @@ public class ExpenseDBManager
             throw new RuntimeException( e );
         }
     }
+
+    public static String getRegistMonth(String userId) {
+
+        try (
+                Connection con = PoolConnection.getConnection();
+                )
+        {
+            ExpenseDao edao = new ExpenseDao( con );
+
+            String registMonth = edao.getRegistMonth(userId);
+
+            return registMonth;
+        } catch ( SQLException e )
+        {
+            e.printStackTrace();
+            throw new RuntimeException( e );
+        }
+
+    }
 }

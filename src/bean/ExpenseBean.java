@@ -25,6 +25,9 @@ public class ExpenseBean
     private int selectDay;
 
     private boolean isChange;
+    //ユーザーの登録月
+    private int registMonth;
+    private int registYear;
 
     public ExpenseBean()
     {
@@ -113,6 +116,22 @@ public class ExpenseBean
 
     public void setChange(boolean isChange) {
         this.isChange = isChange;
+    }
+
+    public int getRegistYear() {
+        return registYear;
+    }
+
+    public void setRegistYear(int registYear) {
+        this.registYear = registYear;
+    }
+
+    public void setRegistMonth(int registMonth) {
+        this.registMonth = registMonth;
+    }
+
+    public int getRegistMonth() {
+        return registMonth;
     }
 
     @Override

@@ -1,5 +1,6 @@
 <%@page import="vo.CategoryVo"%>
 <%@page import="vo.ExpenseVo"%>
+<%@ page import="java.time.LocalDate"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" import="java.util.Calendar"%>
 <jsp:useBean id="bean" class="bean.ExpenseBean" scope="request" />
@@ -42,20 +43,35 @@
       <%=bean.getDate().get(Calendar.MONTH) + 1%>月
 
       <form method="POST" action="ExpenseServlet">
-        <select name="year">
-          <option value="2017">2017</option>
-          <option value="2018" selected>2018</option>
-        </select> <select name="month">
-          <%
-            for (int i = 1; i <= 12; i++) {
-          %>
+      <select name="year">
+      <% for(int count = bean.getRegistYear(); count <= LocalDate.now().getYear(); count++ ){ %>
+      <option value= <%=count %>
+      <% if(count == bean.getDate().get(Calendar.YEAR)){ %>
+      selected
+      <%} %>
+      ><%=count %></option>
+      <%} %>
+      </select>
+
+      <select name="month">
+            <%if(bean.getDate().get(Calendar.YEAR) != bean.getRegistYear()) { %>
+          <% for (int i = 1; i <= 12; i++) { %>
           <option value=<%=i%>
             <%if (i == bean.getDate().get(Calendar.MONTH) + 1) {%> selected
             <%}%>>
             <%=i%></option>
-          <%
+          <% }%>
+          <% } else {%>
+
+          <% for (int i = bean.getRegistMonth(); i <= 12; i++) { %>
+          <option value=<%=i%>
+            <%if (i == bean.getDate().get(Calendar.MONTH) + 1) {%> selected
+            <%
             }
-          %>
+            %>>
+            <%=i%></option>
+          <% }%>
+          <% }%>
 
         </select> <input type="submit" value="年月変更">
       </form>
@@ -239,8 +255,7 @@
         }
       %>
 
-
-      <form method="POST" action="ExpenseServlet">
+      <form method="POST" action="ExpenseServlet" onSubmit="return double()">
         <tr>
           <td><select name="categoryId">
               <%
@@ -274,7 +289,6 @@
     <%
       }
     %>
-
 
     <!-- 変更ボタンを押した後  -->
 
@@ -378,8 +392,12 @@
       }
 
       document.getElementById("indata").value = list;
-
     }
+    var set=0;
+    function double() {
+    if(set==0){ set=1; } else {
+    alert("只今処理中です。\nそのままお待ちください。");
+    return false; }}
   </script>
 </body>
 
