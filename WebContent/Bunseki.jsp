@@ -142,12 +142,10 @@ var myChart = new Chart(document.getElementById("newcanvas").getContext("2d")).D
   <%} else {%>
     このままだと目標を超えちゃうよ
     <%for(String categoryName : bean.getCategoryNameList()) {%>
-      、<%=categoryName %>
-    <%} %>の項目を節約しよう
-  <%} %>
+      、<%=categoryName%>
+    <%}%>の項目の出費を抑えると良いよ！！
+  <%}%>
   </p>
   </div>
-
-
 </body>
 </html>
