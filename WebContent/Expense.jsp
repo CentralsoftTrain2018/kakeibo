@@ -40,10 +40,10 @@
       入力してね<br>
 
       <%=bean.getDate().get(Calendar.YEAR)%>年
-      <%=bean.getDate().get(Calendar.MONTH) + 1%>月
+      <%=bean.getDate().get(Calendar.MONTH) + 1%>月<br>
 
-  <form method="POST" action="ExpenseServlet">
-        <select name="year" id = "selectYear" onChange = "checkRegistMonth()">
+  <form method="POST" action="ExpenseServlet" id="nengetsu">
+        <select name="year" id = "selectYear" onChange = "checkRegistMonth()" style="float:left;">
           <% for(int count = bean.getRegistYear(); count <= LocalDate.now().getYear(); count++ ){ %>
           <option value=<%=count %>
             <% if(count == bean.getDate().get(Calendar.YEAR)){ %> selected
@@ -56,7 +56,7 @@
         <input type="hidden" id="registMonth" value=<%=bean.getRegistMonth() %>>
 
      <div id = "selectMonth">
-      <select name="month">
+      <select name="month" style="margin:0px auto; margin-left: 10px; float:left;">
           <% for (int i = 1; i <= 12; i++) { %>
           <option value=<%=i%>
             <%if (i == bean.getDate().get(Calendar.MONTH) + 1) {%> selected
@@ -65,9 +65,8 @@
             <%} %>
       </select>
      </div>
-           <input type="submit" value="年月変更">
-
-      </form>
+          <input type="submit" value="年月変更" style="margin:0px auto; margin-left: 10px; float:left;">
+    </form>
     </div>
     <table id="calender">
       <tr>
@@ -102,13 +101,10 @@
               value=<%=bean.getDate().get(Calendar.MONTH) + 1%>> <input
               type="hidden" name="selectDay" value=<%=day%>> <input
               type="submit" class="day" value=<%=day%>>
-          </form> <%=bean.getExpenses()[day - 1]%> <%
-   day++;
- %> <%
-   }
- %> <%
-   if (i == bean.getStartDayOfTheWeek()) {
- %>
+          </form> <%=bean.getExpenses()[day - 1]%>
+          <% day++; %>
+          <% } %>
+          <% if (i == bean.getStartDayOfTheWeek()) { %>
 
           <form method="POST" action="ExpenseServlet">
             <input type="hidden" name="year"
@@ -263,9 +259,7 @@
           </select></td>
 
           <td><input type="text" name="expenseName" required></td>
-
           <td><input type="number" name="kingaku" required></td>
-
           <td colspan=2 align="center">
           <input type="submit" name="choice" value="登録">
           <input type="hidden" name="year" value=<%=bean.getDate().get(Calendar.YEAR)%>>
