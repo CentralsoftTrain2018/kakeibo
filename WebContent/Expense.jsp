@@ -42,44 +42,31 @@
       <%=bean.getDate().get(Calendar.YEAR)%>年
       <%=bean.getDate().get(Calendar.MONTH) + 1%>月
 
-      <form method="POST" action="ExpenseServlet">
-      <select name="year">
-      <% for(int count = bean.getRegistYear(); count <= LocalDate.now().getYear(); count++ ){ %>
-      <option value= <%=count %>
-      <% if(count == bean.getDate().get(Calendar.YEAR)){ %>
-      selected
-      <%} %>
-      ><%=count %></option>
-      <%} %>
-      </select>
+  <form method="POST" action="ExpenseServlet">
+        <select name="year" id = "selectYear" onChange = "checkRegistMonth()">
+          <% for(int count = bean.getRegistYear(); count <= LocalDate.now().getYear(); count++ ){ %>
+          <option value=<%=count %>
+            <% if(count == bean.getDate().get(Calendar.YEAR)){ %> selected
+            <%} %>><%=count %></option>
+          <%} %>
+        </select>
+        <input type="hidden" id="nowYear" value=<%=bean.getDate().get(Calendar.YEAR) %>>
+        <input type="hidden" id="registYear" value=<%=bean.getRegistYear() %>>
+        <input type="hidden" id="nowMonth" value=<%=bean.getDate().get(Calendar.MONTH)+1 %>>
+        <input type="hidden" id="registMonth" value=<%=bean.getRegistMonth() %>>
 
+     <div id = "selectMonth">
       <select name="month">
-            <%if(bean.getDate().get(Calendar.YEAR) != bean.getRegistYear()) { %>
           <% for (int i = 1; i <= 12; i++) { %>
           <option value=<%=i%>
             <%if (i == bean.getDate().get(Calendar.MONTH) + 1) {%> selected
             <%}%>>
             <%=i%></option>
-          <% }%>
-          <% } else {%>
+            <%} %>
+      </select>
+     </div>
+           <input type="submit" value="年月変更">
 
-
-
-
-          <% for (int i = bean.getRegistMonth(); i <= 12; i++) { %>
-          <option value=<%=i%>
-            <%if (i == bean.getDate().get(Calendar.MONTH) + 1) {%> selected
-            <%
-            }
-            %>>
-            <%=i%></option>
-          <% }%>
-          <% }%>
-
-
-
-
-        </select> <input type="submit" value="年月変更">
       </form>
     </div>
     <table id="calender">
@@ -110,11 +97,11 @@
 
           <form method="POST" action="ExpenseServlet">
             <input type="hidden" name="year"
-              value=<%=bean.getDate().get(Calendar.YEAR)%>>
-            <input type="hidden" name="month"
-              value=<%=bean.getDate().get(Calendar.MONTH) + 1%>>
-              <input type="hidden" name="selectDay" value=<%=day%>>
-            <input type="submit" class="day" value=<%=day%> >
+              value=<%=bean.getDate().get(Calendar.YEAR)%>> <input
+              type="hidden" name="month"
+              value=<%=bean.getDate().get(Calendar.MONTH) + 1%>> <input
+              type="hidden" name="selectDay" value=<%=day%>> <input
+              type="submit" class="day" value=<%=day%>>
           </form> <%=bean.getExpenses()[day - 1]%> <%
    day++;
  %> <%
@@ -280,12 +267,11 @@
 
           <td><input type="number" name="kingaku" required></td>
 
-          <td colspan=2 align="center"><input type="submit"
-            name="choice" value="登録"> <input type="hidden" name="year"
-            value=<%=bean.getDate().get(Calendar.YEAR)%>> <input
-            type="hidden" name="month"
-            value=<%=bean.getDate().get(Calendar.MONTH) + 1%>> <input
-            type="hidden" name="selectDay" value=<%=bean.getSelectDay()%>>
+          <td colspan=2 align="center">
+          <input type="submit" name="choice" value="登録">
+          <input type="hidden" name="year" value=<%=bean.getDate().get(Calendar.YEAR)%>>
+          <input type="hidden" name="month" value=<%=bean.getDate().get(Calendar.MONTH) + 1%>>
+          <input type="hidden" name="selectDay" value=<%=bean.getSelectDay()%>>
 
           </td>
         </tr>
@@ -303,21 +289,22 @@
     <%
       if (bean.isChange()) {
     %>
-    <form name="myform" method="POST" action="ExpenseServlet" onSubmit="test2();">
-    <table class="list">
-      <tr>
-        <th bgcolor=lime colspan=5><%=bean.getDate().get(Calendar.MONTH) + 1%>月
-          <%=bean.getSelectDay()%>日</th>
-      </tr>
+    <form name="myform" method="POST" action="ExpenseServlet"
+      onSubmit="joinData();">
+      <table class="list">
+        <tr>
+          <th bgcolor=lime colspan=5><%=bean.getDate().get(Calendar.MONTH) + 1%>月
+            <%=bean.getSelectDay()%>日</th>
+        </tr>
 
-      <tr>
-        <th>項目</th>
-        <th>買ったもの</th>
-        <th>金額</th>
-        <th colspan=2 align="center">操作</th>
-      </tr>
+        <tr>
+          <th>項目</th>
+          <th>買ったもの</th>
+          <th>金額</th>
+          <th colspan=2 align="center">操作</th>
+        </tr>
 
-      <%
+        <%
         for (ExpenseVo ev : bean.getExpenseOfDay()) {
       %>
 
@@ -364,7 +351,7 @@
             type="submit" name="choice" value="戻る"> <input
             type="hidden" name="isChange" value="false"></td>
         </tr>
-    </table>
+      </table>
     </form>
 
   </div>
@@ -374,7 +361,7 @@
   %>
 
   <script type="text/javascript">
-    function test2() {
+    function joinData() {
 
       var categoryIdList = document.getElementsByName("categoryId");
       var expenseIdList = document.getElementsByName("expenseId");
@@ -402,7 +389,56 @@
       document.getElementById("indata").value = list;
 
     }
-  </script>
+
+    function checkRegistMonth(){
+
+      var sel = document.getElementById("selectMonth");
+      var year = document.getElementById("selectYear").value;
+      var registyear = document.getElementById("registYear").value;
+      var month = document.getElementById("nowMonth").value;
+      var registmonth = document.getElementById("registMonth").value;
+
+      var dt = new Date();
+
+      alert(dt.getFullYear())
+      alert(dt.getMonth()+1)
+
+      var text = null;
+
+      text = '<select name="month">';
+
+      if(year == registyear){
+          for (var i = registmonth; i <= 12; i++) {
+                text = text + "<option value=" + i;
+                  if (i == month) {
+                      text = text + " selected";
+                  }
+                  text = text + ">" + i + "</option>";
+                }
+        }
+      else if(year == dt.getFullYear()) {
+        for (var i = 1; i <= dt.getMonth()+1; i++) {
+              text = text + "<option value=" + i;
+                if (i == month) {
+                    text = text + " selected";
+                }
+                text = text + ">" + i + "</option>";
+              }
+      }else {
+        for (var i = 1; i <= 12; i++) {
+              text = text + "<option value=" + i;
+                if (i == month) {
+                    text = text + " selected";
+                }
+                text = text + ">" + i + "</option>";
+              }
+      }
+
+      text = text + "</select>";
+
+      sel.innerHTML = text;
+      }
+    </script>
 </body>
 
 </html>
