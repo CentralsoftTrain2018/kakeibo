@@ -71,7 +71,7 @@
 
 
 <div style="width: 1100px; height: 700px; text-align:center; margin-left:auto; margin-right:auto; position: relative; ">
-<div class="en" style="width: 600px; height: 700px; margin-bottom: 0px; padding-bottom: 0px;  position: absolute; left:0px;">
+<div class="en" style="width: 400px; height: 500px; margin-bottom: 0px; padding-bottom: 0px;  position: absolute; left:0px;">
 
 <canvas id="newcanvas"style="width: 100%; height: 100%;"></canvas>
 
