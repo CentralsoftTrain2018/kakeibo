@@ -13,33 +13,47 @@
     <ul>
       <li><h2>会員登録</h2></li>
       <li><div id="errorMessage">
-      <%if(bean.getMessage() != null){%>
-      <%= bean.getMessage() %>
-      <%} %>
-      </div></li>
+          <%
+            if (bean.getMessage() != null) {
+          %>
+          <%=bean.getMessage()%>
+          <%
+            }
+          %>
+        </div></li>
       <li><label>ユーザーID</label> <input type="text" name="userId"
         pattern="^[0-9A-Za-z]+$" required>（半角英数）</li>
       <li><label>PASS</label> <input type="password" name="password"
         id="password" required></li>
       <li><label>PASS(確認)</label> <input type="password"
-        name="passwordConfirm" id="passwordConfirm" required oninput="check(this)"></li>
+        name="passwordConfirm" id="passwordConfirm" required
+        oninput="check(this)"></li>
       <li><label>メールアドレス</label> <input type="email" name="mail"
-        required></li>
+        required oninput="mailCheck(this)"></li>
       <li class="under"><label>月収</label> <input type="number"
-        name="income" required>円</li>
-      <li><input type="submit" value="登録">
-      <input type="reset" value="リセット"></li>
+        name="income" min="0" required>円</li>
+      <li><input type="submit" value="登録"> <input type="reset"
+        value="リセット"></li>
     </ul>
   </form>
   <script>
-function check(input) {
-  if (input.value != document.getElementById('password').value) {
-    input.setCustomValidity('パスワードが一致しません');
-  } else {
-    // input is valid -- reset the error message
-    input.setCustomValidity('');
-  }
-}
-</script>
+    function check(input) {
+      if (input.value != document.getElementById('password').value) {
+        input.setCustomValidity('パスワードが一致しません');
+      } else {
+        // input is valid -- reset the error message
+        input.setCustomValidity('');
+      }
+    }
+    function mailCheck(input) {
+      var str = input.value;
+      if (str.match(/[^\x00-\x7E]/)) {
+        input.setCustomValidity('全角文字は使用できません');
+      } else {
+        // input is valid -- reset the error message
+        input.setCustomValidity('');
+      }
+    }
+  </script>
 </body>
 </html>
