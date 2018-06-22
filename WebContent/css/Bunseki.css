@@ -4,7 +4,7 @@
   top:-550px;
   display:block;
   position: relative;
-  left: 800px;
+  left: 900px;
   height: 400px;
 }
 
@@ -16,7 +16,7 @@
   display: inline-block;
   top: -930px;
   font-size: 20px;
-  left:500px;
+  left:600px;
 }
 
 .balloon::before{
