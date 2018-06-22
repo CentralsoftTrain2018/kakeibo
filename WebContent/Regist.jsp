@@ -46,8 +46,7 @@
       }
     }
     function mailCheck(input) {
-      var str = input.value;
-      if (str.match(/[^\x00-\x7E]/)) {
+      if (input.match(/^[^\x01-\x7E\xA1-\xDF]+$/)) {
         input.setCustomValidity('半角英数字と@ . 以外は使用できません');
       } else {
         // input is valid -- reset the error message
