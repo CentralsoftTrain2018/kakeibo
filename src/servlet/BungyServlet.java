@@ -34,21 +34,14 @@ public class BungyServlet extends HttpServlet
             String userId = (String)session.getAttribute("userId");
             String year = request.getParameter("year");
 
-            System.out.println("サーブレッ");
             String month = request.getParameter("month");
             String nengetsu = "";
-
-            System.out.println(month);
 
             if(year != null && month != null)
             {
                 month = String.format("%02d",Integer.parseInt(month));
                 nengetsu = year + "/" + month;
             }
-
-
-
-            System.out.println("サーブレット："+nengetsu);
 
             /*
              * nengetuに文字が入っていない場合（他の画面からバンジーボタンが押された）

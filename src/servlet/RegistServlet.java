@@ -54,7 +54,6 @@ public class RegistServlet extends HttpServlet
         LocalDate ld  = LocalDate.now();
 
         String registMonth = String.format("%tY/%tm", ld, ld);
-        System.out.println(registMonth);
 
         //ユーザーIDが重複していない
         if ( UserDataService.isUnique( userId ))
