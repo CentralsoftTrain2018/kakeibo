@@ -120,15 +120,34 @@ var data = [
   ];
 var myChart = new Chart(document.getElementById("newcanvas").getContext("2d")).Doughnut(data);
 </script>
+          <%
+        int sumMokuhyou = 0;
+        for ( bean.BunsekiBean bb : bean.getList() )
+        {
+      %>
+      <%sumMokuhyou += bb.getMokuhyouKingaku();%> <br>
+      <%
+        }
+      %>
   <div>
     <img src="image/conan.png" class="conan">
   </div>
-  <div class="balloon">
+
+  <div class="balloon"
+  >
   <p class ="baloon1">
-  aaaaaaaaaaaaaaaaaaaaaaaaaaa<br>
-  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  <%if(!bean.getOverMokuhyou()){ %>
+  今月は目標まで、<br>あと<%=sumMokuhyou - bean.getSumSpending() %>円使えるよ<br>
+  このまま頑張ろう！！
+  <%} else {%>
+    このままだと目標を超えちゃうよ
+    <%for(String categoryName : bean.getCategoryNameList()) {%>
+      、<%=categoryName %>
+    <%} %>の項目を節約しよう
+  <%} %>
   </p>
   </div>
+
 
 </body>
 </html>

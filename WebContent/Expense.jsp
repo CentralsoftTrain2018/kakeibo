@@ -63,9 +63,6 @@
           <% }%>
           <% } else {%>
 
-
-
-
           <% for (int i = bean.getRegistMonth(); i <= 12; i++) { %>
           <option value=<%=i%>
             <%if (i == bean.getDate().get(Calendar.MONTH) + 1) {%> selected
@@ -75,9 +72,6 @@
             <%=i%></option>
           <% }%>
           <% }%>
-
-
-
 
         </select> <input type="submit" value="年月変更">
       </form>
@@ -261,8 +255,7 @@
         }
       %>
 
-
-      <form method="POST" action="ExpenseServlet">
+      <form method="POST" action="ExpenseServlet" onSubmit="return double()">
         <tr>
           <td><select name="categoryId">
               <%
@@ -296,7 +289,6 @@
     <%
       }
     %>
-
 
     <!-- 変更ボタンを押した後  -->
 
@@ -400,8 +392,12 @@
       }
 
       document.getElementById("indata").value = list;
-
     }
+    var set=0;
+    function double() {
+    if(set==0){ set=1; } else {
+    alert("只今処理中です。\nそのままお待ちください。");
+    return false; }}
   </script>
 </body>
 

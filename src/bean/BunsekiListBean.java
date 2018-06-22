@@ -9,6 +9,26 @@ public class BunsekiListBean
     private List<BunsekiBean> list;
     private int sumSpending = 0;
     private Calendar date;
+    private boolean isOverMokuhyou;
+    private List<String> categoryNameList;
+
+
+
+    public List<String> getCategoryNameList() {
+        return categoryNameList;
+    }
+
+    public void setCategoryNameList(List<String> categoryNameList) {
+        this.categoryNameList = categoryNameList;
+    }
+
+    public boolean getOverMokuhyou() {
+        return isOverMokuhyou;
+    }
+
+    public void setOverMokuhyou(boolean isOverMokuhyou) {
+        this.isOverMokuhyou = isOverMokuhyou;
+    }
 
     public BunsekiListBean()
     {
