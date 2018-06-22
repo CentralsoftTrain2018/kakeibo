@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.Calendar"%>
+<%@ page import="java.time.LocalDate"%>
 
 <jsp:useBean id="bean" class="bean.BunsekiListBean" scope="request" />
 
@@ -29,22 +30,44 @@
   </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-<form method="POST" action="BunsekiServlet" style="margin-top: 10px;">
-<select name="year">
-<option value="2017">2017</option>
-<option value="2018" selected>2018</option>
-</select>
-<select name="month">
-<%for(int i = 1; i <= 12; i++ ){%>
-<option value=<%= i %>
-<%if(i == bean.getDate().get(Calendar.MONTH)+1) {%>
-      selected
-      <%} %>> <%= i %></option>
-<%} %>
 
-</select>
-<input type="submit" value="年月変更">
-</form>
+<form method="POST" action="BunsekiServlet" style="margin-top: 10px;">
+    <select name="year" id = "selectYear" onChange = "checkRegistMonth()" style="float:left;">
+      <% for(int count = bean.getRegistYear(); count <= LocalDate.now().getYear(); count++ ){ %>
+      <option value=<%=count %>
+          <% if(count == bean.getDate().get(Calendar.YEAR)){ %> selected
+            <%} %>><%=count %></option>
+          <%} %>
+    </select>
+    <input type="hidden" id="nowYear" value=<%=bean.getDate().get(Calendar.YEAR) %>>
+    <input type="hidden" id="registYear" value=<%=bean.getRegistYear() %>>
+    <input type="hidden" id="nowMonth" value=<%=bean.getDate().get(Calendar.MONTH)+1 %>>
+    <input type="hidden" id="registMonth" value=<%=bean.getRegistMonth() %>>
+
+    <div id = "selectMonth">
+      <select name="month" style="margin:0px auto; margin-left: 10px; float:left;">
+      <%if(bean.getDate().get(Calendar.YEAR) == LocalDate.now().getYear()) {%>
+          <% for (int i = 1; i <= LocalDate.now().getMonthValue(); i++) { %>
+          <option value=<%=i%>
+            <%if (i == bean.getDate().get(Calendar.MONTH) + 1) {%>
+              selected
+            <%}%>>
+
+            <%=i%></option>
+            <%} %>
+            <%} else{ %>
+          <% for (int i = 1; i <= 12; i++) { %>
+          <option value=<%=i%>
+            <%if (i == bean.getDate().get(Calendar.MONTH)+1) {%> selected
+            <%}%>>
+            <%=i%></option>
+            <%} %>
+            <%} %>
+
+      </select>
+     </div>
+       <input type="submit" value="年月変更">
+    </form>
 
 
 <div style="width: 1100px; height: 700px; text-align:center; margin-left:auto; margin-right:auto; position: relative; ">
@@ -129,7 +152,7 @@ var myChart = new Chart(document.getElementById("newcanvas").getContext("2d")).D
       <%
         }
       %>
-      
+
     <%if(bean.getVisibleConan()) {%>
   <div>
     <img src="image/conan.png" class="conan">
@@ -149,5 +172,53 @@ var myChart = new Chart(document.getElementById("newcanvas").getContext("2d")).D
   </p>
   </div>
     <%} %>
+
+    <script type="text/javascript">
+      function checkRegistMonth(){
+
+      var sel = document.getElementById("selectMonth");
+      var year = document.getElementById("selectYear").value;
+      var registyear = document.getElementById("registYear").value;
+      var month = document.getElementById("nowMonth").value;
+      var registmonth = document.getElementById("registMonth").value;
+
+      var dt = new Date();
+
+      var text = null;
+
+      text = '<select name="month">';
+
+      if(year == registyear){
+          for (var i = registmonth; i <= 12; i++) {
+                text = text + "<option value=" + i;
+                  if (i == month) {
+                      text = text + " selected";
+                  }
+                  text = text + ">" + i + "</option>";
+                }
+        }
+      else if(year == dt.getFullYear()) {
+        for (var i = 1; i <= dt.getMonth()+1; i++) {
+              text = text + "<option value=" + i;
+                if (i == month) {
+                    text = text + " selected";
+                }
+                text = text + ">" + i + "</option>";
+              }
+      }else {
+        for (var i = 1; i <= 12; i++) {
+              text = text + "<option value=" + i;
+                if (i == month) {
+                    text = text + " selected";
+                }
+                text = text + ">" + i + "</option>";
+              }
+      }
+
+      text = text + "</select>";
+
+      sel.innerHTML = text;
+      }
+      </script>
 </body>
 </html>

@@ -13,6 +13,8 @@ public class BunsekiListBean
     private List<String> categoryNameList;
     private boolean isVisibleConan;
 
+    private int registYear;
+    private int registMonth;
 
 
     public boolean getVisibleConan() {
@@ -77,6 +79,22 @@ public class BunsekiListBean
     public void setDate( Calendar date )
     {
         this.date = date;
+    }
+
+    public int getRegistYear() {
+        return registYear;
+    }
+
+    public void setRegistYear(int registYear) {
+        this.registYear = registYear;
+    }
+
+    public int getRegistMonth() {
+        return registMonth;
+    }
+
+    public void setRegistMonth(int registMonth) {
+        this.registMonth = registMonth;
     }
 
 }

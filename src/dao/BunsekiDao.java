@@ -50,6 +50,13 @@ public class BunsekiDao extends Dao
             " order by " +
             "  k.kccategoryid;";
 
+    private static final String GET_REGISTMONTH = "SELECT"
+            + " registmonth "
+            + " FROM "
+            + " user "
+            + " WHERE "
+            + " userId = ? ";
+
     public BunsekiDao( Connection con )
     {
         super( con );
@@ -89,6 +96,30 @@ public class BunsekiDao extends Dao
             return list;
         }
 
+        catch ( SQLException e )
+        {
+            throw e;
+        }
+
+    }
+
+    public String getRegistMonth(String userId) throws SQLException {
+
+        ResultSet rset = null;
+
+        try ( PreparedStatement stmt = con.prepareStatement( GET_REGISTMONTH ); )
+        {
+            stmt.setString( 1, userId );
+
+            rset = stmt.executeQuery();
+
+            String registMonth = null;
+
+            rset.next();
+            registMonth = rset.getString(1);
+
+            return registMonth;
+        }
         catch ( SQLException e )
         {
             throw e;

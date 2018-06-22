@@ -140,9 +140,6 @@
 
       var dt = new Date();
 
-      alert(dt.getFullYear())
-      alert(dt.getMonth()+1)
-
       var text = null;
 
       text = '<select name="month">';

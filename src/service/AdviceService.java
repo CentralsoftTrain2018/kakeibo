@@ -148,6 +148,10 @@ public class AdviceService
             isVisibleConan = false;
         }
 
+        String registMonth[] = AdviceDBManager.getRegistMonth(userId).split("/",0);
+        blb.setRegistYear(Integer.parseInt(registMonth[0]));
+        blb.setRegistMonth(Integer.parseInt(registMonth[1]));
+
         blb.setDate( calendar );
         blb.setOverMokuhyou(isOverMokuhyou);
         blb.setCategoryNameList(categoryNameList);
@@ -185,6 +189,10 @@ public class AdviceService
                 categoryNameList.add(bb.getCategoryName());
             }
         }
+
+        String registMonth[] = AdviceDBManager.getRegistMonth(userId).split("/",0);
+        blb.setRegistYear(Integer.parseInt(registMonth[0]));
+        blb.setRegistMonth(Integer.parseInt(registMonth[1]));
 
         blb.setDate( calendar );
         blb.setOverMokuhyou(isOverMokuhyou);

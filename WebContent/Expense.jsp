@@ -342,12 +342,9 @@
 
       var dt = new Date();
 
-      alert(dt.getFullYear())
-      alert(dt.getMonth()+1)
-
       var text = null;
 
-      text = '<select name="month">';
+      text = '<select name="month" style="margin:0px auto; margin-left: 10px; float:left;">';
 
       if(year == registyear){
           for (var i = registmonth; i <= 12; i++) {
