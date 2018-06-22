@@ -133,7 +133,7 @@
        <form method="POST" action="SetteiServlet">
        <input type="hidden" name="dispName" value="settei">
        <td><%=sv.getCategoryName()%></td>
-       <td><input type="number" name="newMokuhyoukingaku" min="0" value=<%=sv.getMokuhyouKingaku()%>></td>
+       <td><input type="number" required name="newMokuhyoukingaku" min="0" value=<%=sv.getMokuhyouKingaku()%>></td>
        <td>
        <input type="submit" name="choice" value="updateMokuhyou">
        <input type="hidden" name="oldCategoryName" value=<%=sv.getCategoryName()%>>

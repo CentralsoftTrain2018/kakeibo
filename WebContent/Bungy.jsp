@@ -31,13 +31,11 @@
 
   <h1>
     Bungy
-    <%=bean.getNengetsu()%></h1>
-  <div class="pattern1"
-    style="width: 800px; height: 742px; overflow: hidden;
-    margin-bottom: 0px; padding-bottom: 0px; position: relative; text-align:center; margin-left:auto; margin-right:auto;">
-
-  <form method="POST" action="BungyServlet">
-        <select name="year" id = "selectYear" onChange = "checkRegistMonth()">
+    <%=bean.getNengetsu()%>
+    </h1>
+    <div id="nengetsu">
+    <form method="POST" action="BungyServlet">
+        <select name="year" id = "selectYear" onChange = "checkRegistMonth()" style="float: left;">
           <% for(int count = bean.getRegistYear(); count <= LocalDate.now().getYear(); count++ ){ %>
           <option value=<%=count %>
             <% if(count == bean.getSelectedYear()){ %> selected
@@ -49,7 +47,7 @@
         <input type="hidden" id="nowMonth" value=<%=bean.getSelectedMonth() %>>
         <input type="hidden" id="registMonth" value=<%=bean.getRegistMonth() %>>
 
-     <div id = "selectMonth">
+     <div id = "selectMonth" style="margin-left: 10px; margin-right: 10px; float: left;">
       <select name="month">
      <%if(bean.getSelectedYear() == LocalDate.now().getYear()) {%>
           <% for (int i = 1; i <= LocalDate.now().getMonthValue(); i++) { %>
@@ -69,9 +67,12 @@
 
       </select>
      </div>
-           <input type="submit" value="年月変更">
-
+     <input type="submit" value="年月変更">
       </form>
+      </div>
+  <div class="pattern1"
+    style="width: 800px; height: 742px; overflow: hidden;
+    margin-bottom: 0px; padding-bottom: 0px; position: relative; text-align:center; margin-left:auto; margin-right:auto;">
 
     <img src="image/bg_taki.jpg" alt="" class="base"
       style="position: absolute; width: 800px; height: 742px; margin-all: 0px; padding-all: 0px; left: 10px;">
@@ -93,7 +94,7 @@
       style="position: absolute;
       width: 50px;
       right: 35%;
-      top:22%;">
+      top:19%;">
     <%
       } else
       {
@@ -103,13 +104,13 @@
       width: 100px;
       height: 100px;
       right: 30%;
-      top:<%=bean.getJumperDispPosition() + 27%>%;">
+      top:<%=bean.getJumperDispPosition() + 24%>%;">
       <img src="image/himo.png" alt="" class="himo"
       style="position: absolute;
       width: 50px;
       height:<%=bean.getJumperDispPosition() + 7%>%;
       right: 35%;
-      top: 22%;">
+      top: 19%;">
     <%
       }
     %>
