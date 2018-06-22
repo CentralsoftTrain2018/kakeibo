@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
 .conan {
-  top:-500px;
+  top:-550px;
   display:block;
   position: relative;
-  left: 900px;
+  left: 800px;
   height: 400px;
 }
 
@@ -14,9 +14,9 @@
   background-color: #fff5cc;
   border: 2px solid #ffdb4f;
   display: inline-block;
-  top: -830px;
+  top: -930px;
   font-size: 20px;
-  left:630px;
+  left:500px;
 }
 
 .balloon::before{
