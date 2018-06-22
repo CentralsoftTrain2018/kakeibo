@@ -21,6 +21,8 @@ public class SetteiDao extends Dao {
             "values " +
 
             "	(?, ? , ?, ?)";
+
+
     private static final String INSERT_MOKUHYOU =
             "insert into " +
             "	mokuhyou( " +
@@ -31,6 +33,24 @@ public class SetteiDao extends Dao {
             "	) " +
             "values " +
             "	(?, ? , ?, "+
+            "	(select " +
+            "		categoryid " +
+            "	from " +
+            "		category " +
+            "	where " +
+            "		user_userid = ? " +
+            "	and	categoryname = ? ));";
+
+    private static final String INSERT_NEWMONTH_MOKUHYOU =
+            "insert into " +
+            "	mokuhyou( " +
+            "		kingaku, " +
+            "		month," +
+            "		user_userid," +
+            "		category_categoryId" +
+            "	) " +
+            "values " +
+            "	( ? , ? , ?, "+
             "	(select " +
             "		categoryid " +
             "	from " +
@@ -62,6 +82,12 @@ public class SetteiDao extends Dao {
            "FROM user " +
            "WHERE userId = ?;";
 
+    private static final String SELECT_MONTH =
+            " SELECT "+
+            "	Max(month)"+
+            " FROM mokuhyou"+
+            " WHERE user_userid = ?;";
+
     private static final String SELECT_MOKUHYOU =
             "SELECT " +
             "categoryName " +
@@ -73,6 +99,7 @@ public class SetteiDao extends Dao {
             "AND c.useflag = 1 " +
             "AND m.user_userId = ? " +
             "AND m.Month = ?;";
+
 
     private static final String  UPDATE_MOKUHYOU =
             "update " +
@@ -130,6 +157,26 @@ public class SetteiDao extends Dao {
             throw ex;
         }
     }
+
+    public String getMonth( String userId ) throws SQLException {
+        ResultSet rset = null;
+        try ( PreparedStatement stmt = con.prepareStatement( SELECT_MONTH ); )
+        {
+            String month;
+
+            stmt.setString( 1, userId );
+            /* SQL実行 */
+            rset = stmt.executeQuery();
+            rset.next();
+            month = (rset.getString( 1 ));
+            return month;
+        } catch ( SQLException ex )
+        {
+            throw ex;
+        }
+    }
+
+
 
     public void addNewMokuhyou(String categoryName, String userId, String nengetu, int kingaku ) throws SQLException {
         try ( PreparedStatement stmt = con.prepareStatement( INSERT_MOKUHYOU ); )
@@ -308,4 +355,24 @@ public class SetteiDao extends Dao {
             throw ex;
         }
     }
+
+
+    public void addNewMonthMokuhyou( String userId, String categoryName, int kingaku, String nengetu ) throws SQLException
+    {
+        try ( PreparedStatement stmt = con.prepareStatement( INSERT_NEWMONTH_MOKUHYOU ); )
+        {
+            stmt.setInt(1, kingaku);
+            stmt.setString(2, nengetu);
+            stmt.setString(3, userId);
+            stmt.setString(4, userId);
+            stmt.setString(5, categoryName);
+
+            /* ｓｑｌ実行 */
+            stmt.executeUpdate();
+        } catch ( SQLException ex )
+        {
+            throw ex;
+        }
+    }
 }
+

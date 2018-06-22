@@ -108,6 +108,21 @@ public class UserDataService
         Calendar calendar = Calendar.getInstance();
         String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
 
+        String[] nengetus = nengetsu.split("/");
+
+        String month=UserDBManeger.getMonth(userId);
+        if(month != null) {
+            String [] months=month.split("/");
+            if((Integer.parseInt(months[1]) !=Integer.parseInt(nengetus[1]))||(Integer.parseInt(months[0]) !=Integer.parseInt(nengetus[0])))
+            {
+                List<SetteiVo> Monthmokuhyou = UserDBManeger.getMokuhyou(userId,month);
+                for(SetteiVo sv:Monthmokuhyou)
+                {
+                    UserDBManeger.addNewMonthMokuhyou(userId, sv.getCategoryName(), sv.getMokuhyouKingaku(),nengetsu);
+                }
+
+            }
+        }
         //収入の取得
         int syunyuu = UserDBManeger.getSyunyuu( userId );
         //目標の取得

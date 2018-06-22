@@ -6,6 +6,7 @@ import java.util.List;
 
 import dao.BunsekiDao;
 import dao.ConanDao;
+import dao.ExpenseDao;
 import dao.JihakuDao;
 import vo.AdviceVo;
 import vo.BunsekiVo;
@@ -146,5 +147,24 @@ public class AdviceDBManager
             e.printStackTrace();
             throw new RuntimeException( e );
         }
+    }
+
+    public static String getRegistMonth(String userId) {
+
+        try (
+                Connection con = PoolConnection.getConnection();
+                )
+        {
+            ExpenseDao edao = new ExpenseDao( con );
+
+            String registMonth = edao.getRegistMonth(userId);
+
+            return registMonth;
+        } catch ( SQLException e )
+        {
+            e.printStackTrace();
+            throw new RuntimeException( e );
+        }
+
     }
 }

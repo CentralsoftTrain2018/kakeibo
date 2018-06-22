@@ -52,14 +52,25 @@
 
     <div id = "selectMonth">
       <select name="month" style="margin:0px auto; margin-left: 10px; float:left;">
-          <% for (int i = 1; i <= 12; i++) { %>
+      <%if(bean.getDate().get(Calendar.YEAR) == LocalDate.now().getYear()) {%>
+          <% for (int i = 1; i <= LocalDate.now().getMonthValue(); i++) { %>
           <option value=<%=i%>
+
             <%if (i == bean.getDate().get(Calendar.MONTH) + 1) {%>
               selected
             <%}%>>
-            <%=i%>
-          </option>
-          <%} %>
+
+            <%=i%></option>
+            <%} %>
+            <%} else{ %>
+          <% for (int i = 1; i <= 12; i++) { %>
+          <option value=<%=i%>
+            <%if (i == bean.getDate().get(Calendar.MONTH)+1) {%> selected
+            <%}%>>
+            <%=i%></option>
+            <%} %>
+            <%} %>
+
       </select>
      </div>
        <input type="submit" value="年月変更" style="margin:0px auto; margin-left: 10px; float:left;">
@@ -331,12 +342,9 @@
 
       var dt = new Date();
 
-      alert(dt.getFullYear())
-      alert(dt.getMonth()+1)
-
       var text = null;
 
-      text = '<select name="month">';
+      text = '<select name="month" style="margin:0px auto; margin-left: 10px; float:left;">';
 
       if(year == registyear){
           for (var i = registmonth; i <= 12; i++) {
