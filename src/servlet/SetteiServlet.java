@@ -40,11 +40,22 @@ public class SetteiServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String userId = ( String ) session.getAttribute( "userId" );
         String choice = request.getParameter("choice");
-        String oldCategoryName = request.getParameter("oldCategoryName");
-        String newCategoryName = request.getParameter("newCategoryName");
+        String oldCategoryName = null;
+        String newCategoryName = null;
+        String newCategoryColor=request.getParameter("colorName");
+        if(request.getParameter("oldCategoryName")!=null)
+        {
+               oldCategoryName =new String(request.getParameter("oldCategoryName").getBytes("iso-8859-1"), "UTF-8");
+        }
+        if(request.getParameter("newCategoryName")!=null)
+        {
+               newCategoryName =new String(request.getParameter("newCategoryName").getBytes("iso-8859-1"), "UTF-8");
+        }
+        String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
         String newIncomeStr = request.getParameter("newIncome");
         String newMokuhyoukingakuStr = request.getParameter("newMokuhyoukingaku");
+        String dispName=request.getParameter("dispName");;
 
         int newIncome= -1;
         int newMokuhyoukingaku= -1;
@@ -53,11 +64,15 @@ public class SetteiServlet extends HttpServlet {
         {
             choice = "";
         }
-
+        if(dispName==null)
+        {
+            dispName="";
+        }
 
         if(choice.equals("addCategory"))
         {
-            UserDataService.addCategory(newCategoryName);
+            newMokuhyoukingaku = Integer.parseInt(newMokuhyoukingakuStr);
+            UserDataService.addCategory(newCategoryName,newCategoryColor,userId,newMokuhyoukingaku);
         }
         if(choice.equals("updateCategory"))
         {
@@ -92,7 +107,14 @@ public class SetteiServlet extends HttpServlet {
             }
         }
 
+        if(choice.equals(""))
+        {
+            UserDataService.settei( userId );
+        }
+
+
         SetteiBean bean = UserDataService.settei( userId );
+        bean.setDispName(dispName);
         request.setAttribute( "bean", bean );
 
         //JSPに遷移する

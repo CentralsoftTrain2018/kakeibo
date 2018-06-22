@@ -21,6 +21,12 @@ button.button1 {
     display:block;
 
 }
+.button2 {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+
+}
 /*画面レイアウト調整用　幅：1000px,高さ：800px*/
 .contena
 {
@@ -39,6 +45,13 @@ button.button1 {
   left:0%;
   top:0%;
 
+}
+
+.subsettei{
+  background-color: #ff0000;
+  display: table;
+  width: 100%;
+  padding:0px;
 }
 /*表示内容を変更する場所のレイアウト*/
 .hanni{
@@ -70,4 +83,44 @@ button.button1 {
   width:925px;
   height:800px;
   display:none;
+}
+
+.subcontana{
+  background-color: #ff0080;
+  top:20%;
+  position: absolute;
+  width:900px;
+  height:500px;
+  margin-left: 10px;
+}
+
+#deleteKoumoku{
+  float:right;
+  background-color: #0080ff;
+  top:0px;
+  margin: 10px;
+  position: absolute;
+  display:none;
+
+}
+#updateMokuhyou{
+  float:right;
+  background-color: #0080ff;
+  top:0px;
+  margin: 10px;
+  position: absolute;
+  display:none;
+}
+#updateKoumoku{
+  float:right;
+  background-color: #0080ff;
+  top:0px;
+  margin: 10px;
+  position: absolute;
+  display:none;
+}
+.subtable{
+  table-layout: fixed;
+  width:100%;
+  background:rgba(255,255,255,0.1);
 }

@@ -109,13 +109,27 @@ public class UserDBManeger
     //UserDataService
     //呼び出し先
     //SetteiDao
-    public static void addCategory( String categoryName )
+    public static void addCategory( String categoryName, String categoryColor,String userId, String nengetu, int kingaku )
     {
         try (
                 Connection con = PoolConnection.getConnection(); )
         {
             SetteiDao sdao = new SetteiDao( con );
-            sdao.addCategory( categoryName );
+            sdao.addCategory( categoryName, categoryColor,userId,nengetu,kingaku );
+        } catch ( SQLException e )
+        {
+            e.printStackTrace();
+            throw new RuntimeException( e );
+        }
+    }
+
+    public static void addNewMokuhyou( String categoryName, String userId, String nengetu, int kingaku )
+    {
+        try (
+                Connection con = PoolConnection.getConnection(); )
+        {
+            SetteiDao sdao = new SetteiDao( con );
+            sdao.addNewMokuhyou( categoryName, userId,nengetu,kingaku );
         } catch ( SQLException e )
         {
             e.printStackTrace();
