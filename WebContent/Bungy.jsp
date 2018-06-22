@@ -94,7 +94,7 @@
       style="position: absolute;
       width: 50px;
       right: 35%;
-      top:22%;">
+      top:19%;">
     <%
       } else
       {
@@ -104,13 +104,13 @@
       width: 100px;
       height: 100px;
       right: 30%;
-      top:<%=bean.getJumperDispPosition() + 27%>%;">
+      top:<%=bean.getJumperDispPosition() + 24%>%;">
       <img src="image/himo.png" alt="" class="himo"
       style="position: absolute;
       width: 50px;
       height:<%=bean.getJumperDispPosition() + 7%>%;
       right: 35%;
-      top: 22%;">
+      top: 19%;">
     <%
       }
     %>
