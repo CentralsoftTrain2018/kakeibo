@@ -137,6 +137,34 @@ public class UserDBManeger
         }
     }
 
+    public static String getMonth( String userId )
+    {
+        try (
+                Connection con = PoolConnection.getConnection(); )
+        {
+            SetteiDao sdao = new SetteiDao( con );
+            return sdao.getMonth(userId);
+        } catch ( SQLException e )
+        {
+            e.printStackTrace();
+            throw new RuntimeException( e );
+        }
+    }
+
+    public static void addNewMonthMokuhyou( String userId, String categoryName, int kingaku, String nengetu)
+    {
+        try (
+                Connection con = PoolConnection.getConnection(); )
+        {
+            SetteiDao sdao = new SetteiDao( con );
+            sdao.addNewMonthMokuhyou(userId, categoryName, kingaku, nengetu);
+        } catch ( SQLException e )
+        {
+            e.printStackTrace();
+            throw new RuntimeException( e );
+        }
+    }
+
     //カテゴリーの変更
      //呼び出し元
     //UserDataService

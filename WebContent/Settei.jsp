@@ -65,7 +65,7 @@
     <input type="submit" value="収入変更" name="">
     <input type="hidden" value="updateSyunyuu" name="choice">
     </form><br>
-    目標:<%=bean.getMokuhyougoukei() %><br>
+    目標:<%=bean.getMokuhyougoukei()%><br>
 
     <form method="POST" action="SetteiServlet">
     <table ><tr>
