@@ -14,11 +14,30 @@ public class SetteiDao extends Dao {
             "insert into " +
             "	category( " +
             "		categoryname, " +
-            "		useflag" +
+            "		useflag," +
+            "		color," +
+            "		user_userid" +
             "	) " +
             "values " +
 
-            "	(?, 1)";
+            "	(?, ? , ?, ?)";
+    private static final String INSERT_MOKUHYOU =
+            "insert into " +
+            "	mokuhyou( " +
+            "		kingaku, " +
+            "		month," +
+            "		user_userid," +
+            "		category_categoryId" +
+            "	) " +
+            "values " +
+            "	(?, ? , ?, "+
+            "	(select " +
+            "		categoryid " +
+            "	from " +
+            "		category " +
+            "	where " +
+            "		user_userid = ? " +
+            "	and	categoryname = ? ));";
 
     private static final String UPDATE_CATEGORY =
             "update " +
@@ -51,6 +70,7 @@ public class SetteiDao extends Dao {
             ",category c " +
             "WHERE " +
             "m.category_categoryId = c.categoryId " +
+            "AND c.useflag = 1 " +
             "AND m.user_userId = ? " +
             "AND m.Month = ?;";
 
@@ -68,7 +88,7 @@ public class SetteiDao extends Dao {
             "		category " +
             "	where " +
             "		user_userid = ? " +
-            "		categoryname = ?)";
+            "	and	categoryname = ? )";
 
     private static final String UPDATE_SYUNYUU =
             "update " +
@@ -103,13 +123,31 @@ public class SetteiDao extends Dao {
     //カテゴリーの追加
     //呼び出し元
     //UserDBManager
-    public void addCategory(String categoryName) throws SQLException {
+    public void addCategory(String categoryName,String categoryColor, String userId, String nengetu, int kingaku ) throws SQLException {
         try ( PreparedStatement stmt = con.prepareStatement( INSERT_CATEGORY ); )
         {
 
             stmt.setString( 1, categoryName );
             stmt.setInt(2, 1);
-            stmt.setString(3, "red");
+            stmt.setString(3, categoryColor);
+            stmt.setString(4, userId);
+            /* ｓｑｌ実行 */
+            stmt.executeUpdate();
+        } catch ( SQLException ex )
+        {
+            throw ex;
+        }
+    }
+
+    public void addNewMokuhyou(String categoryName, String userId, String nengetu, int kingaku ) throws SQLException {
+        try ( PreparedStatement stmt = con.prepareStatement( INSERT_MOKUHYOU ); )
+        {
+
+            stmt.setInt( 1, kingaku );
+            stmt.setString(2, nengetu);
+            stmt.setString(3, userId);
+            stmt.setString(4, userId);
+            stmt.setString(5, categoryName);
             /* ｓｑｌ実行 */
             stmt.executeUpdate();
         } catch ( SQLException ex )

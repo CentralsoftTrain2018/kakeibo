@@ -69,9 +69,13 @@ public class UserDataService
     //SetteiServlet
     //呼び出し先
     //UserDBManager
-    public static void addCategory( String categoryName )
+    public static void addCategory( String categoryName ,String categoryColor,String userId, int kingaku)
     {
-        UserDBManeger.addCategory( categoryName );
+        //現在時刻の取得
+        Calendar calendar = Calendar.getInstance();
+        String nengetsu = new SimpleDateFormat( "yyyy/MM" ).format( calendar.getTime() );
+        UserDBManeger.addCategory( categoryName, categoryColor, userId,nengetsu,kingaku );
+        UserDBManeger.addNewMokuhyou(categoryName, userId, nengetsu, kingaku);
     }
 
     //カテゴリーの変更

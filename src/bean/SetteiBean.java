@@ -5,6 +5,11 @@ import java.util.List;
 import vo.SetteiVo;
 
 public class SetteiBean {
+
+    //
+    private String dispName="";
+
+
     //カテゴリー毎の目標金額、カテゴリー名、カテゴリーIDを持つリスト
     private List<SetteiVo> categoryMokuhyouList;
 
@@ -21,6 +26,16 @@ public class SetteiBean {
 
     //画面遷移の際前回表示していた画面が何かを記録するための変数
     private String disp;
+
+
+    public String getDispName()
+    {
+        return dispName;
+    }
+    public void setDispName(String dispName)
+    {
+        this.dispName = dispName;
+    }
 
     public List<SetteiVo> getCategoryMokuhyouList() {
         return categoryMokuhyouList;
