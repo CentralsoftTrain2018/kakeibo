@@ -74,7 +74,7 @@ public class BungyBean {
         }
 
         //犯人の表示位置（高さ）が７５％を超えた場合、特定位置までの横移動に切り替える
-        if(hanninIchi>=75)
+        if(hanninIchi>=71)
         {
             int specialYoko=(int)((((double)sisyutu/(double)mokuhyou*100.0-75.0)/25.0)*38.0)+12;
             if(specialYoko>=45)

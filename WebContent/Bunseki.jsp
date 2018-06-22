@@ -129,12 +129,13 @@ var myChart = new Chart(document.getElementById("newcanvas").getContext("2d")).D
       <%
         }
       %>
+      
+    <%if(bean.getVisibleConan()) {%>
   <div>
     <img src="image/conan.png" class="conan">
   </div>
 
-  <div class="balloon"
-  >
+  <div class="balloon">
   <p class ="baloon1">
   <%if(!bean.getOverMokuhyou()){ %>
   今月は目標まで、<br>あと<%=sumMokuhyou - bean.getSumSpending() %>円使えるよ<br>
@@ -147,5 +148,6 @@ var myChart = new Chart(document.getElementById("newcanvas").getContext("2d")).D
   <%}%>
   </p>
   </div>
+    <%} %>
 </body>
 </html>
