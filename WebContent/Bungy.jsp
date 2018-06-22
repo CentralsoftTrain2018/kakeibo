@@ -36,21 +36,42 @@
     style="width: 800px; height: 742px; overflow: hidden;
     margin-bottom: 0px; padding-bottom: 0px; position: relative; text-align:center; margin-left:auto; margin-right:auto;">
 
-      <form method="POST" action="BungyServlet">
-    年月<select name="nengetsu">
-      <option value="2018/01"> 2018/01 </option>
-      <option value="2018/02"> 2018/02 </option>
-      <option value="2018/03"> 2018/03 </option>
-      <option value="2018/04"> 2018/04 </option>
-      <option value="2018/05"> 2018/05 </option>
-      <option value="2018/06"> 2018/06 </option>
-      <option value="2018/07"> 2018/07 </option>
-      <option value="2018/08"> 2018/08 </option>
-      <option value="2018/09"> 2018/09 </option>
-      <option value="2018/10"> 2018/10 </option>
-    </select>
-    <input type="submit" value="Bungy"><br>
-  </form>
+  <form method="POST" action="BungyServlet">
+        <select name="year" id = "selectYear" onChange = "checkRegistMonth()">
+          <% for(int count = bean.getRegistYear(); count <= LocalDate.now().getYear(); count++ ){ %>
+          <option value=<%=count %>
+            <% if(count == bean.getSelectedYear()){ %> selected
+            <%} %>><%=count %></option>
+          <%} %>
+        </select>
+        <input type="hidden" id="nowYear" value=<%=bean.getSelectedYear() %>>
+        <input type="hidden" id="registYear" value=<%=bean.getRegistYear() %>>
+        <input type="hidden" id="nowMonth" value=<%=bean.getSelectedMonth() %>>
+        <input type="hidden" id="registMonth" value=<%=bean.getRegistMonth() %>>
+
+     <div id = "selectMonth">
+      <select name="month">
+     <%if(bean.getSelectedYear() == LocalDate.now().getYear()) {%>
+          <% for (int i = 1; i <= LocalDate.now().getMonthValue(); i++) { %>
+          <option value=<%=i%>
+            <%if (i == bean.getSelectedMonth()) {%> selected
+            <%}%>>
+            <%=i%></option>
+            <%} %>
+            <%} else{ %>
+          <% for (int i = 1; i <= 12; i++) { %>
+          <option value=<%=i%>
+            <%if (i == bean.getSelectedMonth()) {%> selected
+            <%}%>>
+            <%=i%></option>
+            <%} %>
+            <%} %>
+
+      </select>
+     </div>
+           <input type="submit" value="年月変更">
+
+      </form>
 
     <img src="image/bg_taki.jpg" alt="" class="base"
       style="position: absolute; width: 800px; height: 742px; margin-all: 0px; padding-all: 0px; left: 10px;">
@@ -107,6 +128,54 @@
       %>
     </form>
   </div>
+
+<script type="text/javascript">
+      function checkRegistMonth(){
+
+      var sel = document.getElementById("selectMonth");
+      var year = document.getElementById("selectYear").value;
+      var registyear = document.getElementById("registYear").value;
+      var month = document.getElementById("nowMonth").value;
+      var registmonth = document.getElementById("registMonth").value;
+
+      var dt = new Date();
+
+      var text = null;
+
+      text = '<select name="month">';
+
+      if(year == registyear){
+          for (var i = registmonth; i <= 12; i++) {
+                text = text + "<option value=" + i;
+                  if (i == month) {
+                      text = text + " selected";
+                  }
+                  text = text + ">" + i + "</option>";
+                }
+        }
+      else if(year == dt.getFullYear()) {
+        for (var i = 1; i <= dt.getMonth()+1; i++) {
+              text = text + "<option value=" + i;
+                if (i == month) {
+                    text = text + " selected";
+                }
+                text = text + ">" + i + "</option>";
+              }
+      }else {
+        for (var i = 1; i <= 12; i++) {
+              text = text + "<option value=" + i;
+                if (i == month) {
+                    text = text + " selected";
+                }
+                text = text + ">" + i + "</option>";
+              }
+      }
+
+      text = text + "</select>";
+
+      sel.innerHTML = text;
+      }
+      </script>
 
 </body>
 </html>

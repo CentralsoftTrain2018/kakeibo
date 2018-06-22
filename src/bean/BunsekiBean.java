@@ -7,6 +7,7 @@ public class BunsekiBean {
     private int mokuhyouKingaku;
     private int difference;
     private int wariai;
+
     public String getColor() {
         return color;
     }

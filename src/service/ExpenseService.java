@@ -43,12 +43,18 @@ public class ExpenseService
         ExpenseDBManager.deleteExpense( ev );
     }
 
-    public static BungyBean getMokuhyouAndExpenses( String userid, String month )
+    public static BungyBean makeBungyBean( String userid, String month )
     {
-        BungyVo bv = ExpenseDBManager.getMokuhyouAndExpenses( userid, month );
+        BungyVo bv = ExpenseDBManager.makeBungyBean( userid, month );
         BungyBean bb = new BungyBean();
+
+        String registMonth[] = bv.getRegistMonth().split("/", 0);
+
         bb.setMokuhyou( bv.getMokuhyou() );
         bb.setSisyutu( bv.getTotalexpenses() );
+        bb.setRegistYear( Integer.parseInt(registMonth[0]) );
+        bb.setRegistMonth( Integer.parseInt(registMonth[1]) );
+
         bb.setNengetsu( month );
 
         return bb;

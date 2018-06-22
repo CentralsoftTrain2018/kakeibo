@@ -57,7 +57,7 @@ public class LoginServlet extends HttpServlet
             if ( UserDataService.hasMokuhyou( userId ) )
             {
                 //String nengetu=request.getParameter("nengetsu");
-                bb = ExpenseService.getMokuhyouAndExpenses( userId, nengetsu );
+                bb = ExpenseService.makeBungyBean( userId, nengetsu );
 
                 request.setAttribute( "bean", bb );
                 RequestDispatcher disp = request.getRequestDispatcher( "/Bungy.jsp" );
