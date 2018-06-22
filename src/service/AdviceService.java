@@ -119,6 +119,9 @@ public class AdviceService
         BunsekiListBean blb = setBunsekiList( userId, nengetsu );
         boolean isOverMokuhyou = false;
         int bottomWariai = 100;
+        int sumMokuhyou = 0;
+        boolean isVisibleConan = true;
+        boolean hasMokuhyou = false;
         List<String> categoryNameList = new ArrayList<String>();
         for ( BunsekiBean bb : blb.getList() )
         {
@@ -130,6 +133,8 @@ public class AdviceService
             {
                 bottomWariai = bb.getWariai();
             }
+            sumMokuhyou +=bb.getMokuhyouKingaku();
+            hasMokuhyou = true;
         }
         for ( BunsekiBean bb : blb.getList() )
         {
@@ -138,10 +143,15 @@ public class AdviceService
                 categoryNameList.add(bb.getCategoryName());
             }
         }
+        if(blb.getSumSpending() > sumMokuhyou || !hasMokuhyou)
+        {
+            isVisibleConan = false;
+        }
 
         blb.setDate( calendar );
         blb.setOverMokuhyou(isOverMokuhyou);
         blb.setCategoryNameList(categoryNameList);
+        blb.setVisibleConan(isVisibleConan);
 
         return blb;
     }
@@ -179,6 +189,11 @@ public class AdviceService
         blb.setDate( calendar );
         blb.setOverMokuhyou(isOverMokuhyou);
         blb.setCategoryNameList(categoryNameList);
+        blb.setVisibleConan(false);
+        Calendar nowCalendar = Calendar.getInstance();
+        if(calendar.get(Calendar.YEAR) == nowCalendar.get(Calendar.YEAR) && calendar.get(Calendar.MONTH) == nowCalendar.get(Calendar.MONTH)) {
+            return selectBunseki(userId);
+        }
 
         return blb;
     }

@@ -9,7 +9,7 @@
 <title>会員登録</title>
 </head>
 <body>
-  <form method="POST" action="RegistServlet">
+  <form method="POST" action="RegistServlet" onSubmit="return double()">
     <ul>
       <li><h2>会員登録</h2></li>
       <li><div id="errorMessage">
@@ -53,6 +53,11 @@
         input.setCustomValidity('');
       }
     }
+    var set=0;
+    function double() {
+    if(set==0){ set=1; } else {
+    alert("只今処理中です。\nそのままお待ちください。");
+    return false; }}
   </script>
 </body>
 </html>

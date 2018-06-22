@@ -107,6 +107,7 @@ public class SetteiServlet extends HttpServlet {
             }
         }
 
+
         SetteiBean bean = UserDataService.settei( userId );
         bean.setDispName(dispName);
         request.setAttribute( "bean", bean );

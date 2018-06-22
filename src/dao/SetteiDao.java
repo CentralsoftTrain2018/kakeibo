@@ -356,6 +356,7 @@ public class SetteiDao extends Dao {
         }
     }
 
+
     public void addNewMonthMokuhyou( String userId, String categoryName, int kingaku, String nengetu ) throws SQLException
     {
         try ( PreparedStatement stmt = con.prepareStatement( INSERT_NEWMONTH_MOKUHYOU ); )
@@ -374,3 +375,4 @@ public class SetteiDao extends Dao {
         }
     }
 }
+

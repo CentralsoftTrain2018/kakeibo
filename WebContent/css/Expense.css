@@ -17,9 +17,14 @@ div#nav {
   margin-top: 10px;
 }
 
-table{
+form#nengetsu {
+  display: inline-block;
+}
+
+table {
   border: solid 1px gray;
 }
+
 table th, table td {
   border: solid 1px;
 }
