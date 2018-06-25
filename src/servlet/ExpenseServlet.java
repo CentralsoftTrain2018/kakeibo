@@ -79,7 +79,6 @@ public class ExpenseServlet extends HttpServlet
         {
             month = String.valueOf( Integer.parseInt( month ) );
             day = "01";
-
         }
 
         String date = year + "-" + month + "-" + day;
@@ -94,63 +93,44 @@ public class ExpenseServlet extends HttpServlet
 
         if ( choice.equals( "登録" ) )
         {
-            try
+            int kingaku = Integer.parseInt( kingakuStr );
+            int categoryId = Integer.parseInt( categoryIdStr );
+            String expenseName = new String( request.getParameter( "expenseName" ).getBytes( "iso-8859-1" ), "UTF-8" );
+            if ( expenseName.equals( "" ) )
             {
-                int kingaku = Integer.parseInt( kingakuStr );
-                int categoryId = Integer.parseInt( categoryIdStr );
-                String expenseName = new String( request.getParameter( "expenseName" ).getBytes( "iso-8859-1" ),"UTF-8" );
-                if ( expenseName.equals( "" ) )
-                {
-                    throw new NoTextException();
-                }
-                ExpenseService.addExpense( kingaku, categoryId, expenseName, userId, Date.valueOf( date ) );
-            } catch ( NumberFormatException | NoTextException e )
-            {
-                message = "入力が不正です";
+                throw new NoTextException();
             }
+            ExpenseService.addExpense( kingaku, categoryId, expenseName, userId, Date.valueOf( date ) );
         }
 
         if ( choice.equals( "変更" ) )
         {
-            try
+            String dataList = request.getParameter( "data" );
+
+            String data[] = dataList.split( "/", 0 );
+
+            for ( int i = 0; i < data.length; i++ )
             {
-                String dataList = request.getParameter( "data" );
+                int categoryId = Integer.parseInt( data[i] );
+                int expenseId = Integer.parseInt( data[i + (data.length / 4)] );
+                String expenseName = new String( data[i + (data.length / 4 * 2)].getBytes( "iso-8859-1" ), "UTF-8" );
 
-                String data[] = dataList.split( "/", 0 );
-
-                for ( int i = 0; i < data.length; i++ )
+                if ( expenseName.equals( "" ) )
                 {
-                    int categoryId = Integer.parseInt( data[i] );
-                    int expenseId = Integer.parseInt( data[i + (data.length / 4)] );
-                    String expenseName = new String( data[i + (data.length / 4 * 2)].getBytes( "iso-8859-1" ),"UTF-8" );
-
-                    if ( expenseName.equals( "" ) )
-                    {
-                        throw new NoTextException();
-                    }
-                    int kingaku = Integer.parseInt( data[i + (data.length / 4 * 3)] );
-
-                    ExpenseService.updateExpense( expenseId, kingaku, categoryId, expenseName );
+                    throw new NoTextException();
                 }
+                int kingaku = Integer.parseInt( data[i + (data.length / 4 * 3)] );
 
-            } catch ( NumberFormatException | NoTextException e )
-            {
-                message = "入力が不正です";
+                ExpenseService.updateExpense( expenseId, kingaku, categoryId, expenseName );
             }
         }
 
         if ( choice.equals( "削除" ) )
         {
-            try
-            {
-                int expenseId = Integer.parseInt( expenseIdStr );
-                ExpenseService.deleteExpense( expenseId );
+            int expenseId = Integer.parseInt( expenseIdStr );
+            ExpenseService.deleteExpense( expenseId );
 
-                isChange = false;
-            } catch ( NumberFormatException e )
-            {
-                message = "入力が不正です";
-            }
+            isChange = false;
         }
 
         eb = ExpenseService.makeExpenseBean( calendar, Date.valueOf( date ), userId );
